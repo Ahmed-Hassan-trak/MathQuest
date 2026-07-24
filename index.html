@@ -20,7 +20,7 @@
     --shadow-deep: rgba(0,0,0,0.45);
     --radius-tablet: 22px;
   }
-
+ 
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
@@ -33,7 +33,7 @@
     font-family:"Tajawal", sans-serif;
     overflow-x:hidden;
   }
-
+ 
   /* chalkboard texture speckle */
   body::before{
     content:"";
@@ -47,7 +47,7 @@
     z-index:0;
     opacity:0.6;
   }
-
+ 
   .eyebrow{
     font-family:"Cairo", sans-serif;
     font-weight:600;
@@ -65,7 +65,7 @@
     display:inline-block;
     border-radius:2px;
   }
-
+ 
   /* ================= NAV ================= */
   nav{
     position:relative; z-index:5;
@@ -97,7 +97,7 @@
     padding:8px 4px;
   }
   .nav-link:focus-visible{ outline:2px solid var(--chalk-yellow); outline-offset:4px; border-radius:4px; }
-
+ 
   /* ================= HERO ================= */
   .hero{
     position:relative; z-index:2;
@@ -130,7 +130,7 @@
   .doodle.d4{ animation-delay:2.0s; }
   .doodle.d5{ animation-delay:2.2s; }
   .doodle.d6{ animation-delay:2.35s; }
-
+ 
   .hero-copy{ position:relative; z-index:3; max-width:640px; }
   h1{
     font-family:"Baloo Bhaijaan 2", sans-serif;
@@ -148,7 +148,7 @@
     max-width:520px;
     margin:0 auto 34px;
   }
-
+ 
   .cta{
     display:inline-flex; align-items:center; gap:10px;
     font-family:"Cairo", sans-serif;
@@ -167,7 +167,7 @@
   .cta:focus-visible{ outline:3px solid var(--chalk-white); outline-offset:4px; }
   .cta svg{ transition:transform 0.18s ease; }
   .cta:hover svg{ transform:translateX(-4px); }
-
+ 
   /* ================= PATH / CHAPTERS ================= */
   .path-section{
     position:relative; z-index:2;
@@ -182,7 +182,7 @@
     font-size:clamp(1.7rem, 3.4vw, 2.4rem);
     margin:14px 0 0;
   }
-
+ 
   /* ================= CHAPTER / LESSON INDEX ================= */
   .chapters{ display:flex; flex-direction:column; gap:46px; }
   .chapter-block{ position:relative; }
@@ -237,16 +237,16 @@
     display:flex; align-items:center; justify-content:center;
   }
   .lesson-title{ font-size:0.95rem; line-height:1.5; }
-
+ 
   .c1{ --accent: var(--chalk-teal); }
   .c2{ --accent: var(--chalk-coral); }
   .c3{ --accent: var(--chalk-violet); }
   .c4{ --accent: var(--chalk-yellow); }
-
+ 
   @media (max-width:640px){
     .lesson-grid{ grid-template-columns:1fr; }
   }
-
+ 
   /* ================= FEATURES ================= */
   .features{
     position:relative; z-index:2;
@@ -263,7 +263,7 @@
     font-family:"Baloo Bhaijaan 2", sans-serif; font-size:1.05rem; margin:0 0 8px; font-weight:600;
   }
   .feature p{ color:var(--chalk-white-dim); font-size:0.9rem; line-height:1.8; margin:0; }
-
+ 
   /* ================= FOOTER ================= */
   footer{
     position:relative; z-index:2;
@@ -273,10 +273,10 @@
     flex-wrap:wrap; gap:12px;
     font-size:0.85rem; color:var(--chalk-white-dim);
   }
-
+ 
   @keyframes draw-compass{ to{ stroke-dashoffset:0; } }
   @keyframes doodle-in{ from{ opacity:0; transform:scale(0.6) rotate(-8deg);} to{ opacity:1; transform:scale(1) rotate(var(--rot,0deg)); } }
-
+ 
   @media (max-width:880px){
     .stations{ grid-template-columns:1fr 1fr; }
     .features{ grid-template-columns:1fr; }
@@ -285,7 +285,7 @@
     .stations{ grid-template-columns:1fr; }
     nav .nav-link.hide-mobile{ display:none; }
   }
-
+ 
   @media (prefers-reduced-motion: reduce){
     .compass-path{ animation:none; stroke-dashoffset:0; }
     .doodle{ animation:none; opacity:1; }
@@ -294,12 +294,12 @@
 </style>
 </head>
 <body>
-
+ 
 <nav>
   <div class="brand"><span class="brand-mark">٣</span> Math Quest</div>
   <a href="#stations" class="nav-link hide-mobile">الدروس</a>
 </nav>
-
+ 
 <header class="hero">
   <div class="hero-ring-wrap" aria-hidden="true">
     <svg viewBox="0 0 300 300">
@@ -314,7 +314,7 @@
       <rect class="doodle d6" x="140" y="266" width="20" height="20" fill="none" stroke="var(--chalk-coral)" stroke-width="2" style="--rot:14deg;" transform="rotate(14 150 276)"/>
     </svg>
   </div>
-
+ 
   <div class="hero-copy">
     <span class="eyebrow">Math Quest · الصف الثالث الابتدائي</span>
     <h1>مغامرة <span>الأرقام</span></h1>
@@ -325,13 +325,13 @@
     </a>
   </div>
 </header>
-
+ 
 <section class="path-section" id="stations">
   <div class="section-head">
     <span class="eyebrow">فهرس المحتويات</span>
     <h2>اختر الفصل وابدأ الدرس</h2>
   </div>
-
+ 
   <div class="chapters">
     <div class="chapter-block">
       <div class="chapter-head">
@@ -351,17 +351,17 @@
           <span class="lesson-num">٣</span>
           <span class="lesson-title">التمثيل البياني بالنقاط</span>
         </a>
-        <a class="lesson-link c1" href="Ch1_Lesson4.html">
+        <a class="lesson-link c1" href="Ch1_Lengths.html">
           <span class="lesson-num">٤</span>
-          <span class="lesson-title">قياس الأطوال بالسنتيمتر</span>
+          <span class="lesson-title">قياس الأطوال</span>
         </a>
-        <a class="lesson-link c1" href="Ch1_Lesson5.html">
+        <a class="lesson-link c1" href="Ch1_Review.html">
           <span class="lesson-num">٥</span>
-          <span class="lesson-title">قياس الأطوال بالمتر</span>
+          <span class="lesson-title">مراجعة الفصل الأول</span>
         </a>
-        <a class="lesson-link c1" href="Ch1_Lesson6.html">
+        <a class="lesson-link c1" href="Ch1_Assessment.html">
           <span class="lesson-num">٦</span>
-          <span class="lesson-title">قياس الأطوال بالمليمتر</span>
+          <span class="lesson-title">تقييم الفصل الأول</span>
         </a>
       </div>
     </div>
@@ -571,7 +571,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section class="features">
   <div class="feature">
     <span class="fnum">٠١</span>
@@ -589,11 +589,11 @@
     <p>لغة وأمثلة قريبة من الطالب في السنة الدراسية دي.</p>
   </div>
 </section>
-
+ 
 <footer>
   <span>Math Quest — رياضيات الصف الثالث الابتدائي</span>
   <span>صُمم لمساعدة طلابنا على تعلّم الرياضيات بمتعة</span>
 </footer>
-
+ 
 </body>
 </html>
