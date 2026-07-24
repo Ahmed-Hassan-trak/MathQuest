@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>درس الأنماط — الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#7C3AED; --p-lt:#F5F3FF; --p-dk:#5B21B6;
+  --pk:#EC4899; --pk-lt:#FDF2F8;
+  --gold:#F59E0B; --gold-lt:#FFFBEA;
+  --gr:#10B981; --gr-lt:#ECFDF5;
+  --sky:#0EA5E9; --sky-lt:#F0F9FF;
+  --red:#EF4444; --red-lt:#FEF2F2;
+  --org:#F97316; --org-lt:#FFF7ED;
+  --ink:#1E1B4B; --muted:#6B7280; --border:#E5E7EB;
+  --bg:#FDF4FF; --surface:#FFFFFF;
+  --radius:18px; --rsm:12px;
+  --shadow:0 4px 28px rgba(124,58,237,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--ink);direction:rtl;min-height:100vh}
+
+/* HOME BUTTON */
+#homeBtn{position:fixed;top:16px;right:16px;z-index:1000;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);color:var(--p-dk);border:none;border-radius:99px;padding:10px 16px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:all .2s;text-decoration:none}
+#homeBtn:hover{background:#fff;transform:translateY(-1px)}
+@media(max-width:480px){#homeBtn{top:10px;right:10px;padding:8px 12px;font-size:13px}}
+
+/* TTS TOGGLE */
+#ttsBtn{position:fixed;bottom:20px;left:16px;z-index:1000;width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all .2s}
+#ttsBtn.on{background:linear-gradient(135deg,#7C3AED,#EC4899)}
+#ttsBtn.off{background:#9CA3AF}
+#ttsBar{position:fixed;bottom:82px;left:8px;z-index:1000;background:rgba(124,58,237,.9);color:#fff;font-size:13px;font-weight:700;padding:6px 14px;border-radius:99px;pointer-events:none;opacity:0;transition:opacity .3s;max-width:200px;text-align:center}
+#ttsBar.show{opacity:1}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#4C1D95 0%,#7C3AED 40%,#A855F7 70%,#EC4899 100%);padding:3rem 1.5rem 4.5rem;text-align:center;position:relative;overflow:hidden}
+.bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.08);animation:bbl 8s ease-in-out infinite}
+.bubble:nth-child(1){width:150px;height:150px;top:-50px;left:3%;animation-delay:0s}
+.bubble:nth-child(2){width:100px;height:100px;top:0;right:8%;animation-delay:2s}
+.bubble:nth-child(3){width:70px;height:70px;bottom:10px;left:20%;animation-delay:4s}
+.bubble:nth-child(4){width:120px;height:120px;bottom:-30px;right:3%;animation-delay:1s}
+@keyframes bbl{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(8deg)}}
+.hero-emojis{font-size:52px;margin-bottom:.75rem;animation:pop .6s .2s ease both}
+@keyframes pop{from{transform:scale(0)}60%{transform:scale(1.15)}to{transform:scale(1)}}
+.hero h1{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:2.4rem;font-weight:800;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.2);margin-bottom:.4rem}
+.hero p{color:rgba(255,255,255,.9);font-size:1rem}
+.hero-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.hero-tag{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:20px;padding:5px 15px;font-size:13px;font-weight:600}
+
+/* TABS */
+.tabs-wrap{background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.07);position:sticky;top:0;z-index:100}
+.tabs{display:flex;overflow-x:auto;padding:0 .5rem;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:.8rem 1rem;border:none;background:none;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--p)}
+.tab-btn.active{color:var(--p);border-bottom-color:var(--p)}
+
+/* LAYOUT */
+.content{max-width:880px;margin:0 auto;padding:2rem 1rem 5rem}
+.section{display:none}
+.section.active{display:block;animation:fu .3s ease}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(124,58,237,.08);padding:1.75rem;margin-bottom:1.5rem}
+.card-title{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.card-title .num{background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+
+/* BOXES */
+.info-box{background:var(--p-lt);border-right:4px solid var(--p);border-radius:var(--rsm);padding:1rem 1.25rem;margin-bottom:1.25rem;color:#3B0764;font-size:15px;line-height:1.9}
+.info-box strong{color:var(--p)}
+.gold-box{background:var(--gold-lt);border-right:4px solid var(--gold);border-radius:var(--rsm);padding:1rem 1.25rem;margin-bottom:1.25rem;color:#78350F;font-size:15px;line-height:1.9}
+.tip-box{background:var(--gr-lt);border-right:4px solid var(--gr);border-radius:var(--rsm);padding:.9rem 1.25rem;margin:.75rem 0;color:#064E3B;font-size:14px;line-height:1.8}
+
+/* PATTERN DISPLAY */
+.pattern-track{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:1.25rem;background:#FAFAFA;border:2px solid var(--border);border-radius:var(--rsm);margin:1rem 0;min-height:72px}
+.p-item{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;border-radius:10px;background:#fff;border:2px solid var(--border);transition:all .3s;cursor:default;user-select:none}
+.p-item.highlight{animation:hl .5s ease;border-color:var(--gold);background:var(--gold-lt)}
+@keyframes hl{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.p-item.missing{background:linear-gradient(135deg,#F3F4F6,#E5E7EB);border:2px dashed var(--p);color:var(--p);font-size:1.4rem;font-weight:900;cursor:pointer}
+.p-item.missing:hover{background:var(--p-lt);transform:scale(1.05)}
+.p-separator{color:var(--muted);font-size:1.2rem;font-weight:700}
+
+/* NUMBER PATTERN */
+.num-seq{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:1rem 0}
+.ns-box{min-width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.4rem;font-weight:800;border-radius:var(--rsm);transition:all .3s}
+.ns-box.filled{background:linear-gradient(135deg,var(--p-lt),#EDE9FE);border:2px solid var(--p);color:var(--p)}
+.ns-box.empty{background:linear-gradient(135deg,#F9FAFB,#F3F4F6);border:2px dashed var(--p);color:var(--muted)}
+.ns-box.answer{background:linear-gradient(135deg,#D1FAE5,#A7F3D0);border:2px solid var(--gr);color:var(--gr)}
+.ns-box.wrong-ans{background:var(--red-lt);border:2px solid var(--red);color:var(--red)}
+.ns-arrow{font-size:1rem;color:var(--muted);font-weight:700;padding:0 2px}
+.rule-badge{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:20px;font-size:14px;font-weight:700;background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;margin-top:.5rem}
+
+/* OPTIONS GRID */
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+.opt-btn{border:2px solid var(--border);border-radius:var(--rsm);padding:12px;background:#fff;font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.2rem;font-weight:800;color:var(--ink);cursor:pointer;transition:all .15s;text-align:center}
+.opt-btn:hover:not(:disabled){border-color:var(--p);background:var(--p-lt);color:var(--p)}
+.opt-btn.correct{border-color:var(--gr)!important;background:var(--gr-lt)!important;color:#065F46!important}
+.opt-btn.wrong{border-color:var(--red)!important;background:var(--red-lt)!important;color:#7F1D1D!important}
+.opt-btn:disabled{cursor:not-allowed}
+
+/* Q BLOCKS */
+.q-block{border:1.5px solid var(--border);border-radius:var(--rsm);padding:1.25rem;margin-bottom:1rem;transition:border-color .2s}
+.q-block.ok{border-color:var(--gr);background:var(--gr-lt)}
+.q-block.no{border-color:var(--red);background:var(--red-lt)}
+.q-text{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.75}
+.q-lbl{color:var(--p);font-weight:800}
+.fb-msg{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.fb-msg.show{display:block}
+.fb-msg.ok{background:var(--gr-lt);color:#065F46}
+.fb-msg.no{background:var(--red-lt);color:#7F1D1D}
+
+/* SCORE */
+.score-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.5rem}
+.sc-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--rsm);padding:1rem;text-align:center}
+.sc-n{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:2rem;font-weight:800;color:var(--p)}
+.sc-l{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* BUILDER */
+.palette{display:flex;flex-wrap:wrap;gap:10px;padding:1.25rem;background:#FAFAFA;border:1.5px solid var(--border);border-radius:var(--rsm);margin:1rem 0;justify-content:center}
+.pal-item{width:56px;height:56px;display:flex;align-items:center;justify-content:center;font-size:2rem;border:2px solid var(--border);border-radius:10px;cursor:pointer;background:#fff;transition:all .2s;user-select:none}
+.pal-item:hover{transform:scale(1.15);border-color:var(--p);background:var(--p-lt)}
+.pal-item:active{transform:scale(.95)}
+.build-track{display:flex;flex-wrap:wrap;gap:8px;padding:1.25rem;background:#F9F5FF;border:2px dashed var(--p);border-radius:var(--rsm);min-height:80px;margin:1rem 0;align-items:center}
+.built-item{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;border:2px solid var(--p-lt);border-radius:10px;background:#fff;cursor:pointer;transition:all .2s;position:relative}
+.built-item:hover::after{content:'×';position:absolute;top:-6px;right:-6px;width:16px;height:16px;background:var(--red);color:#fff;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.pattern-result{margin-top:1rem;padding:1rem 1.25rem;border-radius:var(--rsm);font-size:15px;font-weight:700;display:none}
+.pattern-result.show{display:block}
+.pattern-result.valid{background:var(--gr-lt);border-right:4px solid var(--gr);color:#065F46}
+.pattern-result.invalid{background:var(--gold-lt);border-right:4px solid var(--gold);color:#78350F}
+
+/* SPEED GAME */
+.timer-row{display:flex;align-items:center;justify-content:center;gap:20px;margin:1rem 0;flex-wrap:wrap}
+.timer-circ{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#5B21B6,#7C3AED);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(124,58,237,.3)}
+.t-n{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.8rem;font-weight:800;line-height:1}
+.t-l{font-size:10px;opacity:.8}
+.sg-q{text-align:center;padding:1.5rem;background:linear-gradient(135deg,var(--p-lt),#EDE9FE);border-radius:var(--rsm);margin:1rem 0;border:2px solid var(--p)}
+.sg-seq{font-size:1.6rem;font-weight:800;font-family:'Baloo Bhaijaan 2',sans-serif;color:var(--p);letter-spacing:2px;line-height:1.8}
+.sg-ask{font-size:1rem;font-weight:700;color:var(--ink);margin-top:.5rem}
+.sg-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem}
+.sg-opt{padding:14px;font-size:1.2rem;font-weight:800;border:2px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:'Baloo Bhaijaan 2',sans-serif;text-align:center;transition:all .15s;color:var(--ink)}
+.sg-opt:hover{border-color:var(--p);background:var(--p-lt)}
+.sg-opt.correct{border-color:var(--gr)!important;background:var(--gr-lt)!important;color:#065F46!important}
+.sg-opt.wrong{border-color:var(--red)!important;background:var(--red-lt)!important;color:#7F1D1D!important}
+
+/* MEMORY */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:1rem 0}
+.mem-card{aspect-ratio:1;border-radius:var(--rsm);border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.m-front,.m-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;transition:transform .4s;border-radius:10px;padding:4px;text-align:center;font-weight:700}
+.m-front{background:linear-gradient(135deg,#5B21B6,#7C3AED);color:#fff;font-size:1.8rem}
+.m-back{transform:rotateY(180deg);font-size:0.8rem;line-height:1.4}
+.mem-card.flipped .m-front{transform:rotateY(180deg)}
+.mem-card.flipped .m-back{transform:rotateY(0)}
+.mem-card.matched{border-color:var(--gr);background:var(--gr-lt)}
+
+/* PROGRESS */
+.prog-wrap{background:var(--border);border-radius:20px;height:14px;overflow:hidden;margin:6px 0 4px}
+.prog-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--p),var(--pk));transition:width .5s ease}
+
+/* CERT */
+.cert{background:linear-gradient(135deg,#FFFBEA,#FEF3C7);border:3px solid var(--gold);border-radius:24px;padding:2rem;text-align:center;margin-top:1.5rem}
+.cert h2{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.7rem;color:#78350F;margin-bottom:.5rem}
+.cert p{font-size:15px;color:#92400E}
+
+/* DATA TABLE */
+.dtable{width:100%;border-collapse:collapse;margin:1rem 0;font-size:14px}
+.dtable th{background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;padding:10px 14px;font-weight:700;text-align:center}
+.dtable td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:center}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:nth-child(even) td{background:var(--p-lt)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rsm);border:none;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .18s}
+.btn-p{background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.3)}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,.4)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#D97706;transform:translateY(-1px)}
+.btn-gr{background:var(--gr);color:#fff}
+.btn-gr:hover{background:#047857;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:2px solid var(--p);color:var(--p)}
+.btn-outline:hover{background:var(--p-lt)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem}
+
+/* STEP LIST */
+.step-list{display:flex;flex-direction:column;gap:14px;margin:1rem 0}
+.step-item{display:flex;gap:14px;align-items:flex-start}
+.step-n{background:linear-gradient(135deg,var(--p),var(--pk));color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;margin-top:2px}
+.step-c strong{display:block;font-size:15px;color:var(--p);margin-bottom:3px}
+.step-c p{font-size:14px;color:var(--muted);line-height:1.75}
+
+/* PATTERN TYPE CARDS */
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1rem 0}
+.type-card{border-radius:var(--rsm);padding:1.25rem;text-align:center;border:2px solid}
+.type-card.num{background:var(--sky-lt);border-color:var(--sky);color:#0C4A6E}
+.type-card.shape{background:var(--pk-lt);border-color:var(--pk);color:#831843}
+.type-card h3{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.type-card p{font-size:13px;line-height:1.7}
+.type-card .tc-icon{font-size:2.5rem;margin-bottom:.5rem}
+
+/* COMPLETE THE PATTERN */
+.ctp-card{background:#FAFAFA;border:1.5px solid var(--border);border-radius:var(--rsm);padding:1.25rem;margin-bottom:1.25rem}
+.ctp-q{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.ctp-opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:.75rem}
+.ctp-opt{padding:10px 18px;border:2px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.1rem;font-weight:800;transition:all .15s;color:var(--ink)}
+.ctp-opt:hover:not(:disabled){border-color:var(--p);background:var(--p-lt);color:var(--p)}
+.ctp-opt.correct{border-color:var(--gr)!important;background:var(--gr-lt)!important;color:#065F46!important}
+.ctp-opt.wrong{border-color:var(--red)!important;background:var(--red-lt)!important;color:#7F1D1D!important}
+
+/* RULE FINDER */
+.rule-opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:1rem;justify-content:center}
+.rule-opt{padding:10px 20px;border:2px solid var(--border);border-radius:10px;background:#fff;cursor:pointer;font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.1rem;font-weight:800;transition:all .15s;min-width:100px;text-align:center;color:var(--ink)}
+.rule-opt:hover:not(:disabled){border-color:var(--p);background:var(--p-lt);color:var(--p)}
+.rule-opt.correct{border-color:var(--gr)!important;background:var(--gr-lt)!important;color:#065F46!important}
+.rule-opt.wrong{border-color:var(--red)!important;background:var(--red-lt)!important;color:#7F1D1D!important}
+
+@media(max-width:540px){
+  .hero h1{font-size:1.7rem}
+  .opts-grid,.type-grid{grid-template-columns:1fr}
+  .mem-grid{grid-template-columns:repeat(3,1fr)}
+  .sg-opts{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<a id="homeBtn" href="index.html">🏠 الصفحة الرئيسية</a>
+<button id="ttsBtn" class="on">🔊</button>
+<div id="ttsBar"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="hero-emojis">🔵🔺🟡⭐🔵🔺🟡⭐</div>
+  <h1>درس الأنماط</h1>
+  <p>اكتشف الأنماط العددية وأنماط الأشكال — الصف الثالث الابتدائي</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🔢 الأنماط العددية</span>
+    <span class="hero-tag">🔷 أنماط الأشكال</span>
+    <span class="hero-tag">🎯 أكمل النمط</span>
+    <span class="hero-tag">🏗️ ابنِ نمطك</span>
+    <span class="hero-tag">⚡ التحدي السريع</span>
+    <span class="hero-tag">🧩 لعبة الذاكرة</span>
+    <span class="hero-tag">🏆 اختبار الإتقان</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" id="tbtn-intro">📖 المقدمة</button>
+    <button class="tab-btn" id="tbtn-numPat">🔢 الأنماط العددية</button>
+    <button class="tab-btn" id="tbtn-shapePat">🔷 أنماط الأشكال</button>
+    <button class="tab-btn" id="tbtn-complete">🎯 أكمل النمط</button>
+    <button class="tab-btn" id="tbtn-build">🏗️ ابنِ نمطك</button>
+    <button class="tab-btn" id="tbtn-speed">⚡ التحدي السريع</button>
+    <button class="tab-btn" id="tbtn-memory">🧩 لعبة الذاكرة</button>
+    <button class="tab-btn" id="tbtn-mastery">🏆 اختبار الإتقان</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- INTRO -->
+<div class="section active" id="tab-intro">
+  <div class="card">
+    <div class="card-title"><span class="num">١</span> ما هو النمط؟</div>
+    <div class="info-box">
+      النمط هو <strong>تسلسل منتظم</strong> يتبع <strong>قاعدة محددة</strong>.<br>
+      يمكن أن يكون النمط بالأعداد أو الأشكال أو الألوان!<br><br>
+      🔑 <strong>القاعدة</strong> هي ما يربط عناصر النمط ببعضها — ابحث عنها!
+    </div>
+    <div class="type-grid">
+      <div class="type-card num">
+        <div class="tc-icon">🔢</div>
+        <h3>الأنماط العددية</h3>
+        <p>٢، ٤، ٦، ٨، ١٠...<br>القاعدة: <strong>+٢</strong></p>
+      </div>
+      <div class="type-card shape">
+        <div class="tc-icon">🔷</div>
+        <h3>أنماط الأشكال</h3>
+        <p>🔵🔺🔵🔺🔵...<br>القاعدة: <strong>تكرار AB</strong></p>
+      </div>
+    </div>
+    <div class="tip-box">💡 <strong>خطوات اكتشاف النمط:</strong> انظر إلى الأعداد أو الأشكال، ابحث عما يتكرر أو يتغير، ثم تنبأ بالعنصر التالي!</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="num">٢</span> أمثلة على الأنماط</div>
+    <div id="intro-examples"></div>
+    <div class="btn-group">
+      <button class="btn btn-p" id="gt-num">التالي: الأنماط العددية ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- NUM PATTERNS -->
+<div class="section" id="tab-numPat">
+  <div class="card">
+    <div class="card-title"><span class="num">١</span> الأنماط التصاعدية (الجمع)</div>
+    <div class="info-box">في الأنماط التصاعدية <strong>نجمع</strong> نفس العدد في كل مرة لنصل للعدد التالي.</div>
+    <div id="inc-patterns"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="num">٢</span> الأنماط التنازلية (الطرح)</div>
+    <div class="info-box">في الأنماط التنازلية <strong>نطرح</strong> نفس العدد في كل مرة لنصل للعدد التالي.</div>
+    <div id="dec-patterns"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="num">٣</span> اكتشف القاعدة!</div>
+    <div class="info-box">انظر للنمط وحدد قاعدته — هل هو جمع أم طرح؟ وبكم؟</div>
+    <div id="rule-finder"></div>
+    <div class="btn-group">
+      <button class="btn btn-gold" id="new-rule-btn">🔄 نمط جديد</button>
+      <button class="btn btn-p" id="gt-shape">التالي: أنماط الأشكال ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- SHAPE PATTERNS -->
+<div class="section" id="tab-shapePat">
+  <div class="card">
+    <div class="card-title"><span class="num">١</span> أنماط الأشكال المتكررة</div>
+    <div class="info-box">في هذا النوع <strong>تتكرر مجموعة</strong> من الأشكال مراراً. ابحث عن الوحدة المتكررة!</div>
+    <div id="shape-examples"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="num">٢</span> تفاعلي: انقر لإكمال النمط</div>
+    <div class="info-box">انقر على المربع الفارغ لاختيار الشكل الصحيح!</div>
+    <div id="shape-interactive"></div>
+    <div class="btn-group">
+      <button class="btn btn-gold" id="new-shape-btn">🔄 نمط جديد</button>
+      <button class="btn btn-p" id="gt-complete">التالي: أكمل النمط ←</button>
+    </div>
+    <div id="shape-fb" style="margin-top:1rem;display:none" class="tip-box"></div>
+  </div>
+</div>
+
+<!-- COMPLETE THE PATTERN -->
+<div class="section" id="tab-complete">
+  <div class="card">
+    <div class="card-title"><span class="num">🎯</span> لعبة أكمل النمط!</div>
+    <div class="score-bar">
+      <div class="sc-card"><div class="sc-n" id="ctp-score">٠</div><div class="sc-l">صحيح</div></div>
+      <div class="sc-card"><div class="sc-n" id="ctp-total">٠</div><div class="sc-l">المحاولات</div></div>
+      <div class="sc-card"><div class="sc-n" id="ctp-pct">—</div><div class="sc-l">نسبة النجاح</div></div>
+    </div>
+    <div class="info-box">اختر العنصر الصحيح لإكمال النمط 🎯 — أنماط عددية وأشكال!</div>
+    <div id="ctp-questions"></div>
+    <div class="btn-group">
+      <button class="btn btn-p" id="gt-build">التالي: ابنِ نمطك ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- BUILD -->
+<div class="section" id="tab-build">
+  <div class="card">
+    <div class="card-title"><span class="num">🏗️</span> ابنِ نمطك الخاص!</div>
+    <div class="info-box">اضغط على الأشكال من اللوحة لبنائها في المسار، ثم اضغط <strong>تحقق</strong> لمعرفة إذا كوّنت نمطاً!</div>
+    <div class="tip-box">💡 ابنِ نمطاً متكرراً مثل: 🔵🔺🔵🔺 أو 🟡⭐🔴🟡⭐🔴</div>
+
+    <p style="font-size:14px;font-weight:700;color:var(--p);margin-bottom:.5rem">🎨 اللوحة — اضغط لإضافة:</p>
+    <div class="palette" id="palette"></div>
+
+    <p style="font-size:14px;font-weight:700;color:var(--p);margin-bottom:.5rem">🏗️ مسار النمط — اضغط على عنصر لحذفه:</p>
+    <div class="build-track" id="build-track">
+      <span style="color:var(--muted);font-size:14px">ابدأ بالضغط على الأشكال أعلاه...</span>
+    </div>
+
+    <div class="pattern-result" id="pat-result"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-p" id="check-pattern-btn">🔍 تحقق من النمط</button>
+      <button class="btn btn-outline" id="clear-pattern-btn">🗑️ امسح الكل</button>
+      <button class="btn btn-p" id="gt-speed">التالي: التحدي السريع ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- SPEED GAME -->
+<div class="section" id="tab-speed">
+  <div class="card">
+    <div class="card-title"><span class="num">⚡</span> تحدي الأنماط السريع!</div>
+    <div id="speed-start">
+      <div class="info-box">لديك <strong>٦٠ ثانية</strong> — أجب عن أكبر عدد من أسئلة الأنماط! ⚡</div>
+      <div style="text-align:center;padding:1.5rem">
+        <div style="font-size:5rem;margin-bottom:1rem">⚡</div>
+        <p style="color:var(--muted);margin-bottom:1.5rem;font-size:1rem">أنماط عددية وأنماط أشكال — كن سريعاً ودقيقاً!</p>
+        <button class="btn btn-p" style="font-size:1.1rem;padding:14px 32px" id="start-speed-btn">🚀 ابدأ التحدي!</button>
+      </div>
+    </div>
+    <div id="speed-game" style="display:none">
+      <div class="timer-row">
+        <div class="timer-circ"><div class="t-n" id="sp-timer">٦٠</div><div class="t-l">ثانية</div></div>
+        <div style="text-align:center">
+          <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.4rem;font-weight:800;color:var(--gold)">⭐ <span id="sp-score">٠</span> نقطة</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">س: <span id="sp-qn">١</span></div>
+        </div>
+        <div id="sp-streak" style="font-size:13px;font-weight:700;color:var(--pk)"></div>
+      </div>
+      <div class="sg-q">
+        <div class="sg-seq" id="sp-seq"></div>
+        <div class="sg-ask" id="sp-ask">ما العنصر التالي؟</div>
+      </div>
+      <div class="sg-opts" id="sp-opts"></div>
+      <div id="sp-fb" style="text-align:center;font-size:1.1rem;font-weight:700;margin-top:.75rem;min-height:28px"></div>
+    </div>
+    <div id="speed-end" style="display:none">
+      <div class="cert">
+        <div style="font-size:56px;margin-bottom:.5rem">🏅</div>
+        <h2>انتهى الوقت!</h2>
+        <p style="font-size:1.2rem;margin:.5rem 0">حصلتَ على <strong id="sp-final">٠</strong> نقطة</p>
+        <p id="sp-msg" style="margin-top:.25rem"></p>
+        <button class="btn btn-p" style="margin-top:1rem" id="retry-speed-btn">🔄 العب مرة أخرى</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MEMORY -->
+<div class="section" id="tab-memory">
+  <div class="card">
+    <div class="card-title"><span class="num">🧩</span> لعبة الذاكرة: طابق النمط مع القاعدة!</div>
+    <div class="info-box">اقلب بطاقتين — طابق <strong>النمط العددي</strong> مع <strong>قاعدته</strong>! 🎉</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:1rem">
+      <div style="font-size:15px;font-weight:700">الأزواج: <span id="mem-pairs" style="color:var(--gr);font-size:1.3rem;font-weight:800">٠</span> / ٦</div>
+      <div style="font-size:15px;font-weight:700">المحاولات: <span id="mem-tries" style="color:var(--red);font-size:1.3rem;font-weight:800">٠</span></div>
+      <button class="btn btn-outline" id="reset-mem-btn" style="padding:6px 16px;font-size:13px">🔄 لعبة جديدة</button>
+    </div>
+    <div class="mem-grid" id="mem-grid"></div>
+    <div id="mem-win" style="display:none" class="cert">
+      <div style="font-size:60px;margin-bottom:.5rem">🎉</div>
+      <h2>أحسنت! فزتَ!</h2>
+      <p>أنجزتَ في <strong id="mem-final-tries">٠</strong> محاولة!</p>
+      <div style="font-size:2.5rem;margin-top:.75rem">⭐⭐⭐</div>
+    </div>
+  </div>
+</div>
+
+<!-- MASTERY -->
+<div class="section" id="tab-mastery">
+  <div class="card">
+    <div class="card-title"><span class="num">🏆</span> اختبار الإتقان النهائي</div>
+    <div class="info-box">أجب عن <strong>جميع الأسئلة</strong> للحصول على شهادة الإتقان! تحتاج <strong>٨٠٪ أو أكثر</strong> 🏆</div>
+    <div style="margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span style="color:var(--muted)">تقدّمك</span>
+        <span id="m-prog-txt" style="color:var(--p);font-weight:700">٠ / ١٢</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" id="m-prog-bar" style="width:0%"></div></div>
+    </div>
+    <div id="mastery-qs"></div>
+    <div class="btn-group" style="margin-top:1.5rem">
+      <button class="btn btn-p" id="submit-mastery" style="display:none">🏆 احسب نتيجتي</button>
+    </div>
+    <div id="mastery-result" style="display:none"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ══════════════════════════════
+// TTS
+// ══════════════════════════════
+const tts={
+  enabled:true,unlocked:false,voice:null,_bt:null,
+  init(){
+    this._lv();
+    if(typeof speechSynthesis!=='undefined'&&'onvoiceschanged' in speechSynthesis)
+      speechSynthesis.onvoiceschanged=()=>this._lv();
+    setInterval(()=>{if(window.speechSynthesis&&speechSynthesis.speaking){speechSynthesis.pause();speechSynthesis.resume();}},10000);
+    const autoUnlock=()=>{
+      if(this.unlocked)return;
+      document.removeEventListener('click',autoUnlock);
+      document.removeEventListener('touchstart',autoUnlock);
+      this._unlock(true);
+    };
+    document.addEventListener('click',autoUnlock);
+    document.addEventListener('touchstart',autoUnlock);
+    document.getElementById('ttsBtn').addEventListener('click',()=>{
+      this.enabled=!this.enabled;
+      const b=document.getElementById('ttsBtn');
+      b.textContent=this.enabled?'🔊':'🔇';b.className=this.enabled?'on':'off';
+      if(!this.enabled&&window.speechSynthesis)speechSynthesis.cancel();
+      this._bar(this.enabled?'الصوت مفعّل 🔊':'الصوت مكتوم 🔇');
+    });
+  },
+  _lv(){
+    if(!window.speechSynthesis)return;
+    const v=speechSynthesis.getVoices();
+    this.voice=v.find(x=>x.lang==='ar-EG')||v.find(x=>x.lang==='ar-SA')||v.find(x=>x.lang.startsWith('ar'))||null;
+  },
+  _unlock(wa){
+    this.enabled=wa;this.unlocked=true;
+    const bn=document.getElementById('unlockBanner');
+    if(bn){bn.style.opacity='0';setTimeout(()=>bn.remove(),380);}
+    const tb=document.getElementById('ttsBtn');
+    if(tb){tb.style.display='flex';tb.textContent=wa?'🔊':'🔇';tb.className=wa?'on':'off';}
+    if(!wa||!window.speechSynthesis)return;
+    speechSynthesis.cancel();
+    const si=new SpeechSynthesisUtterance('\u200B');
+    si.volume=0;si.lang='ar-EG';if(this.voice)si.voice=this.voice;
+    const welcome=()=>setTimeout(()=>this.speak('مرحباً! هيا نتعلم الأنماط!',true),150);
+    si.onend=si.onerror=welcome;
+    speechSynthesis.speak(si);
+    setTimeout(()=>{if(!speechSynthesis.pending&&!speechSynthesis.speaking)welcome();},600);
+  },
+  speak(text,priority=false){
+    if(!this.enabled||!this.unlocked||!window.speechSynthesis)return;
+    if(priority)speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='ar-EG';u.rate=0.82;u.pitch=1.1;u.volume=1;
+    if(this.voice)u.voice=this.voice;
+    u.onerror=e=>{if(e.error!=='interrupted'&&e.error!=='canceled'){setTimeout(()=>{try{const u2=new SpeechSynthesisUtterance(text);u2.lang='ar-EG';u2.rate=0.82;speechSynthesis.speak(u2);}catch(x){}},300);}};
+    try{speechSynthesis.speak(u);}catch(x){}
+  },
+  _bar(msg){
+    const b=document.getElementById('ttsBar');if(!b)return;
+    b.textContent=msg;b.classList.add('show');
+    clearTimeout(this._bt);this._bt=setTimeout(()=>b.classList.remove('show'),1800);
+  }
+};
+
+// ══════════════════════════════
+// HELPERS
+// ══════════════════════════════
+const ARD=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toAr(n){return String(n).replace(/\d/g,d=>ARD[+d]);}
+function rand(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+
+// TABS
+const TABS=['intro','numPat','shapePat','complete','build','speed','memory','mastery'];
+function showTab(name){
+  TABS.forEach(id=>{
+    document.getElementById('tab-'+id).classList.toggle('active',id===name);
+    document.getElementById('tbtn-'+id).classList.toggle('active',id===name);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+TABS.forEach(id=>document.getElementById('tbtn-'+id).addEventListener('click',()=>showTab(id)));
+
+// ══════════════════════════════
+// DATA
+// ══════════════════════════════
+const SHAPES=['🔵','🔴','🟡','🟢','🔺','🔶','⭐','❤️','🌙','🔷'];
+const PALETTE_SHAPES=['🔵','🔴','🟡','🟢','🔺','🔶','⭐','❤️'];
+
+const INC_PATTERNS=[
+  {seq:[2,4,6,8],rule:'+٢',next:10},
+  {seq:[3,6,9,12],rule:'+٣',next:15},
+  {seq:[5,10,15,20],rule:'+٥',next:25},
+  {seq:[10,20,30,40],rule:'+١٠',next:50},
+  {seq:[100,200,300,400],rule:'+١٠٠',next:500},
+  {seq:[1000,2000,3000,4000],rule:'+١٠٠٠',next:5000},
+  {seq:[25,50,75,100],rule:'+٢٥',next:125},
+  {seq:[4,8,12,16],rule:'+٤',next:20},
+];
+
+const DEC_PATTERNS=[
+  {seq:[20,18,16,14],rule:'-٢',next:12},
+  {seq:[50,45,40,35],rule:'-٥',next:30},
+  {seq:[100,90,80,70],rule:'-١٠',next:60},
+  {seq:[30,25,20,15],rule:'-٥',next:10},
+  {seq:[1000,900,800,700],rule:'-١٠٠',next:600},
+  {seq:[40,36,32,28],rule:'-٤',next:24},
+  {seq:[200,175,150,125],rule:'-٢٥',next:100},
+];
+
+const SHAPE_SEQS=[
+  {seq:['🔵','🔴','🔵','🔴','🔵'],unit:'🔵🔴',next:'🔴',type:'AB'},
+  {seq:['⭐','🔺','🟡','⭐','🔺'],unit:'⭐🔺🟡',next:'🟡',type:'ABC'},
+  {seq:['🟢','🟢','🔴','🟢','🟢'],unit:'🟢🟢🔴',next:'🔴',type:'AAB'},
+  {seq:['🔵','🔶','🔵','🔶','🔵'],unit:'🔵🔶',next:'🔶',type:'AB'},
+  {seq:['❤️','⭐','⭐','❤️','⭐'],unit:'❤️⭐⭐',next:'⭐',type:'ABB'},
+  {seq:['🟡','🔴','🟢','🟡','🔴'],unit:'🟡🔴🟢',next:'🟢',type:'ABC'},
+  {seq:['🔷','🔷','🔶','🔷','🔷'],unit:'🔷🔷🔶',next:'🔶',type:'AAB'},
+  {seq:['🌙','⭐','🔵','🌙','⭐'],unit:'🌙⭐🔵',next:'🔵',type:'ABC'},
+];
+
+// Complete the Pattern data (mixed)
+const CTP_DATA=[
+  {type:'num',seq:[5,10,15,'?'],answer:20,rule:'+٥',opts:[18,20,22,25]},
+  {type:'shape',seq:['🔵','🔴','🔵','?'],answer:'🔴',rule:'AB',opts:['🔵','🔴','🟡','🟢']},
+  {type:'num',seq:[100,200,300,'?'],answer:400,rule:'+١٠٠',opts:[350,400,450,500]},
+  {type:'shape',seq:['⭐','⭐','🔺','⭐','⭐','?'],answer:'🔺',rule:'AAB',opts:['⭐','🔺','🟡','🔵']},
+  {type:'num',seq:[50,45,40,'?'],answer:35,rule:'-٥',opts:[30,33,35,38]},
+  {type:'shape',seq:['🟡','🔴','🟢','🟡','?'],answer:'🔴',rule:'ABC',opts:['🟡','🔴','🟢','🔵']},
+  {type:'num',seq:[1000,2000,3000,'?'],answer:4000,rule:'+١٠٠٠',opts:[3500,4000,4500,5000]},
+  {type:'shape',seq:['❤️','⭐','❤️','?'],answer:'⭐',rule:'AB',opts:['❤️','⭐','🔵','🌙']},
+  {type:'num',seq:[3,6,9,12,'?'],answer:15,rule:'+٣',opts:[13,14,15,16]},
+  {type:'shape',seq:['🔷','🔶','🔷','🔶','?'],answer:'🔷',rule:'AB',opts:['🔷','🔶','⭐','🔵']},
+  {type:'num',seq:[200,180,160,'?'],answer:140,rule:'-٢٠',opts:[130,135,140,145]},
+  {type:'shape',seq:['🌙','🌙','⭐','🌙','🌙','?'],answer:'⭐',rule:'AAB',opts:['🌙','⭐','🔵','🔺']},
+  {type:'num',seq:[25,50,75,'?'],answer:100,rule:'+٢٥',opts:[95,100,105,110]},
+  {type:'num',seq:[900,800,700,'?'],answer:600,rule:'-١٠٠',opts:[500,550,600,650]},
+  {type:'shape',seq:['🔵','🔺','🟡','🔵','🔺','?'],answer:'🟡',rule:'ABC',opts:['🔵','🔺','🟡','🔶']},
+];
+
+// Speed game data
+function genSpeedQ(){
+  const type=Math.random()<0.6?'num':'shape';
+  if(type==='num'){
+    const p=INC_PATTERNS.concat(DEC_PATTERNS)[rand(0,INC_PATTERNS.length+DEC_PATTERNS.length-1)];
+    const seq=[...p.seq,'?'];
+    const correct=p.next;
+    const fakes=new Set([correct]);
+    while(fakes.size<4){
+      const diff=Math.abs(parseInt(p.rule.replace(/[^0-9]/g,'')));
+      const fake=correct+rand(-3,3)*diff;
+      if(fake!==correct&&fake>0)fakes.add(fake);
+    }
+    return{type:'num',seqDisplay:p.seq.map(toAr).join('، ')+' , ?',ask:'ما العدد التالي؟',correct,opts:shuffle([...fakes]).map(toAr)};
+  } else {
+    const sp=SHAPE_SEQS[rand(0,SHAPE_SEQS.length-1)];
+    const correct=sp.next;
+    const others=SHAPES.filter(s=>s!==correct);
+    const opts=shuffle([correct,...shuffle(others).slice(0,3)]);
+    return{type:'shape',seqDisplay:sp.seq.join(' '),ask:'ما الشكل التالي؟',correct,opts};
+  }
+}
+
+// Memory pairs
+const MEM_PAIRS=[
+  {seq:'٢، ٤، ٦، ٨',rule:'+٢',spoken:'نمط الجمع بمقدار اثنين'},
+  {seq:'٣، ٦، ٩، ١٢',rule:'+٣',spoken:'نمط الجمع بمقدار ثلاثة'},
+  {seq:'١٠، ٢٠، ٣٠، ٤٠',rule:'+١٠',spoken:'نمط الجمع بمقدار عشرة'},
+  {seq:'٥٠، ٤٥، ٤٠، ٣٥',rule:'-٥',spoken:'نمط الطرح بمقدار خمسة'},
+  {seq:'١٠٠، ٢٠٠، ٣٠٠، ٤٠٠',rule:'+١٠٠',spoken:'نمط الجمع بمقدار مئة'},
+  {seq:'١٠٠٠، ٩٠٠، ٨٠٠، ٧٠٠',rule:'-١٠٠',spoken:'نمط الطرح بمقدار مئة'},
+];
+
+// Mastery questions
+const MAST_QS=[
+  {text:'م١: ما العدد التالي في النمط: ٤، ٨، ١٢، ١٦، ___؟',opts:['١٨','٢٠','١٩','٢٢'],correct:1,exp:'القاعدة +٤، إذن ١٦+٤=٢٠'},
+  {text:'م٢: ما العدد التالي: ١٠٠، ٩٠، ٨٠، ٧٠، ___؟',opts:['٥٥','٦٠','٦٥','٧٥'],correct:1,exp:'القاعدة -١٠، إذن ٧٠-١٠=٦٠'},
+  {text:'م٣: 🔵🔺🔵🔺🔵___ ما الشكل التالي؟',opts:['🔵','🔺','🟡','🔶'],correct:1,exp:'النمط AB يتكرر، الشكل التالي 🔺'},
+  {text:'م٤: ما قاعدة النمط: ٥، ١٠، ١٥، ٢٠؟',opts:['+٢','+٣','+٥','+١٠'],correct:2,exp:'الفرق بين كل عددين هو ٥، إذن القاعدة +٥'},
+  {text:'م٥: ما العدد المفقود: ٢٥، ___, ٧٥، ١٠٠؟',opts:['٤٠','٤٥','٥٠','٦٠'],correct:2,exp:'القاعدة +٢٥، إذن ٢٥+٢٥=٥٠'},
+  {text:'م٦: ⭐⭐🔴⭐⭐___ ما الشكل التالي؟',opts:['⭐','🔴','🟡','🔵'],correct:1,exp:'النمط AAB يتكرر، الشكل التالي 🔴'},
+  {text:'م٧: ما العدد التالي: ١٠٠٠، ٢٠٠٠، ٣٠٠٠، ___؟',opts:['٣٥٠٠','٤٠٠٠','٤٥٠٠','٥٠٠٠'],correct:1,exp:'القاعدة +١٠٠٠، إذن ٣٠٠٠+١٠٠٠=٤٠٠٠'},
+  {text:'م٨: ما قاعدة النمط: ٣٠، ٢٥، ٢٠، ١٥؟',opts:['+٥','-٥','-١٠','+١٠'],correct:1,exp:'الفرق هو -٥ في كل مرة'},
+  {text:'م٩: 🟡🔴🟢🟡🔴___ ما الشكل التالي؟',opts:['🟡','🔴','🟢','🔵'],correct:2,exp:'النمط ABC يتكرر، الشكل التالي 🟢'},
+  {text:'م١٠: ما العدد المفقود: ٢٠٠، ___، ٦٠٠، ٨٠٠؟',opts:['٣٠٠','٤٠٠','٣٥٠','٤٥٠'],correct:1,exp:'القاعدة +٢٠٠، إذن ٢٠٠+٢٠٠=٤٠٠'},
+  {text:'م١١: أي نمط قاعدته +٣؟',opts:['٢،٤،٦،٨','٣،٧،١١','٣،٦،٩،١٢','١٠،٢٠،٣٠'],correct:2,exp:'٣، ٦، ٩، ١٢ — الفرق ٣ في كل مرة'},
+  {text:'م١٢: كم حلقة تكرار في: 🔵🔴🔵🔴🔵🔴؟',opts:['١','٢','٣','٦'],correct:2,exp:'الوحدة 🔵🔴 تتكرر ٣ مرات'},
+];
+
+// ══════════════════════════════
+// QUESTION ENGINE
+// ══════════════════════════════
+const QSTORE={};
+let prSc=0,prTot=0;
+
+function renderQBlocks(cid,qs,trackScore=false){
+  QSTORE[cid]=qs;
+  const cont=document.getElementById(cid);
+  if(!cont)return;
+  cont.innerHTML='';
+  qs.forEach((q,i)=>{
+    const block=document.createElement('div');block.className='q-block';block.id=cid+'_q'+i;
+    const qt=document.createElement('div');qt.className='q-text';
+    const sp=document.createElement('span');sp.className='q-lbl';sp.textContent='س'+toAr(i+1)+': ';
+    qt.appendChild(sp);qt.appendChild(document.createTextNode(q.text));
+    block.appendChild(qt);
+    const og=document.createElement('div');og.className='opts-grid';
+    q.opts.forEach((opt,j)=>{
+      const btn=document.createElement('button');btn.className='opt-btn';btn.textContent=opt;
+      btn.addEventListener('click',()=>answerQ(cid,i,j,trackScore));
+      og.appendChild(btn);
+    });
+    block.appendChild(og);
+    const fb=document.createElement('div');fb.className='fb-msg';fb.id=cid+'_fb'+i;
+    block.appendChild(fb);
+    cont.appendChild(block);
+  });
+}
+
+function answerQ(cid,qi,chosen,track){
+  const block=document.getElementById(cid+'_q'+qi);
+  if(!block||block.classList.contains('ok')||block.classList.contains('no'))return;
+  const q=QSTORE[cid][qi];
+  const btns=block.querySelectorAll('.opt-btn');btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById(cid+'_fb'+qi);
+  if(track)prTot++;
+  if(chosen===q.correct){
+    if(track)prSc++;
+    btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ إجابة صحيحة! رائع! 🎉';fb.className='fb-msg show ok';
+    tts.speak('أحسنت!',false);
+  } else {
+    btns[chosen].classList.add('wrong');btns[q.correct].classList.add('correct');block.classList.add('no');
+    fb.textContent='❌ الصحيح: '+q.opts[q.correct]+(q.exp?' — '+q.exp:'');fb.className='fb-msg show no';
+    tts.speak('خطأ',false);
+  }
+  if(track){
+    document.getElementById('ctp-score').textContent=toAr(prSc);
+    document.getElementById('ctp-total').textContent=toAr(prTot);
+    document.getElementById('ctp-pct').textContent=toAr(Math.round(prSc/prTot*100))+'٪';
+  }
+}
+
+// ══════════════════════════════
+// INTRO EXAMPLES
+// ══════════════════════════════
+function buildIntro(){
+  const cont=document.getElementById('intro-examples');
+  cont.innerHTML='';
+  const examples=[
+    {label:'نمط تصاعدي (+٣)',seq:['٣','٦','٩','١٢','١٥'],type:'num',color:'var(--sky)'},
+    {label:'نمط تنازلي (-١٠)',seq:['٥٠','٤٠','٣٠','٢٠','١٠'],type:'num',color:'var(--pk)'},
+    {label:'نمط AB (شكلان)',seq:['🔵','🔴','🔵','🔴','🔵'],type:'shape',color:'var(--p)'},
+    {label:'نمط ABC (ثلاثة أشكال)',seq:['⭐','🔺','🟡','⭐','🔺'],type:'shape',color:'var(--org)'},
+    {label:'نمط AAB',seq:['🟢','🟢','🔴','🟢','🟢'],type:'shape',color:'var(--gr)'},
+  ];
+  examples.forEach(ex=>{
+    const div=document.createElement('div');div.style.cssText='margin-bottom:1rem;';
+    const lbl=document.createElement('div');
+    lbl.style.cssText='font-size:13px;font-weight:700;color:'+ex.color+';margin-bottom:6px;';
+    lbl.textContent='📌 '+ex.label;
+    div.appendChild(lbl);
+    const track=document.createElement('div');track.className='pattern-track';
+    ex.seq.forEach((item,i)=>{
+      const el=document.createElement('div');el.className='p-item';
+      el.style.borderColor=ex.color;el.style.color=ex.color;
+      el.textContent=item;
+      if(i===ex.seq.length-1)el.style.animation='hl .5s ease infinite alternate';
+      track.appendChild(el);
+      if(i<ex.seq.length-1){
+        const arr=document.createElement('span');arr.className='p-separator';arr.textContent='...';
+        track.appendChild(arr);
+      }
+    });
+    div.appendChild(track);
+    cont.appendChild(div);
+  });
+}
+
+// ══════════════════════════════
+// NUMBER PATTERNS DISPLAY
+// ══════════════════════════════
+function buildNumPatterns(){
+  buildPatGroup('inc-patterns',INC_PATTERNS.slice(0,4));
+  buildPatGroup('dec-patterns',DEC_PATTERNS.slice(0,4));
+}
+
+function buildPatGroup(cid,patterns){
+  const cont=document.getElementById(cid);cont.innerHTML='';
+  patterns.forEach(p=>{
+    const div=document.createElement('div');div.style.cssText='margin-bottom:1.25rem;';
+    const seq=document.createElement('div');seq.className='num-seq';
+    p.seq.forEach((n,i)=>{
+      const box=document.createElement('div');box.className='ns-box filled';
+      box.textContent=toAr(n);
+      seq.appendChild(box);
+      if(i<p.seq.length-1){const arr=document.createElement('span');arr.className='ns-arrow';arr.textContent='→';seq.appendChild(arr);}
+    });
+    const arr=document.createElement('span');arr.className='ns-arrow';arr.textContent='→';seq.appendChild(arr);
+    const nextBox=document.createElement('div');nextBox.className='ns-box empty';nextBox.textContent='?';
+    seq.appendChild(nextBox);
+    const btn=document.createElement('button');btn.className='btn btn-p';btn.style.cssText='padding:8px 16px;font-size:14px;margin-right:8px;';
+    btn.textContent='🔍 اكشف';
+    btn.addEventListener('click',()=>{
+      nextBox.className='ns-box answer';nextBox.textContent=toAr(p.next);
+      btn.textContent='✅ '+p.rule;btn.disabled=true;
+      tts.speak('القاعدة '+p.rule+'. العدد التالي '+toAr(p.next),true);
+    });
+    div.appendChild(seq);div.appendChild(btn);
+    const rule=document.createElement('span');rule.className='rule-badge';rule.textContent='القاعدة: '+p.rule;
+    rule.style.display='none';div.appendChild(rule);
+    cont.appendChild(div);
+  });
+}
+
+// ══════════════════════════════
+// RULE FINDER
+// ══════════════════════════════
+let currentRulePattern=null;
+function newRuleFinder(){
+  const all=INC_PATTERNS.concat(DEC_PATTERNS);
+  const p=all[rand(0,all.length-1)];
+  currentRulePattern=p;
+  const cont=document.getElementById('rule-finder');cont.innerHTML='';
+  // Show sequence
+  const seq=document.createElement('div');seq.className='num-seq';seq.style.justifyContent='center';
+  p.seq.concat([p.next]).forEach((n,i)=>{
+    const box=document.createElement('div');box.className='ns-box filled';box.textContent=toAr(n);
+    seq.appendChild(box);
+    if(i<p.seq.length){const a=document.createElement('span');a.className='ns-arrow';a.textContent='→';seq.appendChild(a);}
+  });
+  cont.appendChild(seq);
+  // Generate rule options
+  const rules=[p.rule];
+  const allRules=['+٢','+٣','+٤','+٥','+١٠','+٢٥','+١٠٠','+١٠٠٠','-٢','-٣','-٥','-١٠','-٢٥','-١٠٠'];
+  const others=shuffle(allRules.filter(r=>r!==p.rule)).slice(0,3);
+  const opts=shuffle([p.rule,...others]);
+  const ruleRow=document.createElement('div');ruleRow.className='rule-opts';
+  const fb=document.createElement('div');fb.className='fb-msg';
+  opts.forEach(r=>{
+    const btn=document.createElement('button');btn.className='rule-opt';btn.textContent=r;
+    btn.addEventListener('click',()=>{
+      if(btn.disabled)return;
+      ruleRow.querySelectorAll('.rule-opt').forEach(b=>b.disabled=true);
+      if(r===p.rule){
+        btn.classList.add('correct');
+        fb.textContent='✅ ممتاز! القاعدة هي '+p.rule;fb.className='fb-msg show ok';
+        tts.speak('ممتاز! القاعدة هي '+p.rule,true);
+      } else {
+        btn.classList.add('wrong');
+        ruleRow.querySelectorAll('.rule-opt').forEach(b=>{if(b.textContent===p.rule)b.classList.add('correct');});
+        fb.textContent='❌ القاعدة الصحيحة هي '+p.rule;fb.className='fb-msg show no';
+        tts.speak('خطأ. القاعدة هي '+p.rule,true);
+      }
+    });
+    ruleRow.appendChild(btn);
+  });
+  const ask=document.createElement('div');ask.style.cssText='font-size:15px;font-weight:700;text-align:center;color:var(--ink);margin:.75rem 0;';
+  ask.textContent='ما قاعدة هذا النمط؟';
+  cont.appendChild(ask);cont.appendChild(ruleRow);cont.appendChild(fb);
+}
+
+// ══════════════════════════════
+// SHAPE PATTERNS
+// ══════════════════════════════
+function buildShapeExamples(){
+  const cont=document.getElementById('shape-examples');cont.innerHTML='';
+  const examples=SHAPE_SEQS.slice(0,4);
+  examples.forEach(sp=>{
+    const div=document.createElement('div');div.style.cssText='margin-bottom:1.25rem;';
+    const lbl=document.createElement('div');lbl.style.cssText='font-size:13px;font-weight:700;color:var(--pk);margin-bottom:6px;';
+    lbl.textContent='📌 نمط '+sp.type+' — الوحدة: '+sp.unit;
+    div.appendChild(lbl);
+    const track=document.createElement('div');track.className='pattern-track';
+    sp.seq.forEach((s,i)=>{
+      const el=document.createElement('div');el.className='p-item';el.textContent=s;
+      track.appendChild(el);
+    });
+    div.appendChild(track);
+    cont.appendChild(div);
+  });
+}
+
+let currentShapePat=null,shapeAnswered=false;
+function newShapeInteractive(){
+  shapeAnswered=false;
+  const sp=SHAPE_SEQS[rand(0,SHAPE_SEQS.length-1)];
+  currentShapePat=sp;
+  const cont=document.getElementById('shape-interactive');cont.innerHTML='';
+  const fb=document.getElementById('shape-fb');fb.style.display='none';
+  // Show sequence with last missing
+  const track=document.createElement('div');track.className='pattern-track';
+  sp.seq.slice(0,-1).forEach(s=>{
+    const el=document.createElement('div');el.className='p-item';el.textContent=s;
+    track.appendChild(el);
+  });
+  const missing=document.createElement('div');missing.className='p-item missing';missing.textContent='?';
+  track.appendChild(missing);
+  cont.appendChild(track);
+  // Options
+  const correct=sp.seq[sp.seq.length-1];
+  const others=SHAPES.filter(s=>s!==correct);
+  const opts=shuffle([correct,...shuffle(others).slice(0,3)]);
+  const optsDiv=document.createElement('div');optsDiv.className='ctp-opts';
+  opts.forEach(opt=>{
+    const btn=document.createElement('button');btn.className='ctp-opt';btn.textContent=opt;
+    btn.addEventListener('click',()=>{
+      if(shapeAnswered)return;shapeAnswered=true;
+      optsDiv.querySelectorAll('.ctp-opt').forEach(b=>b.disabled=true);
+      if(opt===correct){
+        btn.classList.add('correct');missing.textContent=correct;missing.classList.remove('missing');
+        fb.textContent='✅ أحسنت! الشكل الصحيح هو '+correct+' (نمط '+sp.type+')';fb.style.display='block';fb.className='tip-box';
+        tts.speak('أحسنت! الشكل الصحيح هو '+sp.type,true);
+      } else {
+        btn.classList.add('wrong');
+        optsDiv.querySelectorAll('.ctp-opt').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});
+        fb.textContent='❌ الشكل الصحيح هو '+correct+' — لأن النمط '+sp.type+' يتكرر: '+sp.unit;
+        fb.style.display='block';fb.className='tip-box';
+        tts.speak('خطأ. الشكل الصحيح '+correct,true);
+      }
+    });
+    optsDiv.appendChild(btn);
+  });
+  const ask=document.createElement('div');ask.style.cssText='font-size:15px;font-weight:700;color:var(--ink);margin:.75rem 0;text-align:center;';
+  ask.textContent='ما الشكل التالي في النمط؟';
+  cont.appendChild(ask);cont.appendChild(optsDiv);
+}
+
+// ══════════════════════════════
+// COMPLETE THE PATTERN
+// ══════════════════════════════
+function buildCTP(){
+  const questions=shuffle(CTP_DATA).slice(0,10).map((q,i)=>({
+    text:buildCTPText(q,i),
+    opts:q.type==='num'?q.opts.map(o=>toAr(o)):q.opts,
+    correct:q.type==='num'?q.opts.indexOf(q.answer):(q.opts).indexOf(q.answer),
+    exp:'القاعدة: '+q.rule
+  }));
+  prSc=0;prTot=0;
+  document.getElementById('ctp-score').textContent='٠';
+  document.getElementById('ctp-total').textContent='٠';
+  document.getElementById('ctp-pct').textContent='—';
+  renderQBlocks('ctp-questions',questions,true);
+}
+
+function buildCTPText(q,i){
+  if(q.type==='num'){
+    return 'أكمل النمط العددي: '+q.seq.map(x=>x==='?'?'___':toAr(x)).join('، ')+' (القاعدة: '+q.rule+')';
+  } else {
+    return 'أكمل نمط الأشكال: '+q.seq.map(x=>x==='?'?'___':x).join('  ')+'  (نمط '+q.rule+')';
+  }
+}
+
+// ══════════════════════════════
+// PATTERN BUILDER
+// ══════════════════════════════
+let builtPattern=[];
+function buildPalette(){
+  const pal=document.getElementById('palette');pal.innerHTML='';
+  PALETTE_SHAPES.forEach(shape=>{
+    const item=document.createElement('div');item.className='pal-item';item.textContent=shape;
+    item.addEventListener('click',()=>{
+      builtPattern.push(shape);
+      renderBuildTrack();
+    });
+    pal.appendChild(item);
+  });
+}
+
+function renderBuildTrack(){
+  const track=document.getElementById('build-track');track.innerHTML='';
+  if(builtPattern.length===0){
+    track.innerHTML='<span style="color:var(--muted);font-size:14px">ابدأ بالضغط على الأشكال أعلاه...</span>';
+    return;
+  }
+  builtPattern.forEach((shape,i)=>{
+    const item=document.createElement('div');item.className='built-item';item.textContent=shape;
+    item.title='اضغط لحذفه';
+    item.addEventListener('click',()=>{builtPattern.splice(i,1);renderBuildTrack();document.getElementById('pat-result').classList.remove('show');});
+    track.appendChild(item);
+  });
+}
+
+function checkBuiltPattern(){
+  const res=document.getElementById('pat-result');
+  if(builtPattern.length<4){
+    res.textContent='⚠️ أضف على الأقل ٤ عناصر لتكوين نمط!';res.className='pattern-result show invalid';return;
+  }
+  const detected=detectShapePattern(builtPattern);
+  if(detected){
+    res.innerHTML='✅ <strong>رائع!</strong> كوّنت نمطاً من نوع '+detected.type+'!<br>الوحدة المتكررة: '+detected.unit.join(' ')+' × '+toAr(detected.reps)+' مرات';
+    res.className='pattern-result show valid';
+    tts.speak('رائع! كوّنت نمطاً! الوحدة المتكررة تكررت '+toAr(detected.reps)+' مرات',true);
+  } else {
+    res.textContent='💡 لم أجد نمطاً واضحاً! حاول أن تكرر نفس مجموعة الأشكال على الأقل مرتين.';
+    res.className='pattern-result show invalid';
+    tts.speak('لم أجد نمطاً. حاول تكرار نفس الأشكال',true);
+  }
+}
+
+function detectShapePattern(arr){
+  for(let unitLen=2;unitLen<=4;unitLen++){
+    const unit=arr.slice(0,unitLen);
+    let reps=0;let valid=true;
+    for(let i=0;i<arr.length;i++){
+      if(arr[i]!==unit[i%unitLen]){valid=false;break;}
+      if(i%unitLen===unitLen-1)reps++;
+    }
+    if(valid&&reps>=2){
+      const types={2:'AB',3:'ABC',4:'ABCD'};
+      return{unit,reps,type:types[unitLen]||'ABCD'};
+    }
+  }
+  return null;
+}
+
+// ══════════════════════════════
+// SPEED GAME
+// ══════════════════════════════
+let spTimer=null,spTime=60,spScore=0,spQn=0,spAnswered=false,spStreak=0;
+function startSpeed(){
+  spTime=60;spScore=0;spQn=0;spAnswered=false;spStreak=0;
+  document.getElementById('speed-start').style.display='none';
+  document.getElementById('speed-end').style.display='none';
+  document.getElementById('speed-game').style.display='block';
+  document.getElementById('sp-timer').textContent=toAr(60);
+  document.getElementById('sp-score').textContent=toAr(0);
+  document.getElementById('sp-streak').textContent='';
+  nextSpeedQ();
+  clearInterval(spTimer);
+  spTimer=setInterval(()=>{
+    spTime--;document.getElementById('sp-timer').textContent=toAr(spTime);
+    if(spTime<=10)tts.speak(toAr(spTime),false);
+    if(spTime<=0){clearInterval(spTimer);endSpeed();}
+  },1000);
+}
+
+let spCurrent=null;
+function nextSpeedQ(){
+  spAnswered=false;document.getElementById('sp-fb').textContent='';
+  spCurrent=genSpeedQ();
+  document.getElementById('sp-seq').textContent=spCurrent.seqDisplay;
+  document.getElementById('sp-ask').textContent=spCurrent.ask;
+  document.getElementById('sp-qn').textContent=toAr(spQn+1);
+  const cont=document.getElementById('sp-opts');cont.innerHTML='';
+  spCurrent.opts.forEach(opt=>{
+    const btn=document.createElement('button');btn.className='sg-opt';
+    btn.textContent=typeof opt==='number'?toAr(opt):opt;
+    const correctVal=typeof spCurrent.correct==='number'?toAr(spCurrent.correct):spCurrent.correct;
+    btn.addEventListener('click',()=>{
+      if(spAnswered)return;spAnswered=true;
+      cont.querySelectorAll('.sg-opt').forEach(b=>b.disabled=true);
+      const isCorrect=btn.textContent===correctVal;
+      if(isCorrect){
+        btn.classList.add('correct');spScore++;spStreak++;
+        document.getElementById('sp-score').textContent=toAr(spScore);
+        document.getElementById('sp-fb').innerHTML='✅'+(spStreak>=3?' 🔥 سلسلة '+toAr(spStreak)+'!':'');
+        document.getElementById('sp-fb').style.color='var(--gr)';
+        document.getElementById('sp-streak').textContent=spStreak>=3?'🔥×'+toAr(spStreak):'';
+        tts.speak('صح',false);
+      } else {
+        btn.classList.add('wrong');spStreak=0;
+        document.getElementById('sp-streak').textContent='';
+        cont.querySelectorAll('.sg-opt').forEach(b=>{if(b.textContent===correctVal)b.classList.add('correct');});
+        document.getElementById('sp-fb').textContent='❌ الصواب: '+correctVal;
+        document.getElementById('sp-fb').style.color='var(--red)';
+        tts.speak('خطأ',false);
+      }
+      spQn++;setTimeout(nextSpeedQ,900);
+    });
+    cont.appendChild(btn);
+  });
+}
+
+function endSpeed(){
+  document.getElementById('speed-game').style.display='none';
+  document.getElementById('speed-end').style.display='block';
+  document.getElementById('sp-final').textContent=toAr(spScore);
+  const msgs=['💪 استمر في التدريب!','👏 جيد!','⭐ ممتاز!','🏆 بطل الأنماط!'];
+  document.getElementById('sp-msg').textContent=msgs[spScore<5?0:spScore<10?1:spScore<15?2:3];
+  tts.speak('انتهى الوقت! حصلت على '+toAr(spScore)+' نقاط',true);
+}
+
+// ══════════════════════════════
+// MEMORY GAME
+// ══════════════════════════════
+let memFlipped=[],memMatched=[],memLocked=false,memTries=0;
+function resetMemory(){
+  memFlipped=[];memMatched=[];memLocked=false;memTries=0;
+  document.getElementById('mem-pairs').textContent='٠';
+  document.getElementById('mem-tries').textContent='٠';
+  document.getElementById('mem-win').style.display='none';
+  const cards=[];
+  MEM_PAIRS.forEach((p,i)=>{
+    cards.push({id:'s'+i,val:i,content:p.seq,big:false});
+    cards.push({id:'r'+i,val:i,content:p.rule,big:true});
+  });
+  const shuffled=shuffle(cards);
+  const grid=document.getElementById('mem-grid');grid.innerHTML='';
+  shuffled.forEach(card=>{
+    const el=document.createElement('div');el.className='mem-card';el.id='mc-'+card.id;el.dataset.val=card.val;
+    const front=document.createElement('div');front.className='m-front';front.textContent='?';
+    const back=document.createElement('div');back.className='m-back';
+    back.style.cssText='background:'+(card.big?'var(--gold-lt)':'var(--p-lt)')+';color:'+(card.big?'#78350F':'#3B0764')+';font-size:'+(card.big?'1.3rem':'.75rem')+';font-weight:800;';
+    back.textContent=card.content;
+    el.appendChild(front);el.appendChild(back);
+    el.addEventListener('click',()=>flipMem(el,card));
+    grid.appendChild(el);
+  });
+}
+
+function flipMem(el,card){
+  if(memLocked||el.classList.contains('flipped')||el.classList.contains('matched'))return;
+  el.classList.add('flipped');memFlipped.push({el,card});
+  if(memFlipped.length===2){
+    memTries++;document.getElementById('mem-tries').textContent=toAr(memTries);memLocked=true;
+    setTimeout(checkMem,800);
+  }
+}
+function checkMem(){
+  const[a,b]=memFlipped;
+  if(a.card.val===b.card.val&&a.card.id!==b.card.id){
+    a.el.classList.add('matched');b.el.classList.add('matched');
+    memMatched.push(a.card.val);
+    document.getElementById('mem-pairs').textContent=toAr(memMatched.length);
+    tts.speak('أحسنت! زوج صحيح!',false);
+    if(memMatched.length===6){setTimeout(()=>{document.getElementById('mem-final-tries').textContent=toAr(memTries);document.getElementById('mem-win').style.display='block';tts.speak('أحسنت! لقد فزت!',true);},400);}
+  } else {
+    a.el.classList.remove('flipped');b.el.classList.remove('flipped');
+    tts.speak('حاول مرة أخرى',false);
+  }
+  memFlipped=[];memLocked=false;
+}
+
+// ══════════════════════════════
+// MASTERY
+// ══════════════════════════════
+let mastAns=new Array(12).fill(null);
+function renderMastery(){
+  const cont=document.getElementById('mastery-qs');cont.innerHTML='';
+  MAST_QS.forEach((q,i)=>{
+    const block=document.createElement('div');block.className='q-block';block.id='mq-'+i;
+    const qt=document.createElement('div');qt.className='q-text';qt.textContent=q.text;
+    block.appendChild(qt);
+    const og=document.createElement('div');og.className='opts-grid';
+    q.opts.forEach((opt,j)=>{
+      const btn=document.createElement('button');btn.className='opt-btn';btn.id='mo-'+i+'-'+j;btn.textContent=opt;
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('[id^="mo-'+i+'-"]').forEach(b=>{b.style.borderColor='';b.style.background='';b.style.color='';});
+        mastAns[i]=j;
+        btn.style.borderColor='var(--p)';btn.style.background='var(--p-lt)';btn.style.color='var(--p)';
+        const ans=mastAns.filter(a=>a!==null).length;
+        document.getElementById('m-prog-bar').style.width=(ans/12*100)+'%';
+        document.getElementById('m-prog-txt').textContent=toAr(ans)+' / ١٢';
+      });
+      og.appendChild(btn);
+    });
+    block.appendChild(og);cont.appendChild(block);
+  });
+  document.getElementById('submit-mastery').style.display='flex';
+  document.getElementById('mastery-result').style.display='none';
+}
+
+function submitMastery(){
+  let correct=0;
+  MAST_QS.forEach((q,i)=>{
+    const chosen=mastAns[i];
+    const btns=document.querySelectorAll('[id^="mo-'+i+'-"]');
+    btns.forEach(b=>{b.disabled=true;b.style.borderColor='';b.style.background='';b.style.color='';});
+    if(chosen!==null){
+      if(chosen===q.correct){correct++;btns[chosen].classList.add('correct');document.getElementById('mq-'+i).classList.add('ok');}
+      else{btns[chosen].classList.add('wrong');btns[q.correct].classList.add('correct');document.getElementById('mq-'+i).classList.add('no');}
+    } else btns[q.correct].classList.add('correct');
+  });
+  const score=Math.round(correct/12*100);
+  const res=document.getElementById('mastery-result');
+  if(score>=80){
+    res.innerHTML='<div class="cert"><div style="font-size:64px;margin-bottom:.5rem">🏆</div><h2>تهانينا! أتقنتَ الأنماط!</h2><p style="font-size:1.1rem;margin:.5rem 0">نتيجتك: <strong>'+toAr(correct)+' / ١٢</strong> ('+toAr(score)+'٪)</p><p>أنت الآن تستطيع اكتشاف وإكمال وبناء الأنماط! 🌟</p><div style="font-size:2.5rem;margin-top:.75rem">⭐⭐⭐</div></div>';
+    tts.speak('تهانينا! لقد أتقنت درس الأنماط!',true);
+  } else {
+    res.innerHTML='<div style="background:var(--red-lt);border:2px solid var(--red);border-radius:20px;padding:1.5rem;text-align:center"><div style="font-size:48px;margin-bottom:.5rem">💪</div><h2 style="color:#7F1D1D;font-family:Baloo Bhaijaan 2;margin-bottom:.5rem">استمر في التدريب!</h2><p style="color:#7F1D1D">نتيجتك: <strong>'+toAr(correct)+' / ١٢</strong> ('+toAr(score)+'٪) — تحتاج ٨٠٪</p><button class="btn btn-p" style="margin-top:1rem" id="retry-mastery-btn">🔄 أعد الاختبار</button></div>';
+    setTimeout(()=>{const rb=document.getElementById('retry-mastery-btn');if(rb)rb.addEventListener('click',()=>{mastAns=new Array(12).fill(null);renderMastery();document.getElementById('m-prog-bar').style.width='0%';document.getElementById('m-prog-txt').textContent='٠ / ١٢';});},100);
+    tts.speak('استمر في التدريب!',true);
+  }
+  res.style.display='block';
+  document.getElementById('submit-mastery').style.display='none';
+  document.getElementById('m-prog-bar').style.width='100%';
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+window.addEventListener('load',()=>{
+  buildIntro();
+  document.getElementById('gt-num').addEventListener('click',()=>showTab('numPat'));
+  buildNumPatterns();
+  newRuleFinder();
+  document.getElementById('new-rule-btn').addEventListener('click',newRuleFinder);
+  document.getElementById('gt-shape').addEventListener('click',()=>showTab('shapePat'));
+  buildShapeExamples();
+  newShapeInteractive();
+  document.getElementById('new-shape-btn').addEventListener('click',newShapeInteractive);
+  document.getElementById('gt-complete').addEventListener('click',()=>showTab('complete'));
+  buildCTP();
+  document.getElementById('gt-build').addEventListener('click',()=>showTab('build'));
+  buildPalette();
+  renderBuildTrack();
+  document.getElementById('check-pattern-btn').addEventListener('click',checkBuiltPattern);
+  document.getElementById('clear-pattern-btn').addEventListener('click',()=>{builtPattern=[];renderBuildTrack();document.getElementById('pat-result').classList.remove('show');});
+  document.getElementById('gt-speed').addEventListener('click',()=>showTab('speed'));
+  document.getElementById('start-speed-btn').addEventListener('click',startSpeed);
+  document.getElementById('retry-speed-btn').addEventListener('click',startSpeed);
+  resetMemory();
+  document.getElementById('reset-mem-btn').addEventListener('click',resetMemory);
+  renderMastery();
+  document.getElementById('submit-mastery').addEventListener('click',submitMastery);
+  tts.init();
+});
+</script>
+</body>
+</html>
