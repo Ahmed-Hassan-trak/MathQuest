@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مفهوم الضرب — الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   ROOT VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root{
+  --coral:#FF6B6B;  --coral-lt:#FFF0F0;  --coral-dk:#E53935;
+  --teal:#26C6DA;   --teal-lt:#E0F7FA;   --teal-dk:#00838F;
+  --amber:#FFB300;  --amber-lt:#FFF8E1;  --amber-dk:#E65100;
+  --pu:#7E57C2;     --pu-lt:#EDE7F6;     --pu-dk:#4527A0;
+  --gn:#26A69A;     --gn-lt:#E0F2F1;     --gn-dk:#00695C;
+  --pk:#EC407A;     --pk-lt:#FCE4EC;     --pk-dk:#880E4F;
+  --sky:#42A5F5;    --sky-lt:#E3F2FD;    --sky-dk:#1565C0;
+  --lime:#9CCC65;   --lime-lt:#F1F8E9;
+  --succ:#22C55E;   --succ-lt:#DCFCE7;
+  --err:#EF4444;    --err-lt:#FEE2E2;
+  --bg:#FFF9F0;  --sur:#FFFFFF;  --txt:#1C1917;  --mu:#78716C;  --br:#E7E5E4;
+  --rad:18px;  --sh:0 6px 28px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--txt);direction:rtl;
+  background-image:radial-gradient(circle,rgba(126,87,194,.08) 1px,transparent 1px);
+  background-size:30px 30px}
+
+/* ═══════════════════════════════════════════
+   TTS UNLOCK + TOGGLE
+═══════════════════════════════════════════ */
+#unlockBanner{position:fixed;inset:0;z-index:10000;
+  background:linear-gradient(135deg,#f8f0ff 0%,#fff0f9 50%,#f0f8ff 100%);
+  display:flex;align-items:center;justify-content:center;transition:opacity .35s}
+#unlockCard{text-align:center;padding:36px 28px;background:white;border-radius:28px;
+  box-shadow:0 8px 40px rgba(0,0,0,.12);max-width:340px;width:90%;animation:popIn .4s ease}
+#unlockBtn{width:100%;padding:18px;font-size:18px;font-weight:900;
+  background:linear-gradient(135deg,var(--pu),var(--pu-dk));color:white;
+  border:none;border-radius:16px;cursor:pointer;font-family:inherit;
+  box-shadow:0 6px 20px rgba(126,87,194,.45);margin-bottom:12px;transition:transform .15s}
+#unlockBtn:active{transform:scale(.96)}
+#skipAudioBtn{background:none;border:none;color:#b2bec3;font-size:14px;
+  font-family:inherit;cursor:pointer;padding:6px;text-decoration:underline}
+#ttsToggle{position:fixed;bottom:20px;left:16px;z-index:1000;
+  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;font-size:24px;
+  display:none;align-items:center;justify-content:center;
+  transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.2);-webkit-tap-highlight-color:transparent}
+#ttsToggle.on{background:var(--pu)}
+#ttsToggle.off{background:#b2bec3}
+#ttsBar{position:fixed;bottom:80px;left:8px;z-index:1000;
+  background:rgba(126,87,194,.95);color:white;font-family:inherit;font-size:13px;
+  font-weight:700;padding:6px 14px;border-radius:99px;pointer-events:none;
+  opacity:0;transition:opacity .3s;max-width:200px;text-align:center;direction:rtl}
+#ttsBar.show{opacity:1}
+#homeBtn{position:fixed;top:16px;right:16px;z-index:1000;
+  width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.92);
+  color:var(--pu-dk);display:flex;align-items:center;justify-content:center;
+  font-size:22px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.18);
+  transition:transform .15s}
+#homeBtn:hover{transform:scale(1.08)}
+@media(max-width:480px){#homeBtn{width:42px;height:42px;font-size:19px;top:12px;right:12px}}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{background:linear-gradient(135deg,#3D1C96 0%,#6B27C9 35%,#C2185B 70%,#FF6B6B 100%);
+  padding:3rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before,.hero::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero::before{width:320px;height:320px;top:-100px;right:-80px}
+.hero::after{width:200px;height:200px;bottom:-70px;left:-40px}
+.hero-sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sparkle{position:absolute;border-radius:50%;animation:twinkle 2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.4)}}
+.hero-emoji{font-size:62px;margin-bottom:.6rem;position:relative;z-index:1;
+  animation:superBounce 2.5s ease-in-out infinite}
+@keyframes superBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-14px) rotate(3deg)}}
+.hero h1{font-family:'Cairo',sans-serif;font-size:2.3rem;font-weight:900;color:#fff;
+  text-shadow:0 3px 20px rgba(0,0,0,.25);margin-bottom:.5rem;position:relative;z-index:1}
+.hero p{color:rgba(255,255,255,.88);font-size:1.05rem;position:relative;z-index:1}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+  margin-top:1rem;position:relative;z-index:1}
+.h-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700}
+
+/* ═══════════════════════════════════════════
+   TABS
+═══════════════════════════════════════════ */
+.tabs-wrap{background:var(--sur);box-shadow:0 2px 16px rgba(0,0,0,.08);
+  position:sticky;top:0;z-index:100}
+.tabs{display:flex;overflow-x:auto;padding:0 .75rem;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:.9rem 1.1rem;border:none;background:none;
+  font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;
+  color:var(--mu);cursor:pointer;border-bottom:3px solid transparent;
+  transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.tab-btn:hover{color:var(--coral)}
+.tab-btn.active{color:var(--coral);border-bottom-color:var(--coral)}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.content{max-width:920px;margin:0 auto;padding:2rem 1rem 6rem}
+.sec{display:none}
+.sec.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes celebrate{0%{transform:scale(1)}30%{transform:scale(1.2) rotate(3deg)}60%{transform:scale(.95) rotate(-2deg)}100%{transform:scale(1)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════ */
+.card{background:var(--sur);border-radius:var(--rad);box-shadow:var(--sh);
+  padding:1.75rem;margin-bottom:1.5rem;border:1px solid rgba(0,0,0,.04)}
+.card-hd{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
+.card-ico{width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.card-ttl{font-family:'Cairo',sans-serif;font-size:1.18rem;font-weight:700;color:var(--txt)}
+.card-sub{font-size:13px;color:var(--mu);margin-top:2px}
+
+/* INFO BOXES */
+.ib{border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;
+  font-size:15px;line-height:1.85;border-right:4px solid}
+.ib-pu{background:var(--pu-lt);border-color:var(--pu);color:var(--pu-dk)}
+.ib-coral{background:var(--coral-lt);border-color:var(--coral);color:var(--coral-dk)}
+.ib-teal{background:var(--teal-lt);border-color:var(--teal);color:var(--teal-dk)}
+.ib-amber{background:var(--amber-lt);border-color:var(--amber);color:var(--amber-dk)}
+.ib-gn{background:var(--gn-lt);border-color:var(--gn);color:var(--gn-dk)}
+.ib strong{font-weight:800}
+.tip{background:var(--amber-lt);border-right:4px solid var(--amber);border-radius:12px;
+  padding:.85rem 1.25rem;margin:.75rem 0;color:#78350F;font-size:14px;line-height:1.8}
+
+/* ═══════════════════════════════════════════
+   CONCEPT CARDS (Vocab)
+═══════════════════════════════════════════ */
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:1rem 0}
+.vocab-card{border-radius:14px;padding:1.1rem;text-align:center;border:2px solid}
+.vc-icon{font-size:32px;margin-bottom:.4rem}
+.vc-word{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;margin-bottom:.3rem}
+.vc-def{font-size:12px;line-height:1.6}
+.big-equation{font-family:'Cairo',sans-serif;font-size:2.8rem;font-weight:900;
+  text-align:center;padding:1.25rem;background:linear-gradient(135deg,var(--pu-lt),var(--coral-lt));
+  border-radius:16px;margin:1rem 0;border:2px solid rgba(126,87,194,.2);
+  letter-spacing:.05em;cursor:pointer;transition:transform .2s}
+.big-equation:hover{transform:scale(1.03)}
+.big-equation .factor{color:var(--pu-dk);font-size:3.2rem}
+.big-equation .sign{color:var(--coral-dk);font-size:2.4rem;margin:0 .2rem}
+.big-equation .result{color:var(--gn-dk);font-size:3.2rem}
+
+/* ═══════════════════════════════════════════
+   EQUAL GROUPS EXPLORER
+═══════════════════════════════════════════ */
+.eg-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.25rem}
+.eg-ctrl-card{background:var(--bg);border-radius:14px;padding:1rem;text-align:center;border:2px solid var(--br)}
+.eg-ctrl-label{font-size:13px;font-weight:700;color:var(--mu);margin-bottom:.75rem}
+.eg-spinner{display:flex;align-items:center;justify-content:center;gap:12px}
+.spin-btn{width:40px;height:40px;border-radius:10px;border:none;
+  font-size:1.3rem;font-weight:900;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center}
+.spin-btn:active{transform:scale(.88)}
+.spin-val{font-family:'Cairo',sans-serif;font-size:2rem;font-weight:900;
+  min-width:44px;text-align:center;transition:all .2s}
+
+.emoji-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:1rem 0}
+.emoji-pick{width:40px;height:40px;border-radius:10px;border:2px solid var(--br);
+  background:var(--sur);font-size:20px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s}
+.emoji-pick:hover{border-color:var(--pu);transform:scale(1.12)}
+.emoji-pick.selected{border-color:var(--pu);background:var(--pu-lt);transform:scale(1.1)}
+
+.groups-display{display:flex;flex-wrap:wrap;gap:12px;
+  min-height:80px;justify-content:center;margin:1rem 0;
+  padding:1rem;background:#FAFAFA;border-radius:14px;border:2px dashed var(--br);
+  transition:all .3s}
+.group-box{border-radius:12px;padding:.6rem;display:flex;flex-wrap:wrap;
+  gap:4px;align-items:center;justify-content:center;
+  animation:popIn .25s ease both;transition:transform .2s;cursor:pointer;
+  min-width:54px}
+.group-box:hover{transform:scale(1.06)}
+.group-item{font-size:22px;line-height:1;animation:popIn .2s ease both;
+  transition:transform .15s}
+.group-item:hover{transform:scale(1.25)}
+
+.eg-summary{background:linear-gradient(135deg,var(--pu-lt),var(--teal-lt));
+  border-radius:16px;padding:1.25rem;margin-top:1rem;text-align:center;
+  border:2px solid rgba(126,87,194,.2)}
+.eg-expr{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900;
+  color:var(--pu-dk);margin-bottom:.4rem}
+.eg-rep-add{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;
+  color:var(--teal-dk);margin-bottom:.3rem}
+.eg-total{font-family:'Cairo',sans-serif;font-size:2.4rem;font-weight:900;
+  color:var(--coral-dk)}
+
+/* ═══════════════════════════════════════════
+   NUMBER LINE
+═══════════════════════════════════════════ */
+.nl-wrap{overflow-x:auto;padding:1rem 0;margin:.75rem 0}
+.nl-svg{min-width:480px;display:block;margin:0 auto}
+
+/* ═══════════════════════════════════════════
+   TIMES TABLE GRID
+═══════════════════════════════════════════ */
+.tt-header-row{display:flex;align-items:center;gap:8px;margin-bottom:.75rem;flex-wrap:wrap}
+.tt-filter-btn{padding:6px 14px;border-radius:20px;border:2px solid var(--br);
+  background:var(--sur);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;
+  color:var(--mu);cursor:pointer;transition:all .2s}
+.tt-filter-btn:hover{border-color:var(--pu);color:var(--pu-dk)}
+.tt-filter-btn.tt-active{border-color:var(--pu);background:var(--pu);color:#fff}
+
+.tt-grid-wrap{overflow-x:auto;border-radius:16px;box-shadow:var(--sh)}
+.tt-grid{display:grid;grid-template-columns:repeat(11,1fr);border-radius:16px;overflow:hidden;min-width:420px}
+.tt-cell{display:flex;align-items:center;justify-content:center;
+  font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;
+  aspect-ratio:1;cursor:pointer;transition:all .18s;border:1px solid rgba(255,255,255,.2);
+  position:relative}
+.tt-cell:hover{transform:scale(1.12);z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.tt-cell.highlighted{transform:scale(1.15);z-index:12;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.tt-corner{background:#2D2D44;color:rgba(255,255,255,.6);font-size:12px}
+.tt-header{background:#4A4A6A;color:#fff;font-size:13px}
+.tt-detail{background:linear-gradient(135deg,var(--pu-lt),#fff);border-radius:16px;
+  padding:1.25rem;margin-top:1rem;text-align:center;
+  border:2px solid var(--pu);animation:slideDown .3s ease;display:none}
+.tt-detail-eq{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900;color:var(--pu-dk)}
+.tt-detail-visual{margin:.75rem 0}
+
+/* ═══════════════════════════════════════════
+   PROPERTIES SECTION
+═══════════════════════════════════════════ */
+.prop-demo{background:var(--bg);border-radius:14px;padding:1.25rem;
+  margin:1rem 0;cursor:pointer;transition:all .2s;border:2px solid var(--br)}
+.prop-demo:hover{border-color:var(--pu);background:var(--pu-lt)}
+.prop-demo.revealed{background:var(--succ-lt);border-color:var(--succ)}
+.prop-demo .pd-q{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:800;
+  text-align:center;margin-bottom:.5rem}
+.prop-demo .pd-hint{font-size:12px;color:var(--mu);text-align:center}
+.prop-demo .pd-answer{font-family:'Cairo',sans-serif;font-size:1.2rem;font-weight:700;
+  color:var(--gn-dk);text-align:center;margin-top:.5rem;display:none;animation:slideDown .3s ease}
+.prop-demo.revealed .pd-answer{display:block}
+.prop-demo.revealed .pd-hint{display:none}
+
+/* ═══════════════════════════════════════════
+   PRACTICE / QUESTIONS
+═══════════════════════════════════════════ */
+.score-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.sc-card{background:var(--sur);border:1.5px solid var(--br);border-radius:14px;padding:.85rem;text-align:center}
+.sc-n{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900}
+.sc-l{font-size:11px;color:var(--mu);margin-top:2px}
+.q-block{border:1.5px solid var(--br);border-radius:14px;padding:1.25rem;
+  margin-bottom:1rem;transition:all .2s}
+.q-block.ok{border-color:var(--succ);background:var(--succ-lt)}
+.q-block.no{border-color:var(--err);background:var(--err-lt);animation:shake .3s ease}
+.q-text{font-size:15px;font-weight:600;color:var(--txt);margin-bottom:12px;line-height:1.7}
+.q-num{font-weight:800;color:var(--pu-dk)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt-btn{border:1.5px solid var(--br);border-radius:10px;padding:10px 12px;
+  background:var(--sur);font-family:'Tajawal',sans-serif;font-size:14px;
+  color:var(--txt);cursor:pointer;transition:all .15s;text-align:center;line-height:1.4}
+.opt-btn:hover:not(:disabled){border-color:var(--pu);background:var(--pu-lt);color:var(--pu-dk)}
+.opt-btn.correct{border-color:var(--succ)!important;background:var(--succ-lt)!important;
+  color:var(--gn-dk)!important;font-weight:700;animation:celebrate .4s ease}
+.opt-btn.wrong{border-color:var(--err)!important;background:var(--err-lt)!important;
+  color:#7F1D1D!important;font-weight:700}
+.opt-btn:disabled{cursor:not-allowed}
+.fb{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--succ-lt);color:var(--gn-dk)}
+.fb.no{background:var(--err-lt);color:#7F1D1D}
+
+/* ═══════════════════════════════════════════
+   GAMES
+═══════════════════════════════════════════ */
+.game-arena{background:linear-gradient(135deg,#1A0A3C,#2D1B69,#1A3A6C);
+  border-radius:20px;padding:2rem;text-align:center;border:2px solid rgba(162,155,254,.25)}
+.g-info{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:.75rem}
+.g-question{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;
+  color:#fff;margin-bottom:1.5rem;text-shadow:0 2px 12px rgba(0,0,0,.3)}
+.g-q-num{color:var(--amber);font-size:3.5rem}
+.g-sign{color:rgba(255,255,255,.5);margin:0 .3rem}
+.g-q-mark{color:#A29BFE}
+.g-bubbles{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem}
+.g-bubble{width:80px;height:80px;border-radius:50%;border:none;
+  font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;
+  cursor:pointer;transition:all .18s;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.g-bubble:hover{transform:scale(1.12) translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.g-bubble:active{transform:scale(.94)}
+.g-bubble.b0{background:linear-gradient(135deg,#FF6B6B,#E53935)}
+.g-bubble.b1{background:linear-gradient(135deg,#26C6DA,#00838F)}
+.g-bubble.b2{background:linear-gradient(135deg,#AB47BC,#6A1B9A)}
+.g-bubble.b3{background:linear-gradient(135deg,#FFB300,#E65100)}
+.g-bubble.correct-b{background:linear-gradient(135deg,#22C55E,#15803D)!important;
+  animation:celebrate .4s ease,pop .3s ease}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+.g-bubble.wrong-b{background:linear-gradient(135deg,#EF4444,#B91C1C)!important;
+  animation:shake .3s ease}
+.g-feedback{min-height:36px;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;
+  border-radius:10px;padding:.5rem 1rem;margin-bottom:1rem;
+  transition:all .3s}
+.g-feedback.hid{opacity:0}
+.g-feedback.ok-f{background:rgba(34,197,94,.2);color:#4ADE80}
+.g-feedback.no-f{background:rgba(239,68,68,.2);color:#FCA5A5}
+.g-scores{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.g-sc{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;padding:.65rem 1.5rem;text-align:center}
+.g-sc .gn{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;color:var(--amber)}
+.g-sc .gl{font-size:12px;color:rgba(255,255,255,.55)}
+
+/* Skip Count Game */
+.skip-display{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  margin:1rem 0;padding:1rem;background:var(--bg);border-radius:14px}
+.skip-cell{min-width:52px;height:52px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cairo',sans-serif;font-size:1.2rem;font-weight:900;transition:all .2s}
+.skip-known{background:linear-gradient(135deg,var(--pu-lt),var(--teal-lt));
+  color:var(--pu-dk);border:2px solid var(--pu)}
+.skip-blank{background:white;color:var(--mu);border:2px dashed var(--br)}
+.skip-blank.filled-ok{background:var(--succ-lt);color:var(--gn-dk);border-color:var(--succ);
+  border-style:solid;animation:celebrate .3s ease}
+.skip-blank.filled-no{background:var(--err-lt);color:#7F1D1D;border-color:var(--err);
+  border-style:solid;animation:shake .3s ease}
+.skip-choices{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:.75rem}
+.skip-choice{width:64px;height:48px;border-radius:12px;border:2px solid var(--br);
+  background:var(--sur);font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:800;
+  cursor:pointer;transition:all .15s}
+.skip-choice:hover:not(:disabled){border-color:var(--coral);background:var(--coral-lt);color:var(--coral-dk)}
+.skip-choice:disabled{cursor:not-allowed;opacity:.5}
+
+/* ═══════════════════════════════════════════
+   MASTERY
+═══════════════════════════════════════════ */
+.prog-wrap{background:var(--br);border-radius:20px;height:12px;overflow:hidden;margin:6px 0 4px}
+.prog-bar{height:100%;border-radius:20px;
+  background:linear-gradient(90deg,var(--pu),var(--coral));transition:width .6s ease}
+.sdiv{display:flex;align-items:center;gap:10px;margin:1.25rem 0}
+.sdiv-line{flex:1;height:1px;background:var(--br)}
+.sdiv-lbl{font-size:12px;font-weight:800;color:var(--mu);white-space:nowrap;
+  padding:4px 12px;border:1px solid var(--br);border-radius:10px;background:var(--sur)}
+.lv-badge{display:inline-flex;align-items:center;gap:6px;
+  padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700}
+.lv0{background:var(--err-lt);color:#7F1D1D;border:2px solid var(--err)}
+.lv1{background:var(--amber-lt);color:#78350F;border:2px solid var(--amber)}
+.lv2{background:var(--sky-lt);color:var(--sky-dk);border:2px solid var(--sky)}
+.lv3{background:var(--succ-lt);color:var(--gn-dk);border:2px solid var(--succ)}
+.trc{display:flex;align-items:center;gap:12px;padding:14px 16px;
+  margin-bottom:10px;border-radius:14px;border:1.5px solid var(--br);background:var(--sur)}
+.trc-ico{font-size:26px}
+.trc-info{flex:1}
+.trc-name{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:4px}
+.trc-fill{height:8px;background:var(--br);border-radius:10px;overflow:hidden;margin-bottom:4px}
+.trc-bar{height:100%;border-radius:10px;transition:width .8s ease}
+.cert{background:linear-gradient(135deg,#1A0A3C,#2D1B69);border:3px solid var(--amber);
+  border-radius:24px;padding:2rem;text-align:center;margin-top:1.5rem;
+  animation:popIn .5s cubic-bezier(.34,1.56,.64,1)}
+.cert h2{font-family:'Cairo',sans-serif;font-size:1.7rem;color:var(--amber);margin-bottom:.5rem}
+.cert p{color:rgba(255,255,255,.8);font-size:15px}
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;
+  border-radius:12px;border:none;font-family:'Tajawal',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;transition:all .18s}
+.btn-pu{background:var(--pu);color:#fff}
+.btn-pu:hover{background:var(--pu-dk);transform:translateY(-1px)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{background:var(--coral-dk);transform:translateY(-1px)}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-amber:hover{background:var(--amber-dk);transform:translateY(-1px)}
+.btn-gn{background:var(--gn);color:#fff}
+.btn-gn:hover{background:var(--gn-dk);transform:translateY(-1px)}
+.btn-dark{background:#1A0A3C;color:#fff}
+.btn-dark:hover{background:#2D1B69;transform:translateY(-1px)}
+.btn-out{background:transparent;border:2px solid var(--pu);color:var(--pu-dk)}
+.btn-out:hover{background:var(--pu-lt)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem}
+
+@media(max-width:560px){
+  .hero h1{font-size:1.5rem}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .opts{grid-template-columns:1fr}
+  .eg-controls{grid-template-columns:1fr}
+  .g-bubble{width:68px;height:68px;font-size:1.2rem}
+  .tt-cell{font-size:11px}
+  .big-equation{font-size:2rem}
+  .big-equation .factor,.big-equation .result{font-size:2.4rem}
+}
+</style>
+</head>
+<body>
+
+<a href="index.html" id="homeBtn" title="العودة للشاشة الرئيسية">🏠</a>
+<button id="ttsToggle" class="on" style="display:flex">🔊</button>
+<div id="ttsBar"></div>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-sparkles" id="heroSparkles"></div>
+  <div class="hero-emoji">✖️</div>
+  <h1>مفهوم الضرب</h1>
+  <p>الصف الثالث الابتدائي | رياضيات</p>
+  <div class="hero-badges">
+    <span class="h-badge">👫 المجموعات المتساوية</span>
+    <span class="h-badge">🔁 الجمع المتكرر</span>
+    <span class="h-badge">📊 جدول الضرب</span>
+    <span class="h-badge">⚡ خصائص الضرب</span>
+    <span class="h-badge">🎮 ألعاب تعليمية</span>
+    <span class="h-badge">🏆 اختبار الإتقان</span>
+  </div>
+</div>
+
+<!-- ══ TABS ══ -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" id="tb-concept" onclick="showTab('concept')">📖 المفهوم</button>
+    <button class="tab-btn" id="tb-explore" onclick="showTab('explore')">🔍 استكشف</button>
+    <button class="tab-btn" id="tb-table" onclick="showTab('table')">📊 جدول الضرب</button>
+    <button class="tab-btn" id="tb-props" onclick="showTab('props')">⚡ الخصائص</button>
+    <button class="tab-btn" id="tb-practice" onclick="showTab('practice')">✏️ التدريبات</button>
+    <button class="tab-btn" id="tb-games" onclick="showTab('games')">🎮 الألعاب</button>
+    <button class="tab-btn" id="tb-mastery" onclick="showTab('mastery')">🏆 اختبار الإتقان</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════ CONCEPT ═══════════════════ -->
+<div class="sec active" id="sec-concept">
+
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--pu-lt)">✖️</div>
+      <div><div class="card-ttl">ما هو الضرب؟</div><div class="card-sub">اكتشف معنى الضرب خطوة بخطوة</div></div>
+    </div>
+    <div class="ib ib-pu">
+      الضرب هو <strong>طريقة سريعة لجمع أعداد متساوية</strong> أكثر من مرة.<br>
+      بدلاً من كتابة 5+5+5+5 نكتب <strong>4×5</strong> ← أسرع وأسهل!
+    </div>
+
+    <div class="big-equation" onclick="tts.speakEquation(4,5)" title="انقر لسماع المعادلة">
+      <span class="factor">4</span>
+      <span class="sign">×</span>
+      <span class="factor">5</span>
+      <span class="sign">=</span>
+      <span class="result">20</span>
+      <span style="font-size:1.2rem;color:var(--mu);margin-right:.5rem">🔊</span>
+    </div>
+
+    <div class="tip">
+      💡 <strong>القاعدة الذهبية:</strong> الضرب = جمع متكرر<br>
+      4 × 5 = 5+5+5+5 = 20 &nbsp;|&nbsp; يمكن قراءته: "أربع مرات خمسة"
+    </div>
+  </div>
+
+  <!-- Vocabulary -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--coral-lt)">📝</div>
+      <div><div class="card-ttl">مصطلحات الضرب</div><div class="card-sub">تعلّم الكلمات الأساسية</div></div>
+    </div>
+    <div class="vocab-grid">
+      <div class="vocab-card" style="background:var(--pu-lt);border-color:var(--pu)">
+        <div class="vc-icon">🔢</div>
+        <div class="vc-word" style="color:var(--pu-dk)">العامل</div>
+        <div class="vc-def" style="color:var(--pu-dk)">الأعداد التي نضربها ببعض<br>في 3×4 — العاملان هما <strong>3</strong> و<strong>4</strong></div>
+      </div>
+      <div class="vocab-card" style="background:var(--gn-lt);border-color:var(--gn)">
+        <div class="vc-icon">🎯</div>
+        <div class="vc-word" style="color:var(--gn-dk)">الحاصل</div>
+        <div class="vc-def" style="color:var(--gn-dk)">نتيجة عملية الضرب<br>في 3×4 = 12 — الحاصل هو <strong>12</strong></div>
+      </div>
+      <div class="vocab-card" style="background:var(--amber-lt);border-color:var(--amber)">
+        <div class="vc-icon">✖️</div>
+        <div class="vc-word" style="color:var(--amber-dk)">علامة الضرب</div>
+        <div class="vc-def" style="color:var(--amber-dk)">الرمز × الذي يدل على<br>عملية الضرب</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Equal Groups Intro -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--teal-lt)">👫</div>
+      <div><div class="card-ttl">المجموعات المتساوية</div><div class="card-sub">كل مجموعة تحتوي على عدد متساوٍ من العناصر</div></div>
+    </div>
+    <div class="ib ib-teal">
+      عندما يكون لدينا <strong>عدة مجموعات</strong> وكل مجموعة فيها <strong>نفس العدد من العناصر</strong>،<br>
+      يمكننا كتابة ذلك كعملية ضرب!
+    </div>
+
+    <!-- Static visual example -->
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:1rem;background:var(--bg);border-radius:14px;margin:.75rem 0">
+      <div style="border:2px solid var(--coral);background:var(--coral-lt);border-radius:12px;padding:.65rem;text-align:center;min-width:70px">
+        <div style="font-size:26px;line-height:1.3">⭐<br>⭐<br>⭐</div>
+        <div style="font-size:11px;font-weight:700;color:var(--coral-dk);margin-top:4px">مجموعة 1</div>
+      </div>
+      <div style="border:2px solid var(--teal);background:var(--teal-lt);border-radius:12px;padding:.65rem;text-align:center;min-width:70px">
+        <div style="font-size:26px;line-height:1.3">⭐<br>⭐<br>⭐</div>
+        <div style="font-size:11px;font-weight:700;color:var(--teal-dk);margin-top:4px">مجموعة 2</div>
+      </div>
+      <div style="border:2px solid var(--pu);background:var(--pu-lt);border-radius:12px;padding:.65rem;text-align:center;min-width:70px">
+        <div style="font-size:26px;line-height:1.3">⭐<br>⭐<br>⭐</div>
+        <div style="font-size:11px;font-weight:700;color:var(--pu-dk);margin-top:4px">مجموعة 3</div>
+      </div>
+      <div style="border:2px solid var(--amber);background:var(--amber-lt);border-radius:12px;padding:.65rem;text-align:center;min-width:70px">
+        <div style="font-size:26px;line-height:1.3">⭐<br>⭐<br>⭐</div>
+        <div style="font-size:11px;font-weight:700;color:var(--amber-dk);margin-top:4px">مجموعة 4</div>
+      </div>
+    </div>
+    <div style="background:linear-gradient(135deg,var(--pu-lt),var(--teal-lt));border-radius:12px;padding:1rem;text-align:center;border:2px solid rgba(126,87,194,.2)">
+      <div style="font-family:'Cairo',sans-serif;font-size:1.2rem;font-weight:700;color:var(--pu-dk)">
+        4 مجموعات × 3 نجوم في كل مجموعة
+      </div>
+      <div style="font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;color:var(--coral-dk);margin:.4rem 0">
+        4 × 3 = 12 نجمة
+      </div>
+      <div style="font-size:14px;font-weight:700;color:var(--teal-dk)">
+        الجمع المتكرر: 3+3+3+3 = 12
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-pu" onclick="showTab('explore')">التالي: جرّب بنفسك ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ EXPLORE ═══════════════════ -->
+<div class="sec" id="sec-explore">
+
+  <!-- Equal Groups Builder -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--pu-lt)">🎨</div>
+      <div><div class="card-ttl">مستكشف المجموعات المتساوية</div><div class="card-sub">غيّر الأرقام وشاهد الضرب ينبض!</div></div>
+    </div>
+    <div class="ib ib-pu">
+      استخدم الأزرار <strong>+ و−</strong> لتغيير عدد المجموعات وعدد العناصر في كل مجموعة!
+    </div>
+
+    <!-- Emoji picker -->
+    <div style="font-size:13px;font-weight:700;color:var(--mu);margin-bottom:.5rem">اختر نوع العنصر:</div>
+    <div class="emoji-row" id="emojiPicker"></div>
+
+    <!-- Spinners -->
+    <div class="eg-controls">
+      <div class="eg-ctrl-card">
+        <div class="eg-ctrl-label">عدد المجموعات</div>
+        <div class="eg-spinner">
+          <button class="spin-btn btn-coral" onclick="changeEG('g',-1)" style="color:#fff">−</button>
+          <div class="spin-val" id="eg-g-val" style="color:var(--coral-dk)">3</div>
+          <button class="spin-btn btn-coral" onclick="changeEG('g',1)" style="color:#fff">+</button>
+        </div>
+      </div>
+      <div class="eg-ctrl-card">
+        <div class="eg-ctrl-label">عناصر كل مجموعة</div>
+        <div class="eg-spinner">
+          <button class="spin-btn btn-pu" onclick="changeEG('i',-1)" style="color:#fff">−</button>
+          <div class="spin-val" id="eg-i-val" style="color:var(--pu-dk)">4</div>
+          <button class="spin-btn btn-pu" onclick="changeEG('i',1)" style="color:#fff">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Groups display -->
+    <div class="groups-display" id="groupsDisplay"></div>
+
+    <!-- Summary -->
+    <div class="eg-summary" id="egSummary">
+      <div class="eg-expr" id="egExpr">3 × 4 = ?</div>
+      <div class="eg-rep-add" id="egRepAdd">4 + 4 + 4 = 12</div>
+      <div style="font-size:14px;color:var(--mu);margin:.25rem 0">الحاصل</div>
+      <div class="eg-total" id="egTotal">12</div>
+      <button class="btn btn-out" style="margin-top:.75rem" onclick="speakCurrentEG()">🔊 استمع</button>
+    </div>
+  </div>
+
+  <!-- Number Line Jumper -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--teal-lt)">🐸</div>
+      <div><div class="card-ttl">خط الأعداد — الضفدعة العداءة!</div><div class="card-sub">الضرب = قفزات متساوية على خط الأعداد</div></div>
+    </div>
+    <div class="ib ib-teal">
+      الضفدعة تقفز <strong>مسافات متساوية</strong> على خط الأعداد — كل قفزة تمثّل جمع عدد واحد!
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem">
+      <div class="eg-ctrl-card">
+        <div class="eg-ctrl-label">حجم القفزة</div>
+        <div class="eg-spinner">
+          <button class="spin-btn btn-teal" onclick="changeNL('s',-1)" style="background:var(--teal);color:#fff">−</button>
+          <div class="spin-val" id="nl-s-val" style="color:var(--teal-dk)">3</div>
+          <button class="spin-btn btn-teal" onclick="changeNL('s',1)" style="background:var(--teal);color:#fff">+</button>
+        </div>
+      </div>
+      <div class="eg-ctrl-card">
+        <div class="eg-ctrl-label">عدد القفزات</div>
+        <div class="eg-spinner">
+          <button class="spin-btn btn-amber" onclick="changeNL('j',-1)" style="background:var(--amber);color:#fff">−</button>
+          <div class="spin-val" id="nl-j-val" style="color:var(--amber-dk)">4</div>
+          <button class="spin-btn btn-amber" onclick="changeNL('j',1)" style="background:var(--amber);color:#fff">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nl-wrap">
+      <svg id="nlSvg" class="nl-svg" viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <div id="nlSummary" style="background:var(--teal-lt);border-radius:12px;padding:1rem;text-align:center;border:2px solid var(--teal)">
+      <div style="font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:900;color:var(--teal-dk)" id="nlExpr">4 قفزات × 3 = 3+3+3+3 = 12</div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-pu" onclick="showTab('table')">التالي: جدول الضرب ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ TIMES TABLE ═══════════════════ -->
+<div class="sec" id="sec-table">
+
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--amber-lt)">📊</div>
+      <div><div class="card-ttl">جدول الضرب التفاعلي</div><div class="card-sub">انقر على أي خانة لرؤيتها وسماعها!</div></div>
+    </div>
+    <div class="ib ib-amber">
+      انقر على أي <strong>خانة في الجدول</strong> لتسمع حقيقة الضرب ورؤية تفسيرها!<br>
+      يمكنك تصفية الجدول لمضاعفات عدد معين.
+    </div>
+
+    <div class="tt-header-row">
+      <span style="font-size:13px;font-weight:700;color:var(--mu)">عرض مضاعفات:</span>
+      <button class="tt-filter-btn tt-active" id="ttf-all" onclick="filterTT(0)">الكل</button>
+      <span id="tt-filter-btns"></span>
+    </div>
+
+    <div class="tt-grid-wrap">
+      <div class="tt-grid" id="ttGrid"></div>
+    </div>
+
+    <!-- Detail panel -->
+    <div class="tt-detail" id="ttDetail">
+      <div class="tt-detail-eq" id="ttDetailEq"></div>
+      <div class="tt-detail-visual" id="ttDetailViz"></div>
+      <button class="btn btn-out btn-pu" onclick="tts.speakEquation(ttA,ttB)">🔊 استمع</button>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-pu" onclick="showTab('props')">التالي: خصائص الضرب ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ PROPERTIES ═══════════════════ -->
+<div class="sec" id="sec-props">
+
+  <!-- Commutative -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--pu-lt)">🔄</div>
+      <div><div class="card-ttl">خاصية الإبدال (الترتيب)</div><div class="card-sub">ترتيب العوامل لا يغيّر الحاصل!</div></div>
+    </div>
+    <div class="ib ib-pu">
+      <strong>3 × 4 = 4 × 3 = 12</strong><br>
+      بغض النظر عن ترتيب الضرب، النتيجة واحدة دائماً!
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1rem 0">
+      <div style="text-align:center;padding:1rem;background:var(--coral-lt);border-radius:14px;border:2px solid var(--coral)">
+        <div style="font-size:13px;font-weight:700;color:var(--coral-dk);margin-bottom:.5rem">3 مجموعات × 4 عناصر</div>
+        <div id="comm-left-grid"></div>
+        <div style="font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;color:var(--coral-dk);margin-top:.5rem">3 × 4 = 12</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:var(--teal-lt);border-radius:14px;border:2px solid var(--teal)">
+        <div style="font-size:13px;font-weight:700;color:var(--teal-dk);margin-bottom:.5rem">4 مجموعات × 3 عناصر</div>
+        <div id="comm-right-grid"></div>
+        <div style="font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;color:var(--teal-dk);margin-top:.5rem">4 × 3 = 12</div>
+      </div>
+    </div>
+
+    <div class="ib ib-gn" style="text-align:center">
+      <strong>⭐ القاعدة:</strong> أ × ب = ب × أ<br>
+      ترتيب العوامل لا يغيّر الحاصل ✅
+    </div>
+
+    <!-- Interactive commutative demos -->
+    <div style="font-size:14px;font-weight:700;color:var(--mu);margin:.75rem 0 .5rem">انقر لاستكشاف أمثلة خاصية الإبدال:</div>
+    <div id="comm-demos" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px"></div>
+  </div>
+
+  <!-- Zero & Identity -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--coral-lt)">🔢</div>
+      <div><div class="card-ttl">خاصية الصفر وخاصية الواحد</div><div class="card-sub">قواعد ذهبية سهلة التذكر!</div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1rem 0">
+      <div style="border-radius:16px;padding:1.25rem;background:linear-gradient(135deg,#f8f0ff,#ede7f6);border:2px solid var(--pu);text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:.4rem">0️⃣</div>
+        <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;color:var(--pu-dk);margin-bottom:.5rem">خاصية الصفر</div>
+        <div style="font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:900;color:var(--pu-dk)">أي عدد × 0 = 0</div>
+        <div style="font-size:13px;color:var(--mu);margin-top:.4rem">7×0=0 | 100×0=0 | 0×999=0</div>
+      </div>
+      <div style="border-radius:16px;padding:1.25rem;background:linear-gradient(135deg,#e0f7fa,#b2ebf2);border:2px solid var(--teal);text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:.4rem">1️⃣</div>
+        <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;color:var(--teal-dk);margin-bottom:.5rem">خاصية الواحد</div>
+        <div style="font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:900;color:var(--teal-dk)">أي عدد × 1 = نفسه</div>
+        <div style="font-size:13px;color:var(--mu);margin-top:.4rem">7×1=7 | 25×1=25 | 1×99=99</div>
+      </div>
+    </div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--mu);margin:.75rem 0 .5rem">
+      انقر على كل بطاقة لاكتشاف الإجابة:
+    </div>
+    <div id="prop-demos" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-pu" onclick="showTab('practice')">التالي: التدريبات ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ PRACTICE ═══════════════════ -->
+<div class="sec" id="sec-practice">
+
+  <!-- Sec 1 -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--pu-lt)">👫</div>
+      <div><div class="card-ttl">المجموعات المتساوية والضرب</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-g-c" style="color:var(--pu-dk)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-g-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-g-p" style="color:var(--gn-dk)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-groups"></div>
+  </div>
+
+  <!-- Sec 2 -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--teal-lt)">🔁</div>
+      <div><div class="card-ttl">الجمع المتكرر والضرب</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-r-c" style="color:var(--teal-dk)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-r-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-r-p" style="color:var(--gn-dk)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-rep"></div>
+  </div>
+
+  <!-- Sec 3 -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--coral-lt)">⚡</div>
+      <div><div class="card-ttl">خصائص الضرب</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-p-c" style="color:var(--coral-dk)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-p-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-p-p" style="color:var(--gn-dk)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-props"></div>
+  </div>
+
+  <!-- Sec 4 -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--amber-lt)">🧮</div>
+      <div><div class="card-ttl">التطبيق والمسائل الحياتية</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-a-c" style="color:var(--amber-dk)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-a-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-a-p" style="color:var(--gn-dk)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-app"></div>
+    <div class="btn-group">
+      <button class="btn btn-pu" onclick="showTab('games')">التالي: الألعاب ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ GAMES ═══════════════════ -->
+<div class="sec" id="sec-games">
+
+  <!-- Game 1: Multiplication Quiz -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:#1A0A3C">🎮</div>
+      <div><div class="card-ttl">لعبة الضرب السريع! ⚡</div><div class="card-sub">10 جولات — اضغط الفقاعة الصحيحة</div></div>
+    </div>
+    <div class="ib ib-pu">
+      ستُعرض عليك مسألة ضرب. اضغط على <strong>الفقاعة الصحيحة</strong> في أسرع وقت!
+    </div>
+
+    <div class="game-arena">
+      <div class="g-info">الجولة <span id="g1-round" style="color:var(--amber);font-weight:800">1</span> من 10</div>
+      <div class="g-question">
+        <span class="g-q-num" id="g1-a">—</span>
+        <span class="g-sign">×</span>
+        <span class="g-q-num" id="g1-b">—</span>
+        <span class="g-sign">=</span>
+        <span class="g-q-mark">؟</span>
+      </div>
+      <div class="g-bubbles" id="g1-bubbles"></div>
+      <div class="g-feedback hid" id="g1-fb"></div>
+      <div class="g-scores">
+        <div class="g-sc"><div class="gn" id="g1-correct">0</div><div class="gl">صحيحة ✅</div></div>
+        <div class="g-sc"><div class="gn" id="g1-wrong" style="color:#FCA5A5">0</div><div class="gl">خاطئة ❌</div></div>
+        <div class="g-sc"><div class="gn" id="g1-streak" style="color:#FCD34D">0</div><div class="gl">تتالي 🔥</div></div>
+      </div>
+    </div>
+
+    <div id="g1-result" style="display:none;text-align:center;padding:1.25rem;
+      background:linear-gradient(135deg,var(--pu-lt),var(--teal-lt));
+      border-radius:16px;margin-top:1rem;border:2px solid var(--pu)"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-pu" onclick="restartG1()">🔄 لعبة جديدة</button>
+    </div>
+  </div>
+
+  <!-- Game 2: Skip Count Challenge -->
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--teal-lt)">🔢</div>
+      <div><div class="card-ttl">لعبة العد بالقفز! 🐸</div><div class="card-sub">أكمل سلسلة المضاعفات</div></div>
+    </div>
+    <div class="ib ib-teal">
+      اختر العدد ثم <strong>أكمل سلسلة مضاعفاته</strong> بالضغط على الأرقام الصحيحة!
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem" id="skipChooseRow">
+      <span style="font-size:13px;font-weight:700;color:var(--mu);margin-top:8px">اختر العدد:</span>
+    </div>
+
+    <div class="skip-display" id="skipDisplay"></div>
+    <div class="skip-choices" id="skipChoicesBtns"></div>
+
+    <div id="skipResult" style="display:none;text-align:center;padding:1rem;
+      background:var(--succ-lt);border-radius:12px;border:2px solid var(--succ);
+      font-family:'Cairo',sans-serif;font-size:1.2rem;font-weight:700;color:var(--gn-dk)"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-teal" onclick="newSkipGame()">🔄 سلسلة جديدة</button>
+      <button class="btn btn-dark" onclick="showTab('mastery')">اختبار الإتقان ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ MASTERY ═══════════════════ -->
+<div class="sec" id="sec-mastery">
+
+  <div class="card">
+    <div class="card-hd">
+      <div class="card-ico" style="background:var(--amber-lt)">🏆</div>
+      <div><div class="card-ttl">اختبار الإتقان الشامل</div><div class="card-sub">15 سؤالاً — 3 أسئلة من كل موضوع</div></div>
+    </div>
+    <div class="ib ib-amber">
+      أجب عن جميع الأسئلة ثم اضغط "احسب نتيجتي" للحصول على <strong>تحليل تفصيلي لمستواك</strong> 🎯
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span style="color:var(--mu)">تقدّمك</span>
+        <span id="m-pt" style="color:var(--pu-dk);font-weight:700">0 / 15</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" id="m-pb" style="width:0%"></div></div>
+    </div>
+    <div id="q-mastery" style="margin-top:1rem"></div>
+    <div class="btn-group" style="margin-top:1.5rem">
+      <button class="btn btn-pu" id="submitMasteryBtn" onclick="submitMastery()"
+        style="display:none;font-size:15px;padding:14px 28px">🏆 احسب نتيجتي وحدّد مستواي</button>
+    </div>
+    <div id="mastery-result"></div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+<script>
+// ═══════════════════════════════════════════
+// TTS ENGINE (full implementation)
+// ═══════════════════════════════════════════
+const NUM_WORDS=['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر','عشرون','واحد وعشرون','اثنان وعشرون','ثلاثة وعشرون','أربعة وعشرون','خمسة وعشرون','ستة وعشرون','سبعة وعشرون','ثمانية وعشرون','تسعة وعشرون','ثلاثون','واحد وثلاثون','اثنان وثلاثون','ثلاثة وثلاثون','أربعة وثلاثون','خمسة وثلاثون','ستة وثلاثون','سبعة وثلاثون','ثمانية وثلاثون','تسعة وثلاثون','أربعون','واحد وأربعون','اثنان وأربعون','ثلاثة وأربعون','أربعة وأربعون','خمسة وأربعون','ستة وأربعون','سبعة وأربعون','ثمانية وأربعون','تسعة وأربعون','خمسون','واحد وخمسون','اثنان وخمسون','ثلاثة وخمسون','أربعة وخمسون','خمسة وخمسون','ستة وخمسون','سبعة وخمسون','ثمانية وخمسون','تسعة وخمسون','ستون','واحد وستون','اثنان وستون','ثلاثة وستون','أربعة وستون','خمسة وستون','ستة وستون','سبعة وستون','ثمانية وستون','تسعة وستون','سبعون','واحد وسبعون','اثنان وسبعون','ثلاثة وسبعون','أربعة وسبعون','خمسة وسبعون','ستة وسبعون','سبعة وسبعون','ثمانية وسبعون','تسعة وسبعون','ثمانون','واحد وثمانون','اثنان وثمانون','ثلاثة وثمانون','أربعة وثمانون','خمسة وثمانون','ستة وثمانون','سبعة وثمانون','ثمانية وثمانون','تسعة وثمانون','تسعون','واحد وتسعون','اثنان وتسعون','ثلاثة وتسعون','أربعة وتسعون','خمسة وتسعون','ستة وتسعون','سبعة وتسعون','ثمانية وتسعون','تسعة وتسعون','مئة'];
+function numWord(n){return(n>=0&&n<NUM_WORDS.length)?NUM_WORDS[n]:String(n);}
+
+const tts={
+  enabled:true,unlocked:false,voice:null,barTimer:null,
+  init(){
+    this._lv();
+    if(typeof speechSynthesis!=='undefined'&&'onvoiceschanged' in speechSynthesis)
+      speechSynthesis.onvoiceschanged=()=>this._lv();
+    setInterval(()=>{if(window.speechSynthesis?.speaking){speechSynthesis.pause();speechSynthesis.resume();}},10000);
+    document.getElementById('ttsToggle')?.addEventListener('click',()=>{
+      this.enabled=!this.enabled;const btn=document.getElementById('ttsToggle');
+      btn.textContent=this.enabled?'🔊':'🔇';btn.className=this.enabled?'on':'off';
+      if(!this.enabled)speechSynthesis.cancel();
+      this.showBar(this.enabled?'الصوت مفعّل 🔊':'الصوت مكتوم 🔇');
+    });
+    this.unlocked=true;
+  },
+  _lv(){if(!window.speechSynthesis)return;const v=speechSynthesis.getVoices();
+    this.voice=v.find(x=>x.lang==='ar-EG')||v.find(x=>x.lang==='ar-SA')||v.find(x=>x.lang.startsWith('ar'))||null;},
+  _ul(withAudio){
+    this.enabled=withAudio;this.unlocked=true;
+    const b=document.getElementById('unlockBanner');
+    if(b){b.style.opacity='0';setTimeout(()=>b.remove(),380);}
+    const t=document.getElementById('ttsToggle');
+    if(t){t.style.display='flex';t.textContent=this.enabled?'🔊':'🔇';t.className=this.enabled?'on':'off';}
+    if(!withAudio||!window.speechSynthesis)return;
+    speechSynthesis.cancel();
+    const s=new SpeechSynthesisUtterance('\u200B');s.volume=0;s.lang='ar-EG';
+    if(this.voice)s.voice=this.voice;
+    const w=()=>setTimeout(()=>this.speak('أهلاً! لنتعلم الضرب معاً!',true),150);
+    s.onend=s.onerror=w;speechSynthesis.speak(s);
+    setTimeout(()=>{if(!speechSynthesis.pending&&!speechSynthesis.speaking)w();},600);
+  },
+  speak(text,priority=false){
+    if(!this.enabled||!this.unlocked||!window.speechSynthesis)return;
+    if(priority)speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='ar-EG';u.rate=0.82;u.pitch=1.15;u.volume=1;
+    if(this.voice)u.voice=this.voice;
+    u.onerror=e=>{if(e.error!=='interrupted'&&e.error!=='canceled')
+      setTimeout(()=>{try{speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(text),{lang:'ar-EG',rate:0.82,pitch:1.15}));}catch(_){}},300);};
+    try{speechSynthesis.speak(u);}catch(_){}
+  },
+  speakEquation(a,b){this.speak(`${numWord(a)} في ${numWord(b)} يساوي ${numWord(a*b)}`,true);},
+  speakQuestion(a,b){this.speak(`كم يساوي ${numWord(a)} في ${numWord(b)} ؟`,true);},
+  speakCorrect(ans){const p=['أحسنت!','ممتاز!','رائع!','بطل!','صحيح تماماً!'][Math.floor(Math.random()*5)];this.speak(`${p} الجواب هو ${numWord(ans)}`,true);},
+  speakWrong(ans){this.speak(`حاول مرة أخرى. الجواب الصحيح هو ${numWord(ans)}`,true);},
+  showBar(msg){const bar=document.getElementById('ttsBar');if(!bar)return;
+    bar.textContent=msg;bar.classList.add('show');
+    clearTimeout(this.barTimer);this.barTimer=setTimeout(()=>bar.classList.remove('show'),1800);}
+};
+
+// ═══════════════════════════════════════════
+// HERO SPARKLES
+// ═══════════════════════════════════════════
+function initSparkles(){
+  const c=document.getElementById('heroSparkles');
+  for(let i=0;i<25;i++){
+    const s=document.createElement('div');s.className='sparkle';
+    const sz=Math.random()*4+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;background:rgba(255,255,255,${Math.random()*.7+.3});top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${1.5+Math.random()*2}s`;
+    c.appendChild(s);
+  }
+}
+
+// ═══════════════════════════════════════════
+// EQUAL GROUPS INTERACTIVE
+// ═══════════════════════════════════════════
+const EMOJIS=['⭐','🍎','🎈','🏀','🌸','💎','🦋','🎵','🍭'];
+const GROUP_COLORS=[
+  {b:'#FF6B6B',bg:'#FFF0F0'},{b:'#26C6DA',bg:'#E0F7FA'},{b:'#7E57C2',bg:'#EDE7F6'},
+  {b:'#FFB300',bg:'#FFF8E1'},{b:'#26A69A',bg:'#E0F2F1'},{b:'#EC407A',bg:'#FCE4EC'},
+  {b:'#42A5F5',bg:'#E3F2FD'},{b:'#9CCC65',bg:'#F1F8E9'},{b:'#FF7043',bg:'#FBE9E7'},
+];
+let egGroups=3,egItems=4,egEmoji=0;
+
+function initEmojiPicker(){
+  const row=document.getElementById('emojiPicker');
+  EMOJIS.forEach((e,i)=>{
+    const b=document.createElement('button');
+    b.className='emoji-pick'+(i===0?' selected':'');
+    b.textContent=e;b.onclick=()=>{
+      egEmoji=i;
+      document.querySelectorAll('.emoji-pick').forEach((x,j)=>x.classList.toggle('selected',j===i));
+      renderEG();
+    };
+    row.appendChild(b);
+  });
+}
+
+function changeEG(dim,delta){
+  if(dim==='g')egGroups=Math.max(1,Math.min(9,egGroups+delta));
+  else egItems=Math.max(1,Math.min(9,egItems+delta));
+  document.getElementById('eg-g-val').textContent=egGroups;
+  document.getElementById('eg-i-val').textContent=egItems;
+  renderEG();
+}
+
+function renderEG(){
+  const display=document.getElementById('groupsDisplay');
+  display.innerHTML='';
+  const co=GROUP_COLORS;
+  for(let g=0;g<egGroups;g++){
+    const box=document.createElement('div');
+    box.className='group-box';
+    box.style.cssText=`border:2px solid ${co[g%co.length].b};background:${co[g%co.length].bg};animation-delay:${g*50}ms`;
+    for(let i=0;i<egItems;i++){
+      const item=document.createElement('span');
+      item.className='group-item';
+      item.textContent=EMOJIS[egEmoji];
+      item.style.animationDelay=(g*egItems+i)*30+'ms';
+      box.appendChild(item);
+    }
+    const lbl=document.createElement('div');
+    lbl.style.cssText='width:100%;font-size:10px;font-weight:700;text-align:center;color:'+co[g%co.length].b+';margin-top:4px';
+    lbl.textContent=arN(g+1);
+    box.appendChild(lbl);
+    display.appendChild(box);
+  }
+  const total=egGroups*egItems;
+  const repAdd=Array(egGroups).fill(egItems).join('+');
+  document.getElementById('egExpr').textContent=`${egGroups} × ${egItems} = ?`;
+  document.getElementById('egRepAdd').textContent=`${repAdd} = ${total}`;
+  document.getElementById('egTotal').textContent=total;
+  setTimeout(()=>{document.getElementById('egExpr').textContent=`${egGroups} × ${egItems} = ${total}`;},800);
+}
+
+function speakCurrentEG(){
+  tts.speakEquation(egGroups,egItems);
+}
+
+// ═══════════════════════════════════════════
+// NUMBER LINE
+// ═══════════════════════════════════════════
+let nlStep=3,nlJumps=4;
+
+function changeNL(dim,delta){
+  if(dim==='s')nlStep=Math.max(1,Math.min(9,nlStep+delta));
+  else nlJumps=Math.max(1,Math.min(9,nlJumps+delta));
+  document.getElementById('nl-s-val').textContent=nlStep;
+  document.getElementById('nl-j-val').textContent=nlJumps;
+  renderNL();
+}
+
+function renderNL(){
+  const svg=document.getElementById('nlSvg');
+  const total=nlStep*nlJumps;
+  const maxVal=total+nlStep;
+  const W=500,H=95,PAD=18,lineY=72;
+  const scale=(W-2*PAD)/maxVal;
+
+  svg.innerHTML='';
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+
+  // Grid lines
+  for(let v=0;v<=maxVal;v+=nlStep){
+    const x=PAD+v*scale;
+    const tick=document.createElementNS('http://www.w3.org/2000/svg','line');
+    tick.setAttribute('x1',x);tick.setAttribute('y1',lineY-4);
+    tick.setAttribute('x2',x);tick.setAttribute('y2',lineY+4);
+    tick.setAttribute('stroke','#9E9E9E');tick.setAttribute('stroke-width','1');
+    svg.appendChild(tick);
+    if(v%nlStep===0){
+      const txt=document.createElementNS('http://www.w3.org/2000/svg','text');
+      txt.setAttribute('x',x);txt.setAttribute('y',lineY+18);
+      txt.setAttribute('text-anchor','middle');txt.setAttribute('font-size','10');
+      txt.setAttribute('fill','#666');txt.setAttribute('font-weight','600');
+      txt.textContent=v;svg.appendChild(txt);
+    }
+  }
+
+  // Main line
+  const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+  line.setAttribute('x1',PAD);line.setAttribute('y1',lineY);
+  line.setAttribute('x2',W-PAD);line.setAttribute('y2',lineY);
+  line.setAttribute('stroke','#374151');line.setAttribute('stroke-width','2');
+  svg.appendChild(line);
+
+  // Arrow
+  const arr=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+  arr.setAttribute('points',`${W-PAD+6},${lineY} ${W-PAD-2},${lineY-4} ${W-PAD-2},${lineY+4}`);
+  arr.setAttribute('fill','#374151');svg.appendChild(arr);
+
+  // Arcs
+  const arcColors=['#FF6B6B','#26C6DA','#7E57C2','#FFB300','#26A69A','#EC407A','#42A5F5','#9CCC65','#FF7043'];
+  for(let j=0;j<nlJumps;j++){
+    const x1=PAD+j*nlStep*scale,x2=PAD+(j+1)*nlStep*scale;
+    const cx=(x1+x2)/2,cy=lineY-25-(j%3)*8;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${x1},${lineY} Q${cx},${cy} ${x2},${lineY}`);
+    path.setAttribute('fill','none');path.setAttribute('stroke',arcColors[j%arcColors.length]);
+    path.setAttribute('stroke-width','2');path.setAttribute('stroke-dasharray','0');
+    // Animate
+    const len=200;
+    path.style.cssText=`stroke-dasharray:${len};stroke-dashoffset:${len};animation:drawArc .4s ${j*.15}s ease forwards`;
+    svg.appendChild(path);
+
+    // Jump label
+    const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+    lbl.setAttribute('x',cx);lbl.setAttribute('y',cy-4);
+    lbl.setAttribute('text-anchor','middle');lbl.setAttribute('font-size','10');
+    lbl.setAttribute('fill',arcColors[j%arcColors.length]);lbl.setAttribute('font-weight','800');
+    lbl.textContent='+'+nlStep;svg.appendChild(lbl);
+  }
+
+  // Landing dot
+  const dotX=PAD+total*scale;
+  const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  dot.setAttribute('cx',dotX);dot.setAttribute('cy',lineY);dot.setAttribute('r','7');
+  dot.setAttribute('fill','#FF6B6B');svg.appendChild(dot);
+  const dotLbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+  dotLbl.setAttribute('x',dotX);dotLbl.setAttribute('y',lineY-12);
+  dotLbl.setAttribute('text-anchor','middle');dotLbl.setAttribute('font-size','12');
+  dotLbl.setAttribute('fill','#C0392B');dotLbl.setAttribute('font-weight','900');
+  dotLbl.textContent=total;svg.appendChild(dotLbl);
+
+  // Frog at start
+  const frogTxt=document.createElementNS('http://www.w3.org/2000/svg','text');
+  frogTxt.setAttribute('x',PAD);frogTxt.setAttribute('y',lineY-12);
+  frogTxt.setAttribute('text-anchor','middle');frogTxt.setAttribute('font-size','16');
+  frogTxt.textContent='🐸';svg.appendChild(frogTxt);
+
+  document.getElementById('nlExpr').textContent=
+    `${nlJumps} قفزات × ${nlStep} = ${Array(nlJumps).fill(nlStep).join('+')} = ${total}`;
+}
+
+// Add arc animation keyframe
+const arcStyle=document.createElement('style');
+arcStyle.textContent='@keyframes drawArc{to{stroke-dashoffset:0}}';
+document.head.appendChild(arcStyle);
+
+// ═══════════════════════════════════════════
+// TIMES TABLE
+// ═══════════════════════════════════════════
+let ttA=0,ttB=0,ttFilter=0;
+
+function buildTT(){
+  // Filter buttons
+  const row=document.getElementById('tt-filter-btns');
+  for(let i=2;i<=9;i++){
+    const b=document.createElement('button');
+    b.className='tt-filter-btn';b.textContent='× '+i;b.id='ttf-'+i;
+    b.onclick=()=>filterTT(i);row.appendChild(b);
+  }
+
+  const grid=document.getElementById('ttGrid');
+  grid.innerHTML='';
+  // Corner
+  const corner=document.createElement('div');
+  corner.className='tt-cell tt-corner';corner.textContent='×';grid.appendChild(corner);
+  // Col headers
+  for(let c=1;c<=10;c++){
+    const h=document.createElement('div');h.className='tt-cell tt-header';h.textContent=c;grid.appendChild(h);
+  }
+  // Rows
+  for(let r=1;r<=10;r++){
+    const rh=document.createElement('div');rh.className='tt-cell tt-header';rh.textContent=r;grid.appendChild(rh);
+    for(let c=1;c<=10;c++){
+      const cell=document.createElement('div');
+      cell.className='tt-cell';cell.id=`tc-${r}-${c}`;
+      const v=r*c;
+      const hue=Math.floor((v/100)*260);
+      cell.style.cssText=`background:hsl(${hue},${60+v}%,${82-v*.25}%);color:hsl(${hue},60%,25%)`;
+      cell.textContent=v;
+      cell.title=`${r} × ${c} = ${v}`;
+      cell.onclick=()=>showTTDetail(r,c);
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function filterTT(n){
+  ttFilter=n;
+  document.querySelectorAll('.tt-filter-btn').forEach(b=>b.classList.remove('tt-active'));
+  document.getElementById('ttf-'+(n===0?'all':n)).classList.add('tt-active');
+  for(let r=1;r<=10;r++) for(let c=1;c<=10;c++){
+    const cell=document.getElementById(`tc-${r}-${c}`);
+    if(!cell)continue;
+    const show=(n===0)||(r===n)||(c===n);
+    cell.style.opacity=show?'1':'0.2';
+    cell.style.transform=show?'':'scale(.85)';
+  }
+}
+
+function showTTDetail(r,c){
+  ttA=r;ttB=c;
+  const detail=document.getElementById('ttDetail');
+  detail.style.display='block';
+  document.getElementById('ttDetailEq').textContent=`${r} × ${c} = ${r*c}`;
+
+  // Small visual
+  const viz=document.getElementById('ttDetailViz');
+  viz.innerHTML='';
+  const g=document.createElement('div');
+  g.style.cssText='display:inline-grid;gap:3px';
+  g.style.gridTemplateColumns=`repeat(${c},1fr)`;
+  const co=GROUP_COLORS[r%GROUP_COLORS.length];
+  for(let i=0;i<Math.min(r*c,50);i++){
+    const cell=document.createElement('div');
+    cell.style.cssText=`width:20px;height:20px;border-radius:4px;background:${co.b};animation:cellPop .15s ${i*15}ms ease both`;
+    g.appendChild(cell);
+  }
+  viz.appendChild(g);
+  if(r*c>50){const more=document.createElement('div');more.style.cssText='font-size:12px;color:var(--mu);margin-top:4px';more.textContent='...';viz.appendChild(more);}
+
+  tts.speakEquation(r,c);
+  document.querySelectorAll('.tt-cell').forEach(x=>x.classList.remove('highlighted'));
+  document.getElementById(`tc-${r}-${c}`)?.classList.add('highlighted');
+}
+
+const cellPopStyle=document.createElement('style');
+cellPopStyle.textContent='@keyframes cellPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}';
+document.head.appendChild(cellPopStyle);
+
+// ═══════════════════════════════════════════
+// PROPERTIES
+// ═══════════════════════════════════════════
+function buildProps(){
+  // Commutative visual
+  const cl=document.getElementById('comm-left-grid');
+  const cr=document.getElementById('comm-right-grid');
+  function mkSmallGrid(rows,cols,color,parent){
+    const g=document.createElement('div');
+    g.style.cssText=`display:inline-grid;gap:3px;grid-template-columns:repeat(${cols},1fr)`;
+    for(let i=0;i<rows*cols;i++){
+      const c=document.createElement('div');
+      c.style.cssText=`width:18px;height:18px;border-radius:4px;background:${color}`;
+      g.appendChild(c);
+    }
+    parent.appendChild(g);
+  }
+  mkSmallGrid(3,4,'#FF6B6B',cl);
+  mkSmallGrid(4,3,'#26C6DA',cr);
+
+  // Commutative demos
+  const cd=document.getElementById('comm-demos');
+  [[6,7],[8,3],[5,9]].forEach(([a,b])=>{
+    const div=document.createElement('div');
+    div.className='prop-demo';
+    div.innerHTML=`<div class="pd-q"><span style="color:var(--pu-dk)">${a}×${b}</span> = <span style="color:var(--teal-dk)">${b}×${a}</span> = ?</div>
+      <div class="pd-hint">انقر للكشف</div>
+      <div class="pd-answer">الحاصل = <span style="color:var(--coral-dk);font-size:1.4rem">${a*b}</span> ✅</div>`;
+    div.onclick=()=>{div.classList.toggle('revealed');if(div.classList.contains('revealed'))tts.speakEquation(a,b);};
+    cd.appendChild(div);
+  });
+
+  // Zero & Identity demos
+  const pd=document.getElementById('prop-demos');
+  [[7,0,'خاصية الصفر: أي عدد × 0 = 0'],[9,1,'خاصية الواحد: أي عدد × 1 = نفسه'],[0,5,'خاصية الصفر: 0 × أي عدد = 0'],[1,8,'خاصية الواحد: 1 × أي عدد = العدد نفسه']].forEach(([a,b,hint])=>{
+    const div=document.createElement('div');
+    div.className='prop-demo';
+    div.innerHTML=`<div class="pd-q">${a} × ${b} = ?</div>
+      <div class="pd-hint">${hint} — انقر</div>
+      <div class="pd-answer">${a} × ${b} = <span style="color:var(--coral-dk);font-size:1.4rem">${a*b}</span> ✅</div>`;
+    div.onclick=()=>{div.classList.toggle('revealed');if(div.classList.contains('revealed'))tts.speakEquation(a,b);};
+    pd.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════
+// PRACTICE QUESTIONS
+// ═══════════════════════════════════════════
+const secS={
+  g:{c:0,t:0,ans:new Array(5).fill(false)},
+  r:{c:0,t:0,ans:new Array(5).fill(false)},
+  p:{c:0,t:0,ans:new Array(5).fill(false)},
+  a:{c:0,t:0,ans:new Array(5).fill(false)},
+};
+function updSec(sec){
+  document.getElementById('sc-'+sec+'-c').textContent=secS[sec].c;
+  document.getElementById('sc-'+sec+'-t').textContent=secS[sec].t;
+  document.getElementById('sc-'+sec+'-p').textContent=secS[sec].t>0?Math.round(secS[sec].c/secS[sec].t*100)+'%':'—';
+}
+function ansQ(sec,qi,chosen,correct,exp){
+  if(secS[sec].ans[qi])return;
+  secS[sec].ans[qi]=true;secS[sec].t++;
+  const block=document.getElementById('qb-'+sec+'-'+qi);
+  const btns=block.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById('fb-'+sec+'-'+qi);
+  if(chosen===correct){
+    secS[sec].c++;btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ أحسنت! إجابة صحيحة 🌟';fb.className='fb show ok';tts.speakCorrect(0);
+  } else {
+    btns[chosen].classList.add('wrong');btns[correct].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent='❌ الإجابة الصحيحة: '+btns[correct].textContent+(exp?' — '+exp:'');
+    fb.className='fb show no';tts.speakWrong(0);
+  }
+  updSec(sec);
+}
+function buildQs(sec,qs,cid){
+  const cont=document.getElementById(cid);cont.innerHTML='';
+  qs.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='q-block';d.id='qb-'+sec+'-'+i;
+    d.innerHTML=`<div class="q-text"><span class="q-num">${arN(i+1)}.</span> ${q.t}</div>
+      <div class="opts">${q.o.map((o,j)=>`<button class="opt-btn" onclick="ansQ('${sec}',${i},${j},${q.c},'${(q.e||'').replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>
+      <div class="fb" id="fb-${sec}-${i}"></div>`;
+    cont.appendChild(d);
+  });
+}
+
+const Qs={
+  g:[
+    {t:'<strong>3 مجموعات</strong> كل مجموعة فيها <strong>4 كرات</strong>. ما عملية الضرب؟',
+     o:['3+4=7','3×4=12','4×4=16','3×4=7'],c:1,e:'3 مجموعات × 4 = 12'},
+    {t:'أيّ الجمع المتكرر يساوي <strong>4×5</strong>؟',
+     o:['4+4+4+4','5+5+5+5','4+4+4+4+4','5+5+5+5+5'],c:1,e:'4×5 تعني 5 مضافة 4 مرات'},
+    {t:'الصورة تُظهر: 🌟🌟 | 🌟🌟 | 🌟🌟 | 🌟🌟 | 🌟🌟. ما عملية الضرب؟',
+     o:['5×2=10','2×5=10','10×1=10','كلاهما 5×2 و2×5 يساويان 10'],c:3,e:'5 مجموعات × 2 = 2×5 = 10'},
+    {t:'ما ناتج <strong>3×7</strong>؟',
+     o:['10','21','37','73'],c:1,e:'3×7 = 21'},
+    {t:'<strong>5 مجموعات</strong> من 6 عناصر تساوي:',
+     o:['11','30','56','65'],c:1,e:'5×6 = 30'},
+  ],
+  r:[
+    {t:'<strong>7+7+7</strong> = 7 × ___',
+     o:['2','3','4','7'],c:1,e:'7 مضافة 3 مرات = 7×3'},
+    {t:'<strong>8+8+8+8</strong> = ___ × 8 = ___',
+     o:['4×8=32','3×8=24','8×8=64','4×8=40'],c:0,e:'8 مضافة 4 مرات = 4×8 = 32'},
+    {t:'<strong>3×6</strong> كجمع متكرر يساوي:',
+     o:['3+3+3+3+3+3=18','6+6+6=18','3+6=9','الخياران أ و ب كلاهما صحيح'],c:3,e:'3×6 = 6+6+6 = 3+3+3+3+3+3 = 18'},
+    {t:'<strong>9+9+9+9+9</strong> = ___',
+     o:['36','40','45','50'],c:2,e:'9 × 5 = 45'},
+    {t:'أيّ عملية ضرب تمثّل: <strong>4+4+4+4+4+4+4</strong> (جمع 4 سبع مرات)؟',
+     o:['4×4=16','4×7=28','7×4=28','كلاهما 4×7 و7×4'],c:3,e:'7 مرات 4 = 4×7 = 7×4 = 28'},
+  ],
+  p:[
+    {t:'<strong>5 × 0</strong> = ___',
+     o:['5','0','1','50'],c:1,e:'أي عدد × صفر = صفر'},
+    {t:'<strong>9 × 1</strong> = ___',
+     o:['1','9','10','0'],c:1,e:'أي عدد × 1 = العدد نفسه'},
+    {t:'بموجب خاصية الإبدال: <strong>6 × 4 = 4 × ___</strong>',
+     o:['4','6','24','10'],c:1,e:'6×4 = 4×6 = 24 — الترتيب لا يغير الحاصل'},
+    {t:'بموجب خاصية الإبدال، ما الذي يساوي <strong>8 × 3</strong>؟',
+     o:['8+3','3×8','8−3','3+8'],c:1,e:'8×3 = 3×8 = 24'},
+    {t:'أيّ الخيارات التالية <strong>غير صحيح</strong>؟',
+     o:['7×1=7','0×8=0','3×5=5×3','6×0=6'],c:3,e:'6×0=0 وليس 6! — أي عدد × صفر = صفر'},
+  ],
+  a:[
+    {t:'اشترى أحمد <strong>4 صناديق</strong> كل صندوق فيه <strong>6 تفاحات</strong>. كم تفاحة اشترى؟',
+     o:['10','24','46','20'],c:1,e:'4 × 6 = 24 تفاحة'},
+    {t:'في الفصل <strong>5 صفوف</strong> كل صف فيه <strong>7 طلاب</strong>. كم طالباً في الفصل؟',
+     o:['12','25','35','57'],c:2,e:'5 × 7 = 35 طالباً'},
+    {t:'تاجر الزهور يضع <strong>8 ورود</strong> في كل مزهرية، عنده <strong>3 مزهريات</strong>. كم وردة عنده؟',
+     o:['11','24','38','83'],c:1,e:'3 × 8 = 24 وردة'},
+    {t:'طول ربطة واحدة <strong>9 سم</strong>، وعدد الربطات <strong>5</strong>. ما مجموع الطول؟',
+     o:['14 سم','45 سم','54 سم','95 سم'],c:1,e:'5 × 9 = 45 سم'},
+    {t:'باع دكّان الفاكهة <strong>7 كيلو تفاح</strong> كل يوم لمدة <strong>5 أيام</strong>. كم كيلو باع إجمالاً؟',
+     o:['12','35','57','75'],c:1,e:'7 × 5 = 35 كيلو'},
+  ],
+};
+
+// ═══════════════════════════════════════════
+// GAME 1: MULTIPLICATION QUIZ
+// ═══════════════════════════════════════════
+let g1Round=1,g1Correct=0,g1Wrong=0,g1Streak=0,g1Locked=false,g1Ans=-1;
+const G1_TOTAL=10;
+const GAME_PAIRS=[[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[2,7],[3,8],[4,9],[5,7],[6,8],[2,9],[3,6],[4,7],[5,8],[6,9],[7,9],[2,8],[3,7]];
+
+function loadG1Round(){
+  if(g1Round>G1_TOTAL){showG1Result();return;}
+  g1Locked=false;
+  const [a,b]=GAME_PAIRS[Math.floor(Math.random()*GAME_PAIRS.length)];
+  const ans=a*b;g1Ans=ans;
+  document.getElementById('g1-a').textContent=a;
+  document.getElementById('g1-b').textContent=b;
+  document.getElementById('g1-round').textContent=g1Round;
+
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const w=Math.max(1,ans+[-ans*.3,-.2*ans,1,-1,2,-2,3,-3,4,-4,ans*.2][Math.floor(Math.random()*11)]);
+    const ww=Math.round(w);
+    if(ww>0&&ww!==ans&&!wrongs.has(ww))wrongs.add(ww);
+  }
+  const opts=shuffle([ans,...wrongs].slice(0,4));
+  const bubbles=document.getElementById('g1-bubbles');
+  bubbles.innerHTML='';
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className=`g-bubble b${i}`;b.textContent=o;b.id='g1b-'+i;
+    b.onclick=()=>submitG1(o,i,opts,ans,a,b.textContent=o);
+    bubbles.appendChild(b);
+  });
+
+  const fb=document.getElementById('g1-fb');fb.className='g-feedback hid';fb.textContent='';
+  tts.speakQuestion(a,b);
+}
+
+function submitG1(val,idx,opts,ans,a){
+  if(g1Locked)return;g1Locked=true;
+  document.querySelectorAll('[id^="g1b-"]').forEach(b=>b.onclick=null);
+  const fb=document.getElementById('g1-fb');
+  const btn=document.getElementById('g1b-'+idx);
+
+  if(val===ans){
+    g1Correct++;g1Streak++;
+    btn.classList.add('correct-b');
+    fb.textContent='✅ ممتاز! '+val+' صحيح!';fb.className='g-feedback ok-f';
+    tts.speakCorrect(ans);
+  } else {
+    g1Wrong++;g1Streak=0;
+    btn.classList.add('wrong-b');
+    // Find correct button
+    document.querySelectorAll('[id^="g1b-"]').forEach(b=>{if(+b.textContent===ans)b.classList.add('correct-b');});
+    fb.textContent='❌ الصحيح: '+ans;fb.className='g-feedback no-f';
+    tts.speakWrong(ans);
+  }
+  document.getElementById('g1-correct').textContent=g1Correct;
+  document.getElementById('g1-wrong').textContent=g1Wrong;
+  document.getElementById('g1-streak').textContent=g1Streak;
+  g1Round++;
+  setTimeout(()=>{
+    document.querySelectorAll('[id^="g1b-"]').forEach(b=>{b.classList.remove('correct-b','wrong-b');b.onclick=null;});
+    loadG1Round();
+  },1800);
+}
+
+function showG1Result(){
+  const pct=Math.round(g1Correct/G1_TOTAL*100);
+  const res=document.getElementById('g1-result');
+  res.style.display='block';
+  res.innerHTML=`<div style="font-size:52px;margin-bottom:.5rem">${pct>=80?'🏆':'💪'}</div>
+    <div style="font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:900;color:var(--pu-dk)">
+      ${pct>=80?'رائع! نتيجة ممتازة!':'استمر في التدريب!'}</div>
+    <div style="font-size:15px;color:var(--mu);margin-top:.5rem">أصبت بـ <strong>${g1Correct}</strong> من ${G1_TOTAL} (${pct}%)</div>`;
+  tts.speak(`أحسنت! حصلت على ${numWord(g1Correct)} نقاط`,true);
+}
+
+function restartG1(){
+  g1Round=1;g1Correct=0;g1Wrong=0;g1Streak=0;
+  ['g1-correct','g1-wrong','g1-streak'].forEach(id=>document.getElementById(id).textContent=0);
+  document.getElementById('g1-result').style.display='none';
+  loadG1Round();
+}
+
+function shuffle(a){return a.sort(()=>Math.random()-.5);}
+
+// ═══════════════════════════════════════════
+// GAME 2: SKIP COUNT
+// ═══════════════════════════════════════════
+let skipNum=3,skipAnswers=[],skipCurrentBlank=0,skipTotalBlanks=0;
+
+function initSkipGame(){
+  const row=document.getElementById('skipChooseRow');
+  for(let n=2;n<=9;n++){
+    const b=document.createElement('button');
+    b.className='tt-filter-btn'+(n===3?' tt-active':'');
+    b.textContent=n;b.dataset.n=n;
+    b.onclick=()=>{
+      skipNum=n;
+      document.querySelectorAll('#skipChooseRow .tt-filter-btn').forEach(x=>x.classList.remove('tt-active'));
+      b.classList.add('tt-active');
+      newSkipGame();
+    };
+    row.appendChild(b);
+  }
+  newSkipGame();
+}
+
+function newSkipGame(){
+  skipAnswers=[];skipCurrentBlank=0;
+  document.getElementById('skipResult').style.display='none';
+  const seq=[];for(let i=1;i<=8;i++)seq.push(skipNum*i);
+  // Hide 3 random positions
+  const hideIdx=shuffle([...Array(8).keys()]).slice(0,3).sort((a,b)=>a-b);
+  skipTotalBlanks=hideIdx.length;
+
+  const display=document.getElementById('skipDisplay');
+  display.innerHTML='';
+  seq.forEach((v,i)=>{
+    const cell=document.createElement('div');
+    if(hideIdx.includes(i)){
+      cell.className='skip-cell skip-blank';cell.id='skip-blank-'+i;
+      cell.textContent='?';cell.dataset.val=v;cell.dataset.blankIdx=skipAnswers.length;
+      skipAnswers.push({idx:i,val:v,answered:false});
+    } else {
+      cell.className='skip-cell skip-known';cell.textContent=v;
+    }
+    display.appendChild(cell);
+  });
+
+  // Generate choices for first blank
+  renderSkipChoices();
+}
+
+function renderSkipChoices(){
+  const blank=skipAnswers[skipCurrentBlank];
+  if(!blank)return;
+  const cont=document.getElementById('skipChoicesBtns');
+  cont.innerHTML='';
+
+  const correct=blank.val;
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const w=correct+[-skipNum,skipNum,1,-1,2,-2,skipNum*2,-skipNum*2][Math.floor(Math.random()*8)];
+    if(w>0&&w!==correct&&!wrongs.has(w))wrongs.add(w);
+  }
+  const opts=shuffle([correct,...wrongs].slice(0,4));
+  opts.forEach(v=>{
+    const b=document.createElement('button');
+    b.className='skip-choice';b.textContent=v;
+    b.onclick=()=>submitSkip(v,correct,blank);
+    cont.appendChild(b);
+  });
+  // Speak the position
+  tts.speak('ما العدد الناقص؟',false);
+}
+
+function submitSkip(chosen,correct,blank){
+  const cellId='skip-blank-'+blank.idx;
+  const cell=document.getElementById(cellId);
+  if(!cell||blank.answered)return;
+  blank.answered=true;
+
+  document.querySelectorAll('.skip-choice').forEach(b=>b.disabled=true);
+
+  if(chosen===correct){
+    cell.textContent=correct;cell.className='skip-cell skip-blank filled-ok';
+    tts.speakCorrect(correct);
+    skipCurrentBlank++;
+    if(skipCurrentBlank>=skipTotalBlanks){
+      document.getElementById('skipResult').style.display='block';
+      document.getElementById('skipResult').textContent='🎉 ممتاز! أكملت سلسلة مضاعفات '+skipNum+' بنجاح!';
+      tts.speak('ممتاز! أكملت السلسلة',true);
+    } else {
+      setTimeout(renderSkipChoices,800);
+    }
+  } else {
+    cell.className='skip-cell skip-blank filled-no';
+    setTimeout(()=>{
+      cell.className='skip-cell skip-blank';cell.textContent='?';blank.answered=false;
+      document.querySelectorAll('.skip-choice').forEach(b=>b.disabled=false);
+    },800);
+    tts.speakWrong(correct);
+  }
+}
+
+// ═══════════════════════════════════════════
+// MASTERY TEST
+// ═══════════════════════════════════════════
+const masteryQs=[
+  // Equal Groups (0-2)
+  {top:'g',t:'[المجموعات] <strong>4 مجموعات</strong> كل مجموعة فيها <strong>5 عناصر</strong> = ___×___ = ___',
+   o:['4×5=20','5+4=9','4×5=9','5×4=40'],c:0,e:'4×5=20'},
+  {top:'g',t:'[المجموعات] أيّ الجمع المتكرر يساوي <strong>3×8</strong>؟',
+   o:['3+3+3+3+3+3+3+3','8+8+8','الخياران أ و ب كلاهما صحيح','3+8=11'],c:2,e:'3×8 = 8+8+8 = 3+3+3+3+3+3+3+3 = 24'},
+  {top:'g',t:'[المجموعات] ما ناتج <strong>7×4</strong>؟',
+   o:['11','28','47','74'],c:1,e:'7×4=28'},
+  // Repeated Addition (3-5)
+  {top:'r',t:'[الجمع المتكرر] <strong>6+6+6+6+6</strong> = 6 × ___',
+   o:['4','5','6','7'],c:1,e:'6 مضافة 5 مرات = 6×5=30'},
+  {top:'r',t:'[الجمع المتكرر] <strong>5×9</strong> كجمع متكرر يساوي:',
+   o:['5+5+5+5+5+5+5+5+5','9+9+9+9+9','الخياران ويساويان 45','5+9=14'],c:2,e:'5×9=45 ويمكن كتابتها بالطريقتين'},
+  {top:'r',t:'[الجمع المتكرر] <strong>8+8+8+8</strong> = ___',
+   o:['24','32','40','48'],c:1,e:'8×4=32'},
+  // Multiplication Facts (6-8)
+  {top:'f',t:'[الحقائق] <strong>6×7</strong> = ___',
+   o:['13','42','67','76'],c:1,e:'6×7=42'},
+  {top:'f',t:'[الحقائق] ___ × <strong>8 = 56</strong>',
+   o:['6','7','8','9'],c:1,e:'7×8=56'},
+  {top:'f',t:'[الحقائق] ما أكبر الحاصلين: <strong>9×4</strong> أم <strong>8×5</strong>؟',
+   o:['9×4=36','8×5=40','متساويان','لا يمكن المقارنة'],c:1,e:'9×4=36 و8×5=40، إذن 8×5 أكبر'},
+  // Properties (9-11)
+  {top:'p',t:'[الخصائص] <strong>7×0</strong> = ___',
+   o:['0','7','1','70'],c:0,e:'أي عدد × صفر = صفر'},
+  {top:'p',t:'[الخصائص] بموجب خاصية الإبدال: <strong>9×3</strong> = ___×___',
+   o:['3×9','9×9','9×1','3×3'],c:0,e:'9×3 = 3×9 = 27'},
+  {top:'p',t:'[الخصائص] أيّ الخيارات <strong>غير صحيح</strong>؟',
+   o:['6×1=6','0×9=0','3×4=4×3','5×0=5'],c:3,e:'5×0=0 وليس 5!'},
+  // Application (12-14)
+  {top:'a',t:'[التطبيق] في باقة الزهور <strong>6 أنواع</strong> كل نوع فيه <strong>8 ورود</strong>. كم وردة في الباقة؟',
+   o:['14','48','68','86'],c:1,e:'6×8=48'},
+  {top:'a',t:'[التطبيق] قاعة العروض فيها <strong>9 صفوف</strong> كل صف <strong>7 كراسي</strong>. كم كرسياً؟',
+   o:['16','63','72','97'],c:1,e:'9×7=63'},
+  {top:'a',t:'[التطبيق] اشترت مدرسة <strong>4 حقائب</strong> بسعر <strong>15 جنيهاً</strong> للحقيبة. كم دفعت؟',
+   o:['19 جنيهاً','45 جنيهاً','60 جنيهاً','415 جنيهاً'],c:2,e:'4×15=60 جنيهاً'},
+];
+const mAns=new Array(15).fill(null);let mAnswered=0;
+
+function buildMastery(){
+  const cont=document.getElementById('q-mastery');cont.innerHTML='';
+  const tLbls={g:'👫 المجموعات المتساوية',r:'🔁 الجمع المتكرر',f:'📊 حقائق الضرب',p:'⚡ خصائص الضرب',a:'🧮 التطبيق'};
+  let last='';
+  masteryQs.forEach((q,i)=>{
+    if(q.top!==last){
+      last=q.top;
+      const div=document.createElement('div');div.className='sdiv';
+      div.innerHTML=`<div class="sdiv-line"></div><div class="sdiv-lbl">${tLbls[q.top]}</div><div class="sdiv-line"></div>`;
+      cont.appendChild(div);
+    }
+    const b=document.createElement('div');b.className='q-block';b.id='mqb-'+i;
+    b.innerHTML=`<div class="q-text"><span class="q-num">${arN(i+1)}.</span> ${q.t}</div>
+      <div class="opts">${q.o.map((o,j)=>`<button class="opt-btn" id="mo-${i}-${j}" onclick="ansMastery(${i},${j})">${o}</button>`).join('')}</div>`;
+    cont.appendChild(b);
+  });
+  document.getElementById('submitMasteryBtn').style.display='flex';
+}
+
+function ansMastery(qi,chosen){
+  document.querySelectorAll(`[id^="mo-${qi}-"]`).forEach(b=>{b.style.borderColor='';b.style.background='';b.style.color='';});
+  const was=mAns[qi]!==null;mAns[qi]=chosen;
+  const b=document.getElementById(`mo-${qi}-${chosen}`);
+  b.style.borderColor='var(--pu)';b.style.background='var(--pu-lt)';b.style.color='var(--pu-dk)';
+  if(!was)mAnswered++;
+  document.getElementById('m-pb').style.width=(mAnswered/15*100)+'%';
+  document.getElementById('m-pt').textContent=mAnswered+' / 15';
+}
+
+function submitMastery(){
+  const order=['g','r','f','p','a'];
+  const names={g:'المجموعات المتساوية',r:'الجمع المتكرر',f:'حقائق الضرب',p:'خصائص الضرب',a:'التطبيق'};
+  const icons={g:'👫',r:'🔁',f:'📊',p:'⚡',a:'🧮'};
+  const colors={g:'#7E57C2',r:'#26C6DA',f:'#FF6B6B',p:'#FFB300',a:'#26A69A'};
+
+  let total=0;
+  masteryQs.forEach((q,i)=>{
+    const chosen=mAns[i];
+    const btns=document.querySelectorAll(`[id^="mo-${i}-"]`);
+    btns.forEach(b=>{b.disabled=true;b.style.borderColor='';b.style.background='';b.style.color='';});
+    if(chosen!==null){
+      if(chosen===q.c){total++;btns[chosen].classList.add('correct');document.getElementById('mqb-'+i).classList.add('ok');}
+      else{btns[chosen].classList.add('wrong');btns[q.c].classList.add('correct');document.getElementById('mqb-'+i).classList.add('no');}
+    } else btns[q.c].classList.add('correct');
+  });
+
+  const tScores={};
+  order.forEach(t=>{
+    let s=0;masteryQs.forEach((q,i)=>{if(q.top===t&&mAns[i]===q.c)s++;});tScores[t]=s;
+  });
+
+  const pct=Math.round(total/15*100);
+  const res=document.getElementById('mastery-result');
+  let html='';
+
+  if(pct>=80){
+    html+=`<div class="cert">
+      <div style="font-size:64px;margin-bottom:.5rem">🏆</div>
+      <h2>تهانينا! أتقنت مفهوم الضرب!</h2>
+      <p style="font-size:1.05rem;margin:.5rem 0">نتيجتك: <strong style="color:var(--amber)">${total} / 15</strong> (${pct}%)</p>
+      <p>أنت تفهم الضرب بشكل عميق ومتميز 🌟</p>
+      <div style="font-size:2.5rem;margin-top:.75rem">⭐⭐⭐</div>
+    </div>`;
+  } else {
+    html+=`<div style="background:linear-gradient(135deg,#1A0A3C,#2D1B69);border:2px solid var(--amber);border-radius:20px;padding:1.5rem;text-align:center;margin-top:1rem">
+      <div style="font-size:48px;margin-bottom:.5rem">💪</div>
+      <h2 style="font-family:'Cairo',sans-serif;color:var(--amber);margin-bottom:.5rem">استمر في التدريب!</h2>
+      <p style="color:rgba(255,255,255,.8)">نتيجتك: <strong>${total} / 15</strong> (${pct}%) — تحتاج 80% للنجاح</p>
+    </div>`;
+  }
+
+  html+=`<div style="margin-top:1.5rem">
+    <div style="font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:700;color:var(--txt);margin-bottom:1rem">📋 تحليل مستواك في كل موضوع:</div>`;
+
+  order.forEach(t=>{
+    const s=tScores[t];const tot=masteryQs.filter(q=>q.top===t).length;
+    const lv=getLv(s,tot);const fp=Math.round(s/tot*100);
+    html+=`<div class="trc"><div class="trc-ico">${icons[t]}</div>
+      <div class="trc-info">
+        <div class="trc-name">${names[t]}</div>
+        <div class="trc-fill"><div class="trc-bar" style="width:${fp}%;background:${colors[t]}"></div></div>
+        <div style="font-size:12px;color:var(--mu)">${s} من ${tot} أسئلة صحيحة</div>
+      </div>
+      <div><span class="lv-badge ${lv.cls}">${lv.txt}</span></div>
+    </div>`;
+  });
+
+  const weak=order.filter(t=>tScores[t]<Math.ceil(masteryQs.filter(q=>q.top===t).length*.67));
+  if(weak.length)html+=`<div class="ib ib-amber" style="margin-top:1rem"><strong>💡 توصيات:</strong><br>${weak.map(t=>`• راجع موضوع <strong>${names[t]}</strong>`).join('<br>')}</div>`;
+
+  html+=`</div><div class="btn-group" style="margin-top:1rem">
+    <button class="btn btn-pu" onclick="retryMastery()">🔄 أعد الاختبار</button>
+    <button class="btn btn-dark" onclick="showTab('concept')">📖 راجع الدرس</button>
+  </div>`;
+
+  res.innerHTML=html;res.style.display='block';
+  document.getElementById('submitMasteryBtn').style.display='none';
+  document.getElementById('m-pb').style.width='100%';
+  document.getElementById('m-pt').textContent='15 / 15';
+  tts.speak(`أحسنت! حصلت على ${numWord(total)} نقطة من خمسة عشر`,true);
+}
+
+function retryMastery(){
+  mAns.fill(null);mAnswered=0;
+  document.getElementById('mastery-result').style.display='none';
+  document.getElementById('m-pb').style.width='0%';
+  document.getElementById('m-pt').textContent='0 / 15';
+  buildMastery();
+}
+
+function getLv(s,tot){
+  const p=s/tot;
+  if(p>=0.9)return{cls:'lv3',txt:'متقن ⭐⭐⭐'};
+  if(p>=0.67)return{cls:'lv2',txt:'جيد جداً ⭐⭐'};
+  if(p>=0.34)return{cls:'lv1',txt:'يحتاج مراجعة ⭐'};
+  return{cls:'lv0',txt:'يحتاج تدريباً إضافياً'};
+}
+
+// ═══════════════════════════════════════════
+// TAB + HELPERS
+// ═══════════════════════════════════════════
+function showTab(name){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  document.getElementById('tb-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function arN(n){return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload=function(){
+  tts.init();
+  initSparkles();
+  initEmojiPicker();
+  renderEG();
+  renderNL();
+  buildTT();
+  buildProps();
+  buildQs('g',Qs.g,'q-groups');
+  buildQs('r',Qs.r,'q-rep');
+  buildQs('p',Qs.p,'q-props');
+  buildQs('a',Qs.a,'q-app');
+  initSkipGame();
+  loadG1Round();
+  buildMastery();
+};
+</script>
+</body>
+</html>
