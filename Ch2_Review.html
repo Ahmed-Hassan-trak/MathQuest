@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الفصل الثاني - رياضيات الصف الثالث</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --card: #1a2235;
+  --card2: #1e2a3a;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+
+  --c1: #f59e0b;  /* amber - آلاف */
+  --c2: #10b981;  /* emerald - مزيد */
+  --c3: #3b82f6;  /* blue - عشرات */
+  --c4: #8b5cf6;  /* violet - صيغ */
+  --c5: #ec4899;  /* pink - مصفوفات */
+  --c6: #f97316;  /* orange - ضرب */
+  --c7: #06b6d4;  /* cyan - إبدال */
+
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --text3: #475569;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --r: 16px;
+  --r2: 10px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* Stars bg */
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse at 20% 20%,rgba(245,158,11,0.06) 0%,transparent 50%),
+  radial-gradient(ellipse at 80% 80%,rgba(59,130,246,0.06) 0%,transparent 50%),
+  radial-gradient(ellipse at 50% 50%,rgba(139,92,246,0.04) 0%,transparent 60%);
+  pointer-events:none;z-index:0}
+
+/* ===== NAV ===== */
+.topbar{position:sticky;top:0;z-index:200;background:rgba(10,14,26,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 16px}
+.topbar-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:10px 0;overflow-x:auto;scrollbar-width:none}
+.topbar-inner::-webkit-scrollbar{display:none}
+.tb{display:flex;align-items:center;gap:5px;padding:7px 14px;border-radius:100px;border:1.5px solid transparent;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--text2);background:transparent;cursor:pointer;white-space:nowrap;transition:all .2s}
+.tb:hover{color:var(--text);background:var(--card)}
+.tb.on{color:#0a0e1a;border-color:transparent}
+.tb .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ===== MAIN ===== */
+.wrap{max-width:960px;margin:0 auto;padding:28px 16px 100px;position:relative;z-index:1}
+.page{display:none}
+.page.on{display:block;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== HERO ===== */
+.hero{border-radius:24px;padding:36px 32px;margin-bottom:28px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1a2235 0%,#0f1520 100%);border:1px solid var(--border2)}
+.hero::after{content:'';position:absolute;top:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.1),transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:14px}
+.hero h1{font-family:'Baloo Bhaijaan 2',cursive;font-size:clamp(24px,5vw,40px);font-weight:900;line-height:1.2;margin-bottom:10px}
+.hero p{font-size:14px;color:var(--text2);max-width:500px;line-height:1.8}
+.hero-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.hero-chip{padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;border:1.5px solid}
+
+/* ===== LESSON CARDS (Home) ===== */
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:28px}
+.lcard{border-radius:var(--r);border:1px solid var(--border);background:var(--card);padding:22px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.lcard::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s}
+.lcard:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--border2)}
+.lcard:hover::before{opacity:1}
+.lcard-num{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;opacity:.8}
+.lcard-icon{font-size:36px;margin-bottom:10px;display:block}
+.lcard-title{font-family:'Baloo Bhaijaan 2',cursive;font-size:18px;font-weight:800;margin-bottom:6px}
+.lcard-desc{font-size:13px;color:var(--text2);line-height:1.7}
+.lcard-arrow{position:absolute;bottom:18px;left:18px;font-size:20px;opacity:.5;transition:all .2s}
+.lcard:hover .lcard-arrow{opacity:1;transform:translateX(-4px)}
+
+/* ===== SECTION HEADER ===== */
+.sec-hd{margin-bottom:24px}
+.sec-hd h2{font-family:'Baloo Bhaijaan 2',cursive;font-size:28px;font-weight:900;display:flex;align-items:center;gap:10px}
+.sec-hd p{font-size:14px;color:var(--text2);margin-top:6px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.04em}
+
+/* ===== INFO CARDS ===== */
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px}
+.info-card h3{font-family:'Baloo Bhaijaan 2',cursive;font-size:20px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.info-card p,.info-card li{font-size:14px;line-height:1.9;color:var(--text2)}
+.info-card ul{padding-right:18px}
+.info-card li{margin-bottom:5px;color:var(--text)}
+.highlight-box{border-radius:var(--r2);padding:14px 18px;margin:14px 0;font-size:14px;font-weight:600;border-right:4px solid}
+.val-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+.val-table th,.val-table td{padding:10px 14px;border:1px solid var(--border);text-align:center}
+.val-table th{font-weight:700;font-size:13px}
+.place-boxes{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.pbox{padding:10px 14px;border-radius:var(--r2);text-align:center;min-width:70px;border:2px solid}
+.pbox-val{font-family:'Baloo Bhaijaan 2',cursive;font-size:26px;font-weight:900}
+.pbox-label{font-size:11px;font-weight:700;opacity:.8;margin-top:2px}
+
+/* ===== ARRAY VIS ===== */
+.arr-wrap{display:flex;flex-direction:column;gap:5px;margin:12px 0}
+.arr-row-vis{display:flex;gap:5px}
+.arr-cell{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid rgba(255,255,255,0.12);transition:transform .15s}
+.arr-cell:hover{transform:scale(1.12)}
+
+/* ===== EXERCISES ===== */
+.score-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 22px;margin-bottom:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.sp-item{text-align:center}
+.sp-val{font-family:'Baloo Bhaijaan 2',cursive;font-size:30px;font-weight:900}
+.sp-lbl{font-size:11px;color:var(--text2);margin-top:2px}
+.prog-wrap{flex:1;min-width:100px}
+.prog-track{height:10px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;border-radius:100px;transition:width .5s ease;background:linear-gradient(90deg,#10b981,#3b82f6)}
+
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:14px;transition:border-color .2s}
+.qcard.q-ok{border-color:#10b981;background:rgba(16,185,129,0.07)}
+.qcard.q-err{border-color:#ef4444;background:rgba(239,68,68,0.07)}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;opacity:.75}
+.qtext{font-size:16px;font-weight:600;margin-bottom:14px;line-height:1.7}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{padding:10px 20px;border-radius:100px;border:2px solid var(--border2);background:var(--card2);font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s}
+.opt:hover{color:var(--text);border-color:rgba(255,255,255,0.3)}
+.opt.ok{background:rgba(16,185,129,0.2);border-color:#10b981;color:#6ee7b7}
+.opt.err{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#fca5a5}
+.opt.dis{pointer-events:none;opacity:.45}
+.opt.ok.dis{opacity:1}
+.qfb{margin-top:12px;font-size:14px;font-weight:600;display:none;align-items:center;gap:8px}
+.qfb.show{display:flex}
+.fill-inp{height:44px;width:80px;border-radius:var(--r2);border:2px solid var(--border2);background:var(--card2);text-align:center;font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;color:var(--text);outline:none;transition:all .15s}
+.fill-inp:focus{border-color:rgba(255,255,255,0.3);box-shadow:0 0 0 3px rgba(255,255,255,0.06)}
+.fill-inp.ok{border-color:#10b981;color:#6ee7b7;background:rgba(16,185,129,0.1)}
+.fill-inp.err{border-color:#ef4444;color:#fca5a5;background:rgba(239,68,68,0.1)}
+.chk-btn{padding:10px 22px;border-radius:100px;border:none;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;background:rgba(255,255,255,0.1);color:var(--text)}
+.chk-btn:hover{background:rgba(255,255,255,0.18)}
+
+/* ===== GAMES ===== */
+.game-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;margin-bottom:16px}
+.game-title{font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;margin-bottom:4px}
+.game-desc{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.7}
+
+/* Number builder */
+.numbuilder{display:flex;flex-direction:column;gap:16px}
+.nb-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.nb-lbl{font-size:13px;font-weight:700;min-width:90px;color:var(--text2)}
+.nb-btn{width:38px;height:38px;border-radius:10px;border:2px solid var(--border2);background:var(--card2);font-size:20px;font-weight:700;color:var(--text);cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.nb-btn:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.08)}
+.nb-val{font-family:'Baloo Bhaijaan 2',cursive;font-size:28px;font-weight:900;min-width:40px;text-align:center}
+.nb-display{background:var(--card2);border:2px solid var(--border2);border-radius:var(--r);padding:16px 20px;text-align:center;margin-top:8px}
+.nb-number{font-family:'Baloo Bhaijaan 2',cursive;font-size:40px;font-weight:900;letter-spacing:2px}
+.nb-words{font-size:14px;color:var(--text2);margin-top:6px}
+
+/* Memory game */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.mem-c{aspect-ratio:1;border-radius:var(--r2);background:var(--card2);border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .25s;position:relative;overflow:hidden}
+.mem-c:hover{border-color:var(--border2)}
+.mem-c .back{font-size:22px}
+.mem-c .front{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:12px;font-weight:700;text-align:center;padding:4px}
+.mem-c.flipped .front,.mem-c.matched .front{display:flex}
+.mem-c.flipped .back,.mem-c.matched .back{display:none}
+.mem-c.flipped{background:rgba(245,158,11,0.15);border-color:#f59e0b}
+.mem-c.matched{background:rgba(16,185,129,0.15);border-color:#10b981;cursor:default}
+
+/* Speedrun */
+.speed-hd{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.timer-wrap{flex:1;min-width:100px}
+.timer-track{height:12px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.timer-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#ef4444);border-radius:100px;transition:width .2s linear}
+.speed-q{font-family:'Baloo Bhaijaan 2',cursive;font-size:24px;font-weight:900;text-align:center;margin-bottom:18px;min-height:40px}
+.speed-opts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.speed-opt{width:90px;height:80px;border-radius:var(--r2);border:2px solid var(--border2);background:var(--card2);font-family:'Baloo Bhaijaan 2',cursive;font-size:28px;font-weight:900;color:var(--text);cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.speed-opt:hover{border-color:rgba(255,255,255,0.3);transform:scale(1.06)}
+.speed-opt.s-ok{background:rgba(16,185,129,0.2);border-color:#10b981;color:#6ee7b7}
+.speed-opt.s-err{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#fca5a5}
+
+/* ===== ASSESSMENT ===== */
+.assess-intro{text-align:center;padding:32px 16px}
+.big-emoji{font-size:70px;display:block;margin-bottom:16px;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.assess-start-btn{padding:16px 48px;border-radius:100px;border:none;font-family:'Baloo Bhaijaan 2',cursive;font-size:20px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#f59e0b,#f97316);color:#0a0e1a;box-shadow:0 8px 24px rgba(245,158,11,0.3);transition:all .2s;margin-top:24px}
+.assess-start-btn:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(245,158,11,0.4)}
+
+.assess-progress{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.assess-bar-wrap{flex:1;min-width:100px}
+.assess-bar-track{height:10px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.assess-bar-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#10b981);border-radius:100px;transition:width .5s}
+
+.assess-qcard{background:var(--card);border:2px solid var(--border2);border-radius:var(--r);padding:28px;margin-bottom:16px}
+.assess-qnum{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--text2);margin-bottom:10px}
+.assess-topic{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:12px}
+.assess-q{font-size:18px;font-weight:700;margin-bottom:18px;line-height:1.7}
+.assess-opts{display:flex;gap:10px;flex-wrap:wrap}
+.assess-opt{padding:12px 24px;border-radius:var(--r2);border:2px solid var(--border2);background:var(--card2);font-family:'Cairo',sans-serif;font-size:16px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s}
+.assess-opt:hover{color:var(--text);border-color:rgba(255,255,255,0.3)}
+.assess-opt.a-ok{background:rgba(16,185,129,0.2);border-color:#10b981;color:#6ee7b7}
+.assess-opt.a-err{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#fca5a5}
+.assess-opt.a-dis{pointer-events:none;opacity:.4}
+.assess-opt.a-ok.a-dis{opacity:1}
+.assess-fill{height:48px;width:100px;border-radius:var(--r2);border:2px solid var(--border2);background:var(--card2);text-align:center;font-family:'Baloo Bhaijaan 2',cursive;font-size:24px;font-weight:900;color:var(--text);outline:none;transition:all .15s}
+.assess-fill.a-ok{border-color:#10b981;color:#6ee7b7}
+.assess-fill.a-err{border-color:#ef4444;color:#fca5a5}
+.next-btn{padding:12px 32px;border-radius:100px;border:none;font-family:'Baloo Bhaijaan 2',cursive;font-size:16px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:white;margin-top:16px;display:none;transition:all .2s;box-shadow:0 4px 14px rgba(59,130,246,0.3)}
+.next-btn.show{display:inline-flex;align-items:center;gap:8px}
+.next-btn:hover{transform:translateY(-2px)}
+
+/* Result */
+.result-wrap{text-align:center;padding:24px 0}
+.result-score{font-family:'Baloo Bhaijaan 2',cursive;font-size:80px;font-weight:900;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.result-grade{font-family:'Baloo Bhaijaan 2',cursive;font-size:26px;font-weight:800;margin:8px 0}
+.result-msg{font-size:15px;color:var(--text2);margin-bottom:24px;line-height:1.8}
+.topic-scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:24px 0;text-align:right}
+.ts-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:14px 18px}
+.ts-name{font-size:13px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ts-bar-track{height:8px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden;margin-bottom:4px}
+.ts-bar-fill{height:100%;border-radius:100px;transition:width 1s ease}
+.ts-pct{font-size:12px;color:var(--text2)}
+.stars-row{display:flex;justify-content:center;gap:10px;font-size:44px;margin:16px 0}
+.star-anim{animation:starPop .4s ease both}
+@keyframes starPop{0%{transform:scale(0);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 24px;border-radius:100px;border:none;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-primary{background:rgba(255,255,255,0.1);color:var(--text);border:1.5px solid var(--border2)}
+.btn-primary:hover{background:rgba(255,255,255,0.16)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.confetti{text-align:center;font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;padding:16px;display:none;animation:fadeUp .4s ease}
+.confetti.show{display:block}
+
+@media(max-width:520px){
+  .hero{padding:24px 18px}
+  .arr-cell{width:36px;height:36px;font-size:18px}
+  .mem-grid{grid-template-columns:repeat(4,1fr)}
+}#siteHomeBtn{position:fixed;bottom:20px;right:16px;z-index:999;display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;background:rgba(15,23,42,.75);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Cairo',sans-serif;font-weight:700;
+  font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.35);transition:transform .15s,background .15s}
+#siteHomeBtn:hover{transform:scale(1.05);background:rgba(15,23,42,.9)}
+#siteHomeBtn svg{width:18px;height:18px;flex-shrink:0}
+@media(max-width:480px){#siteHomeBtn{padding:8px 14px;font-size:12px;bottom:14px;right:12px}#siteHomeBtn svg{width:15px;height:15px}}
+</style>
+</head>
+<body>
+
+<a href="index.html" id="siteHomeBtn" title="العودة لصفحة الفهرس الرئيسية">
+  <span>الصفحة الرئيسية</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h4v-6h3v6h4a1 1 0 0 0 1-1v-9"/></svg>
+</a>
+
+<!-- TOP NAV -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <button class="tb on" id="tb-home" onclick="goPage('home')" style="background:#f59e0b;color:#0a0e1a"><span class="dot" style="background:#0a0e1a"></span>الرئيسية</button>
+    <button class="tb" id="tb-l1" onclick="goPage('l1')"><span class="dot" style="background:var(--c1)"></span>الآلاف</button>
+    <button class="tb" id="tb-l2" onclick="goPage('l2')"><span class="dot" style="background:var(--c2)"></span>مزيد من الآلاف</button>
+    <button class="tb" id="tb-l3" onclick="goPage('l3')"><span class="dot" style="background:var(--c3)"></span>عشرات ومئات الآلاف</button>
+    <button class="tb" id="tb-l4" onclick="goPage('l4')"><span class="dot" style="background:var(--c4)"></span>صيغ الأعداد</button>
+    <button class="tb" id="tb-l5" onclick="goPage('l5')"><span class="dot" style="background:var(--c5)"></span>المصفوفات</button>
+    <button class="tb" id="tb-l6" onclick="goPage('l6')"><span class="dot" style="background:var(--c6)"></span>الضرب</button>
+    <button class="tb" id="tb-l7" onclick="goPage('l7')"><span class="dot" style="background:var(--c7)"></span>خاصية الإبدال</button>
+    <button class="tb" id="tb-ex" onclick="goPage('ex')"><span class="dot" style="background:#fff"></span>التدريبات</button>
+    <button class="tb" id="tb-games" onclick="goPage('games')"><span class="dot" style="background:#fff"></span>الألعاب</button>
+    <button class="tb" id="tb-assess" onclick="goPage('assess')"><span class="dot" style="background:#f59e0b"></span>التقييم</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ==================== HOME ==================== -->
+<div class="page on" id="page-home">
+  <div class="hero">
+    <div class="hero-tag" style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.25)">⭐ مراجعة شاملة</div>
+    <h1 style="background:linear-gradient(135deg,#f1f5f9,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">مراجعة الفصل الثاني<br>رياضيات · الصف الثالث</h1>
+    <p>سبعة دروس كاملة — شرح تفاعلي، تدريبات موسعة، ألعاب تعليمية، وتقييم شامل لمستواك</p>
+    <div class="hero-chips">
+      <div class="hero-chip" style="background:rgba(245,158,11,0.1);color:#f59e0b;border-color:rgba(245,158,11,0.25)">📚 ٧ دروس</div>
+      <div class="hero-chip" style="background:rgba(59,130,246,0.1);color:#93c5fd;border-color:rgba(59,130,246,0.25)">✏️ ٥٦ تدريب</div>
+      <div class="hero-chip" style="background:rgba(16,185,129,0.1);color:#6ee7b7;border-color:rgba(16,185,129,0.25)">🎮 ٣ ألعاب</div>
+      <div class="hero-chip" style="background:rgba(139,92,246,0.1);color:#c4b5fd;border-color:rgba(139,92,246,0.25)">🏆 تقييم كامل</div>
+    </div>
+  </div>
+
+  <div class="lesson-grid">
+    <div class="lcard" onclick="goPage('l1')" style="border-color:rgba(245,158,11,0.2)">
+      <div class="lcard-num" style="color:var(--c1)">الدرس ١</div>
+      <span class="lcard-icon">🏛️</span>
+      <div class="lcard-title">الآلاف</div>
+      <div class="lcard-desc">فهم عدد ١٠٠٠ وقراءة الأعداد بالآلاف</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('l2')" style="border-color:rgba(16,185,129,0.2)">
+      <div class="lcard-num" style="color:var(--c2)">الدرس ٢</div>
+      <span class="lcard-icon">🔢</span>
+      <div class="lcard-title">مزيد من الآلاف</div>
+      <div class="lcard-desc">الأعداد من ١٠٠٠ إلى ٩٩٩٩ وقيمة المنازل</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('l3')" style="border-color:rgba(59,130,246,0.2)">
+      <div class="lcard-num" style="color:var(--c3)">الدرس ٣</div>
+      <span class="lcard-icon">🌐</span>
+      <div class="lcard-title">عشرات ومئات الآلاف</div>
+      <div class="lcard-desc">الأعداد الكبيرة حتى ٩٩٩,٩٩٩</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('l4')" style="border-color:rgba(139,92,246,0.2)">
+      <div class="lcard-num" style="color:var(--c4)">الدرس ٤</div>
+      <span class="lcard-icon">📝</span>
+      <div class="lcard-title">صيغ مختلفة لكتابة الأعداد</div>
+      <div class="lcard-desc">الصيغة القياسية، التوسعية، وبالكلمات</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('l5')" style="border-color:rgba(236,72,153,0.2)">
+      <div class="lcard-num" style="color:var(--c5)">الدرس ٥</div>
+      <span class="lcard-icon">🔲</span>
+      <div class="lcard-title">المصفوفات</div>
+      <div class="lcard-desc">الصفوف، الأعمدة، وعدد العناصر</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('l6')" style="border-color:rgba(249,115,22,0.2)">
+      <div class="lcard-num" style="color:var(--c6)">الدرس ٦</div>
+      <span class="lcard-icon">✖️</span>
+      <div class="lcard-title">مفهوم الضرب</div>
+      <div class="lcard-desc">الضرب كجمع متكرر وجداول الضرب</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('l7')" style="border-color:rgba(6,182,212,0.2)">
+      <div class="lcard-num" style="color:var(--c7)">الدرس ٧</div>
+      <span class="lcard-icon">🔄</span>
+      <div class="lcard-title">خاصية الإبدال في الضرب</div>
+      <div class="lcard-desc">أ × ب = ب × أ والتطبيقات</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+    <div class="lcard" onclick="goPage('assess')" style="border-color:rgba(245,158,11,0.4);background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(249,115,22,0.08))">
+      <div class="lcard-num" style="color:var(--c1)">🏆 تقييمي</div>
+      <span class="lcard-icon">📊</span>
+      <div class="lcard-title">اختبار شامل</div>
+      <div class="lcard-desc">قيّم مستواك في جميع دروس الفصل</div>
+      <div class="lcard-arrow">←</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== L1: الآلاف ==================== -->
+<div class="page" id="page-l1">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c1)">🏛️</span> الدرس ١: الآلاف</h2>
+    <p>فهم عدد ١٠٠٠ وكيفية قراءة الأعداد بالآلاف</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c1)">📌 ما هو الألف؟</h3>
+    <p>عندما نجمع <strong>١٠ مئات</strong> نحصل على <strong>١٠٠٠ (ألف)</strong></p>
+    <div class="highlight-box" style="background:rgba(245,158,11,0.08);border-color:var(--c1);color:#fde68a">
+      ١٠ × ١٠٠ = ١٠٠٠ &nbsp;|&nbsp; عشر مئات = ألف واحد
+    </div>
+    <div class="place-boxes">
+      <div class="pbox" style="background:rgba(245,158,11,0.12);border-color:var(--c1)"><div class="pbox-val" style="color:var(--c1)">١</div><div class="pbox-label" style="color:#fde68a">آلاف</div></div>
+      <div class="pbox" style="background:rgba(255,255,255,0.05);border-color:var(--border2)"><div class="pbox-val">٠</div><div class="pbox-label">مئات</div></div>
+      <div class="pbox" style="background:rgba(255,255,255,0.05);border-color:var(--border2)"><div class="pbox-val">٠</div><div class="pbox-label">عشرات</div></div>
+      <div class="pbox" style="background:rgba(255,255,255,0.05);border-color:var(--border2)"><div class="pbox-val">٠</div><div class="pbox-label">آحاد</div></div>
+    </div>
+    <table class="val-table">
+      <tr><th style="color:var(--c1)">العدد</th><th>آلاف</th><th>مئات</th><th>عشرات</th><th>آحاد</th><th>القراءة</th></tr>
+      <tr><td style="color:var(--c1);font-weight:700">١٠٠٠</td><td>١</td><td>٠</td><td>٠</td><td>٠</td><td>ألف</td></tr>
+      <tr><td style="color:var(--c1);font-weight:700">٢٠٠٠</td><td>٢</td><td>٠</td><td>٠</td><td>٠</td><td>ألفان</td></tr>
+      <tr><td style="color:var(--c1);font-weight:700">٥٠٠٠</td><td>٥</td><td>٠</td><td>٠</td><td>٠</td><td>خمسة آلاف</td></tr>
+      <tr><td style="color:var(--c1);font-weight:700">٩٠٠٠</td><td>٩</td><td>٠</td><td>٠</td><td>٠</td><td>تسعة آلاف</td></tr>
+    </table>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c1)">🎯 أمثلة على قراءة الأعداد</h3>
+    <ul>
+      <li><strong>١٢٣٤</strong> = ألف ومئتان وأربعة وثلاثون</li>
+      <li><strong>٣٠٥٦</strong> = ثلاثة آلاف وستة وخمسون</li>
+      <li><strong>٧٠٠٨</strong> = سبعة آلاف وثمانية</li>
+      <li><strong>٤٥٠٠</strong> = أربعة آلاف وخمسمائة</li>
+    </ul>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l2')">الدرس التالي: مزيد من الآلاف ←</button><button class="btn btn-primary" onclick="goPage('ex')">انتقل للتدريبات ✏️</button></div>
+</div>
+
+<!-- ==================== L2 ==================== -->
+<div class="page" id="page-l2">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c2)">🔢</span> الدرس ٢: مزيد من الآلاف</h2>
+    <p>الأعداد من ١٠٠٠ إلى ٩٩٩٩ وقيمة كل منزلة</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c2)">📌 قيمة المنازل في الأعداد الرباعية</h3>
+    <div class="highlight-box" style="background:rgba(16,185,129,0.08);border-color:var(--c2);color:#6ee7b7">
+      كل رقم في العدد له قيمة تعتمد على <strong>مكانه (منزلته)</strong>
+    </div>
+    <p style="margin-bottom:12px">مثال: <strong style="color:var(--c2)">٤٨٢٧</strong></p>
+    <div class="place-boxes">
+      <div class="pbox" style="background:rgba(16,185,129,0.12);border-color:var(--c2)"><div class="pbox-val" style="color:var(--c2)">٤</div><div class="pbox-label" style="color:#6ee7b7">آلاف</div></div>
+      <div class="pbox" style="background:rgba(59,130,246,0.12);border-color:var(--c3)"><div class="pbox-val" style="color:var(--c3)">٨</div><div class="pbox-label" style="color:#93c5fd">مئات</div></div>
+      <div class="pbox" style="background:rgba(139,92,246,0.12);border-color:var(--c4)"><div class="pbox-val" style="color:var(--c4)">٢</div><div class="pbox-label" style="color:#c4b5fd">عشرات</div></div>
+      <div class="pbox" style="background:rgba(245,158,11,0.12);border-color:var(--c1)"><div class="pbox-val" style="color:var(--c1)">٧</div><div class="pbox-label" style="color:#fde68a">آحاد</div></div>
+    </div>
+    <table class="val-table">
+      <tr><th>الرقم</th><th style="color:var(--c2)">القيمة المكانية</th><th>السبب</th></tr>
+      <tr><td style="color:var(--c2);font-weight:700">٤</td><td>٤٠٠٠</td><td>في منزلة الآلاف → ٤ × ١٠٠٠</td></tr>
+      <tr><td style="color:var(--c3);font-weight:700">٨</td><td>٨٠٠</td><td>في منزلة المئات → ٨ × ١٠٠</td></tr>
+      <tr><td style="color:var(--c4);font-weight:700">٢</td><td>٢٠</td><td>في منزلة العشرات → ٢ × ١٠</td></tr>
+      <tr><td style="color:var(--c1);font-weight:700">٧</td><td>٧</td><td>في منزلة الآحاد → ٧ × ١</td></tr>
+    </table>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c2)">🔄 المقارنة بين الأعداد</h3>
+    <ul>
+      <li>نقارن أولًا منزلة <strong>الآلاف</strong> — الأكبر هو الأكبر</li>
+      <li>إذا تساوت الآلاف، نقارن <strong>المئات</strong></li>
+      <li>ثم <strong>العشرات</strong>، ثم <strong>الآحاد</strong></li>
+    </ul>
+    <div class="highlight-box" style="background:rgba(16,185,129,0.08);border-color:var(--c2);color:#6ee7b7">
+      مثال: ٥٣٨٢ &gt; ٥٢٩٩ لأن ٣ &gt; ٢ في منزلة المئات
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l1')">← السابق</button><button class="btn btn-primary" onclick="goPage('l3')">التالي ←</button></div>
+</div>
+
+<!-- ==================== L3 ==================== -->
+<div class="page" id="page-l3">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c3)">🌐</span> الدرس ٣: عشرات ومئات الآلاف</h2>
+    <p>الأعداد الكبيرة حتى ٩٩٩,٩٩٩</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c3)">📌 منازل الأعداد الكبيرة</h3>
+    <div class="place-boxes">
+      <div class="pbox" style="background:rgba(239,68,68,0.12);border-color:#ef4444"><div class="pbox-val" style="color:#f87171">٩</div><div class="pbox-label" style="color:#fca5a5">مئات الآلاف</div></div>
+      <div class="pbox" style="background:rgba(249,115,22,0.12);border-color:var(--c6)"><div class="pbox-val" style="color:var(--c6)">٣</div><div class="pbox-label" style="color:#fdba74">عشرات الآلاف</div></div>
+      <div class="pbox" style="background:rgba(245,158,11,0.12);border-color:var(--c1)"><div class="pbox-val" style="color:var(--c1)">٥</div><div class="pbox-label" style="color:#fde68a">آلاف</div></div>
+      <div class="pbox" style="background:rgba(16,185,129,0.12);border-color:var(--c2)"><div class="pbox-val" style="color:var(--c2)">٧</div><div class="pbox-label" style="color:#6ee7b7">مئات</div></div>
+      <div class="pbox" style="background:rgba(59,130,246,0.12);border-color:var(--c3)"><div class="pbox-val" style="color:var(--c3)">٢</div><div class="pbox-label" style="color:#93c5fd">عشرات</div></div>
+      <div class="pbox" style="background:rgba(139,92,246,0.12);border-color:var(--c4)"><div class="pbox-val" style="color:var(--c4)">١</div><div class="pbox-label" style="color:#c4b5fd">آحاد</div></div>
+    </div>
+    <p style="margin-top:12px">العدد أعلاه: <strong style="color:var(--c3)">٩٣٥,٧٢١</strong> = تسعمائة وخمسة وثلاثون ألفًا وسبعمائة وواحد وعشرون</p>
+    <table class="val-table">
+      <tr><th style="color:var(--c3)">العدد</th><th>قراءته</th></tr>
+      <tr><td style="color:var(--c3);font-weight:700">١٠,٠٠٠</td><td>عشرة آلاف</td></tr>
+      <tr><td style="color:var(--c3);font-weight:700">٥٠,٠٠٠</td><td>خمسون ألفًا</td></tr>
+      <tr><td style="color:var(--c3);font-weight:700">١٠٠,٠٠٠</td><td>مائة ألف</td></tr>
+      <tr><td style="color:var(--c3);font-weight:700">٣٤٥,٦٧٨</td><td>ثلاثمائة وخمسة وأربعون ألفًا وستمائة وثمانية وسبعون</td></tr>
+    </table>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l2')">← السابق</button><button class="btn btn-primary" onclick="goPage('l4')">التالي ←</button></div>
+</div>
+
+<!-- ==================== L4 ==================== -->
+<div class="page" id="page-l4">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c4)">📝</span> الدرس ٤: صيغ مختلفة لكتابة الأعداد</h2>
+    <p>ثلاث طرق لكتابة نفس العدد</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c4)">📌 الصيغ الثلاث</h3>
+    <p style="margin-bottom:14px">مثال على العدد <strong style="color:var(--c4)">٤٢٣٥</strong>:</p>
+    <div style="display:grid;gap:12px">
+      <div style="background:rgba(139,92,246,0.08);border-radius:var(--r2);padding:14px 18px;border:1px solid rgba(139,92,246,0.2)">
+        <div style="color:var(--c4);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px">①  الصيغة القياسية</div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:28px;font-weight:900">٤٢٣٥</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px">الكتابة العادية للعدد بالأرقام</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.08);border-radius:var(--r2);padding:14px 18px;border:1px solid rgba(59,130,246,0.2)">
+        <div style="color:var(--c3);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px">②  الصيغة التوسعية</div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:20px;font-weight:800">٤٠٠٠ + ٢٠٠ + ٣٠ + ٥</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px">نكتب قيمة كل منزلة منفصلة</div>
+      </div>
+      <div style="background:rgba(16,185,129,0.08);border-radius:var(--r2);padding:14px 18px;border:1px solid rgba(16,185,129,0.2)">
+        <div style="color:var(--c2);font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px">③  الصيغة الكلامية (بالحروف)</div>
+        <div style="font-size:17px;font-weight:700">أربعة آلاف ومئتان وخمسة وثلاثون</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px">نكتب العدد بالكلمات كاملًا</div>
+      </div>
+    </div>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c4)">📋 جدول مقارنة</h3>
+    <table class="val-table">
+      <tr><th>قياسية</th><th>توسعية</th><th>كلامية</th></tr>
+      <tr><td style="color:var(--c4);font-weight:700">١٢٠٠</td><td>١٠٠٠ + ٢٠٠</td><td>ألف ومئتان</td></tr>
+      <tr><td style="color:var(--c4);font-weight:700">٣٠٥٠</td><td>٣٠٠٠ + ٥٠</td><td>ثلاثة آلاف وخمسون</td></tr>
+      <tr><td style="color:var(--c4);font-weight:700">٧٨٤٣</td><td>٧٠٠٠+٨٠٠+٤٠+٣</td><td>سبعة آلاف وثمانمائة وثلاثة وأربعون</td></tr>
+    </table>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l3')">← السابق</button><button class="btn btn-primary" onclick="goPage('l5')">التالي ←</button></div>
+</div>
+
+<!-- ==================== L5 ==================== -->
+<div class="page" id="page-l5">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c5)">🔲</span> الدرس ٥: المصفوفات</h2>
+    <p>الصفوف والأعمدة وحساب عدد العناصر</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c5)">📌 تعريف المصفوفة</h3>
+    <p>المصفوفة هي ترتيب للأشياء في <strong>صفوف أفقية</strong> و<strong>أعمدة رأسية</strong> بشكل منتظم.</p>
+    <div class="highlight-box" style="background:rgba(236,72,153,0.08);border-color:var(--c5);color:#f9a8d4">
+      عدد العناصر = عدد الصفوف × عدد الأعمدة
+    </div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:16px;align-items:flex-start">
+      <div>
+        <p style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--c5)">مصفوفة ٣ × ٤ = ١٢ عنصرًا</p>
+        <div class="arr-wrap">
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(236,72,153,0.15)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.15)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.15)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.15)">🌸</div></div>
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(236,72,153,0.12)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.12)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.12)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.12)">🌸</div></div>
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(236,72,153,0.08)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.08)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.08)">🌸</div><div class="arr-cell" style="background:rgba(236,72,153,0.08)">🌸</div></div>
+        </div>
+      </div>
+    </div>
+    <table class="val-table" style="margin-top:16px">
+      <tr><th>اسم المصفوفة</th><th style="color:var(--c5)">صفوف</th><th>أعمدة</th><th>عدد العناصر</th></tr>
+      <tr><td>٢ × ٣</td><td style="color:var(--c5)">٢</td><td>٣</td><td>٦</td></tr>
+      <tr><td>٤ × ٥</td><td style="color:var(--c5)">٤</td><td>٥</td><td>٢٠</td></tr>
+      <tr><td>٣ × ٣</td><td style="color:var(--c5)">٣</td><td>٣</td><td>٩</td></tr>
+    </table>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l4')">← السابق</button><button class="btn btn-primary" onclick="goPage('l6')">التالي ←</button></div>
+</div>
+
+<!-- ==================== L6 ==================== -->
+<div class="page" id="page-l6">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c6)">✖️</span> الدرس ٦: مفهوم الضرب</h2>
+    <p>الضرب كجمع متكرر وجداول الضرب</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c6)">📌 الضرب = جمع متكرر</h3>
+    <div class="highlight-box" style="background:rgba(249,115,22,0.08);border-color:var(--c6);color:#fdba74">
+      ٣ × ٤ تعني: نجمع ٤ ثلاث مرات → ٤ + ٤ + ٤ = ١٢
+    </div>
+    <table class="val-table">
+      <tr><th>عملية الضرب</th><th style="color:var(--c6)">كجمع متكرر</th><th>النتيجة</th></tr>
+      <tr><td>٢ × ٥</td><td style="color:var(--c6)">٥ + ٥</td><td>١٠</td></tr>
+      <tr><td>٣ × ٦</td><td style="color:var(--c6)">٦ + ٦ + ٦</td><td>١٨</td></tr>
+      <tr><td>٤ × ٣</td><td style="color:var(--c6)">٣ + ٣ + ٣ + ٣</td><td>١٢</td></tr>
+      <tr><td>٥ × ٢</td><td style="color:var(--c6)">٢ + ٢ + ٢ + ٢ + ٢</td><td>١٠</td></tr>
+    </table>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c6)">📋 جدول الضرب (١ حتى ٥)</h3>
+    <div style="overflow-x:auto">
+    <table class="val-table">
+      <tr><th>×</th><th>١</th><th>٢</th><th>٣</th><th>٤</th><th>٥</th><th>٦</th><th>٧</th><th>٨</th><th>٩</th><th>١٠</th></tr>
+      <tr><th>١</th><td>١</td><td>٢</td><td>٣</td><td>٤</td><td>٥</td><td>٦</td><td>٧</td><td>٨</td><td>٩</td><td>١٠</td></tr>
+      <tr><th>٢</th><td>٢</td><td>٤</td><td>٦</td><td>٨</td><td>١٠</td><td>١٢</td><td>١٤</td><td>١٦</td><td>١٨</td><td>٢٠</td></tr>
+      <tr><th>٣</th><td>٣</td><td>٦</td><td>٩</td><td>١٢</td><td>١٥</td><td>١٨</td><td>٢١</td><td>٢٤</td><td>٢٧</td><td>٣٠</td></tr>
+      <tr><th>٤</th><td>٤</td><td>٨</td><td>١٢</td><td>١٦</td><td>٢٠</td><td>٢٤</td><td>٢٨</td><td>٣٢</td><td>٣٦</td><td>٤٠</td></tr>
+      <tr><th>٥</th><td>٥</td><td>١٠</td><td>١٥</td><td>٢٠</td><td>٢٥</td><td>٣٠</td><td>٣٥</td><td>٤٠</td><td>٤٥</td><td>٥٠</td></tr>
+    </table>
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l5')">← السابق</button><button class="btn btn-primary" onclick="goPage('l7')">التالي ←</button></div>
+</div>
+
+<!-- ==================== L7 ==================== -->
+<div class="page" id="page-l7">
+  <div class="sec-hd">
+    <h2><span style="color:var(--c7)">🔄</span> الدرس ٧: خاصية الإبدال في الضرب</h2>
+    <p>أ × ب = ب × أ — تغيير الترتيب لا يغير الناتج</p>
+  </div>
+  <div class="info-card">
+    <h3 style="color:var(--c7)">📌 قانون الإبدال</h3>
+    <div class="highlight-box" style="background:rgba(6,182,212,0.08);border-color:var(--c7);color:#67e8f9">
+      أ × ب = ب × أ &nbsp;→&nbsp; الناتج لا يتغير عند تبديل ترتيب العددين
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0">
+      <div style="background:rgba(6,182,212,0.08);border-radius:var(--r2);padding:16px;text-align:center;border:1px solid rgba(6,182,212,0.2)">
+        <div class="arr-wrap" style="align-items:center;margin-bottom:10px">
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(6,182,212,0.15)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.15)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.15)">⭐</div></div>
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(6,182,212,0.1)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.1)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.1)">⭐</div></div>
+        </div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;color:var(--c7)">٢ × ٣ = ٦</div>
+      </div>
+      <div style="background:rgba(6,182,212,0.08);border-radius:var(--r2);padding:16px;text-align:center;border:1px solid rgba(6,182,212,0.2)">
+        <div class="arr-wrap" style="align-items:center;margin-bottom:10px">
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(6,182,212,0.15)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.15)">⭐</div></div>
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(6,182,212,0.1)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.1)">⭐</div></div>
+          <div class="arr-row-vis"><div class="arr-cell" style="background:rgba(6,182,212,0.08)">⭐</div><div class="arr-cell" style="background:rgba(6,182,212,0.08)">⭐</div></div>
+        </div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;color:var(--c7)">٣ × ٢ = ٦</div>
+      </div>
+    </div>
+    <table class="val-table">
+      <tr><th>العملية</th><th style="color:var(--c7)">مبدّلة</th><th>النتيجة</th></tr>
+      <tr><td>٣ × ٥</td><td style="color:var(--c7)">٥ × ٣</td><td>١٥ = ١٥ ✓</td></tr>
+      <tr><td>٦ × ٤</td><td style="color:var(--c7)">٤ × ٦</td><td>٢٤ = ٢٤ ✓</td></tr>
+      <tr><td>٢ × ٩</td><td style="color:var(--c7)">٩ × ٢</td><td>١٨ = ١٨ ✓</td></tr>
+      <tr><td>٧ × ٣</td><td style="color:var(--c7)">٣ × ٧</td><td>٢١ = ٢١ ✓</td></tr>
+    </table>
+    <div class="highlight-box" style="background:rgba(6,182,212,0.08);border-color:var(--c7);color:#67e8f9">
+      💡 فائدة: إذا صعب عليك حساب ٨ × ٣، احسب ٣ × ٨ بدلًا منها!
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn btn-primary" onclick="goPage('l6')">← السابق</button><button class="btn btn-primary" onclick="goPage('ex')">ابدأ التدريبات ✏️</button><button class="btn btn-primary" onclick="goPage('assess')" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.3);color:#f59e0b">🏆 التقييم</button></div>
+</div>
+
+<!-- ==================== EXERCISES ==================== -->
+<div class="page" id="page-ex">
+  <div class="sec-hd">
+    <h2>✏️ التدريبات الشاملة</h2>
+    <p>٥٦ سؤالًا على جميع الدروس</p>
+  </div>
+  <div class="score-panel">
+    <div class="sp-item"><div class="sp-val" style="color:#10b981" id="ex-ok">٠</div><div class="sp-lbl">صحيح ✅</div></div>
+    <div class="sp-item"><div class="sp-val" style="color:#ef4444" id="ex-err">٠</div><div class="sp-lbl">خطأ ❌</div></div>
+    <div class="prog-wrap"><div class="prog-track"><div class="prog-fill" id="ex-prog" style="width:0%"></div></div></div>
+    <div class="sp-item"><div class="sp-val" style="color:var(--c3)" id="ex-pct">٠٪</div><div class="sp-lbl">النسبة</div></div>
+  </div>
+  <div id="ex-container"></div>
+  <div class="confetti" id="ex-done"></div>
+</div>
+
+<!-- ==================== GAMES ==================== -->
+<div class="page" id="page-games">
+  <div class="sec-hd"><h2>🎮 الألعاب التعليمية</h2><p>ثلاث ألعاب ممتعة لتثبيت المفاهيم</p></div>
+
+  <!-- Game 1: Number Builder -->
+  <div class="game-box">
+    <div class="game-title" style="color:var(--c1)">🏗️ لعبة ١: بنّاء الأعداد</div>
+    <div class="game-desc">حرّك أزرار الأرقام واصنع أعدادًا كبيرة — تعرّف على قيمة كل منزلة!</div>
+    <div class="numbuilder">
+      <div class="nb-row"><div class="nb-lbl" style="color:var(--c6)">مئات الآلاف</div><button class="nb-btn" onclick="nbChange('hk',-1)">−</button><div class="nb-val" id="nb-hk" style="color:var(--c6)">٣</div><button class="nb-btn" onclick="nbChange('hk',1)">+</button></div>
+      <div class="nb-row"><div class="nb-lbl" style="color:var(--c3)">عشرات الآلاف</div><button class="nb-btn" onclick="nbChange('tk',-1)">−</button><div class="nb-val" id="nb-tk" style="color:var(--c3)">٤</div><button class="nb-btn" onclick="nbChange('tk',1)">+</button></div>
+      <div class="nb-row"><div class="nb-lbl" style="color:var(--c1)">آلاف</div><button class="nb-btn" onclick="nbChange('k',-1)">−</button><div class="nb-val" id="nb-k" style="color:var(--c1)">٢</div><button class="nb-btn" onclick="nbChange('k',1)">+</button></div>
+      <div class="nb-row"><div class="nb-lbl" style="color:var(--c2)">مئات</div><button class="nb-btn" onclick="nbChange('h',-1)">−</button><div class="nb-val" id="nb-h" style="color:var(--c2)">٧</div><button class="nb-btn" onclick="nbChange('h',1)">+</button></div>
+      <div class="nb-row"><div class="nb-lbl" style="color:var(--c4)">عشرات</div><button class="nb-btn" onclick="nbChange('t',-1)">−</button><div class="nb-val" id="nb-t" style="color:var(--c4)">١</div><button class="nb-btn" onclick="nbChange('t',1)">+</button></div>
+      <div class="nb-row"><div class="nb-lbl" style="color:var(--c5)">آحاد</div><button class="nb-btn" onclick="nbChange('u',-1)">−</button><div class="nb-val" id="nb-u" style="color:var(--c5)">٥</div><button class="nb-btn" onclick="nbChange('u',1)">+</button></div>
+    </div>
+    <div class="nb-display" style="margin-top:16px">
+      <div class="nb-number" id="nb-num" style="background:linear-gradient(135deg,#f59e0b,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">٣٤٢,٧١٥</div>
+      <div class="nb-words" id="nb-words">ثلاثمائة وأربعة وأربعون ألفًا وسبعمائة وخمسة عشر</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:8px" id="nb-expand">توسعية: ٣٠٠٠٠٠ + ٤٠٠٠٠ + ٢٠٠٠ + ٧٠٠ + ١٠ + ٥</div>
+    </div>
+  </div>
+
+  <!-- Game 2: Memory -->
+  <div class="game-box">
+    <div class="game-title" style="color:var(--c4)">🧠 لعبة ٢: الذاكرة — طابق المصفوفة باسمها</div>
+    <div class="game-desc">انقر على بطاقتين متطابقتين (مصفوفة ← اسمها). ابحث عن كل الأزواج!</div>
+    <div style="display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap">
+      <div style="font-size:13px;color:var(--text2)">محاولات: <strong id="mem-tries">٠</strong></div>
+      <div style="font-size:13px;color:var(--text2)">تم إيجادها: <strong id="mem-found">٠</strong>/٦</div>
+      <button class="btn btn-primary" style="font-size:12px;padding:6px 14px" onclick="initMem()">إعادة 🔄</button>
+    </div>
+    <div class="mem-grid" id="mem-grid"></div>
+    <div class="confetti" id="mem-win"></div>
+  </div>
+
+  <!-- Game 3: Speed -->
+  <div class="game-box">
+    <div class="game-title" style="color:var(--c6)">⚡ لعبة ٣: تحدي السرعة</div>
+    <div class="game-desc">أجب على أسئلة الضرب والأعداد قبل انتهاء الوقت!</div>
+    <div id="speed-intro" style="text-align:center;padding:16px 0">
+      <div style="font-size:50px;margin-bottom:12px">🏆</div>
+      <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:20px;font-weight:700;margin-bottom:8px">أعلى نتيجة: <span id="speed-hi">٠</span></div>
+      <button class="btn btn-primary" style="background:rgba(249,115,22,0.2);border-color:rgba(249,115,22,0.4);color:var(--c6);font-size:16px;padding:12px 32px" onclick="startSpeed()">🚀 ابدأ!</button>
+    </div>
+    <div id="speed-game" style="display:none">
+      <div class="speed-hd">
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:24px;font-weight:800;color:var(--c6)" id="speed-time">٣٠</div>
+        <div class="timer-wrap"><div class="timer-track"><div class="timer-fill" id="speed-bar" style="width:100%"></div></div></div>
+        <div style="font-size:14px;color:var(--text2)">نقاط: <strong id="speed-score" style="color:var(--c2)">٠</strong></div>
+      </div>
+      <div class="speed-q" id="speed-q"></div>
+      <div class="speed-opts" id="speed-opts"></div>
+      <div style="text-align:center;font-size:22px;font-weight:800;min-height:36px;margin-top:10px" id="speed-fb"></div>
+    </div>
+    <div id="speed-end" style="display:none;text-align:center;padding:16px">
+      <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:60px;font-weight:900;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" id="speed-final">٠</div>
+      <div style="font-size:16px;color:var(--text2);margin:8px 0" id="speed-end-msg"></div>
+      <button class="btn btn-primary" style="background:rgba(249,115,22,0.2);border-color:rgba(249,115,22,0.4);color:var(--c6)" onclick="startSpeed()">حاول مجددًا 🔄</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ASSESSMENT ==================== -->
+<div class="page" id="page-assess">
+  <div id="assess-intro-div" class="assess-intro">
+    <span class="big-emoji">🏆</span>
+    <h2 style="font-family:'Baloo Bhaijaan 2',cursive;font-size:30px;font-weight:900;margin-bottom:12px">اختبار تشخيصي شامل</h2>
+    <p style="font-size:15px;color:var(--text2);line-height:1.9;max-width:500px;margin:0 auto">٢١ سؤالًا تغطي جميع دروس الفصل الثاني<br>سيتم تقييم مستواك في كل درس على حدة</p>
+    <button class="assess-start-btn" onclick="startAssess()">🚀 ابدأ الاختبار</button>
+  </div>
+
+  <div id="assess-main" style="display:none">
+    <div class="assess-progress">
+      <div style="font-size:13px;color:var(--text2)">السؤال <strong id="a-qnum" style="color:var(--text)">١</strong> من <strong>٢١</strong></div>
+      <div class="assess-bar-wrap"><div class="assess-bar-track"><div class="assess-bar-fill" id="a-bar" style="width:5%"></div></div></div>
+      <div style="font-size:13px;color:var(--text2)">نقاط: <strong id="a-live" style="color:var(--c1)">٠</strong></div>
+    </div>
+    <div id="assess-qwrap"></div>
+    <button class="next-btn" id="a-next" onclick="nextAssessQ()">التالي ←</button>
+  </div>
+
+  <div id="assess-result" style="display:none">
+    <div class="result-wrap">
+      <div style="font-size:14px;color:var(--text2);margin-bottom:8px">نتيجتك الإجمالية</div>
+      <div class="result-score" id="r-score">0</div>
+      <div style="font-size:16px;color:var(--text2)">من ٢١</div>
+      <div class="stars-row" id="r-stars"></div>
+      <div class="result-grade" id="r-grade"></div>
+      <div class="result-msg" id="r-msg"></div>
+      <div class="topic-scores" id="r-topics"></div>
+      <div class="btn-row" style="justify-content:center;margin-top:24px">
+        <button class="btn btn-primary" onclick="restartAssess()">إعادة الاختبار 🔄</button>
+        <button class="btn btn-primary" onclick="goPage('home')">العودة للرئيسية 🏠</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- wrap -->
+
+<script>
+// ===== HELPERS =====
+function ar(n){return String(n).split('').map(d=>'٠١٢٣٤٥٦٧٨٩'[+d]||d).join('')}
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('page-'+id).classList.add('on');
+  const tb=document.getElementById('tb-'+id);
+  if(tb){tb.classList.add('on');tb.style.background='';tb.style.color=''}
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='games'){initNB();initMem();}
+  if(id==='ex'&&!exBuilt){buildExercises();exBuilt=true;}
+}
+
+// ===== EXERCISES =====
+let exOk=0,exErr=0,exTotal=0,exBuilt=false;
+
+const exQuestions=[
+  // L1 الآلاف
+  {t:'الآلاف',c:'c1',q:'كم مئة تساوي ألفًا واحدًا؟',type:'mcq',opts:['٥','١٠','٢','٢٠'],ans:'١٠'},
+  {t:'الآلاف',c:'c1',q:'كيف نكتب "ثلاثة آلاف" بالأرقام؟',type:'mcq',opts:['٣٠٠','٣٠٠٠','٣٠','٣٠٠٠٠'],ans:'٣٠٠٠'},
+  {t:'الآلاف',c:'c1',q:'ما قيمة الرقم ٧ في العدد ٧٠٠٠؟',type:'mcq',opts:['٧','٧٠','٧٠٠','٧٠٠٠'],ans:'٧٠٠٠'},
+  {t:'الآلاف',c:'c1',q:'أكمل: ٨٠٠٠ = ____ × ١٠٠٠',type:'fill',ans:8},
+  {t:'الآلاف',c:'c1',q:'ما الذي يأتي بعد ٩٠٠٠ في العد؟',type:'mcq',opts:['٩٠٠١','٩١٠٠','١٠٠٠٠','٨٩٩٩'],ans:'١٠٠٠٠'},
+  // L2 مزيد
+  {t:'مزيد من الآلاف',c:'c2',q:'في العدد ٥٢٨٣، ما قيمة الرقم ٢؟',type:'mcq',opts:['٢','٢٠','٢٠٠','٢٠٠٠'],ans:'٢٠٠'},
+  {t:'مزيد من الآلاف',c:'c2',q:'أي عدد أكبر؟',type:'mcq',opts:['٣٤٥٦','٣٥٤٦','٣٤٦٥','٣٤٠٩'],ans:'٣٥٤٦'},
+  {t:'مزيد من الآلاف',c:'c2',q:'أكمل: ٦٠٠٠+٤٠٠+٣٠+٢ = ____',type:'fill',ans:6432},
+  {t:'مزيد من الآلاف',c:'c2',q:'في العدد ٨١٤٧، رقم الآحاد هو:',type:'mcq',opts:['٨','١','٤','٧'],ans:'٧'},
+  // L3 عشرات ومئات
+  {t:'عشرات ومئات الآلاف',c:'c3',q:'كيف نكتب "مائة ألف" بالأرقام؟',type:'mcq',opts:['١٠٠٠','١٠٠٠٠','١٠٠٠٠٠','١٠٠٠٠٠٠'],ans:'١٠٠٠٠٠'},
+  {t:'عشرات ومئات الآلاف',c:'c3',q:'في العدد ٣٤٥٦٧٨، ما قيمة الرقم ٤ في منزلة عشرات الآلاف؟',type:'mcq',opts:['٤٠','٤٠٠','٤٠٠٠','٤٠٠٠٠'],ans:'٤٠٠٠٠'},
+  {t:'عشرات ومئات الآلاف',c:'c3',q:'أكمل: ٢٠٠,٠٠٠ = ____ ألفًا',type:'fill',ans:200},
+  {t:'عشرات ومئات الآلاف',c:'c3',q:'أي عدد أصغر؟',type:'mcq',opts:['٤٥٦٧٨','٤٥٦٨٧','٤٥٦٠٩','٤٥٦٩٩'],ans:'٤٥٦٠٩'},
+  // L4 صيغ
+  {t:'صيغ الأعداد',c:'c4',q:'الصيغة التوسعية للعدد ٢٣٥٦ هي:',type:'mcq',opts:['٢٠٠٠+٣٠٠+٥٠+٦','٢+٣+٥+٦','٢٣٥٦','٢٣+٥٦'],ans:'٢٠٠٠+٣٠٠+٥٠+٦'},
+  {t:'صيغ الأعداد',c:'c4',q:'أكمل التوسعية: ٥٠٠٠+____+٧٠+٣ = ٥٤٧٣',type:'fill',ans:400},
+  {t:'صيغ الأعداد',c:'c4',q:'ما الصيغة القياسية لـ: ٣٠٠٠+٢٠٠+٤٠+١ ؟',type:'fill',ans:3241},
+  // L5 مصفوفات
+  {t:'المصفوفات',c:'c5',q:'مصفوفة ٣ × ٥ تحتوي على _____ عنصرًا',type:'fill',ans:15},
+  {t:'المصفوفات',c:'c5',q:'مصفوفة فيها ٤ صفوف و٦ أعمدة، عدد عناصرها:',type:'mcq',opts:['١٠','٢٤','١٨','٤٠'],ans:'٢٤'},
+  {t:'المصفوفات',c:'c5',q:'مصفوفة فيها ٢٠ عنصرًا وعدد أعمدتها ٤، عدد صفوفها:',type:'mcq',opts:['٤','٦','٥','٨'],ans:'٥'},
+  // L6 ضرب
+  {t:'مفهوم الضرب',c:'c6',q:'٤ × ٦ = ٦ + ٦ + ٦ + ___',type:'fill',ans:6},
+  {t:'مفهوم الضرب',c:'c6',q:'٣ × ٧ = ؟',type:'mcq',opts:['١٨','٢١','٢٤','١٥'],ans:'٢١'},
+  {t:'مفهوم الضرب',c:'c6',q:'ما ناتج ٥ × ٨ ؟',type:'fill',ans:40},
+  {t:'مفهوم الضرب',c:'c6',q:'٩ + ٩ + ٩ = ___  × ٩',type:'fill',ans:3},
+  // L7 إبدال
+  {t:'خاصية الإبدال',c:'c7',q:'٦ × ٤ = ٤ × ____',type:'fill',ans:6},
+  {t:'خاصية الإبدال',c:'c7',q:'إذا كان ٧ × ٣ = ٢١، فـ ٣ × ٧ = ؟',type:'mcq',opts:['١٠','١٨','٢١','٢٨'],ans:'٢١'},
+  {t:'خاصية الإبدال',c:'c7',q:'أيٌّ مما يلي مثال على خاصية الإبدال؟',type:'mcq',opts:['٢+٣=٥','٤×٥=٥×٤','٦×١=٦','٨÷٢=٤'],ans:'٤×٥=٥×٤'},
+  {t:'خاصية الإبدال',c:'c7',q:'٩ × ٢ = ٢ × ___',type:'fill',ans:9},
+  // Extra mixed
+  {t:'الآلاف',c:'c1',q:'ما عدد الآلاف في العدد ٤٢٣٥؟',type:'mcq',opts:['٢','٣','٤','٥'],ans:'٤'},
+  {t:'صيغ الأعداد',c:'c4',q:'كيف نقرأ: ٣٠٠٠+٧٠+٢ ؟',type:'mcq',opts:['ثلاثة آلاف واثنان وسبعون','ثلاثمائة وسبعون واثنان','ثلاثة وسبعون','ثلاثة آلاف وسبعمائة واثنان'],ans:'ثلاثة آلاف واثنان وسبعون'},
+  {t:'مفهوم الضرب',c:'c6',q:'أحمد عنده ٤ صفوف من الكرات، كل صف فيه ٧ كرات. كم كرة عنده؟',type:'fill',ans:28},
+  {t:'خاصية الإبدال',c:'c7',q:'٥ × ٩ = ؟ (استخدم الإبدال)',type:'fill',ans:45},
+];
+
+function buildExercises(){
+  exTotal=exQuestions.length;
+  const c=document.getElementById('ex-container');
+  exQuestions.forEach((q,i)=>{
+    const color=`var(--${q.c})`;
+    let inner='';
+    if(q.type==='mcq'){
+      const btns=q.opts.map(o=>`<button class="opt" onclick="exMCQ(this,'ex-${i}',${o===q.ans?'true':'false'})">${o}</button>`).join('');
+      inner=`<div class="opts">${btns}</div>`;
+    } else {
+      inner=`<div style="display:flex;gap:10px;align-items:center"><input class="fill-inp" id="fi-${i}" type="number" placeholder="؟"><button class="chk-btn" onclick="exFill('ex-${i}',${q.ans},${i})">تحقق</button></div>`;
+    }
+    c.innerHTML+=`<div class="qcard" id="ex-${i}">
+      <div class="qtopic" style="color:${color}">${q.t}</div>
+      <div class="qtext">${ar(i+1)}. ${q.q}</div>
+      ${inner}
+      <div class="qfb" id="fb-${i}"></div>
+    </div>`;
+  });
+}
+
+function updateExScore(){
+  document.getElementById('ex-ok').textContent=ar(exOk);
+  document.getElementById('ex-err').textContent=ar(exErr);
+  const pct=exOk+exErr>0?Math.round(exOk/(exOk+exErr)*100):0;
+  document.getElementById('ex-pct').textContent=ar(pct)+'٪';
+  document.getElementById('ex-prog').style.width=(exOk/exTotal*100)+'%';
+  if(exOk+exErr===exTotal){
+    const msg=document.getElementById('ex-done');
+    msg.textContent= exOk===exTotal?'🎉 ممتاز! نتيجة مثالية! أنت بطل! 🏆':
+      exOk>=exTotal*0.8?`🌟 رائع! حصلت على ${ar(exOk)} من ${ar(exTotal)}!`:
+      `👍 حصلت على ${ar(exOk)} من ${ar(exTotal)}. راجع الدروس وحاول مجددًا`;
+    msg.classList.add('show');
+  }
+}
+
+function exMCQ(btn,id,ok){
+  const card=document.getElementById(id);
+  if(card.classList.contains('q-ok')||card.classList.contains('q-err'))return;
+  card.querySelectorAll('.opt').forEach(b=>b.classList.add('dis'));
+  const fb=document.getElementById('fb-'+id.split('-')[1]);
+  fb.classList.add('show');
+  if(ok){btn.classList.add('ok');card.classList.add('q-ok');fb.innerHTML='<span style="color:#10b981">✅ إجابة صحيحة!</span>';exOk++;}
+  else{btn.classList.add('err');card.classList.add('q-err');fb.innerHTML='<span style="color:#ef4444">❌ خطأ! راجع الدرس.</span>';exErr++;}
+  updateExScore();
+}
+function exFill(id,ans,i){
+  const card=document.getElementById(id);
+  if(card.classList.contains('q-ok')||card.classList.contains('q-err'))return;
+  const inp=document.getElementById('fi-'+i);
+  const val=parseInt(inp.value);
+  const fb=document.getElementById('fb-'+i);
+  fb.classList.add('show');
+  inp.disabled=true;
+  if(val===ans){inp.classList.add('ok');card.classList.add('q-ok');fb.innerHTML='<span style="color:#10b981">✅ صحيح! 🎉</span>';exOk++;}
+  else{inp.classList.add('err');card.classList.add('q-err');fb.innerHTML=`<span style="color:#ef4444">❌ الجواب: ${ar(ans)}</span>`;exErr++;}
+  updateExScore();
+}
+
+// ===== GAMES =====
+// Number Builder
+const nbVals={hk:3,tk:4,k:2,h:7,t:1,u:5};
+function initNB(){updateNB();}
+function nbChange(k,d){nbVals[k]=Math.max(0,Math.min(9,nbVals[k]+d));updateNB();}
+function updateNB(){
+  Object.keys(nbVals).forEach(k=>{document.getElementById('nb-'+k).textContent=ar(nbVals[k]);});
+  const n=nbVals.hk*100000+nbVals.tk*10000+nbVals.k*1000+nbVals.h*100+nbVals.t*10+nbVals.u;
+  document.getElementById('nb-num').textContent=formatAr(n);
+  document.getElementById('nb-expand').textContent='توسعية: '+buildExpand(nbVals);
+  document.getElementById('nb-words').textContent=numToWords(n);
+}
+function formatAr(n){return ar(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function buildExpand(v){
+  const parts=[];
+  if(v.hk)parts.push(ar(v.hk*100000));
+  if(v.tk)parts.push(ar(v.tk*10000));
+  if(v.k)parts.push(ar(v.k*1000));
+  if(v.h)parts.push(ar(v.h*100));
+  if(v.t)parts.push(ar(v.t*10));
+  if(v.u)parts.push(ar(v.u));
+  return parts.join(' + ')||ar(0);
+}
+function numToWords(n){
+  if(n===0)return'صفر';
+  const u=['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+  const tens=['','','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+  const h=['','مائة','مئتان','ثلاثمائة','أربعمائة','خمسمائة','ستمائة','سبعمائة','ثمانمائة','تسعمائة'];
+  let parts=[];
+  const hk=Math.floor(n/100000);
+  const tk=Math.floor((n%100000)/10000);
+  const k=Math.floor((n%10000)/1000);
+  const hn=Math.floor((n%1000)/100);
+  const t=Math.floor((n%100)/10);
+  const un=n%10;
+  const thousands=hk*100+tk*10+k;
+  if(thousands){
+    let tw=[];
+    if(hk)tw.push(h[hk]);
+    const rest=thousands%100;
+    const d10=Math.floor(rest/10);const d1=rest%10;
+    if(d10===1)tw.push(u[10+d1]);
+    else{if(d1)tw.push(u[d1]);if(d10)tw.push(tens[d10]);}
+    const ts=tw.join(' و');
+    if(thousands===1)parts.push('ألف');
+    else if(thousands===2)parts.push('ألفان');
+    else if(thousands<=10)parts.push(ts+' آلاف');
+    else parts.push(ts+' ألفًا');
+  }
+  if(hn)parts.push(h[hn]);
+  const rem=n%100;const r10=Math.floor(rem/10);const r1=rem%10;
+  if(rem===10||rem===11||(rem>=12&&rem<=19))parts.push(u[rem]);
+  else{if(r1)parts.push(u[r1]);if(r10)parts.push(tens[r10]);}
+  return parts.join(' و')||'صفر';
+}
+
+// Memory game
+const memPairs=[
+  {key:'a',array:'٢×٣',label:'٦ عناصر'},
+  {key:'b',array:'٤×٢',label:'٨ عناصر'},
+  {key:'c',array:'٣×٥',label:'١٥ عنصرًا'},
+  {key:'d',array:'٢×٦',label:'١٢ عنصرًا'},
+  {key:'e',array:'٤×٤',label:'١٦ عنصرًا'},
+  {key:'f',array:'٣×٣',label:'٩ عناصر'},
+];
+let memFlipped=[],memMatched=0,memTries=0,memCanClick=true;
+function initMem(){
+  memFlipped=[];memMatched=0;memTries=0;memCanClick=true;
+  document.getElementById('mem-tries').textContent=ar(0);
+  document.getElementById('mem-found').textContent=ar(0);
+  document.getElementById('mem-win').classList.remove('show');
+  let cards=[];
+  memPairs.forEach(p=>{
+    cards.push({key:p.key,content:p.array,type:'array'});
+    cards.push({key:p.key,content:p.label,type:'label'});
+  });
+  cards.sort(()=>Math.random()-.5);
+  const g=document.getElementById('mem-grid');
+  g.innerHTML='';
+  cards.forEach(c=>{
+    const el=document.createElement('div');
+    el.className='mem-c';
+    el.dataset.key=c.key;
+    el.innerHTML=`<div class="back" style="color:var(--c4)">❓</div><div class="front">${c.content}</div>`;
+    el.onclick=()=>flipMem(el);
+    g.appendChild(el);
+  });
+}
+function flipMem(el){
+  if(!memCanClick||el.classList.contains('flipped')||el.classList.contains('matched'))return;
+  el.classList.add('flipped');
+  memFlipped.push(el);
+  if(memFlipped.length===2){
+    memCanClick=false;
+    memTries++;
+    document.getElementById('mem-tries').textContent=ar(memTries);
+    setTimeout(()=>{
+      if(memFlipped[0].dataset.key===memFlipped[1].dataset.key){
+        memFlipped.forEach(c=>c.classList.add('matched'));
+        memMatched++;
+        document.getElementById('mem-found').textContent=ar(memMatched);
+        if(memMatched===6){
+          document.getElementById('mem-win').textContent=`🏆 ممتاز! وجدت كل الأزواج في ${ar(memTries)} محاولة!`;
+          document.getElementById('mem-win').classList.add('show');
+        }
+      } else {
+        memFlipped.forEach(c=>c.classList.remove('flipped'));
+      }
+      memFlipped=[];memCanClick=true;
+    },800);
+  }
+}
+
+// Speed game
+let speedTimer,speedTime=30,speedScore=0,speedHi=0;
+const speedQs=[
+  {q:'٣ × ٤ = ؟',opts:[10,12,9,15],ans:12},
+  {q:'٥ × ٦ = ؟',opts:[25,35,30,20],ans:30},
+  {q:'٢ × ٩ = ؟',opts:[16,18,11,20],ans:18},
+  {q:'٤ × ٤ = ؟',opts:[12,16,20,8],ans:16},
+  {q:'٣ × ٨ = ؟',opts:[21,24,18,27],ans:24},
+  {q:'كم عنصرًا في ٣×٤؟',opts:[7,10,12,16],ans:12},
+  {q:'٧ × ٢ = ؟',opts:[9,12,14,16],ans:14},
+  {q:'٦ × ٣ = ؟',opts:[15,18,21,12],ans:18},
+  {q:'مصفوفة ٢×٥ = ؟ عنصر',opts:[7,8,10,12],ans:10},
+  {q:'٤ × ٧ = ؟',opts:[24,28,21,35],ans:28},
+  {q:'٩ × ٣ = ؟',opts:[24,27,21,30],ans:27},
+  {q:'٨ × ٢ = ؟',opts:[14,16,12,18],ans:16},
+  {q:'٥ × ٥ = ؟',opts:[20,30,25,15],ans:25},
+  {q:'٤ × ٩ = ؟',opts:[32,36,27,40],ans:36},
+];
+let usedSQ=[];
+function startSpeed(){
+  speedScore=0;speedTime=30;usedSQ=[];
+  document.getElementById('speed-intro').style.display='none';
+  document.getElementById('speed-end').style.display='none';
+  document.getElementById('speed-game').style.display='block';
+  document.getElementById('speed-score').textContent=ar(0);
+  nextSQ();
+  speedTimer=setInterval(()=>{
+    speedTime--;
+    document.getElementById('speed-time').textContent=ar(speedTime);
+    document.getElementById('speed-bar').style.width=(speedTime/30*100)+'%';
+    if(speedTime<=0)endSpeed();
+  },1000);
+}
+function nextSQ(){
+  const avail=speedQs.filter((_,i)=>!usedSQ.includes(i));
+  if(!avail.length){usedSQ=[];}
+  const pool=speedQs.filter((_,i)=>!usedSQ.includes(i));
+  const i=Math.floor(Math.random()*pool.length);
+  const orig=speedQs.indexOf(pool[i]);
+  usedSQ.push(orig);
+  const q=pool[i];
+  document.getElementById('speed-q').textContent=q.q;
+  document.getElementById('speed-fb').textContent='';
+  const opts=document.getElementById('speed-opts');
+  opts.innerHTML='';
+  const sh=[...q.opts].sort(()=>Math.random()-.5);
+  sh.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='speed-opt';
+    b.textContent=ar(o);
+    b.onclick=()=>answerSpeed(o,q.ans,b);
+    opts.appendChild(b);
+  });
+}
+function answerSpeed(val,ans,btn){
+  document.querySelectorAll('.speed-opt').forEach(b=>b.onclick=null);
+  const fb=document.getElementById('speed-fb');
+  if(val===ans){btn.classList.add('s-ok');speedScore++;document.getElementById('speed-score').textContent=ar(speedScore);fb.textContent='✅ صح!';fb.style.color='#10b981';}
+  else{btn.classList.add('s-err');fb.textContent='❌ خطأ!';fb.style.color='#ef4444';}
+  setTimeout(nextSQ,500);
+}
+function endSpeed(){
+  clearInterval(speedTimer);
+  if(speedScore>speedHi){speedHi=speedScore;document.getElementById('speed-hi').textContent=ar(speedHi);}
+  document.getElementById('speed-game').style.display='none';
+  document.getElementById('speed-end').style.display='block';
+  document.getElementById('speed-final').textContent=ar(speedScore);
+  const msgs=['حاول مجددًا! 💪','جيد! واصل! 👍','ممتاز! 🌟','مذهل! بطل! 🏆'];
+  document.getElementById('speed-end-msg').textContent=msgs[speedScore>=12?3:speedScore>=8?2:speedScore>=4?1:0];
+}
+
+// ===== ASSESSMENT =====
+const assessQs=[
+  {t:'الآلاف',c:'c1',q:'كم مئة تساوي ٣٠٠٠؟',type:'mcq',opts:['١٠','٢٠','٣٠','٤٠'],ans:'٣٠'},
+  {t:'الآلاف',c:'c1',q:'في العدد ٦٠٠٠، ما عدد الآلاف؟',type:'fill',ans:6},
+  {t:'الآلاف',c:'c1',q:'ما الذي يأتي قبل ٤٠٠٠ في العد؟',type:'mcq',opts:['٤٠٠١','٣٩٩٩','٣٩٠٠','٤١٠٠'],ans:'٣٩٩٩'},
+  {t:'مزيد من الآلاف',c:'c2',q:'في العدد ٧٥٢٣، ما قيمة الرقم ٥؟',type:'mcq',opts:['٥','٥٠','٥٠٠','٥٠٠٠'],ans:'٥٠٠'},
+  {t:'مزيد من الآلاف',c:'c2',q:'أيٌّ من هذه الأعداد أكبر؟',type:'mcq',opts:['٦٥٣٢','٦٥٢٣','٦٥٤٠','٦٥١٩'],ans:'٦٥٤٠'},
+  {t:'مزيد من الآلاف',c:'c2',q:'أكمل: ٤٠٠٠+٣٠٠+__+٩ = ٤٣٧٩',type:'fill',ans:70},
+  {t:'عشرات ومئات الآلاف',c:'c3',q:'كم يساوي خمسون ألفًا بالأرقام؟',type:'fill',ans:50000},
+  {t:'عشرات ومئات الآلاف',c:'c3',q:'في العدد ٢٨٠,٣٤٥، ما قيمة ٨ في منزلة عشرات الآلاف؟',type:'mcq',opts:['٨٠٠','٨٠٠٠','٨٠٠٠٠','٨٠'],ans:'٨٠٠٠٠'},
+  {t:'صيغ الأعداد',c:'c4',q:'ما الصيغة التوسعية لـ ٥٢٠٤؟',type:'mcq',opts:['٥٠٠٠+٢٠٠+٤','٥٠٠٠+٢٠+٤','٥٠٠٠+٢٠٠+٤٠','٥٠٢٤'],ans:'٥٠٠٠+٢٠٠+٤'},
+  {t:'صيغ الأعداد',c:'c4',q:'أكمل: ٧٠٠٠+____+٨٠+٣ = ٧٤٨٣',type:'fill',ans:400},
+  {t:'صيغ الأعداد',c:'c4',q:'الصيغة القياسية لـ "ثلاثة آلاف وتسعة وثلاثون":',type:'fill',ans:3039},
+  {t:'المصفوفات',c:'c5',q:'مصفوفة ٥ × ٤ تحتوي على:',type:'mcq',opts:['٩','١٦','٢٠','١٢'],ans:'٢٠'},
+  {t:'المصفوفات',c:'c5',q:'مصفوفة فيها ٣٦ عنصرًا وصفوفها ٦، عدد أعمدتها:',type:'fill',ans:6},
+  {t:'المصفوفات',c:'c5',q:'ما اسم مصفوفة فيها ٣ صفوف و٧ أعمدة؟',type:'mcq',opts:['٧×٣','٣×٧','١٠','٢١'],ans:'٣×٧'},
+  {t:'مفهوم الضرب',c:'c6',q:'٦ × ٤ = ٤ + ٤ + ٤ + ٤ + ٤ + ____',type:'fill',ans:4},
+  {t:'مفهوم الضرب',c:'c6',q:'ما ناتج ٧ × ٨؟',type:'fill',ans:56},
+  {t:'مفهوم الضرب',c:'c6',q:'سارة لها ٥ أكياس، في كل كيس ٩ تفاحات. الإجمالي:',type:'fill',ans:45},
+  {t:'خاصية الإبدال',c:'c7',q:'إذا ٨ × ٤ = ٣٢، فـ ٤ × ٨ = ؟',type:'fill',ans:32},
+  {t:'خاصية الإبدال',c:'c7',q:'أيٌّ من التالي مثال صحيح على الإبدال؟',type:'mcq',opts:['٣×٢=٣+٢','٣×٢=٢×٣','٦×١=٦','٥×٠=٥'],ans:'٣×٢=٢×٣'},
+  {t:'خاصية الإبدال',c:'c7',q:'٩ × ٦ = ٦ × ____',type:'fill',ans:9},
+  {t:'مفهوم الضرب',c:'c6',q:'ما الجمع المتكرر لـ ٤ × ٥؟',type:'mcq',opts:['٥+٤','٥+٥+٥+٥','٤+٤+٤+٤+٤','٤×٤×٤'],ans:'٥+٥+٥+٥'},
+];
+let aIdx=0,aScore=0,aAnswered=false;
+const topicScores={};
+
+function startAssess(){
+  aIdx=0;aScore=0;aAnswered=false;
+  Object.keys(topicScores).forEach(k=>delete topicScores[k]);
+  assessQs.forEach(q=>{if(!topicScores[q.t])topicScores[q.t]={ok:0,total:0};topicScores[q.t].total++;});
+  document.getElementById('assess-intro-div').style.display='none';
+  document.getElementById('assess-result').style.display='none';
+  document.getElementById('assess-main').style.display='block';
+  showAssessQ();
+}
+function showAssessQ(){
+  const q=assessQs[aIdx];
+  const color=`var(--${q.c})`;
+  document.getElementById('a-qnum').textContent=ar(aIdx+1);
+  document.getElementById('a-bar').style.width=((aIdx+1)/assessQs.length*100)+'%';
+  aAnswered=false;
+  const nxt=document.getElementById('a-next');
+  nxt.classList.remove('show');
+  let inner='';
+  if(q.type==='mcq'){
+    const btns=q.opts.map(o=>`<button class="assess-opt" onclick="ansAssess(this,'${o}',${o===q.ans?'true':'false'})">${o}</button>`).join('');
+    inner=`<div class="assess-opts">${btns}</div>`;
+  } else {
+    inner=`<div style="display:flex;gap:10px;align-items:center"><input class="assess-fill" id="a-fill" type="number" placeholder="؟"><button class="chk-btn" style="padding:12px 20px" onclick="ansAssessFill(${q.ans})">تحقق</button></div>`;
+  }
+  document.getElementById('assess-qwrap').innerHTML=`
+    <div class="assess-qcard">
+      <div class="assess-qnum">السؤال ${ar(aIdx+1)} من ${ar(assessQs.length)}</div>
+      <div class="assess-topic" style="background:rgba(0,0,0,0.3);color:${color};border:1px solid rgba(255,255,255,0.1)">${q.t}</div>
+      <div class="assess-q">${q.q}</div>
+      ${inner}
+      <div id="a-fb" style="margin-top:12px;font-size:14px;font-weight:600;display:none"></div>
+    </div>`;
+}
+function ansAssess(btn,val,ok){
+  if(aAnswered)return;
+  aAnswered=true;
+  const q=assessQs[aIdx];
+  document.querySelectorAll('.assess-opt').forEach(b=>b.classList.add('a-dis'));
+  const fb=document.getElementById('a-fb');fb.style.display='block';
+  if(ok){btn.classList.add('a-ok');aScore++;topicScores[q.t].ok++;document.getElementById('a-live').textContent=ar(aScore);fb.innerHTML='<span style="color:#10b981">✅ إجابة صحيحة!</span>';}
+  else{btn.classList.add('a-err');document.querySelectorAll('.assess-opt').forEach(b=>{if(b.textContent===q.ans)b.classList.remove('a-dis'),b.classList.add('a-ok');});fb.innerHTML=`<span style="color:#ef4444">❌ الإجابة الصحيحة: ${q.ans}</span>`;}
+  document.getElementById('a-next').classList.add('show');
+}
+function ansAssessFill(ans){
+  if(aAnswered)return;
+  aAnswered=true;
+  const q=assessQs[aIdx];
+  const inp=document.getElementById('a-fill');
+  const val=parseInt(inp.value);
+  inp.disabled=true;
+  const fb=document.getElementById('a-fb');fb.style.display='block';
+  if(val===ans){inp.classList.add('a-ok');aScore++;topicScores[q.t].ok++;document.getElementById('a-live').textContent=ar(aScore);fb.innerHTML='<span style="color:#10b981">✅ صحيح!</span>';}
+  else{inp.classList.add('a-err');fb.innerHTML=`<span style="color:#ef4444">❌ الإجابة الصحيحة: ${ar(ans)}</span>`;}
+  document.getElementById('a-next').classList.add('show');
+}
+function nextAssessQ(){
+  aIdx++;
+  if(aIdx>=assessQs.length){showResult();return;}
+  showAssessQ();
+}
+function showResult(){
+  document.getElementById('assess-main').style.display='none';
+  document.getElementById('assess-result').style.display='block';
+  const pct=Math.round(aScore/assessQs.length*100);
+  document.getElementById('r-score').textContent=ar(aScore);
+  const stars=pct>=90?5:pct>=75?4:pct>=60?3:pct>=40?2:1;
+  let starsHTML='';
+  for(let i=0;i<5;i++){starsHTML+=`<span class="${i<stars?'star-anim':''}" style="animation-delay:${i*0.15}s">${i<stars?'⭐':'☆'}</span>`;}
+  document.getElementById('r-stars').innerHTML=starsHTML;
+  const grades=[{t:'ممتاز 🏆',m:'عمل رائع! أنت متمكن من جميع الدروس!'},{t:'جيد جدًا 🌟',m:'مستوى ممتاز! راجع الدروس التي أخطأت فيها.'},{t:'جيد 👍',m:'أداء جيد! راجع الدروس واستمر في التدريب.'},{t:'مقبول 📚',m:'راجع الدروس بعناية وكرر التدريبات.'},{t:'يحتاج مراجعة 💪',m:'لا تيأس! عد للدروس وراجعها واحدًا بواحد.'}];
+  const g=pct>=90?0:pct>=75?1:pct>=60?2:pct>=40?3:4;
+  document.getElementById('r-grade').textContent=grades[g].t;
+  document.getElementById('r-msg').textContent=grades[g].m;
+  const colors=['c1','c2','c3','c4','c5','c6','c7'];
+  const topics=Object.keys(topicScores);
+  let topicHTML='';
+  topics.forEach((t,i)=>{
+    const s=topicScores[t];
+    const p=Math.round(s.ok/s.total*100);
+    const col=`var(--${colors[i%colors.length]})`;
+    topicHTML+=`<div class="ts-item"><div class="ts-name" style="color:${col}">📌 ${t}</div>
+      <div class="ts-bar-track"><div class="ts-bar-fill" style="width:${p}%;background:${col}"></div></div>
+      <div class="ts-pct">${ar(s.ok)}/${ar(s.total)} — ${ar(p)}٪</div></div>`;
+  });
+  document.getElementById('r-topics').innerHTML=topicHTML;
+}
+function restartAssess(){
+  document.getElementById('assess-result').style.display='none';
+  document.getElementById('assess-intro-div').style.display='block';
+}
+
+// init
+initNB();
+</script>
+</body>
+</html>
