@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صيغ مختلفة لكتابة الأعداد | الصف الثالث</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;700;800;900&family=Tajawal:wght@400;500;700;800&family=Righteous&display=swap" rel="stylesheet">
+<style>
+/* ══════════ DESIGN SYSTEM ══════════ */
+:root{
+  --thousands:#7C3AED; --thousands-lt:#EDE9FE; --thousands-dk:#4C1D95;
+  --hundreds:#0369A1;  --hundreds-lt:#E0F2FE;  --hundreds-dk:#0C4A6E;
+  --tens:#047857;      --tens-lt:#D1FAE5;       --tens-dk:#064E3B;
+  --ones:#B45309;      --ones-lt:#FEF3C7;       --ones-dk:#78350F;
+  --accent:#F43F5E;    --accent-lt:#FFE4E6;
+  --gold:#F59E0B;      --gold-lt:#FFFBEB;
+  --ink:#111827;       --muted:#6B7280;
+  --border:#E5E7EB;    --surface:#FFFFFF;
+  --bg:#F9FAFB;
+  --radius:20px;       --rad-sm:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--bg);color:var(--ink);
+  direction:rtl;min-height:100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 10%,rgba(124,58,237,.07) 0%,transparent 55%),
+    radial-gradient(ellipse at 90% 90%,rgba(3,105,161,.06) 0%,transparent 55%);
+}
+
+/* ══════════ HERO ══════════ */
+.hero{
+  background:linear-gradient(135deg,#4C1D95 0%,#7C3AED 40%,#0369A1 100%);
+  padding:2.8rem 1.5rem 4.5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero-bubbles span{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.07);pointer-events:none;
+  animation:bub 7s ease-in-out infinite;
+}
+.hero-bubbles span:nth-child(1){width:120px;height:120px;top:-30px;left:5%;animation-delay:0s}
+.hero-bubbles span:nth-child(2){width:80px;height:80px;top:15%;right:8%;animation-delay:2s}
+.hero-bubbles span:nth-child(3){width:60px;height:60px;bottom:5%;left:20%;animation-delay:4s}
+.hero-bubbles span:nth-child(4){width:100px;height:100px;bottom:-20px;right:15%;animation-delay:1.5s}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.08)}}
+
+.hero-number{
+  font-family:'Righteous',sans-serif;
+  font-size:3.5rem;color:rgba(255,255,255,.15);
+  letter-spacing:8px;margin-bottom:.5rem;
+  animation:fadeSlide .8s ease both;
+}
+.hero h1{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:2.2rem;font-weight:900;color:#fff;
+  text-shadow:0 2px 20px rgba(0,0,0,.25);
+  line-height:1.2;margin-bottom:.5rem;
+  animation:fadeSlide .6s .2s ease both;
+}
+.hero p{color:rgba(255,255,255,.88);font-size:1rem;animation:fadeSlide .6s .4s ease both}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-forms{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  margin-top:1.25rem;animation:fadeSlide .6s .6s ease both;
+}
+.form-tag{
+  padding:6px 16px;border-radius:24px;font-size:13px;font-weight:700;
+  border:1.5px solid rgba(255,255,255,.3);
+  background:rgba(255,255,255,.12);color:#fff;
+}
+
+/* ══════════ TABS ══════════ */
+.tabs-wrap{
+  background:#fff;border-bottom:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(0,0,0,.06);
+  position:sticky;top:0;z-index:100;
+}
+.tabs{display:flex;overflow-x:auto;padding:0 .5rem;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{
+  flex-shrink:0;padding:.85rem 1rem;border:none;background:none;
+  font-family:'Tajawal',sans-serif;font-size:13.5px;font-weight:600;
+  color:var(--muted);cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
+}
+.tab-btn:hover{color:var(--thousands)}
+.tab-btn.active{color:var(--thousands);border-bottom-color:var(--thousands);font-weight:700}
+
+/* ══════════ LAYOUT ══════════ */
+.content{max-width:900px;margin:0 auto;padding:2rem 1rem 6rem}
+.section{display:none}
+.section.active{display:block;animation:up .35s ease}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════ CARDS ══════════ */
+.card{
+  background:var(--surface);border-radius:var(--radius);
+  box-shadow:0 4px 28px rgba(0,0,0,.07);
+  border:1px solid var(--border);
+  padding:1.75rem;margin-bottom:1.5rem;
+  position:relative;overflow:hidden;
+}
+.card-stripe{position:absolute;top:0;right:0;width:5px;height:100%}
+.card-title{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:1.2rem;font-weight:800;color:var(--ink);
+  margin-bottom:1.1rem;display:flex;align-items:center;gap:10px;
+}
+.ctag{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;color:#fff;flex-shrink:0;
+}
+
+/* ══════════ INFO BOXES ══════════ */
+.ib{border-radius:var(--rad-sm);padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:14.5px;line-height:1.9}
+.ib.purple{background:var(--thousands-lt);border-right:4px solid var(--thousands);color:var(--thousands-dk)}
+.ib.blue{background:var(--hundreds-lt);border-right:4px solid var(--hundreds);color:var(--hundreds-dk)}
+.ib.green{background:var(--tens-lt);border-right:4px solid var(--tens);color:var(--tens-dk)}
+.ib.orange{background:var(--ones-lt);border-right:4px solid var(--ones);color:var(--ones-dk)}
+.ib.gold{background:var(--gold-lt);border-right:4px solid var(--gold);color:#78350F}
+.ib.red{background:var(--accent-lt);border-right:4px solid var(--accent);color:#881337}
+
+/* ══════════ PLACE VALUE TABLE ══════════ */
+.pv-table{
+  width:100%;border-collapse:collapse;
+  border-radius:var(--rad-sm);overflow:hidden;
+  margin:1.25rem 0;font-size:15px;
+}
+.pv-table th{
+  padding:12px 10px;font-weight:800;font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:15px;text-align:center;
+}
+.pv-table td{
+  padding:12px 10px;border:1.5px solid #fff;
+  text-align:center;font-size:18px;font-weight:700;
+}
+.pv-th-t{background:var(--thousands);color:#fff}
+.pv-th-h{background:var(--hundreds);color:#fff}
+.pv-th-te{background:var(--tens);color:#fff}
+.pv-th-o{background:var(--ones);color:#fff}
+.pv-td-t{background:var(--thousands-lt);color:var(--thousands-dk)}
+.pv-td-h{background:var(--hundreds-lt);color:var(--hundreds-dk)}
+.pv-td-te{background:var(--tens-lt);color:var(--tens-dk)}
+.pv-td-o{background:var(--ones-lt);color:var(--ones-dk)}
+
+/* ══════════ NUMBER DISPLAY ══════════ */
+.number-display{
+  display:flex;gap:4px;justify-content:center;
+  margin:1.25rem 0;align-items:stretch;flex-wrap:wrap;
+}
+.nd-digit{
+  display:flex;flex-direction:column;align-items:center;
+  border-radius:12px;padding:.75rem 1rem;min-width:72px;
+}
+.nd-digit .dval{
+  font-family:'Righteous',sans-serif;
+  font-size:2.6rem;font-weight:900;line-height:1;
+}
+.nd-digit .dlbl{font-size:12px;font-weight:700;margin-top:4px}
+.nd-t{background:var(--thousands-lt);color:var(--thousands-dk);border:2px solid var(--thousands)}
+.nd-h{background:var(--hundreds-lt);color:var(--hundreds-dk);border:2px solid var(--hundreds)}
+.nd-te{background:var(--tens-lt);color:var(--tens-dk);border:2px solid var(--tens)}
+.nd-o{background:var(--ones-lt);color:var(--ones-dk);border:2px solid var(--ones)}
+
+/* ══════════ FORM CARDS ══════════ */
+.forms-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.25rem 0}
+.form-card{border-radius:var(--rad-sm);padding:1.25rem;border:2px solid;text-align:center}
+.form-card .fc-icon{font-size:32px;margin-bottom:.5rem;display:block}
+.form-card .fc-name{font-size:13px;font-weight:700;margin-bottom:.5rem}
+.form-card .fc-val{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1rem;font-weight:700;line-height:1.6}
+.fc-standard{background:var(--thousands-lt);border-color:var(--thousands);color:var(--thousands-dk)}
+.fc-written{background:var(--hundreds-lt);border-color:var(--hundreds);color:var(--hundreds-dk)}
+.fc-expanded{background:var(--tens-lt);border-color:var(--tens);color:var(--tens-dk)}
+.fc-pv{background:var(--ones-lt);border-color:var(--ones);color:var(--ones-dk)}
+
+/* ══════════ INTERACTIVE NUMBER BUILDER ══════════ */
+.builder-wrap{
+  background:linear-gradient(135deg,#F9F5FF,#EFF6FF);
+  border:2px solid var(--border);border-radius:var(--radius);
+  padding:1.5rem;margin:1.25rem 0;
+}
+.builder-sliders{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.25rem}
+.slider-group{background:#fff;border-radius:var(--rad-sm);padding:1rem;border:1.5px solid var(--border)}
+.slider-label{font-size:13px;font-weight:700;margin-bottom:.5rem;display:flex;justify-content:space-between}
+.slider-val{font-family:'Righteous',sans-serif;font-size:1.4rem;font-weight:900}
+input[type=range]{width:100%;height:6px;border-radius:4px;outline:none;cursor:pointer}
+.builder-result{background:#fff;border-radius:var(--rad-sm);padding:1.25rem;border:1.5px solid var(--border)}
+.br-standard{font-family:'Righteous',sans-serif;font-size:2.5rem;font-weight:900;text-align:center;color:var(--ink);margin-bottom:.75rem}
+.br-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:.5rem;font-size:14px}
+.br-label{font-weight:700;color:var(--muted);min-width:90px;flex-shrink:0}
+.br-value{font-weight:600;color:var(--ink)}
+
+/* ══════════ QUIZ ══════════ */
+.qblock{border:1.5px solid var(--border);border-radius:var(--rad-sm);padding:1.25rem;margin-bottom:1rem;transition:all .2s}
+.qblock.correct{border-color:#10B981;background:#D1FAE5}
+.qblock.wrong{border-color:#EF4444;background:#FEE2E2}
+.q-text{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.75}
+.q-num{font-weight:800;color:var(--thousands)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{
+  border:1.5px solid var(--border);border-radius:10px;
+  padding:10px 14px;background:#fff;
+  font-family:'Tajawal',sans-serif;font-size:14px;color:var(--ink);
+  cursor:pointer;transition:all .15s;text-align:center;font-weight:500;
+}
+.opt:hover:not(:disabled){border-color:var(--thousands);background:var(--thousands-lt);color:var(--thousands-dk)}
+.opt.correct{border-color:#10B981!important;background:#D1FAE5!important;color:#065F46!important;font-weight:700}
+.opt.wrong{border-color:#EF4444!important;background:#FEE2E2!important;color:#991B1B!important;font-weight:700}
+.opt:disabled{cursor:not-allowed}
+.q-fb{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:13.5px;font-weight:600;display:none}
+.q-fb.show{display:block}
+.q-fb.ok{background:#D1FAE5;color:#065F46}
+.q-fb.no{background:#FEE2E2;color:#991B1B}
+
+/* ══════════ FILL IN ══════════ */
+.fill-input{
+  border:2px solid var(--border);border-radius:8px;
+  padding:7px 12px;font-family:'Tajawal',sans-serif;
+  font-size:15px;font-weight:700;color:var(--ink);
+  text-align:center;transition:border-color .2s;
+  background:#fff;
+}
+.fill-input:focus{outline:none;border-color:var(--thousands)}
+.fill-input.ok{border-color:#10B981;background:#D1FAE5;color:#065F46}
+.fill-input.no{border-color:#EF4444;background:#FEE2E2;color:#991B1B}
+.fill-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:14px 16px;background:#FAFAFA;border:1.5px solid var(--border);
+  border-radius:10px;margin-bottom:10px;font-size:15px;font-weight:600;
+}
+
+/* ══════════ SCORE ROW ══════════ */
+.score-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem}
+.sc-box{background:#fff;border:1px solid var(--border);border-radius:var(--rad-sm);padding:1rem;text-align:center}
+.sc-big{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:2rem;font-weight:900}
+.sc-lbl{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* ══════════ SORTING GAME ══════════ */
+.sort-container{background:#F9F5FF;border:2px solid var(--thousands-lt);border-radius:var(--radius);padding:1.5rem;margin:1rem 0}
+.sort-items{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1rem;min-height:52px}
+.sort-chip{
+  background:#fff;border:2px solid var(--border);
+  border-radius:10px;padding:10px 18px;cursor:pointer;
+  font-size:15px;font-weight:800;transition:all .2s;
+  font-family:'Righteous',sans-serif;
+}
+.sort-chip:hover:not(.placed){border-color:var(--thousands);background:var(--thousands-lt);color:var(--thousands-dk)}
+.sort-chip.placed{opacity:.3;pointer-events:none}
+.sort-zone{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  min-height:50px;border:2px dashed var(--border);
+  border-radius:10px;padding:8px;margin-top:8px;
+  transition:border-color .2s;background:#fff;
+}
+.sort-placed{
+  padding:8px 16px;border-radius:8px;
+  font-size:15px;font-weight:800;cursor:pointer;
+  background:var(--thousands-lt);border:1.5px solid var(--thousands);
+  color:var(--thousands-dk);font-family:'Righteous',sans-serif;
+}
+
+/* ══════════ MEMORY GAME ══════════ */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:1rem 0}
+.mem-card{
+  aspect-ratio:.85;border-radius:12px;
+  border:2px solid var(--border);background:#fff;
+  cursor:pointer;position:relative;
+}
+.mc-inner{
+  width:100%;height:100%;position:relative;
+  transform-style:preserve-3d;transition:transform .4s;
+}
+.mem-card.flipped .mc-inner{transform:rotateY(180deg)}
+.mem-card.matched{border-color:#10B981;pointer-events:none}
+.mc-front,.mc-back{
+  position:absolute;inset:0;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  backface-visibility:hidden;
+  font-size:13px;font-weight:700;text-align:center;padding:8px;
+}
+.mc-front{background:linear-gradient(135deg,#7C3AED,#0369A1);color:#fff;font-size:22px}
+.mc-back{background:var(--surface);transform:rotateY(180deg);flex-direction:column;gap:4px;color:var(--ink)}
+.mc-back .mcv{font-family:'Righteous',sans-serif;font-size:16px;color:var(--thousands)}
+.mc-back .mct{font-size:11px;color:var(--muted)}
+.mem-card.matched .mc-back{background:#D1FAE5}
+
+/* ══════════ DRAG GAME ══════════ */
+.drag-pool{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1.25rem;justify-content:center}
+.drag-chip{
+  background:#fff;border:2px solid var(--border);
+  border-radius:10px;padding:10px 18px;cursor:grab;
+  font-size:14px;font-weight:700;transition:all .18s;
+}
+.drag-chip:hover{border-color:var(--thousands);background:var(--thousands-lt);transform:scale(1.04)}
+.drag-chip.dragging{opacity:.3;cursor:grabbing}
+.drag-zones{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.drag-zone{
+  border:2px dashed var(--border);border-radius:var(--rad-sm);
+  padding:1rem;min-height:100px;transition:all .2s;
+  background:#FAFAFA;
+}
+.drag-zone.over{border-color:var(--thousands);background:var(--thousands-lt);transform:scale(1.02)}
+.dz-label{font-size:14px;font-weight:700;margin-bottom:.5rem;color:var(--ink)}
+.dz-label .dz-example{font-size:12px;color:var(--muted);display:block;font-weight:500}
+.placed-drag{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:6px 12px;border-radius:6px;margin:3px;cursor:pointer;
+  font-size:13px;font-weight:700;
+  background:var(--thousands-lt);border:1.5px solid var(--thousands);color:var(--thousands-dk);
+}
+
+/* ══════════ BALLOON GAME ══════════ */
+.balloon-arena{
+  background:linear-gradient(180deg,#EDE9FE,#DBEAFE);
+  border:2px solid var(--thousands-lt);
+  border-radius:var(--radius);min-height:280px;
+  position:relative;overflow:hidden;margin:1rem 0;
+}
+.balloon{
+  position:absolute;bottom:-100px;
+  display:flex;flex-direction:column;align-items:center;
+  cursor:pointer;animation:riseUp linear forwards;user-select:none;
+}
+.bln-body{
+  width:66px;height:78px;
+  border-radius:50% 50% 50% 50% / 55% 55% 45% 45%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Righteous',sans-serif;font-size:12px;font-weight:900;
+  color:#fff;text-align:center;padding:4px;line-height:1.2;
+  box-shadow:inset -4px -8px 14px rgba(0,0,0,.18);
+  transition:transform .12s;
+}
+.bln-body:hover{transform:scale(1.1)}
+.bln-string{width:2px;height:22px;background:rgba(0,0,0,.22)}
+@keyframes riseUp{from{bottom:-100px}to{bottom:300px;opacity:0}}
+
+/* ══════════ PROGRESS ══════════ */
+.prog-wrap{background:var(--border);border-radius:20px;height:14px;overflow:hidden;margin:6px 0 4px}
+.prog-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--thousands),var(--hundreds),var(--tens));transition:width .5s ease}
+
+/* ══════════ CERTIFICATE ══════════ */
+.cert{
+  background:linear-gradient(135deg,#1E1B4B,#2D1B69,#1E3A5F);
+  border:2px solid var(--gold);border-radius:24px;
+  padding:2.5rem;text-align:center;margin-top:1.5rem;
+  animation:popIn .6s cubic-bezier(.34,1.56,.64,1);
+  position:relative;overflow:hidden;
+}
+.cert::before{
+  content:'';position:absolute;inset:-60%;
+  background:conic-gradient(from 0deg,transparent,rgba(245,158,11,.04),transparent 30%);
+  animation:spin 10s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes popIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.cert-big{font-family:'Righteous',sans-serif;font-size:3rem;color:var(--gold);margin-bottom:.5rem;position:relative}
+.cert h2{font-family:'Baloo Bhaijaan 2',sans-serif;font-size:1.7rem;color:var(--gold);margin-bottom:.5rem;position:relative}
+.cert p{color:#CBD5E1;font-size:15px;position:relative}
+.cert-stars{font-size:2.5rem;letter-spacing:4px;position:relative;animation:pop .6s .3s ease both}
+@keyframes pop{from{transform:scale(0)}60%{transform:scale(1.25)}to{transform:scale(1)}}
+
+/* ══════════ BUTTONS ══════════ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:var(--rad-sm);
+  border:none;font-family:'Tajawal',sans-serif;
+  font-size:15px;font-weight:700;cursor:pointer;transition:all .18s;
+}
+.btn-p{background:var(--thousands);color:#fff}
+.btn-p:hover{background:var(--thousands-dk);transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,58,237,.3)}
+.btn-b{background:var(--hundreds);color:#fff}
+.btn-b:hover{background:var(--hundreds-dk);transform:translateY(-2px)}
+.btn-g{background:var(--tens);color:#fff}
+.btn-g:hover{background:var(--tens-dk);transform:translateY(-2px)}
+.btn-o{background:var(--gold);color:#fff}
+.btn-o:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.3)}
+.btn-out{background:transparent;border:2px solid var(--thousands);color:var(--thousands)}
+.btn-out:hover{background:var(--thousands-lt)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.25rem}
+
+/* ══════════ RESPONSIVE ══════════ */
+@media(max-width:600px){
+  .hero h1{font-size:1.6rem}
+  .forms-grid{grid-template-columns:1fr}
+  .builder-sliders{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .mem-grid{grid-template-columns:repeat(3,1fr)}
+  .drag-zones{grid-template-columns:1fr}
+}
+
+/* ══════════ STEPS ══════════ */
+.step-item{display:flex;gap:14px;margin-bottom:1.25rem;align-items:flex-start}
+.step-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff;flex-shrink:0;margin-top:2px}
+.step-c strong{display:block;font-size:15px;margin-bottom:3px}
+.step-c p{font-size:14px;color:var(--muted);line-height:1.7}
+#homeBtn{position:fixed;top:16px;right:16px;z-index:1000;display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;background:rgba(17,24,39,.55);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Baloo Bhaijaan 2',sans-serif;font-weight:700;
+  font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .15s,background .15s}
+#homeBtn:hover{transform:scale(1.05);background:rgba(17,24,39,.75)}
+#homeBtn svg{width:18px;height:18px;flex-shrink:0}
+@media(max-width:480px){#homeBtn{padding:8px 14px;font-size:12px}#homeBtn svg{width:15px;height:15px}}
+</style>
+</head>
+<body>
+
+<a href="index.html" id="homeBtn" title="العودة للشاشة الرئيسية">
+  <span>الرئيسية</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h4v-6h3v6h4a1 1 0 0 0 1-1v-9"/></svg>
+</a>
+
+<!-- ═══════ HERO ═══════ -->
+<div class="hero">
+  <div class="hero-bubbles"><span></span><span></span><span></span><span></span></div>
+  <div class="hero-number">٣٢٥٧</div>
+  <h1>صيغ مختلفة لكتابة الأعداد</h1>
+  <p>الصف الثالث الابتدائي — الفصل الثاني — الدرس السادس</p>
+  <div class="hero-forms">
+    <span class="form-tag">🔢 الصيغة الرمزية</span>
+    <span class="form-tag">📝 الصيغة اللفظية</span>
+    <span class="form-tag">➕ الصيغة الممتدة</span>
+    <span class="form-tag">📊 جدول القيمة المكانية</span>
+  </div>
+</div>
+
+<!-- ═══════ TABS ═══════ -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('intro')">📖 المقدمة</button>
+    <button class="tab-btn" onclick="showTab('placevalue')">📊 القيمة المكانية</button>
+    <button class="tab-btn" onclick="showTab('forms')">📝 الصيغ الثلاث</button>
+    <button class="tab-btn" onclick="showTab('builder')">🔨 أنشئ العدد</button>
+    <button class="tab-btn" onclick="showTab('fill')">✏️ أكمل الفراغات</button>
+    <button class="tab-btn" onclick="showTab('sort')">🔢 رتّب الأعداد</button>
+    <button class="tab-btn" onclick="showTab('drag')">🎯 صنّف الصيغ</button>
+    <button class="tab-btn" onclick="showTab('memory')">🧠 لعبة الذاكرة</button>
+    <button class="tab-btn" onclick="showTab('balloon')">🎈 البالونات</button>
+    <button class="tab-btn" onclick="showTab('practice')">✏️ تدريبات</button>
+    <button class="tab-btn" onclick="showTab('mastery')">🏆 الإتقان</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════
+     INTRO
+══════════════════════════════════ -->
+<div class="section active" id="tab-intro">
+
+  <div class="card">
+    <div class="card-stripe" style="background:linear-gradient(var(--thousands),var(--hundreds),var(--tens),var(--ones))"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--thousands)">١</span> ما هي صيغ كتابة الأعداد؟</div>
+
+    <div class="ib purple">
+      يمكننا كتابة أي عدد بثلاث صيغ مختلفة — كل صيغة تُظهر العدد بطريقة مختلفة لكنها جميعها تعبّر عن <strong>نفس العدد</strong>!
+    </div>
+
+    <!-- Number visual for 3257 -->
+    <div style="text-align:center;font-size:14px;font-weight:700;color:var(--muted);margin-bottom:.5rem">مثال على العدد: ٣٢٥٧</div>
+    <div class="number-display">
+      <div class="nd-digit nd-t"><span class="dval">٣</span><span class="dlbl">آلاف</span></div>
+      <div class="nd-digit nd-h"><span class="dval">٢</span><span class="dlbl">مئات</span></div>
+      <div class="nd-digit nd-te"><span class="dval">٥</span><span class="dlbl">عشرات</span></div>
+      <div class="nd-digit nd-o"><span class="dval">٧</span><span class="dlbl">آحاد</span></div>
+    </div>
+
+    <div class="forms-grid">
+      <div class="form-card fc-standard">
+        <span class="fc-icon">🔢</span>
+        <div class="fc-name">الصيغة الرمزية (الرقمية)</div>
+        <div class="fc-val">٣٢٥٧</div>
+      </div>
+      <div class="form-card fc-written">
+        <span class="fc-icon">📝</span>
+        <div class="fc-name">الصيغة اللفظية (بالكلمات)</div>
+        <div class="fc-val">ثلاثة آلاف ومئتان وسبعة وخمسون</div>
+      </div>
+      <div class="form-card fc-expanded">
+        <span class="fc-icon">➕</span>
+        <div class="fc-name">الصيغة الممتدة</div>
+        <div class="fc-val">٣٠٠٠ + ٢٠٠ + ٥٠ + ٧</div>
+      </div>
+      <div class="form-card fc-pv">
+        <span class="fc-icon">📊</span>
+        <div class="fc-name">جدول القيمة المكانية</div>
+        <div class="fc-val">آلاف: ٣ | مئات: ٢ | عشرات: ٥ | آحاد: ٧</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-stripe" style="background:var(--gold)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--gold)">٢</span> القاعدة الذهبية — القيمة المكانية</div>
+    <div class="ib gold">
+      كل رقم في العدد له <strong>مكان</strong> و<strong>قيمة</strong>. المكان يُحدد قيمة الرقم:<br><br>
+      🟣 <strong>الآلاف</strong> — الرقم × ١٠٠٠ &nbsp;|&nbsp;
+      🔵 <strong>المئات</strong> — الرقم × ١٠٠<br>
+      🟢 <strong>العشرات</strong> — الرقم × ١٠ &nbsp;&nbsp;|&nbsp;
+      🟠 <strong>الآحاد</strong> — الرقم × ١
+    </div>
+
+    <div style="step-item">
+      <div class="step-item">
+        <div class="step-dot" style="background:var(--thousands)">آ</div>
+        <div class="step-c"><strong style="color:var(--thousands-dk)">رقم الآلاف</strong><p>في العدد ٣٢٥٧ — الرقم ٣ في مكان الآلاف، قيمته = ٣ × ١٠٠٠ = ٣٠٠٠</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot" style="background:var(--hundreds)">م</div>
+        <div class="step-c"><strong style="color:var(--hundreds-dk)">رقم المئات</strong><p>الرقم ٢ في مكان المئات، قيمته = ٢ × ١٠٠ = ٢٠٠</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot" style="background:var(--tens)">ع</div>
+        <div class="step-c"><strong style="color:var(--tens-dk)">رقم العشرات</strong><p>الرقم ٥ في مكان العشرات، قيمته = ٥ × ١٠ = ٥٠</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-dot" style="background:var(--ones)">أ</div>
+        <div class="step-c"><strong style="color:var(--ones-dk)">رقم الآحاد</strong><p>الرقم ٧ في مكان الآحاد، قيمته = ٧ × ١ = ٧</p></div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="showTab('placevalue')">التالي: جدول القيمة المكانية ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PLACE VALUE
+══════════════════════════════════ -->
+<div class="section" id="tab-placevalue">
+
+  <div class="card">
+    <div class="card-stripe" style="background:var(--thousands)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--thousands)">١</span> جدول القيمة المكانية</div>
+    <div class="ib purple">الجدول يُساعدنا على فهم قيمة كل رقم في العدد بناءً على مكانه.</div>
+
+    <!-- Interactive place value table -->
+    <table class="pv-table" id="pv-demo-table">
+      <tr>
+        <th class="pv-th-t">آلاف</th>
+        <th class="pv-th-h">مئات</th>
+        <th class="pv-th-te">عشرات</th>
+        <th class="pv-th-o">آحاد</th>
+      </tr>
+      <tr>
+        <td class="pv-td-t" id="pv-t">٣</td>
+        <td class="pv-td-h" id="pv-h">٢</td>
+        <td class="pv-td-te" id="pv-te">٥</td>
+        <td class="pv-td-o" id="pv-o">٧</td>
+      </tr>
+    </table>
+
+    <div style="text-align:center;margin-bottom:1rem">
+      <label style="font-size:14px;font-weight:600;color:var(--muted)">جرّب عدداً آخر: </label>
+      <input type="number" id="pv-input" class="fill-input" placeholder="مثال: 4538" min="1000" max="9999" style="width:120px" oninput="updatePVTable()">
+    </div>
+
+    <div id="pv-analysis" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-stripe" style="background:var(--hundreds)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--hundreds)">٢</span> أمثلة متنوعة من الكتاب</div>
+    <div id="pv-examples-area"></div>
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="showTab('forms')">التالي: الصيغ الثلاث ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════
+     FORMS
+══════════════════════════════════ -->
+<div class="section" id="tab-forms">
+
+  <div class="card">
+    <div class="card-stripe" style="background:linear-gradient(var(--thousands),var(--hundreds))"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--thousands)">١</span> الصيغة الرمزية والصيغة الممتدة</div>
+    <div class="ib purple">
+      <strong>الصيغة الرمزية</strong> = الكتابة العادية بالأرقام: <strong>٦٢١٩</strong><br>
+      <strong>الصيغة الممتدة</strong> = كتابة قيمة كل رقم مع الإشارة +: <strong>٦٠٠٠ + ٢٠٠ + ١٠ + ٩</strong>
+    </div>
+
+    <div id="forms-examples-area"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-stripe" style="background:var(--hundreds)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--hundreds)">٢</span> الصيغة اللفظية (بالكلمات)</div>
+    <div class="ib blue">
+      <strong>الصيغة اللفظية</strong> = نكتب العدد بالكلمات كاملاً.<br>
+      ٦٢١٩ = <strong>ستة آلاف ومئتان وتسعة عشر</strong>
+    </div>
+
+    <div class="ib gold">
+      💡 <strong>كيف نقرأ الأعداد الكبيرة:</strong><br>
+      ابدأ من اليسار: آلاف ← مئات ← عشرات وآحاد<br>
+      ١٥٨٠ = ألف وخمسمئة وثمانون
+    </div>
+
+    <div id="verbal-examples-area"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="showTab('builder')">التالي: أنشئ العدد ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════
+     NUMBER BUILDER
+══════════════════════════════════ -->
+<div class="section" id="tab-builder">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--tens)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--tens)">🔨</span> أنشئ عدداً وشاهد صيغه!</div>
+    <div class="ib green">حرّك الشرائط لاختيار أرقام الآلاف والمئات والعشرات والآحاد — وشاهد جميع الصيغ تتغير تلقائياً!</div>
+
+    <div class="builder-wrap">
+      <div class="builder-sliders">
+        <div class="slider-group">
+          <div class="slider-label">
+            <span style="color:var(--thousands-dk)">🟣 الآلاف</span>
+            <span class="slider-val" id="bld-t" style="color:var(--thousands)">٣</span>
+          </div>
+          <input type="range" id="sl-t" min="1" max="9" value="3" style="accent-color:var(--thousands)" oninput="updateBuilder()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span style="color:var(--hundreds-dk)">🔵 المئات</span>
+            <span class="slider-val" id="bld-h" style="color:var(--hundreds)">٢</span>
+          </div>
+          <input type="range" id="sl-h" min="0" max="9" value="2" style="accent-color:var(--hundreds)" oninput="updateBuilder()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span style="color:var(--tens-dk)">🟢 العشرات</span>
+            <span class="slider-val" id="bld-te" style="color:var(--tens)">٥</span>
+          </div>
+          <input type="range" id="sl-te" min="0" max="9" value="5" style="accent-color:var(--tens)" oninput="updateBuilder()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span style="color:var(--ones-dk)">🟠 الآحاد</span>
+            <span class="slider-val" id="bld-o" style="color:var(--ones)">٧</span>
+          </div>
+          <input type="range" id="sl-o" min="0" max="9" value="7" style="accent-color:var(--ones)" oninput="updateBuilder()">
+        </div>
+      </div>
+
+      <div class="builder-result">
+        <div class="br-standard" id="bld-standard">٣٢٥٧</div>
+        <div class="br-row"><span class="br-label">🔢 رمزية:</span><span class="br-value" id="bld-r">٣٢٥٧</span></div>
+        <div class="br-row"><span class="br-label">📝 لفظية:</span><span class="br-value" id="bld-w">ثلاثة آلاف ومئتان وسبعة وخمسون</span></div>
+        <div class="br-row"><span class="br-label">➕ ممتدة:</span><span class="br-value" id="bld-e">٣٠٠٠ + ٢٠٠ + ٥٠ + ٧</span></div>
+        <div class="br-row"><span class="br-label">📊 جدول:</span><span class="br-value" id="bld-pv">آلاف:٣ مئات:٢ عشرات:٥ آحاد:٧</span></div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="showTab('fill')">التالي: أكمل الفراغات ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     FILL IN THE BLANKS
+══════════════════════════════════ -->
+<div class="section" id="tab-fill">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--hundreds)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--hundreds)">✏️</span> أكمل الفراغات</div>
+    <div class="ib blue">أكمل الصيغة الناقصة لكل عدد، ثم اضغط <strong>"تحقق"</strong>.</div>
+    <div id="fill-area"></div>
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="checkFill()">✓ تحقق من إجاباتي</button>
+      <button class="btn btn-out" onclick="resetFill()">🔄 إعادة</button>
+    </div>
+    <div id="fill-score" style="display:none;margin-top:1rem" class="ib purple"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SORT
+══════════════════════════════════ -->
+<div class="section" id="tab-sort">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--tens)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--tens)">🔢</span> رتّب الأعداد</div>
+    <div class="ib green">اضغط على الأعداد بالترتيب من <strong>الأصغر إلى الأكبر</strong>.</div>
+    <div id="sort-area"></div>
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="checkSort()">✓ تحقق</button>
+      <button class="btn btn-out" onclick="resetSort()">🔄 إعادة</button>
+    </div>
+    <div id="sort-result" style="display:none;margin-top:1rem" class="ib green"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-stripe" style="background:var(--ones)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--ones)">⚖️</span> قارن الأعداد</div>
+    <div id="compare-area"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     DRAG
+══════════════════════════════════ -->
+<div class="section" id="tab-drag">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--accent)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--accent)">🎯</span> صنّف الصيغة الصحيحة</div>
+    <div class="ib red">اسحب كل صيغة إلى المجموعة الصحيحة: هل هي <strong>صيغة ممتدة</strong> أم <strong>صيغة رمزية</strong>؟</div>
+    <div class="drag-pool" id="drag-pool"></div>
+    <div class="drag-zones">
+      <div class="drag-zone" id="zone-std" ondragover="dOver(event,'std')" ondragleave="dLeave('std')" ondrop="dDrop(event,'std')">
+        <div class="dz-label">🔢 صيغة رمزية (أرقام فقط)<span class="dz-example">مثال: ٣٢٥٧</span></div>
+        <div id="placed-std"></div>
+      </div>
+      <div class="drag-zone" id="zone-exp" ondragover="dOver(event,'exp')" ondragleave="dLeave('exp')" ondrop="dDrop(event,'exp')">
+        <div class="dz-label">➕ صيغة ممتدة (جمع قيم)<span class="dz-example">مثال: ٣٠٠٠ + ٢٠٠ + ٥٠ + ٧</span></div>
+        <div id="placed-exp"></div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="checkDrag()">✓ تحقق</button>
+      <button class="btn btn-out" onclick="resetDrag()">🔄 إعادة</button>
+    </div>
+    <div id="drag-result" style="display:none;margin-top:1rem" class="ib purple"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MEMORY
+══════════════════════════════════ -->
+<div class="section" id="tab-memory">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--gold)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--gold)">🧠</span> لعبة الذاكرة — طابق العدد بصيغته</div>
+    <div class="ib gold">اقلب بطاقتين — طابق <strong>الرقم</strong> مع <strong>صيغته الممتدة</strong>!</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px">
+      <div>الأزواج: <strong id="mem-p" style="color:#10B981">٠</strong> / ٨</div>
+      <div>المحاولات: <strong id="mem-t" style="color:#EF4444">٠</strong></div>
+      <button class="btn btn-out" style="padding:6px 14px;font-size:13px" onclick="initMemory()">🔄 جديدة</button>
+    </div>
+    <div class="mem-grid" id="mem-grid"></div>
+    <div id="mem-win" style="display:none;margin-top:1rem" class="ib gold">🎉 أحسنت! أتممت اللعبة في <strong id="mem-win-t">٠</strong> محاولة!</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     BALLOON
+══════════════════════════════════ -->
+<div class="section" id="tab-balloon">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--thousands)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--thousands)">🎈</span> لعبة البالونات — اختر الصيغة الصحيحة!</div>
+    <div class="ib purple">اقرأ السؤال — افقس البالون الذي يحمل الإجابة الصحيحة!</div>
+    <div style="text-align:center;margin-bottom:.75rem">
+      <div id="bln-q" style="font-size:16px;font-weight:700;color:var(--ink)">اضغط "ابدأ اللعبة"</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">النقاط: <strong id="bln-score" style="color:var(--thousands)">٠</strong> | الجولة: <strong id="bln-round" style="color:var(--hundreds)">١</strong>/٨</div>
+    </div>
+    <div class="balloon-arena" id="bln-arena"></div>
+    <div class="btn-group">
+      <button class="btn btn-p" onclick="startBalloon()">▶ ابدأ اللعبة</button>
+      <button class="btn btn-out" onclick="resetBalloon()">🔄 إعادة</button>
+    </div>
+    <div id="bln-result" style="display:none;margin-top:1rem" class="ib purple"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PRACTICE
+══════════════════════════════════ -->
+<div class="section" id="tab-practice">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--hundreds)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--hundreds)">✏️</span> تدريبات متنوعة شاملة</div>
+    <div class="score-row">
+      <div class="sc-box"><div class="sc-big" id="pr-s" style="color:#10B981">٠</div><div class="sc-lbl">صحيح</div></div>
+      <div class="sc-box"><div class="sc-big" id="pr-t" style="color:var(--thousands)">٠</div><div class="sc-lbl">محاولات</div></div>
+      <div class="sc-box"><div class="sc-big" id="pr-p" style="color:var(--hundreds)">—</div><div class="sc-lbl">النسبة</div></div>
+    </div>
+    <div id="practice-area"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MASTERY
+══════════════════════════════════ -->
+<div class="section" id="tab-mastery">
+  <div class="card">
+    <div class="card-stripe" style="background:var(--gold)"></div>
+    <div class="card-title"><span class="ctag" style="background:var(--gold)">🏆</span> اختبار الإتقان النهائي</div>
+    <div class="ib gold">
+      <strong>١٥ سؤالاً</strong> يشمل جميع صيغ كتابة الأعداد والقيمة المكانية.<br>
+      تحتاج <strong>٨٠٪ أو أكثر</strong> للحصول على شهادة الإتقان!
+    </div>
+    <div style="margin-bottom:1.25rem">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span style="color:var(--muted)">تقدّمك</span>
+        <span id="m-txt" style="color:var(--thousands);font-weight:700">٠ / ١٥</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" id="m-bar" style="width:0%"></div></div>
+    </div>
+    <div id="mastery-area"></div>
+    <div class="btn-group" style="margin-top:1.5rem">
+      <button class="btn btn-o" id="submit-btn" onclick="submitMastery()" style="display:none">🏆 احسب نتيجتي</button>
+    </div>
+    <div id="mastery-result"></div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// ARABIC NUMERALS
+// ═══════════════════════════════════════════════════════════
+const AR = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+const EN = s => String(s).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+
+// ═══════════════════════════════════════════════════════════
+// NUMBER TO ARABIC WORDS
+// ═══════════════════════════════════════════════════════════
+function numToArabicWords(n) {
+  if (n === 0) return 'صفر';
+  const ones = ['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة',
+    'عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر',
+    'ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+  const tens = ['','عشرة','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+
+  let result = '';
+  if (n >= 1000) {
+    const t = Math.floor(n / 1000);
+    if (t === 1) result += 'ألف';
+    else if (t === 2) result += 'ألفان';
+    else result += ones[t] + ' آلاف';
+    n %= 1000;
+    if (n > 0) result += ' و';
+  }
+  if (n >= 100) {
+    const h = Math.floor(n / 100);
+    if (h === 1) result += 'مئة';
+    else if (h === 2) result += 'مئتان';
+    else result += ones[h] + ' مئة';
+    n %= 100;
+    if (n > 0) result += ' و';
+  }
+  if (n >= 20) {
+    const t = Math.floor(n / 10), o = n % 10;
+    if (o > 0) result += ones[o] + ' و' + tens[t];
+    else result += tens[t];
+  } else if (n > 0) {
+    result += ones[n];
+  }
+  return result;
+}
+
+// ═══════════════════════════════════════════════════════════
+// EXPANDED FORM
+// ═══════════════════════════════════════════════════════════
+function expandedForm(n) {
+  const t = Math.floor(n / 1000) * 1000;
+  const h = Math.floor((n % 1000) / 100) * 100;
+  const te = Math.floor((n % 100) / 10) * 10;
+  const o = n % 10;
+  const parts = [];
+  if (t > 0) parts.push(AR(t));
+  if (h > 0) parts.push(AR(h));
+  if (te > 0) parts.push(AR(te));
+  if (o > 0) parts.push(AR(o));
+  return parts.join(' + ');
+}
+
+// ═══════════════════════════════════════════════════════════
+// PLACE VALUE TABLE UPDATE (interactive)
+// ═══════════════════════════════════════════════════════════
+function updatePVTable() {
+  const raw = document.getElementById('pv-input').value;
+  const n = parseInt(raw);
+  if (!n || n < 1000 || n > 9999) return;
+  const t = Math.floor(n / 1000), h = Math.floor((n % 1000) / 100),
+    te = Math.floor((n % 100) / 10), o = n % 10;
+  document.getElementById('pv-t').textContent = AR(t);
+  document.getElementById('pv-h').textContent = AR(h);
+  document.getElementById('pv-te').textContent = AR(te);
+  document.getElementById('pv-o').textContent = AR(o);
+  // Analysis
+  const ana = document.getElementById('pv-analysis');
+  ana.innerHTML = `
+    <div class="ib purple" style="margin:0">🟣 رقم الآلاف: ${AR(t)} — قيمته: ${AR(t*1000)}</div>
+    <div class="ib blue" style="margin:0">🔵 رقم المئات: ${AR(h)} — قيمته: ${AR(h*100)}</div>
+    <div class="ib green" style="margin:0">🟢 رقم العشرات: ${AR(te)} — قيمته: ${AR(te*10)}</div>
+    <div class="ib orange" style="margin:0">🟠 رقم الآحاد: ${AR(o)} — قيمته: ${AR(o)}</div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════
+// PV EXAMPLES
+// ═══════════════════════════════════════════════════════════
+const pvExamples = [6219, 7623, 1578, 8200, 3050, 4001];
+function renderPVExamples() {
+  const area = document.getElementById('pv-examples-area');
+  area.innerHTML = '';
+  pvExamples.forEach(n => {
+    const t=Math.floor(n/1000),h=Math.floor((n%1000)/100),te=Math.floor((n%100)/10),o=n%10;
+    const div = document.createElement('div');
+    div.style.cssText = 'margin-bottom:12px';
+    div.innerHTML = `
+      <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">العدد: <span style="font-family:Righteous;font-size:1.3rem;color:var(--thousands)">${AR(n)}</span></div>
+      <table class="pv-table">
+        <tr>
+          <th class="pv-th-t">آلاف</th><th class="pv-th-h">مئات</th>
+          <th class="pv-th-te">عشرات</th><th class="pv-th-o">آحاد</th>
+        </tr>
+        <tr>
+          <td class="pv-td-t">${AR(t)}</td><td class="pv-td-h">${AR(h)}</td>
+          <td class="pv-td-te">${AR(te)}</td><td class="pv-td-o">${AR(o)}</td>
+        </tr>
+      </table>`;
+    area.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// FORMS EXAMPLES
+// ═══════════════════════════════════════════════════════════
+const formsExamples = [6219, 7623, 1578, 8200];
+function renderFormsExamples() {
+  const area = document.getElementById('forms-examples-area');
+  area.innerHTML = '';
+  formsExamples.forEach(n => {
+    const div = document.createElement('div');
+    div.className = 'fill-row';
+    div.style.flexDirection = 'column';
+    div.style.alignItems = 'flex-start';
+    div.innerHTML = `
+      <div style="font-size:1.2rem;font-weight:900;font-family:Righteous;color:var(--thousands);margin-bottom:8px">${AR(n)}</div>
+      <div style="font-size:14px;line-height:2">
+        🔢 <strong>رمزية:</strong> ${AR(n)}<br>
+        ➕ <strong>ممتدة:</strong> ${expandedForm(n)}<br>
+        📝 <strong>لفظية:</strong> ${numToArabicWords(n)}
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function renderVerbalExamples() {
+  const area = document.getElementById('verbal-examples-area');
+  const nums = [1580, 4306, 9010, 2500];
+  area.innerHTML = '';
+  nums.forEach(n => {
+    const div = document.createElement('div');
+    div.className = 'fill-row';
+    div.innerHTML = `
+      <span style="font-family:Righteous;font-size:1.2rem;color:var(--thousands);min-width:80px">${AR(n)}</span>
+      <span style="color:var(--muted);font-size:18px">=</span>
+      <span style="font-size:14px;font-weight:600;color:var(--ink)">${numToArabicWords(n)}</span>`;
+    area.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// BUILDER
+// ═══════════════════════════════════════════════════════════
+function updateBuilder() {
+  const t=+document.getElementById('sl-t').value,
+    h=+document.getElementById('sl-h').value,
+    te=+document.getElementById('sl-te').value,
+    o=+document.getElementById('sl-o').value;
+  document.getElementById('bld-t').textContent=AR(t);
+  document.getElementById('bld-h').textContent=AR(h);
+  document.getElementById('bld-te').textContent=AR(te);
+  document.getElementById('bld-o').textContent=AR(o);
+  const n = t*1000+h*100+te*10+o;
+  document.getElementById('bld-standard').textContent=AR(n);
+  document.getElementById('bld-r').textContent=AR(n);
+  document.getElementById('bld-w').textContent=numToArabicWords(n);
+  document.getElementById('bld-e').textContent=expandedForm(n);
+  document.getElementById('bld-pv').textContent=`آلاف:${AR(t)} مئات:${AR(h)} عشرات:${AR(te)} آحاد:${AR(o)}`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// FILL IN THE BLANKS
+// ═══════════════════════════════════════════════════════════
+const fillData = [
+  {n:3257, missing:'exp'},
+  {n:6219, missing:'std'},
+  {n:1580, missing:'exp'},
+  {n:8200, missing:'std'},
+  {n:4050, missing:'exp'},
+  {n:7623, missing:'std'},
+  {n:9001, missing:'exp'},
+  {n:5400, missing:'std'},
+];
+
+function renderFill() {
+  const area = document.getElementById('fill-area');
+  area.innerHTML = '';
+  fillData.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'fill-row';
+    div.style.flexDirection = 'column';
+    div.style.alignItems = 'flex-start';
+    div.style.gap = '8px';
+    if (f.missing === 'exp') {
+      div.innerHTML = `
+        <div style="font-size:14px;font-weight:600;color:var(--muted)">العدد الرمزي: <strong style="color:var(--thousands);font-family:Righteous;font-size:1.1rem">${AR(f.n)}</strong></div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-weight:700;font-size:14px">➕ الصيغة الممتدة = </span>
+          <input class="fill-input" id="fi${i}" placeholder="مثال: ١٠٠٠ + ٢٠٠ + ٣٠ + ٤" style="width:240px" data-type="exp" data-n="${f.n}">
+        </div>`;
+    } else {
+      div.innerHTML = `
+        <div style="font-size:14px;font-weight:600;color:var(--muted)">الصيغة الممتدة: <strong style="color:var(--tens-dk)">${expandedForm(f.n)}</strong></div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-weight:700;font-size:14px">🔢 الرقم = </span>
+          <input class="fill-input" id="fi${i}" placeholder="الرقم" style="width:100px" data-type="std" data-n="${f.n}">
+        </div>`;
+    }
+    area.appendChild(div);
+  });
+}
+
+function checkFill() {
+  let ok = 0;
+  fillData.forEach((f, i) => {
+    const inp = document.getElementById('fi' + i);
+    inp.classList.remove('ok', 'no');
+    const val = inp.value.trim().replace(/\s/g, '');
+    const expVal = expandedForm(f.n).replace(/\s/g, '');
+    if (f.missing === 'exp') {
+      // Accept arabic or latin digits
+      const userClean = val.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\+/g, '+');
+      const expClean = expVal.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\+/g, '+');
+      if (userClean === expClean || val === expVal) { ok++; inp.classList.add('ok'); }
+      else inp.classList.add('no');
+    } else {
+      const num = parseInt(val.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)));
+      if (num === f.n) { ok++; inp.classList.add('ok'); }
+      else inp.classList.add('no');
+    }
+  });
+  const sc = document.getElementById('fill-score');
+  sc.style.display = 'block';
+  sc.innerHTML = ok === fillData.length
+    ? `✅ رائع! أجبت على جميع الفراغات بشكل صحيح (${ok}/${fillData.length}) 🏆`
+    : `أصبت في ${ok} من ${fillData.length}. الإجابات الخطأ مُحددة باللون الأحمر.`;
+}
+function resetFill() {
+  fillData.forEach((_, i) => { const inp = document.getElementById('fi'+i); if(inp){inp.value='';inp.classList.remove('ok','no');} });
+  document.getElementById('fill-score').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════════════
+// SORT GAME
+// ═══════════════════════════════════════════════════════════
+const sortNums = [3257, 6219, 1580, 8200, 4050, 7623, 2001, 9500];
+let sortPlaced = [];
+
+function renderSort() {
+  sortPlaced = [];
+  const area = document.getElementById('sort-area');
+  area.innerHTML = '';
+  const pool = document.createElement('div'); pool.className = 'sort-items'; pool.id = 'sort-pool';
+  const drop = document.createElement('div');
+  drop.innerHTML = '<div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px">من الأصغر ← إلى الأكبر:</div>';
+  const zone = document.createElement('div'); zone.className = 'sort-zone'; zone.id = 'sort-zone';
+  [...sortNums].sort(() => Math.random() - .5).forEach(n => {
+    const chip = document.createElement('div'); chip.className = 'sort-chip'; chip.id = 'sc_' + n;
+    chip.textContent = AR(n);
+    chip.onclick = () => {
+      if (chip.classList.contains('placed')) return;
+      chip.classList.add('placed'); sortPlaced.push(n);
+      const pc = document.createElement('div'); pc.className = 'sort-placed';
+      pc.textContent = AR(n) + ' ✕';
+      pc.onclick = () => { pc.remove(); sortPlaced = sortPlaced.filter(x => x !== n); chip.classList.remove('placed'); };
+      document.getElementById('sort-zone').appendChild(pc);
+    };
+    pool.appendChild(chip);
+  });
+  drop.appendChild(zone);
+  area.appendChild(pool);
+  area.appendChild(drop);
+  document.getElementById('sort-result').style.display = 'none';
+}
+
+function checkSort() {
+  const correct = [...sortNums].sort((a, b) => a - b);
+  const ok = sortPlaced.length === sortNums.length && sortPlaced.every((n, i) => n === correct[i]);
+  const res = document.getElementById('sort-result');
+  res.style.display = 'block';
+  if (ok) {
+    res.style.borderRightColor = '#10B981'; res.style.background = '#D1FAE5'; res.style.color = '#065F46';
+    res.textContent = '✅ رائع! الترتيب صحيح من الأصغر إلى الأكبر! 🏆';
+  } else {
+    res.style.borderRightColor = '#EF4444'; res.style.background = '#FEE2E2'; res.style.color = '#991B1B';
+    res.textContent = '❌ الترتيب الصحيح: ' + correct.map(n => AR(n)).join(' ← ');
+  }
+}
+function resetSort() { renderSort(); }
+
+// ═══════════════════════════════════════════════════════════
+// COMPARE QUESTIONS
+// ═══════════════════════════════════════════════════════════
+const compareQ = [
+  {t:'أيهما أكبر: ٣٢٥٧ أم ٣٧٢٥؟', o:['٣٢٥٧','٣٧٢٥','متساويان','لا أعرف'], c:1},
+  {t:'أيهما أصغر: ٦٢١٩ أم ٦١٩٢؟', o:['٦٢١٩','٦١٩٢','متساويان','لا أعرف'], c:1},
+  {t:'رتّب: ٥٠٠٠، ٥٤٠٠، ٥٤٠، ٥ من الأصغر للأكبر', o:['٥ ، ٥٤٠ ، ٥٠٠٠ ، ٥٤٠٠','٥٤٠٠ ، ٥٠٠٠ ، ٥٤٠ ، ٥','٥٤٠ ، ٥ ، ٥٠٠٠ ، ٥٤٠٠','٥ ، ٥٠٠٠ ، ٥٤٠٠ ، ٥٤٠'], c:0},
+  {t:'أكبر عدد يمكن تكوينه من الأرقام ٣، ٧، ١، ٩؟', o:['٩٧٣١','٩٧١٣','٩١٣٧','٣١٧٩'], c:0},
+];
+function renderCompareQ() {
+  renderQBlock('compare-area', compareQ, 'cmp');
+}
+
+// ═══════════════════════════════════════════════════════════
+// DRAG CLASSIFY
+// ═══════════════════════════════════════════════════════════
+const dragItems = [
+  {label:'٤٥٠٠ + ٣٠ + ٧', type:'exp'},
+  {label:'٦٢١٩', type:'std'},
+  {label:'٣٠٠٠ + ٢٠٠ + ٥٠', type:'exp'},
+  {label:'١٥٨٠', type:'std'},
+  {label:'٨٠٠٠ + ٢٠٠', type:'exp'},
+  {label:'٩٠٠١', type:'std'},
+  {label:'١٠٠٠ + ٥٠ + ٣', type:'exp'},
+  {label:'٧٦٢٣', type:'std'},
+];
+let dragDragging = null;
+function initDrag() {
+  const pool = document.getElementById('drag-pool');
+  pool.innerHTML = '';
+  document.getElementById('placed-std').innerHTML = '';
+  document.getElementById('placed-exp').innerHTML = '';
+  document.getElementById('drag-result').style.display = 'none';
+  [...dragItems].sort(() => Math.random() - .5).forEach((item, i) => {
+    const chip = document.createElement('div'); chip.className = 'drag-chip';
+    chip.id = 'dc_' + i; chip.draggable = true;
+    chip.dataset.type = item.type; chip.dataset.label = item.label;
+    chip.textContent = item.label;
+    chip.addEventListener('dragstart', () => { dragDragging = {i, item}; chip.classList.add('dragging'); });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+    pool.appendChild(chip);
+  });
+}
+function dOver(e, zone) { e.preventDefault(); document.getElementById('zone-' + zone).classList.add('over'); }
+function dLeave(zone) { document.getElementById('zone-' + zone).classList.remove('over'); }
+function dDrop(e, zone) {
+  e.preventDefault();
+  document.getElementById('zone-' + zone).classList.remove('over');
+  if (!dragDragging) return;
+  const {i, item} = dragDragging;
+  const src = document.getElementById('dc_' + i); if (src) src.remove();
+  const placed = document.createElement('span'); placed.className = 'placed-drag';
+  placed.textContent = item.label + ' ✕';
+  placed.onclick = () => {
+    placed.remove();
+    const pool = document.getElementById('drag-pool');
+    const chip = document.createElement('div'); chip.className = 'drag-chip';
+    chip.id = 'dc_' + i; chip.draggable = true;
+    chip.dataset.type = item.type; chip.dataset.label = item.label;
+    chip.textContent = item.label;
+    chip.addEventListener('dragstart', () => { dragDragging = {i, item}; chip.classList.add('dragging'); });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+    pool.appendChild(chip);
+  };
+  document.getElementById('placed-' + zone).appendChild(placed);
+  dragDragging = null;
+}
+function checkDrag() {
+  let ok = 0;
+  dragItems.forEach(item => {
+    const stdZone = document.getElementById('placed-std');
+    const expZone = document.getElementById('placed-exp');
+    const inStd = Array.from(stdZone.querySelectorAll('.placed-drag')).some(c => c.textContent.includes(item.label));
+    const inExp = Array.from(expZone.querySelectorAll('.placed-drag')).some(c => c.textContent.includes(item.label));
+    if ((item.type === 'std' && inStd) || (item.type === 'exp' && inExp)) ok++;
+  });
+  const res = document.getElementById('drag-result');
+  res.style.display = 'block';
+  res.textContent = ok === dragItems.length
+    ? `✅ ممتاز! صنّفت جميع الصيغ بشكل صحيح (${ok}/${dragItems.length}) 🏆`
+    : `أصبت في ${ok}/${dragItems.length}. تحقق من التصنيف الخطأ.`;
+}
+function resetDrag() { initDrag(); }
+
+// ═══════════════════════════════════════════════════════════
+// MEMORY GAME
+// ═══════════════════════════════════════════════════════════
+const memPairs = [
+  {num: 3257, exp: '٣٠٠٠+٢٠٠+٥٠+٧'},
+  {num: 6219, exp: '٦٠٠٠+٢٠٠+١٠+٩'},
+  {num: 1580, exp: '١٠٠٠+٥٠٠+٨٠'},
+  {num: 8200, exp: '٨٠٠٠+٢٠٠'},
+  {num: 4050, exp: '٤٠٠٠+٥٠'},
+  {num: 7623, exp: '٧٠٠٠+٦٠٠+٢٠+٣'},
+  {num: 2001, exp: '٢٠٠٠+١'},
+  {num: 9500, exp: '٩٠٠٠+٥٠٠'},
+];
+let memFlipped = [], memMatched = [], memLocked = false, memTries = 0;
+function initMemory() {
+  memFlipped = []; memMatched = []; memLocked = false; memTries = 0;
+  document.getElementById('mem-p').textContent = AR(0);
+  document.getElementById('mem-t').textContent = AR(0);
+  document.getElementById('mem-win').style.display = 'none';
+  const cards = [];
+  memPairs.forEach((p, i) => {
+    cards.push({id: `m${i}a`, val: AR(p.num), type: 'num', group: i});
+    cards.push({id: `m${i}b`, val: p.exp, type: 'exp', group: i});
+  });
+  cards.sort(() => Math.random() - .5);
+  const grid = document.getElementById('mem-grid'); grid.innerHTML = '';
+  cards.forEach(card => {
+    const c = document.createElement('div'); c.className = 'mem-card'; c.id = 'mc_' + card.id;
+    c.dataset.group = card.group;
+    c.innerHTML = `<div class="mc-inner">
+      <div class="mc-front">🔢</div>
+      <div class="mc-back">
+        <div class="mcv">${card.val}</div>
+        <div class="mct">${card.type === 'num' ? 'رمزية' : 'ممتدة'}</div>
+      </div>
+    </div>`;
+    c.addEventListener('click', () => flipMem(c, card));
+    grid.appendChild(c);
+  });
+}
+function flipMem(c, card) {
+  if (memLocked || c.classList.contains('flipped') || c.classList.contains('matched')) return;
+  c.classList.add('flipped'); memFlipped.push({c, card});
+  if (memFlipped.length === 2) {
+    memTries++;
+    document.getElementById('mem-t').textContent = AR(memTries);
+    memLocked = true;
+    setTimeout(() => {
+      const [a, b] = memFlipped;
+      if (a.card.group === b.card.group && a.card.id !== b.card.id) {
+        a.c.classList.add('matched'); b.c.classList.add('matched');
+        memMatched.push(a.card.group);
+        document.getElementById('mem-p').textContent = AR(memMatched.length);
+        if (memMatched.length === memPairs.length) {
+          document.getElementById('mem-win-t').textContent = AR(memTries);
+          document.getElementById('mem-win').style.display = 'block';
+        }
+      } else { a.c.classList.remove('flipped'); b.c.classList.remove('flipped'); }
+      memFlipped = []; memLocked = false;
+    }, 700);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// BALLOON GAME
+// ═══════════════════════════════════════════════════════════
+const balloonRounds = [
+  {q: 'ما الصيغة الممتدة للعدد ٣٢٥٧؟', correct: ['٣٠٠٠+٢٠٠+٥٠+٧'], wrong: ['٣+٢+٥+٧','٣٢٠٠+٥٧','٣٠٠٠+٢٥٧']},
+  {q: 'ما الرقم الذي صيغته الممتدة: ٦٠٠٠+٢٠٠+١٠+٩؟', correct: ['٦٢١٩'], wrong: ['٦٢٩١','٦١٢٩','٦٩٢١']},
+  {q: 'ما قيمة الرقم ٤ في العدد ٤٨٣١؟', correct: ['٤٠٠٠'], wrong: ['٤٠٠','٤٠','٤']},
+  {q: 'ما رقم المئات في العدد ٥٧٣٨؟', correct: ['٧'], wrong: ['٥','٣','٨']},
+  {q: 'ما الصيغة الرمزية لـ: ثمانية آلاف ومئتان؟', correct: ['٨٢٠٠'], wrong: ['٨٠٢٠','٨٠٠٢','٨٢٠']},
+  {q: 'ما الصيغة الممتدة للعدد ٤٠٥٠؟', correct: ['٤٠٠٠+٥٠'], wrong: ['٤٠٠٠+٥','٤٠٠+٥٠','٤٠+٥٠']},
+  {q: 'في العدد ٩٠٠١، ما قيمة الرقم ١؟', correct: ['١'], wrong: ['١٠','١٠٠','١٠٠٠']},
+  {q: 'ما أكبر رقم في مكان الآلاف يمكن كتابته؟', correct: ['٩'], wrong: ['١٠','١٩','٩٩']},
+];
+let blnRound = 0, blnScore = 0, blnActive = false;
+const blnColors = ['#7C3AED','#0369A1','#047857','#B45309','#F43F5E','#6D28D9','#1D4ED8','#065F46'];
+
+function startBalloon() {
+  blnRound = 0; blnScore = 0; blnActive = true;
+  document.getElementById('bln-result').style.display = 'none';
+  runBlnRound();
+}
+function runBlnRound() {
+  if (blnRound >= balloonRounds.length) {
+    document.getElementById('bln-result').style.display = 'block';
+    document.getElementById('bln-result').innerHTML =
+      `🎉 انتهت اللعبة! نتيجتك: <strong>${AR(blnScore)}</strong> / ${AR(balloonRounds.length)} نقطة!`;
+    blnActive = false; return;
+  }
+  const round = balloonRounds[blnRound];
+  document.getElementById('bln-q').textContent = round.q;
+  document.getElementById('bln-round').textContent = AR(blnRound + 1);
+  document.getElementById('bln-score').textContent = AR(blnScore);
+  const arena = document.getElementById('bln-arena'); arena.innerHTML = '';
+  const all = [...round.correct, ...round.wrong].sort(() => Math.random() - .5);
+  all.forEach((label, i) => {
+    const isOk = round.correct.includes(label);
+    const bln = document.createElement('div'); bln.className = 'balloon';
+    const leftPct = 8 + i * (84 / all.length);
+    const dur = 4.5 + Math.random() * 2.5;
+    bln.style.cssText = `left:${leftPct}%;animation-duration:${dur}s;animation-delay:${Math.random() * .5}s`;
+    const body = document.createElement('div'); body.className = 'bln-body';
+    body.style.background = blnColors[i % blnColors.length];
+    body.textContent = label;
+    const str = document.createElement('div'); str.className = 'bln-string';
+    bln.appendChild(str); bln.insertBefore(body, str);
+    body.addEventListener('click', () => {
+      if (!blnActive) return;
+      if (isOk) { blnScore++; body.style.background = '#10B981'; body.textContent = '✅'; }
+      else { body.style.background = '#EF4444'; body.textContent = '❌'; }
+      setTimeout(() => bln.remove(), 500);
+      document.getElementById('bln-score').textContent = AR(blnScore);
+    });
+    arena.appendChild(bln);
+    bln.addEventListener('animationend', () => bln.remove());
+  });
+  blnRound++;
+  setTimeout(() => { if (blnActive) runBlnRound(); }, 6500);
+}
+function resetBalloon() {
+  blnActive = false; blnRound = 0; blnScore = 0;
+  document.getElementById('bln-arena').innerHTML = '';
+  document.getElementById('bln-q').textContent = 'اضغط "ابدأ اللعبة"';
+  document.getElementById('bln-score').textContent = AR(0);
+  document.getElementById('bln-round').textContent = AR(1);
+  document.getElementById('bln-result').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════════════
+// PRACTICE QUESTIONS
+// ═══════════════════════════════════════════════════════════
+let prS = 0, prT = 0;
+const upPR = () => {
+  document.getElementById('pr-s').textContent = AR(prS);
+  document.getElementById('pr-t').textContent = AR(prT);
+  document.getElementById('pr-p').textContent = prT ? AR(Math.round(prS / prT * 100)) + '٪' : '—';
+};
+
+const practiceQs = [
+  {t:'ما الصيغة الممتدة للعدد ٦٢١٩؟', o:['٦٠٠٠+٢٠٠+١٠+٩','٦٢٠٠+١٩','٦+٢+١+٩','٦٠٠٠+٢١٩'], c:0, exp:'٦٢١٩ = ٦٠٠٠ + ٢٠٠ + ١٠ + ٩'},
+  {t:'ما الصيغة الرمزية للصيغة الممتدة: ٧٠٠٠ + ٦٠٠ + ٢٣؟', o:['٧٦٢٣','٧٦٣٢','٧٢٦٣','٣٢٦٧'], c:0, exp:'٧٠٠٠+٦٠٠+٢٠+٣ = ٧٦٢٣'},
+  {t:'ما قيمة الرقم ٨ في العدد ٨٢٠٠؟', o:['٨','٨٠٠','٨٠٠٠','٨٠'], c:2, exp:'٨ في مكان الآلاف: ٨ × ١٠٠٠ = ٨٠٠٠'},
+  {t:'ما رقم العشرات في العدد ٤٨٣١؟', o:['٤','٨','٣','١'], c:2, exp:'الرقم في مكان العشرات هو ٣'},
+  {t:'أي الأعداد التالية أكبر: ٥٤٣٢ أم ٥٤٢٣؟', o:['٥٤٣٢','٥٤٢٣','متساويان','لا أعرف'], c:0, exp:'٥٤٣٢ > ٥٤٢٣ (رقم العشرات ٣ > ٢)'},
+  {t:'ما الصيغة اللفظية للعدد ١٠٠٠؟', o:['عشرة آلاف','ألف','مئة ألف','مئة'], c:1, exp:'١٠٠٠ = ألف'},
+  {t:'اكتب بالصيغة الممتدة: ٣٠٥٠', o:['٣٠٠٠+٥٠','٣٠٠٠+٥','٣٠+٥٠','٣٠٠+٥٠'], c:0, exp:'٣٠٥٠ = ٣٠٠٠ + ٥٠ (لا مئات ولا آحاد)'},
+  {t:'ما أكبر عدد من أربعة أرقام يمكن تكوينه من: ١، ٩، ٤، ٦؟', o:['٩٦٤١','٩٦١٤','٩١٦٤','٦٩٤١'], c:0, exp:'نرتّب من الأكبر: ٩٦٤١'},
+  {t:'في العدد ٢٠٠٤: ما رقم المئات؟', o:['٢','٠','٤','لا يوجد'], c:1, exp:'رقم المئات هو ٠ (لا توجد مئات في ٢٠٠٤)'},
+  {t:'ما الصيغة الرمزية لـ: أربعة آلاف وواحد؟', o:['٤٠٠١','٤١٠٠','٤٠١٠','٤١'], c:0, exp:'أربعة آلاف = ٤٠٠٠، وواحد = ١، المجموع: ٤٠٠١'},
+  {t:'أي صيغة ممتدة تساوي ٥٠٠٨؟', o:['٥٠٠٠+٨','٥٠٠+٨','٥+٨','٥٠٠٠+٨٠'], c:0, exp:'٥٠٠٨ = ٥٠٠٠ + ٨ (لا مئات ولا عشرات)'},
+  {t:'ما قيمة الرقم ٣ في العدد ٦٣٧٢؟', o:['٣','٣٠','٣٠٠','٣٠٠٠'], c:2, exp:'٣ في مكان المئات: ٣ × ١٠٠ = ٣٠٠'},
+];
+function renderPractice() {
+  renderQBlock('practice-area', practiceQs, 'pr', true);
+}
+
+// ═══════════════════════════════════════════════════════════
+// MASTERY
+// ═══════════════════════════════════════════════════════════
+const masteryQs = [
+  {t:'م١: ما الصيغة الممتدة للعدد ٣٢٥٧؟', o:['٣٠٠٠+٢٠٠+٥٠+٧','٣٢٠٠+٥٧','٣+٢+٥+٧','٣٠٠٠+٢٥٧'], c:0},
+  {t:'م٢: ما الصيغة الرمزية لـ: ٩٠٠٠+٥٠٠+١٠+١؟', o:['٩٥١١','٩٥٠١','٩٥١٠','٩١٥١'], c:0},
+  {t:'م٣: ما قيمة الرقم ٧ في العدد ٧٣٨٢؟', o:['٧','٧٠','٧٠٠','٧٠٠٠'], c:3},
+  {t:'م٤: ما رقم المئات في العدد ٥٧٢٩؟', o:['٥','٧','٢','٩'], c:1},
+  {t:'م٥: ما الصيغة الممتدة للعدد ٦٠٠٠؟', o:['٦٠٠٠+٠','٦٠٠٠','٦+٠٠٠','٦٠٠+٠'], c:1},
+  {t:'م٦: أيهما أكبر: ٨٢٤٥ أم ٨٤٢٥؟', o:['٨٢٤٥','٨٤٢٥','متساويان','لا أعرف'], c:1},
+  {t:'م٧: ما الصيغة اللفظية للعدد ٥٠٠٠؟', o:['خمسة','خمسون','خمسة آلاف','خمسمئة'], c:2},
+  {t:'م٨: ما الصيغة الرمزية لـ: ألفان وخمسة وعشرون؟', o:['٢٥٢٥','٢٠٢٥','٢٢٥٠','٢٠٥٢'], c:1},
+  {t:'م٩: في العدد ١٠٤٨، ما رقم العشرات؟', o:['١','٠','٤','٨'], c:2},
+  {t:'م١٠: ما الصيغة الممتدة لـ ٤٠٠٦؟', o:['٤٠٠٠+٦','٤٠٠+٦','٤+٦','٤٠+٦'], c:0},
+  {t:'م١١: أكبر رقم من الأرقام ٢، ٨، ٥، ١ في مكان الآلاف؟', o:['٢','٥','٨','١'], c:2},
+  {t:'م١٢: ما قيمة الرقم ٥ في العدد ٣٥٤٨؟', o:['٥','٥٠','٥٠٠','٥٠٠٠'], c:2},
+  {t:'م١٣: ما الصيغة الرمزية لـ: ثلاثة آلاف وخمسة؟', o:['٣٠٠٥','٣٥٠٠','٣٠٥٠','٣٥'], c:0},
+  {t:'م١٤: الصيغة الممتدة للعدد ٧٠٧٠؟', o:['٧٠٠٠+٧٠','٧٠٠٠+٧','٧٠+٧٠','٧٠٠+٧٠'], c:0},
+  {t:'م١٥: ما أصغر عدد من أربعة أرقام؟', o:['٩٩٩','١٠٠٠','١٠٠١','٩٩٩٩'], c:1},
+];
+let mastAns = new Array(15).fill(null), mastDone = 0;
+function renderMastery() {
+  const cont = document.getElementById('mastery-area'); cont.innerHTML = '';
+  masteryQs.forEach((q, i) => {
+    const b = document.createElement('div'); b.className = 'qblock'; b.id = 'mq' + i;
+    b.innerHTML = `<div class="q-text">${q.t}</div>
+      <div class="opts">${q.o.map((o, j) =>
+        `<button class="opt" id="mo${i}_${j}" onclick="pickMast(${i},${j})">${o}</button>`).join('')}</div>`;
+    cont.appendChild(b);
+  });
+  document.getElementById('submit-btn').style.display = 'flex';
+}
+function pickMast(qi, chosen) {
+  document.querySelectorAll(`[id^="mo${qi}_"]`).forEach(b => { b.style.borderColor = ''; b.style.background = ''; b.style.color = ''; });
+  mastAns[qi] = chosen;
+  const btn = document.getElementById(`mo${qi}_${chosen}`);
+  btn.style.borderColor = 'var(--gold)'; btn.style.background = 'var(--gold-lt)'; btn.style.color = '#78350F';
+  mastDone = mastAns.filter(a => a !== null).length;
+  document.getElementById('m-bar').style.width = (mastDone / masteryQs.length * 100) + '%';
+  document.getElementById('m-txt').textContent = AR(mastDone) + ' / ' + AR(masteryQs.length);
+}
+function submitMastery() {
+  let correct = 0;
+  masteryQs.forEach((q, i) => {
+    const chosen = mastAns[i];
+    const btns = document.querySelectorAll(`[id^="mo${i}_"]`);
+    btns.forEach(b => { b.disabled = true; b.style.borderColor = ''; b.style.background = ''; b.style.color = ''; });
+    if (chosen !== null) {
+      if (chosen === q.c) { correct++; btns[chosen].classList.add('correct'); document.getElementById('mq' + i).classList.add('correct'); }
+      else { btns[chosen].classList.add('wrong'); btns[q.c].classList.add('correct'); document.getElementById('mq' + i).classList.add('wrong'); }
+    } else btns[q.c].classList.add('correct');
+  });
+  const score = Math.round(correct / masteryQs.length * 100);
+  const res = document.getElementById('mastery-result');
+  if (score >= 80) {
+    res.innerHTML = `<div class="cert">
+      <div class="cert-big">🏆</div>
+      <h2>شهادة الإتقان</h2>
+      <p style="margin:.5rem 0;font-size:1.1rem">نتيجتك: <strong style="color:var(--gold)">${AR(correct)} / ${AR(masteryQs.length)}</strong> (${AR(score)}٪)</p>
+      <p>أتقنت درس صيغ كتابة الأعداد! 🌟</p>
+      <div class="cert-stars">⭐ ⭐ ⭐</div>
+    </div>`;
+  } else {
+    res.innerHTML = `<div style="background:#FEE2E2;border:2px solid #EF4444;border-radius:20px;padding:2rem;text-align:center">
+      <div style="font-size:52px">💪</div>
+      <h2 style="color:#991B1B;font-family:'Baloo Bhaijaan 2';margin:.5rem 0">استمر في التدريب!</h2>
+      <p style="color:#991B1B">نتيجتك: ${AR(correct)}/${AR(masteryQs.length)} (${AR(score)}٪) — تحتاج ٨٠٪</p>
+      <button class="btn btn-p" style="margin-top:1rem" onclick="retryMastery()">🔄 أعد الاختبار</button>
+    </div>`;
+  }
+  res.style.display = 'block';
+  document.getElementById('submit-btn').style.display = 'none';
+  document.getElementById('m-bar').style.width = '100%';
+  document.getElementById('m-txt').textContent = AR(masteryQs.length) + ' / ' + AR(masteryQs.length);
+}
+function retryMastery() {
+  mastAns = new Array(15).fill(null); mastDone = 0;
+  document.getElementById('mastery-result').style.display = 'none';
+  document.getElementById('m-bar').style.width = '0%';
+  document.getElementById('m-txt').textContent = '٠ / ١٥';
+  renderMastery();
+}
+
+// ═══════════════════════════════════════════════════════════
+// GENERIC Q BLOCK RENDERER
+// ═══════════════════════════════════════════════════════════
+function renderQBlock(containerId, questions, prefix, track) {
+  const cont = document.getElementById(containerId); if (!cont) return; cont.innerHTML = '';
+  questions.forEach((q, i) => {
+    const b = document.createElement('div'); b.className = 'qblock'; b.id = prefix + i;
+    b.innerHTML = `<div class="q-text"><span class="q-num">${AR(i + 1)}:</span> ${q.t}</div>
+      <div class="opts">${q.o.map((o, j) =>
+        `<button class="opt" onclick="ansQ('${prefix}',${i},${j},${q.c},${!!track},'${q.exp || ''}')">${o}</button>`
+      ).join('')}</div>
+      <div class="q-fb" id="${prefix}f${i}"></div>`;
+    cont.appendChild(b);
+  });
+}
+function ansQ(prefix, qi, chosen, correct, track, exp) {
+  const block = document.getElementById(prefix + qi);
+  if (block.classList.contains('correct') || block.classList.contains('wrong')) return;
+  const btns = block.querySelectorAll('.opt'); btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById(prefix + 'f' + qi);
+  if (track) prT++;
+  if (chosen === correct) {
+    btns[chosen].classList.add('correct'); block.classList.add('correct');
+    fb.textContent = '✅ إجابة صحيحة! ' + (exp ? exp : '') + ' 🎉';
+    fb.className = 'q-fb show ok';
+    if (track) prS++;
+  } else {
+    btns[chosen].classList.add('wrong'); btns[correct].classList.add('correct');
+    block.classList.add('wrong');
+    fb.textContent = '❌ الإجابة الصحيحة: ' + btns[correct].textContent + (exp ? ' — ' + exp : '');
+    fb.className = 'q-fb show no';
+  }
+  if (track) upPR();
+}
+
+// ═══════════════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════════════
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  const tabs = ['intro','placevalue','forms','builder','fill','sort','drag','memory','balloon','practice','mastery'];
+  const idx = tabs.indexOf(name);
+  if (idx >= 0) document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
+window.onload = () => {
+  renderPVExamples();
+  renderFormsExamples();
+  renderVerbalExamples();
+  updateBuilder();
+  renderFill();
+  renderSort();
+  renderCompareQ();
+  initDrag();
+  initMemory();
+  renderPractice();
+  renderMastery();
+  document.querySelectorAll('.tab-btn')[0].classList.add('active');
+};
+</script>
+</body>
+</html>
