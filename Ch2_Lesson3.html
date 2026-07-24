@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خاصية الإبدال — الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #0ea5e9;
+  --sun: #f59e0b;
+  --mint: #10b981;
+  --coral: #f43f5e;
+  --violet: #7c3aed;
+  --navy: #0f172a;
+  --cream: #fffbeb;
+  --card: #ffffff;
+  --shadow: 0 10px 40px rgba(15,23,42,0.12);
+  --radius: 20px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Baloo Bhaijaan 2', 'Tajawal', sans-serif;
+  background: #0f172a;
+  color: #0f172a;
+  min-height: 100vh;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+/* ─── ANIMATED BG ─── */
+.bg-scene {
+  position: fixed; inset: 0; z-index: 0;
+  background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 40%, #0f2b3d 100%);
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s);
+}
+@keyframes twinkle {
+  0%,100%{opacity:.2;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.4);}
+}
+.cloud {
+  position: absolute;
+  font-size: 3rem;
+  animation: drift var(--d,20s) linear infinite;
+  opacity: 0.15;
+}
+@keyframes drift {
+  from{transform:translateX(110vw);}
+  to{transform:translateX(-20vw);}
+}
+
+/* ─── LAYOUT ─── */
+.app { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:20px 16px 80px; }
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center;
+  padding: 48px 24px 36px;
+  position: relative;
+}
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--sun), var(--coral));
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 6px 20px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+}
+.hero h1 {
+  font-size: clamp(2.2rem,6vw,3.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  text-shadow: 0 0 40px rgba(14,165,233,0.5);
+}
+.hero h1 span { color: var(--sun); }
+.hero .tagline {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-top: 12px;
+  font-weight: 500;
+}
+.home-btn {
+  position: absolute;
+  top: 16px; right: 16px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #fff;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: inherit;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s;
+}
+.home-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+.home-btn svg { width: 15px; height: 15px; }
+@media (max-width: 520px) {
+  .home-btn { top: 10px; right: 10px; padding: 6px 12px; font-size: 12px; }
+}
+.hero-emoji {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 14px;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+/* ─── NAME INPUT ─── */
+.name-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.name-card h2 { color:#fff; font-size:1.2rem; margin-bottom:16px; }
+.name-card input {
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 14px;
+  padding: 13px 20px;
+  font-size: 1.1rem;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  color: #fff;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  transition: border .2s;
+}
+.name-card input::placeholder { color: rgba(255,255,255,0.35); }
+.name-card input:focus { outline:none; border-color: var(--sun); }
+.btn-go {
+  display: inline-flex; align-items:center; gap:10px;
+  background: linear-gradient(135deg, var(--sun), var(--coral));
+  color: #fff; border: none; border-radius: 14px;
+  padding: 14px 38px; font-size: 1.15rem;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 700; cursor: pointer; margin-top: 16px;
+  box-shadow: 0 6px 24px rgba(244,63,94,0.4);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-go:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(244,63,94,0.5); }
+
+/* ─── SECTION TABS ─── */
+.tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center; margin-bottom: 28px;
+}
+.tab-btn {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 50px; padding: 9px 20px;
+  color: #94a3b8; font-size: 0.92rem;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 600; cursor: pointer;
+  transition: all .2s;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: var(--sky); color: #fff;
+  border-color: var(--sky);
+  box-shadow: 0 4px 16px rgba(14,165,233,0.35);
+}
+.tab-btn.done { border-color: var(--mint); color: var(--mint); }
+.tab-btn.done.active { background: var(--mint); color: #fff; }
+
+/* ─── SECTION PANEL ─── */
+.section { display:none; animation: slideUp .4s ease; }
+.section.active { display:block; }
+@keyframes slideUp {
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:none;}
+}
+
+/* ─── GLASS CARD ─── */
+.glass {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius);
+  padding: 28px 28px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+.glass.light {
+  background: #fff;
+  border: none;
+  color: var(--navy);
+}
+.glass.light p, .glass.light li { color: #334155; }
+
+/* ─── SECTION HEADER ─── */
+.sec-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 22px;
+}
+.sec-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; flex-shrink: 0;
+}
+.sec-header h2 { color: #fff; font-size: 1.4rem; font-weight: 800; }
+.sec-header p { color: #94a3b8; font-size: 0.9rem; margin-top: 2px; }
+
+/* ─── EXPLANATION ─── */
+.explain-box {
+  background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(124,58,237,0.15));
+  border: 1.5px solid rgba(14,165,233,0.3);
+  border-radius: 16px; padding: 22px 24px; margin-bottom: 20px;
+}
+.explain-box h3 { color: var(--sky); font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; }
+.explain-box p { color: #cbd5e1; line-height: 1.9; font-size: 1rem; }
+
+.rule-display {
+  background: var(--navy);
+  border: 2px solid var(--sun);
+  border-radius: 16px; padding: 18px 24px;
+  text-align: center; margin: 16px 0;
+}
+.rule-display .formula {
+  font-size: clamp(1.3rem,4vw,2rem);
+  font-weight: 800; color: var(--sun);
+  letter-spacing: 2px;
+}
+.rule-display .sub { color: #94a3b8; font-size: 0.9rem; margin-top: 6px; }
+
+/* ─── VISUAL DEMO ─── */
+.visual-demo {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap; margin: 20px 0;
+}
+.demo-side {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 18px 22px;
+  text-align: center; min-width: 200px;
+}
+.demo-side .nums {
+  font-size: 2rem; font-weight: 800; color: #fff;
+  margin-bottom: 8px;
+}
+.demo-side .emojis { font-size: 1.6rem; margin-bottom: 10px; }
+.demo-side .result { color: var(--mint); font-size: 1.1rem; font-weight: 700; }
+.swap-arrow {
+  font-size: 2rem; color: var(--sun);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.2);} }
+.equals-badge {
+  background: var(--mint); color: #fff;
+  font-size: 1.5rem; font-weight: 900;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(16,185,129,0.4);
+}
+
+/* ─── INTERACTIVE FLIP ─── */
+.flip-demo {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 24px;
+  text-align: center; margin-bottom: 22px;
+}
+.flip-demo h3 { color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 18px; }
+.flip-nums {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.num-box {
+  width: 64px; height: 64px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 900;
+  transition: transform .4s cubic-bezier(.4,2,.6,1);
+  cursor: default;
+}
+.num-box.a { background: linear-gradient(135deg, #0ea5e9, #6366f1); color: #fff; }
+.num-box.b { background: linear-gradient(135deg, #f43f5e, #f59e0b); color: #fff; }
+.op-box {
+  font-size: 2rem; font-weight: 900; color: #fff;
+}
+.eq-box { font-size: 2rem; font-weight: 900; color: var(--mint); }
+.ans-box {
+  font-size: 2rem; font-weight: 900;
+  color: var(--sun);
+  background: rgba(245,158,11,0.15);
+  border: 2px solid var(--sun);
+  width: 64px; height: 64px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-flip {
+  background: linear-gradient(135deg, var(--violet), var(--sky));
+  color: #fff; border: none; border-radius: 12px;
+  padding: 12px 30px; font-size: 1rem;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 700; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(124,58,237,0.4);
+  transition: transform .15s;
+}
+.btn-flip:hover { transform: scale(1.05); }
+.flip-note {
+  color: #94a3b8; font-size: 0.9rem; margin-top: 12px;
+}
+
+/* ─── GAME SECTION ─── */
+.game-board {
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 18px; padding: 24px;
+  margin-bottom: 20px; position: relative;
+}
+.game-board h3 { color: #fff; font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+.game-board .desc { color: #94a3b8; font-size: 0.88rem; margin-bottom: 18px; }
+
+/* Missing number game */
+.missing-eq {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; flex-wrap: wrap; font-size: 2rem;
+  font-weight: 900; color: #fff; margin-bottom: 18px;
+}
+.blank-box {
+  width: 64px; height: 64px; border: 3px dashed var(--sun);
+  border-radius: 14px; background: rgba(245,158,11,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: var(--sun);
+}
+.blank-box.filled { border-style:solid; background: rgba(245,158,11,0.2); font-size:2rem; color: var(--sun); }
+.choice-btns { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:14px; }
+.choice-btn {
+  width: 56px; height: 56px; border-radius: 14px;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff; font-size: 1.4rem; font-weight: 800;
+  cursor: pointer; transition: all .18s;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+}
+.choice-btn:hover { background: var(--sky); border-color: var(--sky); transform: scale(1.1); }
+.choice-btn.correct-pick { background: var(--mint); border-color: var(--mint); }
+.choice-btn.wrong-pick { background: var(--coral); border-color: var(--coral); }
+.game-feedback {
+  text-align: center; font-size: 1.1rem; font-weight: 700;
+  min-height: 36px; padding: 6px;
+  border-radius: 10px; transition: all .3s;
+}
+.game-feedback.ok { color: var(--mint); background: rgba(16,185,129,0.1); }
+.game-feedback.err { color: var(--coral); background: rgba(244,63,94,0.1); }
+.btn-next-q {
+  display: block; width: 100%;
+  background: linear-gradient(135deg, var(--sky), var(--violet));
+  color: #fff; border: none; border-radius: 12px;
+  padding: 13px; font-size: 1rem;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 700; cursor: pointer; margin-top: 14px;
+  transition: opacity .2s;
+}
+.btn-next-q:hover { opacity:.88; }
+.q-counter {
+  display: inline-flex; align-items:center; gap:6px;
+  background: rgba(255,255,255,0.08); border-radius:50px;
+  padding: 4px 14px; color: #94a3b8;
+  font-size: 0.85rem; font-weight: 600; margin-bottom: 14px;
+}
+.q-counter span { color: var(--sun); font-weight: 800; }
+
+/* ─── DRAG & DROP MATCH ─── */
+.match-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 18px;
+}
+.match-left, .match-right {
+  display: flex; flex-direction:column; gap: 10px;
+}
+.match-item {
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 14px; padding: 14px 16px;
+  color: #fff; font-size: 1.05rem; font-weight: 700;
+  text-align: center; cursor: pointer;
+  transition: all .2s; user-select: none;
+}
+.match-item:hover { border-color: var(--sky); background: rgba(14,165,233,0.15); }
+.match-item.selected { border-color: var(--sun); background: rgba(245,158,11,0.2); color: var(--sun); }
+.match-item.matched { border-color: var(--mint); background: rgba(16,185,129,0.15); color: var(--mint); pointer-events: none; }
+.match-item.wrong-match { border-color: var(--coral); background: rgba(244,63,94,0.15); color: var(--coral); animation: shake .4s; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-8px);} 75%{transform:translateX(8px);} }
+
+/* ─── MCQ QUESTIONS ─── */
+.q-block {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 20px 22px;
+  margin-bottom: 16px; transition: border .2s;
+}
+.q-block.correct { border-color: var(--mint); background: rgba(16,185,129,0.08); }
+.q-block.wrong { border-color: var(--coral); background: rgba(244,63,94,0.08); }
+.q-block .q-text {
+  color: #e2e8f0; font-size: 1.05rem; font-weight: 700;
+  margin-bottom: 14px; line-height: 1.7;
+}
+.q-num-badge {
+  display: inline-flex; align-items:center; justify-content:center;
+  width: 28px; height: 28px; background: var(--sky);
+  color: #fff; border-radius: 50%; font-size: 0.85rem;
+  font-weight: 900; margin-left: 10px; flex-shrink:0;
+}
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media(max-width:500px){ .opts { grid-template-columns: 1fr; } }
+.opt-btn {
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 12px; padding: 12px 16px;
+  color: #cbd5e1; font-size: 1rem; font-weight: 600;
+  cursor: pointer; text-align: center;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  transition: all .18s;
+}
+.opt-btn:hover:not(:disabled) { border-color: var(--sky); color: #fff; background: rgba(14,165,233,0.15); }
+.opt-btn.sel-ok { background: var(--mint); border-color: var(--mint); color: #fff; }
+.opt-btn.sel-err { background: var(--coral); border-color: var(--coral); color: #fff; }
+.opt-btn.reveal { background: rgba(16,185,129,0.2); border-color: var(--mint); color: var(--mint); }
+.opt-btn:disabled { cursor: default; }
+
+/* Fill input */
+.fill-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.fill-inp {
+  background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 10px; padding: 10px 16px;
+  font-size: 1.1rem; font-family: 'Baloo Bhaijaan 2', sans-serif;
+  color: #fff; width: 110px; text-align: center;
+  transition: border .2s;
+}
+.fill-inp:focus { outline:none; border-color: var(--sun); }
+.fill-inp:disabled { opacity:.7; }
+.btn-chk {
+  background: var(--sky); color: #fff; border: none;
+  border-radius: 10px; padding: 10px 20px;
+  font-size: 0.95rem; font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 700; cursor: pointer; transition: background .2s;
+}
+.btn-chk:hover { background: var(--violet); }
+.inline-fb {
+  font-size: 0.95rem; font-weight: 700; padding: 6px 12px;
+  border-radius: 8px; display: none;
+}
+.inline-fb.ok { background: rgba(16,185,129,0.15); color: var(--mint); display:inline-block; }
+.inline-fb.err { background: rgba(244,63,94,0.15); color: var(--coral); display:inline-block; }
+
+/* ─── SUBMIT ─── */
+.btn-submit {
+  display: block; width: 100%;
+  background: linear-gradient(135deg, var(--mint), #059669);
+  color: #fff; border: none; border-radius: 14px;
+  padding: 16px; font-size: 1.15rem;
+  font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 800; cursor: pointer; margin-top: 24px;
+  box-shadow: 0 6px 24px rgba(16,185,129,0.35);
+  transition: transform .15s;
+}
+.btn-submit:hover { transform: translateY(-2px); }
+
+/* ─── RESULT ─── */
+.result-card {
+  display: none; background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 18px; padding: 28px 24px;
+  text-align: center; margin-top: 20px;
+  animation: slideUp .4s ease;
+}
+.result-card.show { display: block; }
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%;
+  display: flex; align-items:center; justify-content:center;
+  flex-direction: column; margin: 0 auto 16px;
+  font-size: 1.9rem; font-weight: 900; color: #fff;
+}
+.score-ring .small { font-size:.85rem; opacity:.85; }
+.score-ring.excellent { background: conic-gradient(var(--mint) var(--p,0%), rgba(255,255,255,.1) 0); box-shadow: 0 0 30px rgba(16,185,129,.5); }
+.score-ring.good { background: conic-gradient(var(--sky) var(--p,0%), rgba(255,255,255,.1) 0); box-shadow: 0 0 30px rgba(14,165,233,.4); }
+.score-ring.fair { background: conic-gradient(var(--sun) var(--p,0%), rgba(255,255,255,.1) 0); box-shadow: 0 0 30px rgba(245,158,11,.4); }
+.score-ring.poor { background: conic-gradient(var(--coral) var(--p,0%), rgba(255,255,255,.1) 0); box-shadow: 0 0 30px rgba(244,63,94,.4); }
+.level-pill {
+  display: inline-block; padding: 8px 24px;
+  border-radius: 50px; font-size: 1rem; font-weight: 800; margin: 10px 0;
+}
+.level-pill.excellent { background: rgba(16,185,129,.2); color: var(--mint); border: 1.5px solid var(--mint); }
+.level-pill.good { background: rgba(14,165,233,.2); color: var(--sky); border: 1.5px solid var(--sky); }
+.level-pill.fair { background: rgba(245,158,11,.2); color: var(--sun); border: 1.5px solid var(--sun); }
+.level-pill.poor { background: rgba(244,63,94,.2); color: var(--coral); border: 1.5px solid var(--coral); }
+.result-msg { color: #94a3b8; font-size: 1rem; margin-top: 10px; line-height: 1.8; }
+
+/* ─── FINAL REPORT ─── */
+.final-report {
+  display: none; background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px; padding: 36px 28px;
+  margin: 20px 0 40px;
+}
+.final-report.show { display: block; animation: slideUp .5s ease; }
+.final-report h2 {
+  color: #fff; font-size: 1.8rem; font-weight: 900;
+  text-align: center; margin-bottom: 28px;
+}
+.final-report h2 span { color: var(--sun); }
+.overall-banner {
+  background: linear-gradient(135deg, var(--violet), var(--sky));
+  border-radius: 18px; padding: 28px; text-align: center; margin-bottom: 24px;
+}
+.overall-banner .big { font-size: 4.5rem; font-weight: 900; color: #fff; line-height:1; }
+.overall-banner .lbl { color: rgba(255,255,255,.8); font-size: 1.05rem; margin-top: 8px; }
+.report-table {
+  width: 100%; border-collapse: collapse; margin-bottom: 22px;
+}
+.report-table th {
+  background: rgba(14,165,233,0.2); color: var(--sky);
+  padding: 12px 16px; font-size: 0.9rem; text-align: right;
+}
+.report-table td {
+  padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.07);
+  color: #cbd5e1; font-size: 0.95rem;
+}
+.report-table tr:hover td { background: rgba(255,255,255,0.04); }
+.tag { display:inline-block; padding:3px 12px; border-radius:50px; font-size:.82rem; font-weight:700; }
+.tag.excellent { background:rgba(16,185,129,.2); color:var(--mint); }
+.tag.good { background:rgba(14,165,233,.2); color:var(--sky); }
+.tag.fair { background:rgba(245,158,11,.2); color:var(--sun); }
+.tag.poor { background:rgba(244,63,94,.2); color:var(--coral); }
+.rec-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 20px 22px; margin-bottom: 22px;
+}
+.rec-box h3 { color: var(--sun); font-size: 1.05rem; font-weight: 800; margin-bottom: 14px; }
+.rec-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.95rem; color: #94a3b8; line-height: 1.7;
+}
+.rec-item:last-child { border: none; }
+.rec-item .ri { font-size: 1.2rem; flex-shrink:0; }
+.report-btns { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.btn-print {
+  background: var(--violet); color:#fff; border:none;
+  border-radius: 12px; padding: 13px 28px;
+  font-size: 1rem; font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 700; cursor: pointer;
+}
+.btn-retry {
+  background: var(--sun); color:#fff; border:none;
+  border-radius: 12px; padding: 13px 28px;
+  font-size: 1rem; font-family: 'Baloo Bhaijaan 2', sans-serif;
+  font-weight: 700; cursor: pointer;
+}
+
+/* ─── PROGRESS BAR ─── */
+.prog-wrap { background: rgba(255,255,255,0.08); border-radius:50px; height:6px; margin-bottom:24px; }
+.prog-fill { background: linear-gradient(90deg, var(--sky), var(--mint)); border-radius:50px; height:6px; transition:width .6s ease; }
+
+/* ─── CELEBRATION ─── */
+.confetti-piece {
+  position: fixed; top: -20px;
+  animation: confettiFall var(--dur,4s) linear forwards;
+  z-index: 9999; pointer-events: none; font-size: 1.4rem;
+}
+@keyframes confettiFall {
+  to { transform: translateY(110vh) rotate(720deg); opacity:0; }
+}
+
+.hidden { display:none!important; }
+</style>
+</head>
+<body>
+
+<!-- BG -->
+<div class="bg-scene" id="bgScene"></div>
+
+<div class="app">
+
+  <!-- HERO -->
+  <div class="hero">
+    <a class="home-btn" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+      الرئيسية
+    </a>
+    <span class="hero-emoji">🔄</span>
+    <div class="hero-badge">الصف الثالث الابتدائي • رياضيات</div>
+    <h1>خاصية <span>الإبدال</span></h1>
+    <p class="tagline">اكتشف السر الرائع في الجمع والضرب!</p>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="mainApp">
+
+    <!-- PROGRESS -->
+    <div class="prog-wrap"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-0" onclick="goTab(0)">📖 الشرح</button>
+      <button class="tab-btn" id="tab-1" onclick="goTab(1)">🎮 اكتشف بنفسك</button>
+      <button class="tab-btn" id="tab-2" onclick="goTab(2)">🧩 لعبة المطابقة</button>
+      <button class="tab-btn" id="tab-3" onclick="goTab(3)">✏️ تدريبات الجمع</button>
+      <button class="tab-btn" id="tab-4" onclick="goTab(4)">✖️ تدريبات الضرب</button>
+      <button class="tab-btn" id="tab-5" onclick="goTab(5)">🏆 التقرير النهائي</button>
+    </div>
+
+    <!-- ══════════ SECTION 0: EXPLANATION ══════════ -->
+    <div class="section active" id="sec-0">
+      <div class="sec-header">
+        <div class="sec-icon" style="background:linear-gradient(135deg,#0ea5e9,#6366f1)">📖</div>
+        <div>
+          <h2>ما هي خاصية الإبدال؟</h2>
+          <p>افهم القاعدة الذهبية بأمثلة حية وممتعة</p>
+        </div>
+      </div>
+
+      <div class="explain-box">
+        <h3>🌟 التعريف</h3>
+        <p>خاصية الإبدال تقول: <strong style="color:#fff">عندما تُبدل (تغير) ترتيب الأعداد في الجمع أو الضرب، يظل الناتج نفسه!</strong><br>
+        يعني مهما قلبنا الأرقام، الجواب واحد ✨</p>
+      </div>
+
+      <div class="rule-display">
+        <div class="formula">أ + ب = ب + أ</div>
+        <div class="sub">خاصية الإبدال في الجمع</div>
+      </div>
+
+      <!-- VISUAL ADDITION -->
+      <div class="glass" style="margin-bottom:14px;">
+        <h3 style="color:var(--sky);font-size:1rem;font-weight:800;margin-bottom:14px;">🍎 مثال على الجمع:</h3>
+        <div class="visual-demo">
+          <div class="demo-side">
+            <div class="emojis">🍎🍎🍎 + 🍋🍋</div>
+            <div class="nums">3 + 2</div>
+            <div class="result">= 5</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="swap-arrow">⇄</div>
+            <div class="equals-badge" style="margin:8px auto;">=</div>
+          </div>
+          <div class="demo-side">
+            <div class="emojis">🍋🍋 + 🍎🍎🍎</div>
+            <div class="nums">2 + 3</div>
+            <div class="result">= 5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-display">
+        <div class="formula">أ × ب = ب × أ</div>
+        <div class="sub">خاصية الإبدال في الضرب</div>
+      </div>
+
+      <!-- VISUAL MULTIPLICATION -->
+      <div class="glass" style="margin-bottom:20px;">
+        <h3 style="color:var(--coral);font-size:1rem;font-weight:800;margin-bottom:14px;">⭐ مثال على الضرب:</h3>
+        <div class="visual-demo">
+          <div class="demo-side">
+            <div class="emojis" style="font-size:1.3rem;line-height:1.8;">
+              ⭐⭐⭐<br>⭐⭐⭐
+            </div>
+            <div class="nums">2 × 3</div>
+            <div class="result">= 6</div>
+          </div>
+          <div style="text-align:center;">
+            <div class="swap-arrow">⇄</div>
+            <div class="equals-badge" style="margin:8px auto;">=</div>
+          </div>
+          <div class="demo-side">
+            <div class="emojis" style="font-size:1.3rem;line-height:1.8;">
+              ⭐⭐<br>⭐⭐<br>⭐⭐
+            </div>
+            <div class="nums">3 × 2</div>
+            <div class="result">= 6</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY POINTS -->
+      <div class="glass light">
+        <h3 style="color:var(--navy);font-size:1rem;font-weight:800;margin-bottom:12px;">📌 نقاط مهمة:</h3>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid #e2e8f0;display:flex;gap:12px;align-items:center;">
+            <span style="font-size:1.3rem;">✅</span>
+            <span>خاصية الإبدال تنطبق على <strong>الجمع والضرب</strong> فقط.</span>
+          </li>
+          <li style="padding:8px 0;border-bottom:1px solid #e2e8f0;display:flex;gap:12px;align-items:center;">
+            <span style="font-size:1.3rem;">❌</span>
+            <span>لا تنطبق على الطرح: 5 − 3 ≠ 3 − 5</span>
+          </li>
+          <li style="padding:8px 0;border-bottom:1px solid #e2e8f0;display:flex;gap:12px;align-items:center;">
+            <span style="font-size:1.3rem;">❌</span>
+            <span>لا تنطبق على القسمة: 8 ÷ 2 ≠ 2 ÷ 8</span>
+          </li>
+          <li style="padding:8px 0;display:flex;gap:12px;align-items:center;">
+            <span style="font-size:1.3rem;">🔄</span>
+            <span>الإبدال = تغيير الترتيب دون تغيير الناتج</span>
+          </li>
+        </ul>
+      </div>
+
+      <button class="btn-submit" onclick="goTab(1)">👉 جرّب بنفسك — لعبة الاكتشاف</button>
+    </div>
+
+    <!-- ══════════ SECTION 1: INTERACTIVE FLIP ══════════ -->
+    <div class="section" id="sec-1">
+      <div class="sec-header">
+        <div class="sec-icon" style="background:linear-gradient(135deg,#f59e0b,#f43f5e)">🎮</div>
+        <div>
+          <h2>اكتشف بنفسك!</h2>
+          <p>اضغط زر "أبدل" وشاهد السحر يحدث 🪄</p>
+        </div>
+      </div>
+
+      <!-- ADDITION FLIP -->
+      <div class="flip-demo">
+        <h3>➕ لعبة الجمع المقلوب</h3>
+        <div class="flip-nums" id="addFlipDisplay">
+          <div class="num-box a" id="addA">4</div>
+          <div class="op-box">+</div>
+          <div class="num-box b" id="addB">7</div>
+          <div class="eq-box">=</div>
+          <div class="ans-box" id="addAns">11</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <button class="btn-flip" onclick="flipAdd()">🔄 أبدل الأرقام</button>
+          <button class="btn-flip" style="background:linear-gradient(135deg,var(--mint),#059669);" onclick="newAddQ()">🎲 سؤال جديد</button>
+        </div>
+        <div class="flip-note" id="addNote">اضغط "أبدل الأرقام" وشاهد ماذا يحدث!</div>
+      </div>
+
+      <!-- MULTIPLICATION FLIP -->
+      <div class="flip-demo">
+        <h3>✖️ لعبة الضرب المقلوب</h3>
+        <div class="flip-nums">
+          <div class="num-box a" id="mulA">3</div>
+          <div class="op-box">×</div>
+          <div class="num-box b" id="mulB">5</div>
+          <div class="eq-box">=</div>
+          <div class="ans-box" id="mulAns">15</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <button class="btn-flip" onclick="flipMul()">🔄 أبدل الأرقام</button>
+          <button class="btn-flip" style="background:linear-gradient(135deg,var(--mint),#059669);" onclick="newMulQ()">🎲 سؤال جديد</button>
+        </div>
+        <div class="flip-note" id="mulNote">اضغط "أبدل الأرقام" وشاهد ماذا يحدث!</div>
+      </div>
+
+      <!-- DISCOVERY BOX -->
+      <div class="explain-box" id="discoveryBox">
+        <h3>🔍 ماذا لاحظت؟</h3>
+        <p>عندما تُبدل الأرقام في الجمع أو الضرب، <strong style="color:var(--sun)">الناتج لا يتغير أبداً!</strong><br>
+        هذه هي خاصية الإبدال. جرّب أرقاماً مختلفة وتأكد بنفسك!</p>
+      </div>
+
+      <!-- COUNTER -->
+      <div class="glass" style="text-align:center;padding:18px;">
+        <p style="color:#94a3b8;font-size:.9rem;margin-bottom:6px;">عدد مرات الاستكشاف</p>
+        <div style="font-size:2.5rem;font-weight:900;color:var(--sun);" id="flipCount">0</div>
+      </div>
+
+      <button class="btn-submit" onclick="goTab(2)">👉 انتقل لـ لعبة المطابقة</button>
+    </div>
+
+    <!-- ══════════ SECTION 2: MATCHING GAME ══════════ -->
+    <div class="section" id="sec-2">
+      <div class="sec-header">
+        <div class="sec-icon" style="background:linear-gradient(135deg,#10b981,#0ea5e9)">🧩</div>
+        <div>
+          <h2>لعبة المطابقة</h2>
+          <p>طابق كل عملية بعمليتها المبدلة الصحيحة!</p>
+        </div>
+      </div>
+
+      <div class="game-board">
+        <h3>🔗 طابق كل عملية بمثيلتها المبدلة</h3>
+        <p class="desc">اضغط على عملية من العمود الأيمن ثم على مثيلها من العمود الأيسر</p>
+        <div class="match-grid">
+          <div class="match-right" id="matchRight"></div>
+          <div class="match-left" id="matchLeft"></div>
+        </div>
+        <div class="game-feedback" id="matchFb"></div>
+        <div style="text-align:center;margin-top:14px;">
+          <span style="color:#94a3b8;font-size:.9rem;">✅ تم مطابقة </span>
+          <span id="matchScore" style="color:var(--sun);font-weight:800;font-size:1.1rem;">0</span>
+          <span style="color:#94a3b8;font-size:.9rem;"> / 5</span>
+        </div>
+        <button class="btn-next-q" id="matchNextBtn" onclick="resetMatch()" style="display:none;">🔄 جولة جديدة</button>
+      </div>
+
+      <button class="btn-submit" onclick="goTab(3)">👉 تدريبات الجمع</button>
+    </div>
+
+    <!-- ══════════ SECTION 3: ADDITION DRILL ══════════ -->
+    <div class="section" id="sec-3">
+      <div class="sec-header">
+        <div class="sec-icon" style="background:linear-gradient(135deg,#0ea5e9,#10b981)">✏️</div>
+        <div>
+          <h2>تدريبات خاصية الإبدال في الجمع</h2>
+          <p>10 أسئلة متنوعة لقياس فهمك</p>
+        </div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="q-block" id="a0q1">
+        <div class="q-text"><span class="q-num-badge">1</span> 6 + 9 = ___ + 6 ، ما الرقم الناقص؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'a0q1','6')">6</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q1','9')">9</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q1','15')">15</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q1','3')">3</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-block" id="a0q2">
+        <div class="q-text"><span class="q-num-badge">2</span> 14 + 8 = ؟</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="a0q2-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('a0q2','22')">✓</button>
+          <span class="inline-fb" id="a0q2-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-block" id="a0q3">
+        <div class="q-text"><span class="q-num-badge">3</span> بتطبيق خاصية الإبدال: 14 + 8 يساوي أيضاً؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'a0q3','14 + 8')">14 + 8</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q3','8 + 14')">8 + 14</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q3','8 - 14')">8 − 14</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q3','14 - 8')">14 − 8</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-block" id="a0q4">
+        <div class="q-text"><span class="q-num-badge">4</span> أيّ المعادلات التالية تُطبّق خاصية الإبدال؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'a0q4','25 + 13 = 13 + 25')">25 + 13 = 13 + 25</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q4','25 + 13 = 25 - 13')">25 + 13 = 25 − 13</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q4','25 + 13 = 38 + 0')">25 + 13 = 38 + 0</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q4','25 + 13 = 26 + 12')">25 + 13 = 26 + 12</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-block" id="a0q5">
+        <div class="q-text"><span class="q-num-badge">5</span> 7 + ___ = 11 + 7 ، ما الرقم الناقص؟</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="a0q5-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('a0q5','11')">✓</button>
+          <span class="inline-fb" id="a0q5-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q-block" id="a0q6">
+        <div class="q-text"><span class="q-num-badge">6</span> جمعت سارة 12 وردة وأختها 9 ورود. وجمعت أختها 9 وردة وسارة 12. هل المجموع نفسه؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'a0q6','نعم')">نعم، المجموع 21 في الحالتين ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q6','لا')">لا، الترتيب يغيّر المجموع ❌</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q6','أحياناً')">أحياناً</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q6','لا أعرف')">لا أعرف</button>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="q-block" id="a0q7">
+        <div class="q-text"><span class="q-num-badge">7</span> 33 + 17 = 17 + ___ ، أكمل:</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="a0q7-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('a0q7','33')">✓</button>
+          <span class="inline-fb" id="a0q7-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="q-block" id="a0q8">
+        <div class="q-text"><span class="q-num-badge">8</span> هل تنطبق خاصية الإبدال على الطرح: 10 − 4 = 4 − 10 ؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'a0q8','لا')">لا، الطرح لا يخضع للإبدال ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q8','نعم')">نعم، الإبدال ينطبق على الجميع</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q8','أحياناً')">أحياناً تنطبق</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q8','لا أعرف')">لا أعرف</button>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="q-block" id="a0q9">
+        <div class="q-text"><span class="q-num-badge">9</span> ___ + 45 = 45 + 20 ، الرقم الناقص؟</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="a0q9-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('a0q9','20')">✓</button>
+          <span class="inline-fb" id="a0q9-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="q-block" id="a0q10">
+        <div class="q-text"><span class="q-num-badge">10</span> أي الجمل صحيحة عن خاصية الإبدال في الجمع؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'a0q10','تغيير ترتيب المجموعين لا يغير الناتج')">تغيير ترتيب المجموعين لا يغير الناتج ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q10','تغيير الترتيب يغير الناتج')">تغيير الترتيب يغير الناتج</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q10','الإبدال يخص الطرح فقط')">الإبدال يخص الطرح فقط</button>
+          <button class="opt-btn" onclick="mcq(this,'a0q10','الأرقام الكبيرة لا تنطبق عليها')">الأرقام الكبيرة لا تنطبق عليها</button>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="submitSection(3);goTab(4)">✅ إنهاء تدريبات الجمع والانتقال للضرب</button>
+      <div class="result-card" id="res-3"></div>
+    </div>
+
+    <!-- ══════════ SECTION 4: MULTIPLICATION DRILL ══════════ -->
+    <div class="section" id="sec-4">
+      <div class="sec-header">
+        <div class="sec-icon" style="background:linear-gradient(135deg,#f43f5e,#7c3aed)">✖️</div>
+        <div>
+          <h2>تدريبات خاصية الإبدال في الضرب</h2>
+          <p>10 أسئلة متنوعة تحدي الضرب!</p>
+        </div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="q-block" id="m0q1">
+        <div class="q-text"><span class="q-num-badge">1</span> 4 × 7 = 7 × ___ ، الرقم الناقص؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q1','4')">4</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q1','7')">7</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q1','28')">28</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q1','11')">11</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-block" id="m0q2">
+        <div class="q-text"><span class="q-num-badge">2</span> 6 × 8 = ؟</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="m0q2-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('m0q2','48')">✓</button>
+          <span class="inline-fb" id="m0q2-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-block" id="m0q3">
+        <div class="q-text"><span class="q-num-badge">3</span> بتطبيق الإبدال: 6 × 8 = ؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q3','8 × 6')">8 × 6</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q3','6 + 8')">6 + 8</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q3','8 - 6')">8 − 6</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q3','6 ÷ 8')">6 ÷ 8</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-block" id="m0q4">
+        <div class="q-text"><span class="q-num-badge">4</span> أيّ المعادلات تُطبّق خاصية الإبدال في الضرب؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q4','9 × 3 = 3 × 9')">9 × 3 = 3 × 9 ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q4','9 × 3 = 9 + 3')">9 × 3 = 9 + 3</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q4','9 × 3 = 27 × 1')">9 × 3 = 27 × 1</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q4','9 × 3 = 9 ÷ 3')">9 × 3 = 9 ÷ 3</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="q-block" id="m0q5">
+        <div class="q-text"><span class="q-num-badge">5</span> 5 × ___ = 9 × 5 ، الرقم الناقص؟</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="m0q5-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('m0q5','9')">✓</button>
+          <span class="inline-fb" id="m0q5-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="q-block" id="m0q6">
+        <div class="q-text"><span class="q-num-badge">6</span> رسمت لينا مصفوفة 4 صفوف × 6 أعمدة. ثم رسمتها 6 صفوف × 4 أعمدة. كم مجموع النقاط في كل مصفوفة؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q6','24 في الحالتين')">24 في الحالتين ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q6','24 ثم 20')">24 ثم 20</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q6','الأولى أكبر')">الأولى أكبر</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q6','الثانية أكبر')">الثانية أكبر</button>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="q-block" id="m0q7">
+        <div class="q-text"><span class="q-num-badge">7</span> ___ × 7 = 7 × 10 ، الرقم الناقص؟</div>
+        <div class="fill-row">
+          <input class="fill-inp" type="number" id="m0q7-i" placeholder="..."/>
+          <button class="btn-chk" onclick="fill('m0q7','10')">✓</button>
+          <span class="inline-fb" id="m0q7-fb"></span>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="q-block" id="m0q8">
+        <div class="q-text"><span class="q-num-badge">8</span> هل تنطبق خاصية الإبدال على القسمة: 12 ÷ 4 = 4 ÷ 12 ؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q8','لا')">لا، القسمة لا تخضع للإبدال ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q8','نعم')">نعم دائماً</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q8','أحياناً')">أحياناً</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q8','لا أعرف')">لا أعرف</button>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="q-block" id="m0q9">
+        <div class="q-text"><span class="q-num-badge">9</span> أحمد ضرب 8 × 3 = 24. أراد استخدام الإبدال. ما الحساب الذي سيكتبه؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q9','3 × 8 = 24')">3 × 8 = 24 ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q9','8 + 3 = 11')">8 + 3 = 11</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q9','8 - 3 = 5')">8 − 3 = 5</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q9','24 × 1 = 24')">24 × 1 = 24</button>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="q-block" id="m0q10">
+        <div class="q-text"><span class="q-num-badge">10</span> ما أفضل وصف لخاصية الإبدال في الضرب؟</div>
+        <div class="opts">
+          <button class="opt-btn" onclick="mcq(this,'m0q10','تغيير ترتيب العاملين لا يغير الحاصل')">تغيير ترتيب العاملين لا يغير الحاصل ✅</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q10','الحاصل يتغير إذا أبدلنا')">الحاصل يتغير إذا أبدلنا</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q10','تنطبق فقط على الأرقام الصغيرة')">تنطبق فقط على الأرقام الصغيرة</button>
+          <button class="opt-btn" onclick="mcq(this,'m0q10','لا علاقة للإبدال بالضرب')">لا علاقة للإبدال بالضرب</button>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="submitSection(4);goTab(5)">🏆 انظر تقريرك النهائي</button>
+      <div class="result-card" id="res-4"></div>
+    </div>
+
+    <!-- ══════════ SECTION 5: FINAL REPORT ══════════ -->
+    <div class="section" id="sec-5">
+      <div id="reportContent">
+        <div style="text-align:center;padding:60px 20px;">
+          <div style="font-size:3rem;margin-bottom:16px;">📋</div>
+          <p style="color:#94a3b8;font-size:1.1rem;">أكمل التدريبات أولاً لعرض تقريرك!</p>
+          <button class="btn-go" style="margin-top:20px;" onclick="goTab(3)">ابدأ التدريبات →</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mainApp -->
+
+</div><!-- /app -->
+
+<script>
+/* ─── BG STARS ─── */
+const bg = document.getElementById('bgScene');
+for(let i=0;i<80;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const sz=Math.random()*3+1;
+  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*4}s;`;
+  bg.appendChild(s);
+}
+
+/* ─── STATE ─── */
+let answers={};
+let flipCount=0;
+let matchSelected=null;
+let matchDone=0;
+
+const CORRECT={
+  a0q1:'9', a0q2:'22', a0q3:'8 + 14', a0q4:'25 + 13 = 13 + 25',
+  a0q5:'11', a0q6:'نعم', a0q7:'33', a0q8:'لا', a0q9:'20',
+  a0q10:'تغيير ترتيب المجموعين لا يغير الناتج',
+  m0q1:'4', m0q2:'48', m0q3:'8 × 6', m0q4:'9 × 3 = 3 × 9',
+  m0q5:'9', m0q6:'24 في الحالتين', m0q7:'10', m0q8:'لا',
+  m0q9:'3 × 8 = 24', m0q10:'تغيير ترتيب العاملين لا يغير الحاصل',
+};
+
+const SEC_QS={
+  3:['a0q1','a0q2','a0q3','a0q4','a0q5','a0q6','a0q7','a0q8','a0q9','a0q10'],
+  4:['m0q1','m0q2','m0q3','m0q4','m0q5','m0q6','m0q7','m0q8','m0q9','m0q10'],
+};
+
+/* ─── MATCH DATA ─── */
+const MATCH_PAIRS=[
+  {left:'8 + 14', right:'14 + 8'},
+  {left:'3 × 7', right:'7 × 3'},
+  {left:'25 + 11', right:'11 + 25'},
+  {left:'9 × 4', right:'4 × 9'},
+  {left:'50 + 30', right:'30 + 50'},
+];
+
+/* ─── START ─── */
+initMatch();
+
+/* ─── TABS ─── */
+function goTab(idx){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+idx).classList.add('active');
+  document.getElementById('tab-'+idx).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  const done=document.querySelectorAll('.tab-btn.done').length;
+  document.getElementById('progFill').style.width=(done/5*100)+'%';
+}
+
+/* ─── MCQ ─── */
+function mcq(btn,qid,val){
+  const block=document.getElementById(qid);
+  if(block.classList.contains('correct')||block.classList.contains('wrong'))return;
+  const btns=block.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
+  const correct=CORRECT[qid];
+  if(val===correct){
+    btn.classList.add('sel-ok');
+    answers[qid]=true;
+    block.classList.add('correct');
+  } else {
+    btn.classList.add('sel-err');
+    answers[qid]=false;
+    block.classList.add('wrong');
+    btns.forEach(b=>{
+      const bval=b.getAttribute('onclick').match(/'([^']+)'\)$/)?.[1];
+      if(bval===correct) b.classList.add('reveal');
+    });
+  }
+}
+
+/* ─── FILL INPUT ─── */
+function fill(qid,correct){
+  const inp=document.getElementById(qid+'-i');
+  const fb=document.getElementById(qid+'-fb');
+  const block=document.getElementById(qid);
+  if(inp.disabled)return;
+  const val=inp.value.trim();
+  inp.disabled=true;
+  if(val===String(correct)){
+    fb.textContent='✅ أحسنت!'; fb.className='inline-fb ok';
+    answers[qid]=true; block.classList.add('correct');
+  } else {
+    fb.textContent=`❌ الجواب: ${correct}`; fb.className='inline-fb err';
+    answers[qid]=false; block.classList.add('wrong');
+  }
+}
+
+/* ─── SUBMIT SECTION ─── */
+function getLevel(pct){
+  if(pct>=90)return{lbl:'ممتاز 🌟',cls:'excellent',emoji:'🌟',advice:'أداء رائع! أنت متقن لخاصية الإبدال.'};
+  if(pct>=70)return{lbl:'جيد جداً 👍',cls:'good',emoji:'👍',advice:'أداء جيد! راجع بعض الأسئلة لتصل للامتياز.'};
+  if(pct>=50)return{lbl:'جيد 🙂',cls:'fair',emoji:'🙂',advice:'فهمت الأساسيات. تحتاج مزيداً من التدريب.'};
+  return{lbl:'يحتاج مراجعة 📖',cls:'poor',emoji:'📖',advice:'راجع الشرح من البداية وجرّب الأمثلة مرة أخرى.'};
+}
+
+function submitSection(secIdx){
+  const qs=SEC_QS[secIdx];
+  qs.forEach(qid=>{if(answers[qid]===undefined)answers[qid]=false;});
+  let c=0; qs.forEach(qid=>{if(answers[qid])c++;});
+  const pct=Math.round(c/qs.length*100);
+  const lvl=getLevel(pct);
+  const res=document.getElementById('res-'+secIdx);
+  res.classList.add('show');
+  const deg=Math.round(pct*3.6);
+  res.innerHTML=`
+    <div class="score-ring ${lvl.cls}" style="--p:${deg}deg">${c}/${qs.length}<div class="small">${pct}%</div></div>
+    <div class="level-pill ${lvl.cls}">${lvl.lbl}</div>
+    <p class="result-msg">${lvl.advice}</p>
+  `;
+  document.getElementById('tab-'+secIdx).classList.add('done');
+  updateProgress();
+}
+
+/* ─── FLIP DEMO ─── */
+let addFlipped=false;
+let addNums=[4,7];
+function flipAdd(){
+  addFlipped=!addFlipped;
+  const [a,b]=addNums;
+  const na=addFlipped?b:a, nb=addFlipped?a:b;
+  document.getElementById('addA').textContent=na;
+  document.getElementById('addB').textContent=nb;
+  document.getElementById('addAns').textContent=a+b;
+  document.getElementById('addNote').textContent=`${na} + ${nb} = ${a+b} ${addFlipped?'✨ نفس الناتج! هذه خاصية الإبدال':'← جرّب الإبدال!'}`;
+  flipCount++;
+  document.getElementById('flipCount').textContent=flipCount;
+}
+function newAddQ(){
+  const a=Math.floor(Math.random()*9)+1;
+  const b=Math.floor(Math.random()*9)+2;
+  addNums=[a,b]; addFlipped=false;
+  document.getElementById('addA').textContent=a;
+  document.getElementById('addB').textContent=b;
+  document.getElementById('addAns').textContent=a+b;
+  document.getElementById('addNote').textContent='اضغط "أبدل الأرقام" وشاهد ماذا يحدث!';
+  flipCount++;
+  document.getElementById('flipCount').textContent=flipCount;
+}
+let mulFlipped=false;
+let mulNums=[3,5];
+function flipMul(){
+  mulFlipped=!mulFlipped;
+  const [a,b]=mulNums;
+  const na=mulFlipped?b:a, nb=mulFlipped?a:b;
+  document.getElementById('mulA').textContent=na;
+  document.getElementById('mulB').textContent=nb;
+  document.getElementById('mulAns').textContent=a*b;
+  document.getElementById('mulNote').textContent=`${na} × ${nb} = ${a*b} ${mulFlipped?'✨ نفس الناتج! الضرب يُبدل أيضاً':'← جرّب الإبدال!'}`;
+  flipCount++;
+  document.getElementById('flipCount').textContent=flipCount;
+}
+function newMulQ(){
+  const a=Math.floor(Math.random()*8)+2;
+  const b=Math.floor(Math.random()*8)+2;
+  mulNums=[a,b]; mulFlipped=false;
+  document.getElementById('mulA').textContent=a;
+  document.getElementById('mulB').textContent=b;
+  document.getElementById('mulAns').textContent=a*b;
+  document.getElementById('mulNote').textContent='اضغط "أبدل الأرقام" وشاهد ماذا يحدث!';
+  flipCount++;
+  document.getElementById('flipCount').textContent=flipCount;
+}
+
+/* ─── MATCHING GAME ─── */
+function initMatch(){
+  matchSelected=null; matchDone=0;
+  document.getElementById('matchScore').textContent=0;
+  document.getElementById('matchFb').textContent='';
+  document.getElementById('matchFb').className='game-feedback';
+  document.getElementById('matchNextBtn').style.display='none';
+  const shuffledRight=[...MATCH_PAIRS].sort(()=>Math.random()-.5);
+  const shuffledLeft=[...MATCH_PAIRS].sort(()=>Math.random()-.5);
+  const rDiv=document.getElementById('matchRight');
+  const lDiv=document.getElementById('matchLeft');
+  rDiv.innerHTML=''; lDiv.innerHTML='';
+  shuffledRight.forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='match-item'; el.textContent=p.right;
+    el.dataset.pair=p.left; el.dataset.side='right';
+    el.onclick=()=>selectMatch(el);
+    rDiv.appendChild(el);
+  });
+  shuffledLeft.forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='match-item'; el.textContent=p.left;
+    el.dataset.pair=p.left; el.dataset.side='left';
+    el.onclick=()=>selectMatch(el);
+    lDiv.appendChild(el);
+  });
+}
+function selectMatch(el){
+  if(el.classList.contains('matched'))return;
+  if(!matchSelected){
+    matchSelected=el;
+    el.classList.add('selected');
+    return;
+  }
+  if(el===matchSelected){ el.classList.remove('selected'); matchSelected=null; return; }
+  const prev=matchSelected;
+  // Both must be different sides
+  if(el.dataset.side===prev.dataset.side){
+    prev.classList.remove('selected');
+    el.classList.add('selected');
+    matchSelected=el;
+    return;
+  }
+  // Check match
+  const leftEl=prev.dataset.side==='left'?prev:el;
+  const rightEl=prev.dataset.side==='right'?prev:el;
+  if(leftEl.dataset.pair===rightEl.dataset.pair){
+    // Correct
+    leftEl.classList.remove('selected'); rightEl.classList.remove('selected');
+    leftEl.classList.add('matched'); rightEl.classList.add('matched');
+    matchDone++;
+    document.getElementById('matchScore').textContent=matchDone;
+    const fb=document.getElementById('matchFb');
+    fb.textContent=`✅ صحيح! ${leftEl.textContent} = ${rightEl.textContent}`;
+    fb.className='game-feedback ok';
+    if(matchDone===5){
+      fb.textContent='🎉 رائع! طابقت كل الأزواج بنجاح!';
+      document.getElementById('matchNextBtn').style.display='block';
+      celebrate();
+      document.getElementById('tab-2').classList.add('done');
+      updateProgress();
+    }
+  } else {
+    // Wrong
+    prev.classList.remove('selected');
+    el.classList.add('wrong-match'); prev.classList.add('wrong-match');
+    const fb=document.getElementById('matchFb');
+    fb.textContent='❌ ليست مطابقة! حاول مرة أخرى';
+    fb.className='game-feedback err';
+    setTimeout(()=>{
+      el.classList.remove('wrong-match','selected');
+      prev.classList.remove('wrong-match','selected');
+      fb.textContent=''; fb.className='game-feedback';
+    },1200);
+  }
+  matchSelected=null;
+}
+function resetMatch(){ initMatch(); }
+
+/* ─── FINAL REPORT ─── */
+function showFinalReport(){
+  const addQs=SEC_QS[3], mulQs=SEC_QS[4];
+  addQs.forEach(q=>{if(answers[q]===undefined)answers[q]=false;});
+  mulQs.forEach(q=>{if(answers[q]===undefined)answers[q]=false;});
+  let addC=0,mulC=0;
+  addQs.forEach(q=>{if(answers[q])addC++;});
+  mulQs.forEach(q=>{if(answers[q])mulC++;});
+  const total=addC+mulC, totalQ=20;
+  const pct=Math.round(total/totalQ*100);
+  const lvl=getLevel(pct);
+  const addPct=Math.round(addC/10*100), mulPct=Math.round(mulC/10*100);
+  const addLvl=getLevel(addPct), mulLvl=getLevel(mulPct);
+
+  const secName=['','الشرح','الاكتشاف','المطابقة','الجمع','الضرب'];
+  document.getElementById('reportContent').innerHTML=`
+    <div class="final-report show">
+      <h2>🏆 التقرير <span>النهائي</span></h2>
+      <div class="overall-banner">
+        <div class="big">${pct}%</div>
+        <div class="lbl">النتيجة الإجمالية: ${total} / ${totalQ} — ${lvl.lbl}</div>
+      </div>
+      <table class="report-table">
+        <tr><th>القسم</th><th>الدرجة</th><th>النسبة</th><th>المستوى</th></tr>
+        <tr><td>➕ تدريبات الجمع</td><td>${addC} / 10</td><td>${addPct}%</td><td><span class="tag ${addLvl.cls}">${addLvl.lbl}</span></td></tr>
+        <tr><td>✖️ تدريبات الضرب</td><td>${mulC} / 10</td><td>${mulPct}%</td><td><span class="tag ${mulLvl.cls}">${mulLvl.lbl}</span></td></tr>
+        <tr style="font-weight:800;"><td>📊 المجموع</td><td>${total} / 20</td><td>${pct}%</td><td><span class="tag ${lvl.cls}">${lvl.lbl}</span></td></tr>
+      </table>
+      <div class="rec-box">
+        <h3>💡 التوصيات والملاحظات</h3>
+        ${addPct>=90?`<div class="rec-item"><span class="ri">🌟</span><span>ممتاز في الجمع! أنت تتقن خاصية الإبدال مع الجمع بشكل كامل.</span></div>`
+          :addPct>=70?`<div class="rec-item"><span class="ri">📝</span><span>أداء جيد في الجمع. راجع تحديداً أسئلة الرقم الناقص في المعادلات.</span></div>`
+          :`<div class="rec-item"><span class="ri">📖</span><span>راجع درس خاصية الإبدال في الجمع مع معلمك، وركّز على استبدال الأرقام في المعادلة.</span></div>`}
+        ${mulPct>=90?`<div class="rec-item"><span class="ri">🌟</span><span>ممتاز في الضرب! خاصية الإبدال في الضرب واضحة جداً عندك.</span></div>`
+          :mulPct>=70?`<div class="rec-item"><span class="ri">📝</span><span>أداء جيد في الضرب. ركّز على التمييز بين الإبدال والعمليات الأخرى.</span></div>`
+          :`<div class="rec-item"><span class="ri">📖</span><span>راجع مثال المصفوفة (الصفوف والأعمدة) لفهم الإبدال في الضرب بصرياً.</span></div>`}
+        <div class="rec-item"><span class="ri">💡</span><span>تذكّر: الإبدال يعمل في الجمع والضرب فقط — لا في الطرح ولا القسمة!</span></div>
+      </div>
+      <div class="report-btns">
+        <button class="btn-print" onclick="window.print()">🖨️ طباعة التقرير</button>
+        <button class="btn-retry" onclick="location.reload()">🔄 إعادة المحاولة</button>
+      </div>
+    </div>
+  `;
+  if(pct>=75)celebrate();
+}
+
+/* Watch when tab 5 is activated */
+const origGoTab=goTab;
+function goTab(idx){
+  origGoTab(idx);
+  if(idx===5) setTimeout(showFinalReport,300);
+}
+
+/* ─── CELEBRATE ─── */
+function celebrate(){
+  const emojis=['⭐','🎉','🌟','✨','🎊','🔄','🏆','💫'];
+  for(let i=0;i<30;i++){
+    const e=document.createElement('div');
+    e.className='confetti-piece';
+    e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.cssText=`left:${Math.random()*100}vw;--dur:${3+Math.random()*3}s;animation-delay:${Math.random()*1.5}s;`;
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),6000);
+  }
+}
+
+// Redefine goTab properly
+window.goTab=function(idx){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+idx).classList.add('active');
+  document.getElementById('tab-'+idx).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(idx===5) setTimeout(showFinalReport,300);
+}
+</script>
+</body>
+</html>
