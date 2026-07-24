@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Quest | مغامرة الأرقام</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700&family=Cairo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#26332c;
+    --bg-2:#1c2721;
+    --chalk-white:#f3efe3;
+    --chalk-white-dim:#cfd2c8;
+    --chalk-yellow:#f2c14e;
+    --chalk-coral:#e8695b;
+    --chalk-teal:#6bb0a4;
+    --chalk-violet:#a689e8;
+    --line-soft: rgba(243,239,227,0.16);
+    --shadow-deep: rgba(0,0,0,0.45);
+    --radius-tablet: 22px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(243,239,227,0.05), transparent 40%),
+      radial-gradient(ellipse at 90% 10%, rgba(243,239,227,0.04), transparent 45%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-2) 60%, #17201c 100%);
+    color:var(--chalk-white);
+    font-family:"Tajawal", sans-serif;
+    overflow-x:hidden;
+  }
+
+  /* chalkboard texture speckle */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(rgba(243,239,227,0.035) 1px, transparent 1px),
+      radial-gradient(rgba(243,239,227,0.025) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 2px 3px;
+    pointer-events:none;
+    z-index:0;
+    opacity:0.6;
+  }
+
+  .eyebrow{
+    font-family:"Cairo", sans-serif;
+    font-weight:600;
+    letter-spacing:0.12em;
+    font-size:0.8rem;
+    color:var(--chalk-yellow);
+    display:inline-flex;
+    align-items:center;
+    gap:0.5em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:2px;
+    background:var(--chalk-yellow);
+    display:inline-block;
+    border-radius:2px;
+  }
+
+  /* ================= NAV ================= */
+  nav{
+    position:relative; z-index:5;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px clamp(20px,6vw,64px);
+  }
+  .brand{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:700;
+    font-size:1.25rem;
+    color:var(--chalk-white);
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-mark{
+    width:34px; height:34px;
+    border:2.5px solid var(--chalk-teal);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Cairo", sans-serif;
+    color:var(--chalk-teal);
+    font-size:1rem;
+    transform:rotate(-8deg);
+  }
+  .nav-link{
+    color:var(--chalk-white-dim);
+    text-decoration:none;
+    font-size:0.95rem;
+    font-weight:500;
+    padding:8px 4px;
+  }
+  .nav-link:focus-visible{ outline:2px solid var(--chalk-yellow); outline-offset:4px; border-radius:4px; }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative; z-index:2;
+    min-height:92vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:40px 20px 90px;
+  }
+  .hero-ring-wrap{
+    position:relative;
+    width:min(520px, 82vw);
+    aspect-ratio:1/1;
+    margin-bottom:8px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-ring-wrap svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .compass-path{
+    fill:none;
+    stroke:var(--chalk-teal);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-dasharray:820;
+    stroke-dashoffset:820;
+    animation: draw-compass 2.1s cubic-bezier(.65,0,.35,1) 0.2s forwards;
+  }
+  .doodle{ opacity:0; animation: doodle-in 0.6s ease forwards; }
+  .doodle.d1{ animation-delay:1.4s; }
+  .doodle.d2{ animation-delay:1.6s; }
+  .doodle.d3{ animation-delay:1.8s; }
+  .doodle.d4{ animation-delay:2.0s; }
+  .doodle.d5{ animation-delay:2.2s; }
+  .doodle.d6{ animation-delay:2.35s; }
+
+  .hero-copy{ position:relative; z-index:3; max-width:640px; }
+  h1{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:800;
+    font-size:clamp(2.4rem, 6vw, 4rem);
+    line-height:1.15;
+    margin:18px 0 14px;
+    color:var(--chalk-white);
+  }
+  h1 span{ color:var(--chalk-coral); }
+  .hero-sub{
+    font-size:clamp(1rem, 2vw, 1.2rem);
+    color:var(--chalk-white-dim);
+    line-height:1.9;
+    max-width:520px;
+    margin:0 auto 34px;
+  }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:"Cairo", sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--bg-2);
+    background:var(--chalk-yellow);
+    padding:15px 34px;
+    border-radius:40px;
+    text-decoration:none;
+    border:2px solid var(--chalk-yellow);
+    box-shadow: 0 10px 24px -8px rgba(242,193,78,0.45);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .cta:hover{ transform:translateY(-3px); box-shadow:0 16px 30px -8px rgba(242,193,78,0.55); }
+  .cta:focus-visible{ outline:3px solid var(--chalk-white); outline-offset:4px; }
+  .cta svg{ transition:transform 0.18s ease; }
+  .cta:hover svg{ transform:translateX(-4px); }
+
+  /* ================= PATH / CHAPTERS ================= */
+  .path-section{
+    position:relative; z-index:2;
+    padding: 40px clamp(20px,6vw,64px) 110px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .section-head{ text-align:center; margin-bottom:56px; }
+  .section-head h2{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:700;
+    font-size:clamp(1.7rem, 3.4vw, 2.4rem);
+    margin:14px 0 0;
+  }
+
+  /* ================= CHAPTER / LESSON INDEX ================= */
+  .chapters{ display:flex; flex-direction:column; gap:46px; }
+  .chapter-block{ position:relative; }
+  .chapter-head{
+    display:flex; align-items:center; gap:16px;
+    margin-bottom:20px;
+    padding-bottom:14px;
+    border-bottom: 2px dashed var(--line-soft);
+  }
+  .chapter-badge{
+    flex:none;
+    width:40px; height:40px;
+    border-radius:50%;
+    border:2px solid var(--accent, var(--chalk-teal));
+    color:var(--accent, var(--chalk-teal));
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Cairo", sans-serif; font-weight:700; font-size:1rem;
+  }
+  .chapter-head h3{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:600; font-size:1.35rem; margin:0;
+    color:var(--chalk-white);
+  }
+  .lesson-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px 18px;
+  }
+  .lesson-link{
+    display:flex; align-items:center; gap:12px;
+    padding:12px 14px;
+    border-radius:12px;
+    text-decoration:none;
+    color:var(--chalk-white-dim);
+    border:1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+  .lesson-link:hover, .lesson-link:focus-visible{
+    background: rgba(243,239,227,0.05);
+    border-color: var(--accent, var(--chalk-teal));
+    color:var(--chalk-white);
+    transform:translateX(-2px);
+  }
+  .lesson-link:focus-visible{ outline:2px solid var(--chalk-yellow); outline-offset:2px; }
+  .lesson-num{
+    flex:none;
+    width:26px; height:26px;
+    border-radius:50%;
+    background: rgba(243,239,227,0.08);
+    color:var(--accent, var(--chalk-teal));
+    font-family:"Cairo", sans-serif; font-weight:700; font-size:0.78rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .lesson-title{ font-size:0.95rem; line-height:1.5; }
+
+  .c1{ --accent: var(--chalk-teal); }
+  .c2{ --accent: var(--chalk-coral); }
+  .c3{ --accent: var(--chalk-violet); }
+  .c4{ --accent: var(--chalk-yellow); }
+
+  @media (max-width:640px){
+    .lesson-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ================= FEATURES ================= */
+  .features{
+    position:relative; z-index:2;
+    max-width:1000px; margin:0 auto;
+    padding: 0 clamp(20px,6vw,64px) 120px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:34px;
+    text-align:center;
+  }
+  .feature .fnum{
+    font-family:"Cairo", sans-serif; font-weight:700; color:var(--chalk-yellow);
+    font-size:0.85rem; letter-spacing:0.08em; display:block; margin-bottom:10px;
+  }
+  .feature h4{
+    font-family:"Baloo Bhaijaan 2", sans-serif; font-size:1.05rem; margin:0 0 8px; font-weight:600;
+  }
+  .feature p{ color:var(--chalk-white-dim); font-size:0.9rem; line-height:1.8; margin:0; }
+
+  /* ================= FOOTER ================= */
+  footer{
+    position:relative; z-index:2;
+    border-top:1px solid var(--line-soft);
+    padding:28px clamp(20px,6vw,64px);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px;
+    font-size:0.85rem; color:var(--chalk-white-dim);
+  }
+
+  @keyframes draw-compass{ to{ stroke-dashoffset:0; } }
+  @keyframes doodle-in{ from{ opacity:0; transform:scale(0.6) rotate(-8deg);} to{ opacity:1; transform:scale(1) rotate(var(--rot,0deg)); } }
+
+  @media (max-width:880px){
+    .stations{ grid-template-columns:1fr 1fr; }
+    .features{ grid-template-columns:1fr; }
+  }
+  @media (max-width:560px){
+    .stations{ grid-template-columns:1fr; }
+    nav .nav-link.hide-mobile{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .compass-path{ animation:none; stroke-dashoffset:0; }
+    .doodle{ animation:none; opacity:1; }
+    .cta, .lesson-link{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="brand-mark">٣</span> Math Quest</div>
+  <a href="#stations" class="nav-link hide-mobile">الدروس</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-ring-wrap" aria-hidden="true">
+    <svg viewBox="0 0 300 300">
+      <circle class="compass-path" cx="150" cy="150" r="130"/>
+    </svg>
+    <svg viewBox="0 0 300 300" style="overflow:visible;">
+      <text class="doodle d1" x="28" y="70" font-family="Cairo" font-size="30" fill="var(--chalk-coral)" style="--rot:-10deg;">+</text>
+      <text class="doodle d2" x="250" y="60" font-family="Cairo" font-size="26" fill="var(--chalk-yellow)" style="--rot:8deg;">×</text>
+      <text class="doodle d3" x="255" y="235" font-family="Cairo" font-size="28" fill="var(--chalk-teal)" style="--rot:-6deg;">7</text>
+      <text class="doodle d4" x="30" y="245" font-family="Cairo" font-size="26" fill="var(--chalk-violet)" style="--rot:10deg;">3</text>
+      <circle class="doodle d5" cx="150" cy="25" r="9" fill="none" stroke="var(--chalk-yellow)" stroke-width="2"/>
+      <rect class="doodle d6" x="140" y="266" width="20" height="20" fill="none" stroke="var(--chalk-coral)" stroke-width="2" style="--rot:14deg;" transform="rotate(14 150 276)"/>
+    </svg>
+  </div>
+
+  <div class="hero-copy">
+    <span class="eyebrow">Math Quest · الصف الثالث الابتدائي</span>
+    <h1>مغامرة <span>الأرقام</span></h1>
+    <p class="hero-sub">٦ فصول و٤٧ درسًا تفاعليًا في الرياضيات، مصممة خصيصًا لطلاب الصف الثالث، بشرح مبسّط وتمارين مباشرة بدون تعقيد.</p>
+    <a class="cta" href="#stations">
+      ابدأ المغامرة الآن
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</header>
+
+<section class="path-section" id="stations">
+  <div class="section-head">
+    <span class="eyebrow">فهرس المحتويات</span>
+    <h2>اختر الفصل وابدأ الدرس</h2>
+  </div>
+
+  <div class="chapters">
+    <div class="chapter-block">
+      <div class="chapter-head">
+        <span class="chapter-badge c1">١</span>
+        <h3>الفصل الأول</h3>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link c1" href="lessons/Ch1_Lesson1.html">
+          <span class="lesson-num">١</span>
+          <span class="lesson-title">الأنماط</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch1_Lesson2.html">
+          <span class="lesson-num">٢</span>
+          <span class="lesson-title">مزيد من التمثيل البياني بالأعمدة</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch1_Lesson3.html">
+          <span class="lesson-num">٣</span>
+          <span class="lesson-title">التمثيل البياني بالنقاط</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch1_Lesson4.html">
+          <span class="lesson-num">٤</span>
+          <span class="lesson-title">قياس الأطوال بالسنتيمتر</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch1_Lesson5.html">
+          <span class="lesson-num">٥</span>
+          <span class="lesson-title">قياس الأطوال بالمتر</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch1_Lesson6.html">
+          <span class="lesson-num">٦</span>
+          <span class="lesson-title">قياس الأطوال بالمليمتر</span>
+        </a>
+      </div>
+    </div>
+    <div class="chapter-block">
+      <div class="chapter-head">
+        <span class="chapter-badge c2">٢</span>
+        <h3>الفصل الثاني</h3>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson1.html">
+          <span class="lesson-num">١</span>
+          <span class="lesson-title">الآلاف</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson2.html">
+          <span class="lesson-num">٢</span>
+          <span class="lesson-title">مزيد من الآلاف</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson3.html">
+          <span class="lesson-num">٣</span>
+          <span class="lesson-title">عشرات الآلاف - مئات الآلاف</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson4.html">
+          <span class="lesson-num">٤</span>
+          <span class="lesson-title">صيغ مختلفة لكتابة الأعداد</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson5.html">
+          <span class="lesson-num">٥</span>
+          <span class="lesson-title">المصفوفات</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson6.html">
+          <span class="lesson-num">٦</span>
+          <span class="lesson-title">مفهوم الضرب</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch2_Lesson7.html">
+          <span class="lesson-num">٧</span>
+          <span class="lesson-title">خاصية الابدال في الضرب</span>
+        </a>
+      </div>
+    </div>
+    <div class="chapter-block">
+      <div class="chapter-head">
+        <span class="chapter-badge c3">٣</span>
+        <h3>الفصل الثالث</h3>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson1.html">
+          <span class="lesson-num">١</span>
+          <span class="lesson-title">مسائل كلامية على الضرب</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson2.html">
+          <span class="lesson-num">٢</span>
+          <span class="lesson-title">تطبيقات حياتية على الضرب</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson3.html">
+          <span class="lesson-num">٣</span>
+          <span class="lesson-title">مضاعفات العددين ٢، ٣</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson4.html">
+          <span class="lesson-num">٤</span>
+          <span class="lesson-title">مضاعفات العددين ١٠، ٥</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson5.html">
+          <span class="lesson-num">٥</span>
+          <span class="lesson-title">عوامل العدد باستخدام المصفوفات</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson6.html">
+          <span class="lesson-num">٦</span>
+          <span class="lesson-title">الوقت</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson7.html">
+          <span class="lesson-num">٧</span>
+          <span class="lesson-title">تطبيقات حياتية على الوقت</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson8.html">
+          <span class="lesson-num">٨</span>
+          <span class="lesson-title">مفهوم القسمة</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson9.html">
+          <span class="lesson-num">٩</span>
+          <span class="lesson-title">تطبيقات حياتية على القسمة</span>
+        </a>
+        <a class="lesson-link c3" href="lessons/Ch3_Lesson10.html">
+          <span class="lesson-num">١٠</span>
+          <span class="lesson-title">العلاقة بين الضرب والقسمة</span>
+        </a>
+      </div>
+    </div>
+    <div class="chapter-block">
+      <div class="chapter-head">
+        <span class="chapter-badge c4">٤</span>
+        <h3>الفصل الرابع</h3>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson1.html">
+          <span class="lesson-num">١</span>
+          <span class="lesson-title">المضلعات</span>
+        </a>
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson2.html">
+          <span class="lesson-num">٢</span>
+          <span class="lesson-title">خواص الأشكال الرباعية</span>
+        </a>
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson3.html">
+          <span class="lesson-num">٣</span>
+          <span class="lesson-title">المساحة</span>
+        </a>
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson4.html">
+          <span class="lesson-num">٤</span>
+          <span class="lesson-title">مستطيلات متساوية المساحة</span>
+        </a>
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson5.html">
+          <span class="lesson-num">٥</span>
+          <span class="lesson-title">المساحة باستخدام النماذج</span>
+        </a>
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson6.html">
+          <span class="lesson-num">٦</span>
+          <span class="lesson-title">المساحة بتقسيم المصفوفات</span>
+        </a>
+        <a class="lesson-link c4" href="lessons/Ch4_Lesson7.html">
+          <span class="lesson-num">٧</span>
+          <span class="lesson-title">خاصية التوزيع في الضرب</span>
+        </a>
+      </div>
+    </div>
+    <div class="chapter-block">
+      <div class="chapter-head">
+        <span class="chapter-badge c1">٥</span>
+        <h3>الفصل الخامس</h3>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson1.html">
+          <span class="lesson-num">١</span>
+          <span class="lesson-title">محيط المضلعات</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson2.html">
+          <span class="lesson-num">٢</span>
+          <span class="lesson-title">المحيط والمساحة</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson3.html">
+          <span class="lesson-num">٣</span>
+          <span class="lesson-title">المساحة باستخدام الأبعاد</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson4.html">
+          <span class="lesson-num">٤</span>
+          <span class="lesson-title">المساحة باستراتيجيات متنوعة</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson5.html">
+          <span class="lesson-num">٥</span>
+          <span class="lesson-title">محيطات مختلفة لنفس المساحة</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson6.html">
+          <span class="lesson-num">٦</span>
+          <span class="lesson-title">مساحات مختلفة لنفس المحيط</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson7.html">
+          <span class="lesson-num">٧</span>
+          <span class="lesson-title">تطبيقات حياتية على المحيط والمساحة</span>
+        </a>
+        <a class="lesson-link c1" href="lessons/Ch5_Lesson8.html">
+          <span class="lesson-num">٨</span>
+          <span class="lesson-title">الضرب في مضاعفات العدد ١٠</span>
+        </a>
+      </div>
+    </div>
+    <div class="chapter-block">
+      <div class="chapter-head">
+        <span class="chapter-badge c2">٦</span>
+        <h3>الفصل السادس</h3>
+      </div>
+      <div class="lesson-grid">
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson1.html">
+          <span class="lesson-num">١</span>
+          <span class="lesson-title">أنماط الضرب في مضاعفات العدد ١٠</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson2.html">
+          <span class="lesson-num">٢</span>
+          <span class="lesson-title">استراتيجيات الضرب في العدد ٩</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson3.html">
+          <span class="lesson-num">٣</span>
+          <span class="lesson-title">حقائق الضرب والجمع</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson4.html">
+          <span class="lesson-num">٤</span>
+          <span class="lesson-title">مقارنة وترتيب الأعداد بصيغ متنوعة</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson5.html">
+          <span class="lesson-num">٥</span>
+          <span class="lesson-title">استراتيجيات الجمع</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson6.html">
+          <span class="lesson-num">٦</span>
+          <span class="lesson-title">استراتيجيات الطرح</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson7.html">
+          <span class="lesson-num">٧</span>
+          <span class="lesson-title">تطبيقات حياتية على الجمع والطرح</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson8.html">
+          <span class="lesson-num">٨</span>
+          <span class="lesson-title">السعة</span>
+        </a>
+        <a class="lesson-link c2" href="lessons/Ch6_Lesson9.html">
+          <span class="lesson-num">٩</span>
+          <span class="lesson-title">قراءة السعة</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <span class="fnum">٠١</span>
+    <h4>تفاعلي بالكامل</h4>
+    <p>كل درس فيه أسئلة وتمارين تتفاعل معاها فورًا.</p>
+  </div>
+  <div class="feature">
+    <span class="fnum">٠٢</span>
+    <h4>خطوة بخطوة</h4>
+    <p>شرح مبسّط يبني الفكرة تدريجيًا من غير تعقيد.</p>
+  </div>
+  <div class="feature">
+    <span class="fnum">٠٣</span>
+    <h4>بالعربي وبسيط</h4>
+    <p>لغة وأمثلة قريبة من الطالب في السنة الدراسية دي.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Math Quest — رياضيات الصف الثالث الابتدائي</span>
+  <span>صُمم لمساعدة طلابنا على تعلّم الرياضيات بمتعة</span>
+</footer>
+
+</body>
+</html>
