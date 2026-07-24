@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>درس المصفوفات - الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #e0f2fe;
+  --sky2: #bae6fd;
+  --blue: #0284c7;
+  --blue-dark: #0369a1;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --yellow: #f59e0b;
+  --yellow-light: #fef3c7;
+  --orange: #ea580c;
+  --orange-light: #ffedd5;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+  --pink: #db2777;
+  --pink-light: #fce7f3;
+  --bg: #f0f9ff;
+  --white: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated background bubbles */
+body::before {
+  content: '';
+  position: fixed;
+  top: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(2,132,199,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float1 8s ease-in-out infinite;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -80px; right: -80px;
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float2 10s ease-in-out infinite;
+}
+@keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,30px)} }
+@keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,-20px)} }
+
+/* Nav Tabs */
+.nav {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-link {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  border: 2px solid var(--blue, #2563eb);
+  background: transparent;
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue, #2563eb);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all .2s;
+}
+.home-link:hover { background: var(--blue, #2563eb); color: #fff; }
+.home-link svg { width: 15px; height: 15px; }
+
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 10px 0;
+  flex: 1;
+  min-width: 0;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background: transparent;
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+}
+.nav-btn:hover { background: var(--sky); color: var(--blue); }
+.nav-btn.active { background: var(--blue); color: white; border-color: var(--blue-dark); }
+.nav-btn .icon { font-size: 16px; }
+
+/* Main container */
+.main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
+
+/* Page sections */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* Section headers */
+.page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.page-header .emoji-big { font-size: 56px; display: block; margin-bottom: 8px; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.page-header h1 {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin-bottom: 8px;
+}
+.page-header p { font-size: 15px; color: var(--text-muted); }
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+}
+.card.green-card { border-color: #86efac; background: linear-gradient(135deg, #f0fdf4, #dcfce7); }
+.card.blue-card { border-color: #93c5fd; background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+.card.yellow-card { border-color: #fcd34d; background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+.card.purple-card { border-color: #c4b5fd; background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+.card.orange-card { border-color: #fdba74; background: linear-gradient(135deg, #fff7ed, #ffedd5); }
+
+.card h2 {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card p, .card li { font-size: 15px; line-height: 1.9; color: var(--text); }
+.card ul { padding-right: 20px; }
+.card li { margin-bottom: 6px; }
+
+/* Highlight box */
+.highlight {
+  background: var(--yellow-light);
+  border-right: 4px solid var(--yellow);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin: 16px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ============ ARRAYS (Visual) ============ */
+.array-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 16px 0;
+  align-items: center;
+}
+.array-row { display: flex; gap: 6px; }
+.array-cell {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  border: 3px solid rgba(0,0,0,0.1);
+  transition: transform .15s;
+  cursor: default;
+  user-select: none;
+}
+.array-cell:hover { transform: scale(1.12); }
+
+/* ============ INTERACTIVE BUILDER ============ */
+.builder-controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.ctrl-group { display: flex; flex-direction: column; gap: 4px; }
+.ctrl-group label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.ctrl-row { display: flex; align-items: center; gap: 8px; }
+.ctrl-btn {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 2px solid var(--blue);
+  background: var(--white);
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+  line-height: 1;
+}
+.ctrl-btn:hover { background: var(--blue); color: white; }
+.ctrl-val {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+  min-width: 32px;
+  text-align: center;
+}
+.builder-grid { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.builder-info {
+  margin-top: 16px;
+  background: var(--sky);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--blue-dark);
+  text-align: center;
+}
+
+/* ============ EXERCISES ============ */
+.exercise {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border-right: 6px solid var(--blue);
+}
+.exercise.correct-ex { border-color: var(--green); background: var(--green-light); }
+.exercise.wrong-ex { border-color: var(--red); background: var(--red-light); }
+
+.ex-number {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 2px 10px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+.ex-question { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+.ex-options { display: flex; gap: 10px; flex-wrap: wrap; }
+.ex-opt {
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 2px solid var(--blue);
+  background: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue);
+  cursor: pointer;
+  transition: all .15s;
+}
+.ex-opt:hover { background: var(--blue); color: white; transform: scale(1.05); }
+.ex-opt.correct { background: var(--green); color: white; border-color: var(--green); }
+.ex-opt.wrong { background: var(--red); color: white; border-color: var(--red); }
+.ex-opt.disabled { pointer-events: none; opacity: 0.5; }
+.ex-opt.correct.disabled { opacity: 1; }
+
+.ex-feedback {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+.ex-feedback.show { display: flex; }
+.feedback-correct { color: var(--green); }
+.feedback-wrong { color: var(--red); }
+
+.ex-input-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.ex-input {
+  width: 70px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--blue);
+  text-align: center;
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+  outline: none;
+  transition: border-color .15s;
+}
+.ex-input:focus { border-color: var(--blue-dark); box-shadow: 0 0 0 3px rgba(2,132,199,0.15); }
+.ex-input.correct-input { border-color: var(--green); color: var(--green); background: var(--green-light); }
+.ex-input.wrong-input { border-color: var(--red); color: var(--red); background: var(--red-light); }
+
+.check-btn {
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: none;
+  background: var(--blue);
+  color: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+}
+.check-btn:hover { background: var(--blue-dark); transform: scale(1.03); }
+
+/* Score bar */
+.score-bar {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.score-item { text-align: center; }
+.score-val {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 28px;
+  font-weight: 800;
+}
+.score-val.green { color: var(--green); }
+.score-val.red { color: var(--red); }
+.score-label { font-size: 12px; color: var(--text-muted); }
+.score-progress { flex: 1; min-width: 120px; }
+.progress-track {
+  height: 12px;
+  background: var(--sky);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), #22d3ee);
+  border-radius: 100px;
+  transition: width .5s ease;
+}
+
+/* ============ GAME: DRAG & DROP ============ */
+.game-area {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+.game-title {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--purple);
+}
+.game-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+/* Sorting game */
+.sort-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 60px;
+  background: var(--sky);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.sort-item {
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: white;
+  border: 2px solid var(--blue);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  cursor: grab;
+  transition: all .15s;
+  user-select: none;
+}
+.sort-item:hover { background: var(--blue); color: white; transform: scale(1.05); }
+.sort-item.dragging { opacity: 0.4; }
+
+.drop-zones { display: flex; gap: 16px; flex-wrap: wrap; }
+.drop-zone {
+  flex: 1;
+  min-width: 140px;
+  min-height: 120px;
+  border: 3px dashed var(--blue);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  transition: all .2s;
+}
+.drop-zone.drag-over { background: var(--sky); border-color: var(--blue-dark); }
+.drop-zone-label {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.drop-zone-items { display: flex; flex-wrap: wrap; gap: 6px; min-height: 40px; }
+
+/* Memory Game */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.mem-card {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--blue);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: all .3s;
+  transform-style: preserve-3d;
+  position: relative;
+  border: 3px solid transparent;
+}
+.mem-card.flipped { background: var(--yellow-light); border-color: var(--yellow); }
+.mem-card.matched { background: var(--green-light); border-color: var(--green); cursor: default; }
+.mem-card-back { font-size: 28px; }
+.mem-card-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  display: none;
+}
+.mem-card.flipped .mem-card-front,
+.mem-card.matched .mem-card-front { display: flex; color: var(--green); }
+.mem-card.flipped .mem-card-back,
+.mem-card.matched .mem-card-back { display: none; }
+
+/* Fill array game */
+.fill-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0;
+}
+.fill-row { display: flex; gap: 8px; }
+.fill-cell {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  border: 3px dashed var(--blue);
+  background: var(--sky);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.fill-cell.filled { background: var(--yellow-light); border-style: solid; border-color: var(--yellow); }
+.fill-cell:hover:not(.filled) { background: var(--sky2); border-color: var(--blue-dark); }
+
+/* Emoji picker */
+.emoji-picker { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.emoji-pick {
+  width: 50px; height: 50px;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  background: var(--white);
+  font-size: 26px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+  box-shadow: var(--shadow);
+}
+.emoji-pick:hover { transform: scale(1.1); border-color: var(--blue); }
+.emoji-pick.selected { border-color: var(--blue); background: var(--sky); transform: scale(1.1); }
+
+/* Stars / reward */
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 32px;
+  margin: 12px 0;
+}
+.star { transition: transform .3s; }
+.star.lit { animation: starPop .4s ease forwards; }
+@keyframes starPop { 0%{transform:scale(0)} 60%{transform:scale(1.3)} 100%{transform:scale(1)} }
+
+/* Confetti effect */
+.confetti-msg {
+  text-align: center;
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--blue-dark);
+  padding: 20px;
+  display: none;
+}
+.confetti-msg.show { display: block; animation: fadeIn .4s ease; }
+
+/* ============ CHALLENGE ============ */
+.challenge-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+.timer-bar {
+  flex: 1;
+  height: 14px;
+  background: #fed7aa;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.timer-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 100px;
+  transition: width .1s linear;
+}
+.challenge-q {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.challenge-opts { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.challenge-opt {
+  width: 80px; height: 70px;
+  border-radius: var(--radius-sm);
+  border: 3px solid var(--orange);
+  background: white;
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--orange);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.challenge-opt:hover { background: var(--orange); color: white; transform: scale(1.08); }
+.challenge-opt.correct-ch { background: var(--green); color: white; border-color: var(--green); }
+.challenge-opt.wrong-ch { background: var(--red); color: white; border-color: var(--red); }
+
+.challenge-score {
+  text-align: center;
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--orange);
+}
+
+/* ============ SUMMARY CARD ============ */
+.summary {
+  background: linear-gradient(135deg, #0284c7, #7c3aed);
+  color: white;
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  margin-top: 24px;
+}
+.summary h2 {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.summary-item {
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+.summary-item .s-emoji { font-size: 32px; margin-bottom: 6px; }
+.summary-item p { font-size: 13px; font-weight: 600; }
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 100px;
+  border: none;
+  background: var(--blue);
+  color: white;
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 4px 14px rgba(2,132,199,0.3);
+}
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+.btn-green {
+  background: var(--green);
+  box-shadow: 0 4px 14px rgba(22,163,74,0.3);
+}
+.btn-green:hover { background: #15803d; }
+.btn-orange {
+  background: var(--orange);
+  box-shadow: 0 4px 14px rgba(234,88,12,0.3);
+}
+.btn-orange:hover { background: #c2410c; }
+.btn-purple {
+  background: var(--purple);
+  box-shadow: 0 4px 14px rgba(124,58,237,0.3);
+}
+.btn-purple:hover { background: #6d28d9; }
+
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+
+/* Step-by-step lesson */
+.step-nav {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.step-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--sky2);
+  cursor: pointer;
+  transition: all .2s;
+  border: 2px solid transparent;
+}
+.step-dot.active { background: var(--blue); transform: scale(1.3); border-color: var(--blue-dark); }
+.step-dot.done { background: var(--green); }
+
+.step-slide {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  display: none;
+  animation: fadeIn .3s ease;
+}
+.step-slide.active { display: block; }
+.step-slide h3 {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--blue-dark);
+}
+
+/* Word problem */
+.word-problem {
+  background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 2px solid #c4b5fd;
+}
+.word-problem h3 {
+  font-family: 'Baloo Bhaijaan 2', cursive;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+.word-problem p { font-size: 16px; line-height: 1.9; }
+
+/* Responsive */
+@media (max-width: 500px) {
+  .page-header h1 { font-size: 24px; }
+  .array-cell { width: 42px; height: 42px; font-size: 20px; }
+  .fill-cell { width: 46px; height: 46px; font-size: 22px; }
+  .memory-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a class="home-link" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+    الرئيسية
+  </a>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showPage('intro')" id="nb-intro"><span class="icon">🏠</span> البداية</button>
+    <button class="nav-btn" onclick="showPage('lesson')" id="nb-lesson"><span class="icon">📖</span> الدرس</button>
+    <button class="nav-btn" onclick="showPage('builder')" id="nb-builder"><span class="icon">🔨</span> أبني مصفوفتي</button>
+    <button class="nav-btn" onclick="showPage('exercises')" id="nb-exercises"><span class="icon">✏️</span> التدريبات</button>
+    <button class="nav-btn" onclick="showPage('games')" id="nb-games"><span class="icon">🎮</span> الألعاب</button>
+    <button class="nav-btn" onclick="showPage('challenge')" id="nb-challenge"><span class="icon">⚡</span> التحدي</button>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- ===================== PAGE: INTRO ===================== -->
+<div class="page active" id="page-intro">
+  <div class="page-header">
+    <span class="emoji-big">🌟</span>
+    <h1>أهلًا بك في درس المصفوفات!</h1>
+    <p>للصف الثالث الابتدائي — تعلّم وانبسط</p>
+  </div>
+
+  <div class="card yellow-card">
+    <h2>🎯 ماذا سنتعلم اليوم؟</h2>
+    <ul>
+      <li>📌 ما هي المصفوفة وكيف نقرأها</li>
+      <li>📌 صفوف وأعمدة المصفوفة</li>
+      <li>📌 كيف نكتب اسم المصفوفة (مثل: ٣ × ٤)</li>
+      <li>📌 حساب عدد العناصر في المصفوفة</li>
+      <li>📌 رسم مصفوفات جديدة بأنفسنا</li>
+    </ul>
+  </div>
+
+  <div class="card green-card">
+    <h2>🍎 المصفوفة في حياتنا!</h2>
+    <p>المصفوفات موجودة حولنا في كل مكان! مثل:</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;">
+      <div style="background:white;border-radius:12px;padding:12px 16px;text-align:center;font-size:13px;font-weight:600;color:#1e293b;box-shadow:0 2px 8px rgba(0,0,0,0.06)">🍫<br>قطع الشوكولاتة</div>
+      <div style="background:white;border-radius:12px;padding:12px 16px;text-align:center;font-size:13px;font-weight:600;color:#1e293b;box-shadow:0 2px 8px rgba(0,0,0,0.06)">🪑<br>كراسي الفصل</div>
+      <div style="background:white;border-radius:12px;padding:12px 16px;text-align:center;font-size:13px;font-weight:600;color:#1e293b;box-shadow:0 2px 8px rgba(0,0,0,0.06)">🥚<br>البيض في الكرتونة</div>
+      <div style="background:white;border-radius:12px;padding:12px 16px;text-align:center;font-size:13px;font-weight:600;color:#1e293b;box-shadow:0 2px 8px rgba(0,0,0,0.06)">🌺<br>زهور الحديقة</div>
+      <div style="background:white;border-radius:12px;padding:12px 16px;text-align:center;font-size:13px;font-weight:600;color:#1e293b;box-shadow:0 2px 8px rgba(0,0,0,0.06)">📦<br>علب المتجر</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:24px;">
+    <button class="btn-primary" onclick="showPage('lesson')">🚀 ابدأ الدرس الآن!</button>
+  </div>
+</div>
+
+<!-- ===================== PAGE: LESSON ===================== -->
+<div class="page" id="page-lesson">
+  <div class="page-header">
+    <span class="emoji-big">📖</span>
+    <h1>شرح درس المصفوفات</h1>
+    <p>تعلّم خطوة بخطوة</p>
+  </div>
+
+  <div class="step-nav" id="stepNav">
+    <div class="step-dot active" onclick="gotoStep(0)"></div>
+    <div class="step-dot" onclick="gotoStep(1)"></div>
+    <div class="step-dot" onclick="gotoStep(2)"></div>
+    <div class="step-dot" onclick="gotoStep(3)"></div>
+    <div class="step-dot" onclick="gotoStep(4)"></div>
+  </div>
+
+  <!-- Step 0 -->
+  <div class="step-slide active" id="step-0">
+    <h3>🟦 ما هي المصفوفة؟</h3>
+    <p style="font-size:16px;line-height:1.9;margin-bottom:16px;">
+      المصفوفة هي <strong>ترتيب للأشياء في صفوف وأعمدة</strong> بشكل منظّم ومرتّب.
+      <br>كل الصفوف فيها نفس العدد، وكل الأعمدة فيها نفس العدد.
+    </p>
+    <div class="highlight">💡 تخيّل أنك تضع النجوم في ورقة بطريقة مرتّبة — كل صف فيه نفس عدد النجوم!</div>
+    <div style="margin:20px 0;text-align:center;">
+      <p style="font-weight:700;font-size:15px;margin-bottom:12px;color:#0369a1;">مثال: مصفوفة ٢ × ٣</p>
+      <div class="array-demo" id="example-array-1">
+        <div class="array-row">
+          <div class="array-cell" style="background:#fef3c7">⭐</div>
+          <div class="array-cell" style="background:#fef3c7">⭐</div>
+          <div class="array-cell" style="background:#fef3c7">⭐</div>
+        </div>
+        <div class="array-row">
+          <div class="array-cell" style="background:#fef3c7">⭐</div>
+          <div class="array-cell" style="background:#fef3c7">⭐</div>
+          <div class="array-cell" style="background:#fef3c7">⭐</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#64748b;margin-top:10px;">صفّان × ٣ أعمدة = ٦ نجوم</p>
+    </div>
+    <div class="btn-row"><button class="btn-primary" onclick="gotoStep(1)">التالي ← الصفوف والأعمدة</button></div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step-slide" id="step-1">
+    <h3>↔️ الصفوف والأعمدة</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div style="background:#dbeafe;border-radius:14px;padding:16px;text-align:center;border:3px solid #93c5fd;">
+        <div style="font-size:28px;margin-bottom:8px;">↔️</div>
+        <div style="font-weight:800;font-size:16px;color:#1d4ed8;margin-bottom:6px;">الصف</div>
+        <div style="font-size:13px;color:#1e40af;">يمتد <strong>أفقيًا</strong><br>(من اليمين لليسار)</div>
+      </div>
+      <div style="background:#dcfce7;border-radius:14px;padding:16px;text-align:center;border:3px solid #86efac;">
+        <div style="font-size:28px;margin-bottom:8px;">↕️</div>
+        <div style="font-weight:800;font-size:16px;color:#15803d;margin-bottom:6px;">العمود</div>
+        <div style="font-size:13px;color:#166534;">يمتد <strong>عموديًا</strong><br>(من أعلى لأسفل)</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin:20px 0;">
+      <p style="font-weight:700;font-size:15px;margin-bottom:14px;color:#0369a1;">انظر إلى هذه المصفوفة:</p>
+      <div class="array-demo">
+        <div class="array-row">
+          <div style="background:#dbeafe;border-radius:8px;padding:4px 8px;font-size:13px;font-weight:700;color:#1d4ed8;margin-left:8px;min-width:48px;text-align:center;">صف ١</div>
+          <div class="array-cell" style="background:#bfdbfe">🍎</div>
+          <div class="array-cell" style="background:#bfdbfe">🍎</div>
+          <div class="array-cell" style="background:#bfdbfe">🍎</div>
+          <div class="array-cell" style="background:#bfdbfe">🍎</div>
+        </div>
+        <div class="array-row">
+          <div style="background:#dbeafe;border-radius:8px;padding:4px 8px;font-size:13px;font-weight:700;color:#1d4ed8;margin-left:8px;min-width:48px;text-align:center;">صف ٢</div>
+          <div class="array-cell" style="background:#bbf7d0">🍎</div>
+          <div class="array-cell" style="background:#bbf7d0">🍎</div>
+          <div class="array-cell" style="background:#bbf7d0">🍎</div>
+          <div class="array-cell" style="background:#bbf7d0">🍎</div>
+        </div>
+        <div class="array-row">
+          <div style="background:#dbeafe;border-radius:8px;padding:4px 8px;font-size:13px;font-weight:700;color:#1d4ed8;margin-left:8px;min-width:48px;text-align:center;">صف ٣</div>
+          <div class="array-cell" style="background:#fde68a">🍎</div>
+          <div class="array-cell" style="background:#fde68a">🍎</div>
+          <div class="array-cell" style="background:#fde68a">🍎</div>
+          <div class="array-cell" style="background:#fde68a">🍎</div>
+        </div>
+      </div>
+      <p style="font-size:14px;color:#475569;margin-top:10px;">٣ صفوف × ٤ أعمدة</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" style="background:#64748b" onclick="gotoStep(0)">← السابق</button>
+      <button class="btn-primary" onclick="gotoStep(2)">التالي ← اسم المصفوفة →</button>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step-slide" id="step-2">
+    <h3>📝 كيف نكتب اسم المصفوفة؟</h3>
+    <p style="font-size:15px;line-height:1.9;margin-bottom:16px;">نكتب اسم المصفوفة هكذا:</p>
+    <div style="text-align:center;margin:20px 0;">
+      <div style="display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#0284c7,#7c3aed);color:white;padding:20px 32px;border-radius:20px;font-family:'Baloo Bhaijaan 2',cursive;font-size:32px;font-weight:800;box-shadow:0 8px 24px rgba(2,132,199,0.3)">
+        <div style="text-align:center;font-size:14px;font-weight:600;opacity:0.85">عدد الصفوف</div>
+        <div style="font-size:40px">×</div>
+        <div style="text-align:center;font-size:14px;font-weight:600;opacity:0.85">عدد الأعمدة</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0;">
+      <div style="background:var(--yellow-light);border:2px solid #fcd34d;border-radius:14px;padding:16px;text-align:center;">
+        <div class="array-demo" style="margin:0 0 10px;align-items:center">
+          <div class="array-row"><div class="array-cell" style="background:#fef3c7;width:38px;height:38px;font-size:20px">🐝</div><div class="array-cell" style="background:#fef3c7;width:38px;height:38px;font-size:20px">🐝</div></div>
+          <div class="array-row"><div class="array-cell" style="background:#fef3c7;width:38px;height:38px;font-size:20px">🐝</div><div class="array-cell" style="background:#fef3c7;width:38px;height:38px;font-size:20px">🐝</div></div>
+        </div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;color:#b45309">٢ × ٢</div>
+        <div style="font-size:12px;color:#78350f">٢ صفوف × ٢ أعمدة</div>
+      </div>
+      <div style="background:var(--green-light);border:2px solid #86efac;border-radius:14px;padding:16px;text-align:center;">
+        <div class="array-demo" style="margin:0 0 10px;align-items:center">
+          <div class="array-row"><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div></div>
+          <div class="array-row"><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div></div>
+          <div class="array-row"><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div><div class="array-cell" style="background:#dcfce7;width:38px;height:38px;font-size:20px">🌸</div></div>
+        </div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;color:#166534">٣ × ٣</div>
+        <div style="font-size:12px;color:#14532d">٣ صفوف × ٣ أعمدة</div>
+      </div>
+      <div style="background:var(--sky);border:2px solid #7dd3fc;border-radius:14px;padding:16px;text-align:center;">
+        <div class="array-demo" style="margin:0 0 10px;align-items:center">
+          <div class="array-row"><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div></div>
+          <div class="array-row"><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div><div class="array-cell" style="background:#e0f2fe;width:38px;height:38px;font-size:20px">🦋</div></div>
+        </div>
+        <div style="font-family:'Baloo Bhaijaan 2',cursive;font-size:22px;font-weight:800;color:#0369a1">٢ × ٤</div>
+        <div style="font-size:12px;color:#0c4a6e">٢ صفوف × ٤ أعمدة</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" style="background:#64748b" onclick="gotoStep(1)">← السابق</button>
+      <button class="btn-primary" onclick="gotoStep(3)">التالي ← حساب العناصر →</button>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step-slide" id="step-3">
+    <h3>🔢 كيف نحسب عدد العناصر؟</h3>
+    <p style="font-size:15px;line-height:1.9;margin-bottom:16px;">لحساب عدد العناصر في المصفوفة:</p>
+    <div style="text-align:center;margin:20px 0;">
+      <div style="display:inline-block;background:linear-gradient(135deg,#16a34a,#0d9488);color:white;padding:18px 28px;border-radius:16px;font-family:'Baloo Bhaijaan 2',cursive;font-size:24px;font-weight:800;box-shadow:0 6px 20px rgba(22,163,74,0.3)">
+        عدد الصفوف × عدد الأعمدة = عدد العناصر
+      </div>
+    </div>
+    <div style="background:var(--green-light);border-radius:14px;padding:20px;margin:16px 0;">
+      <p style="font-weight:700;font-size:15px;color:#166534;margin-bottom:12px;">📌 مثال محلول:</p>
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <div class="array-demo">
+          <div class="array-row">
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+          </div>
+          <div class="array-row">
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+          </div>
+          <div class="array-row">
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+            <div class="array-cell" style="background:#bbf7d0;width:44px;height:44px;font-size:22px">🐸</div>
+          </div>
+        </div>
+        <div style="font-size:15px;line-height:2;color:#166534;">
+          <div>عدد الصفوف = <strong>٣</strong></div>
+          <div>عدد الأعمدة = <strong>٣</strong></div>
+          <div>٣ × ٣ = <strong style="font-size:22px;color:#15803d">٩ ضفادع! 🎉</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" style="background:#64748b" onclick="gotoStep(2)">← السابق</button>
+      <button class="btn-primary" onclick="gotoStep(4)">التالي ← المصفوفات المتشابهة →</button>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step-slide" id="step-4">
+    <h3>🔄 مصفوفتان بنفس العناصر!</h3>
+    <p style="font-size:15px;line-height:1.9;margin-bottom:16px;">يمكننا أحيانًا ترتيب نفس العناصر بطريقتين مختلفتين!</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:16px 0;">
+      <div style="text-align:center;">
+        <div class="array-demo">
+          <div class="array-row">
+            <div class="array-cell" style="background:#fde68a">🌟</div>
+            <div class="array-cell" style="background:#fde68a">🌟</div>
+            <div class="array-cell" style="background:#fde68a">🌟</div>
+          </div>
+          <div class="array-row">
+            <div class="array-cell" style="background:#fde68a">🌟</div>
+            <div class="array-cell" style="background:#fde68a">🌟</div>
+            <div class="array-cell" style="background:#fde68a">🌟</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;font-family:'Baloo Bhaijaan 2',cursive;font-size:20px;font-weight:800;color:#b45309">٢ × ٣ = ٦</div>
+      </div>
+      <div style="text-align:center;">
+        <div class="array-demo">
+          <div class="array-row">
+            <div class="array-cell" style="background:#c4b5fd">🌟</div>
+            <div class="array-cell" style="background:#c4b5fd">🌟</div>
+          </div>
+          <div class="array-row">
+            <div class="array-cell" style="background:#c4b5fd">🌟</div>
+            <div class="array-cell" style="background:#c4b5fd">🌟</div>
+          </div>
+          <div class="array-row">
+            <div class="array-cell" style="background:#c4b5fd">🌟</div>
+            <div class="array-cell" style="background:#c4b5fd">🌟</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;font-family:'Baloo Bhaijaan 2',cursive;font-size:20px;font-weight:800;color:#6d28d9">٣ × ٢ = ٦</div>
+      </div>
+    </div>
+    <div class="highlight">💡 كلا المصفوفتين فيهما ٦ نجوم! المصفوفة الأولى: ٢ × ٣ والثانية: ٣ × ٢</div>
+    <div class="btn-row">
+      <button class="btn-primary" style="background:#64748b" onclick="gotoStep(3)">← السابق</button>
+      <button class="btn-green btn-primary" onclick="showPage('builder')">🔨 ابنِ مصفوفتك الآن!</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: BUILDER ===================== -->
+<div class="page" id="page-builder">
+  <div class="page-header">
+    <span class="emoji-big">🔨</span>
+    <h1>أبنِ مصفوفتي!</h1>
+    <p>اختر عدد الصفوف والأعمدة وابنِ مصفوفتك</p>
+  </div>
+
+  <div class="card blue-card">
+    <h2>⚙️ تحكم في مصفوفتك</h2>
+    <div class="builder-controls">
+      <div class="ctrl-group">
+        <label>عدد الصفوف</label>
+        <div class="ctrl-row">
+          <button class="ctrl-btn" onclick="changeGrid('rows',-1)">−</button>
+          <div class="ctrl-val" id="rowsVal">٣</div>
+          <button class="ctrl-btn" onclick="changeGrid('rows',1)">+</button>
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <label>عدد الأعمدة</label>
+        <div class="ctrl-row">
+          <button class="ctrl-btn" onclick="changeGrid('cols',-1)">−</button>
+          <div class="ctrl-val" id="colsVal">٤</div>
+          <button class="ctrl-btn" onclick="changeGrid('cols',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <p style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:10px;">اختر الرمز الذي تريد ملء المصفوفة به:</p>
+      <div class="emoji-picker">
+        <div class="emoji-pick selected" onclick="selectEmoji(this,'⭐')">⭐</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🍎')">🍎</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🐸')">🐸</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🌸')">🌸</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🦋')">🦋</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🐝')">🐝</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🍓')">🍓</div>
+        <div class="emoji-pick" onclick="selectEmoji(this,'🚀')">🚀</div>
+      </div>
+    </div>
+
+    <div class="builder-grid" id="builderGrid"></div>
+    <div class="builder-info" id="builderInfo">المصفوفة: ٣ × ٤ = ١٢ عنصرًا</div>
+
+    <div class="btn-row">
+      <button class="btn-primary btn-green" onclick="fillAll()">✨ ملء الكل</button>
+      <button class="btn-primary" style="background:#ef4444" onclick="clearAll()">🗑️ مسح الكل</button>
+    </div>
+  </div>
+
+  <!-- Word problems in builder -->
+  <div class="word-problem">
+    <h3>🧩 مسألة حياتية!</h3>
+    <p id="wordProblemText">سامي رتّب ٣ صفوف من الكتب في الرف، وفي كل صف ٤ كتب. كم كتابًا رتّب سامي في المجموع؟</p>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:15px;font-weight:600;color:#7c3aed;">الإجابة: </span>
+      <input class="ex-input" id="wpAnswer" type="number" placeholder="؟" min="1" max="100">
+      <button class="btn-primary btn-purple" onclick="checkWordProblem()">تحقق</button>
+      <button class="btn-primary" style="background:#64748b;font-size:13px;padding:10px 16px" onclick="newWordProblem()">مسألة جديدة 🔄</button>
+    </div>
+    <div id="wpFeedback" style="margin-top:10px;font-size:15px;font-weight:700;display:none;"></div>
+  </div>
+</div>
+
+<!-- ===================== PAGE: EXERCISES ===================== -->
+<div class="page" id="page-exercises">
+  <div class="page-header">
+    <span class="emoji-big">✏️</span>
+    <h1>التدريبات</h1>
+    <p>دريّب نفسك وتأكد من فهمك</p>
+  </div>
+
+  <div class="score-bar">
+    <div class="score-item">
+      <div class="score-val green" id="correctCount">0</div>
+      <div class="score-label">صحيح ✅</div>
+    </div>
+    <div class="score-item">
+      <div class="score-val red" id="wrongCount">0</div>
+      <div class="score-label">خطأ ❌</div>
+    </div>
+    <div class="score-progress">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="score-item">
+      <div class="score-val" style="color:var(--blue)" id="scorePercent">0%</div>
+      <div class="score-label">النتيجة</div>
+    </div>
+  </div>
+
+  <!-- Exercise 1 -->
+  <div class="exercise" id="ex1">
+    <span class="ex-number">سؤال ١</span>
+    <div class="ex-question">كم عدد الصفوف في هذه المصفوفة؟
+      <div style="margin-top:12px;" class="array-demo">
+        <div class="array-row"><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div></div>
+        <div class="array-row"><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div></div>
+        <div class="array-row"><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div></div>
+        <div class="array-row"><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div><div class="array-cell" style="background:#fde68a">🌺</div></div>
+      </div>
+    </div>
+    <div class="ex-options">
+      <button class="ex-opt" onclick="checkMCQ(this, 'ex1', false)">٣</button>
+      <button class="ex-opt" onclick="checkMCQ(this, 'ex1', true)">٤</button>
+      <button class="ex-opt" onclick="checkMCQ(this, 'ex1', false)">٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this, 'ex1', false)">٢</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex1"></div>
+  </div>
+
+  <!-- Exercise 2 -->
+  <div class="exercise" id="ex2">
+    <span class="ex-number">سؤال ٢</span>
+    <div class="ex-question">ما اسم هذه المصفوفة؟
+      <div style="margin-top:12px;" class="array-demo">
+        <div class="array-row"><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div></div>
+        <div class="array-row"><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div><div class="array-cell" style="background:#c4b5fd">🦊</div></div>
+      </div>
+    </div>
+    <div class="ex-options">
+      <button class="ex-opt" onclick="checkMCQ(this,'ex2',false)">٥ × ٢</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex2',false)">٣ × ٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex2',true)">٢ × ٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex2',false)">٤ × ٢</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex2"></div>
+  </div>
+
+  <!-- Exercise 3: Fill in -->
+  <div class="exercise" id="ex3">
+    <span class="ex-number">سؤال ٣</span>
+    <div class="ex-question">أكمل: المصفوفة ٣ × ٦ تحتوي على _____ عنصرًا.</div>
+    <div class="ex-input-row">
+      <input class="ex-input" id="in-ex3" type="number" placeholder="؟" min="1" max="100">
+      <button class="check-btn" onclick="checkFill('ex3', 18)">تحقق ✓</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex3"></div>
+  </div>
+
+  <!-- Exercise 4 -->
+  <div class="exercise" id="ex4">
+    <span class="ex-number">سؤال ٤</span>
+    <div class="ex-question">كم عدد الأعمدة في المصفوفة ٥ × ٧ ؟</div>
+    <div class="ex-options">
+      <button class="ex-opt" onclick="checkMCQ(this,'ex4',false)">٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex4',true)">٧</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex4',false)">٣٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex4',false)">١٢</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex4"></div>
+  </div>
+
+  <!-- Exercise 5 -->
+  <div class="exercise" id="ex5">
+    <span class="ex-number">سؤال ٥</span>
+    <div class="ex-question">مريم عندها ٢٠ تفاحة وترتبها في مصفوفة ٤ × ٥. كم عدد الصفوف؟</div>
+    <div class="ex-options">
+      <button class="ex-opt" onclick="checkMCQ(this,'ex5',false)">٢٠</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex5',false)">٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex5',true)">٤</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex5',false)">١٠</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex5"></div>
+  </div>
+
+  <!-- Exercise 6: Fill in rows/cols -->
+  <div class="exercise" id="ex6">
+    <span class="ex-number">سؤال ٦</span>
+    <div class="ex-question">مصفوفة فيها ٢٤ عنصرًا، وعدد صفوفها ٤. كم عدد أعمدتها؟</div>
+    <div class="ex-input-row">
+      <input class="ex-input" id="in-ex6" type="number" placeholder="؟" min="1" max="100">
+      <button class="check-btn" onclick="checkFill('ex6', 6)">تحقق ✓</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex6"></div>
+  </div>
+
+  <!-- Exercise 7 -->
+  <div class="exercise" id="ex7">
+    <span class="ex-number">سؤال ٧</span>
+    <div class="ex-question">أيٌّ من المصفوفات التالية يحتوي على ١٢ عنصرًا؟</div>
+    <div class="ex-options">
+      <button class="ex-opt" onclick="checkMCQ(this,'ex7',false)">٢ × ٥</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex7',true)">٣ × ٤</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex7',false)">٤ × ٤</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex7',false)">٢ × ٧</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex7"></div>
+  </div>
+
+  <!-- Exercise 8 -->
+  <div class="exercise" id="ex8">
+    <span class="ex-number">سؤال ٨</span>
+    <div class="ex-question">هل المصفوفة ٢ × ٦ والمصفوفة ٦ × ٢ لهما نفس عدد العناصر؟</div>
+    <div class="ex-options">
+      <button class="ex-opt" onclick="checkMCQ(this,'ex8',true)">نعم، لأن ٢×٦ = ٦×٢ = ١٢</button>
+      <button class="ex-opt" onclick="checkMCQ(this,'ex8',false)">لا، هما مختلفتان تمامًا</button>
+    </div>
+    <div class="ex-feedback" id="fb-ex8"></div>
+  </div>
+
+  <div class="confetti-msg" id="allDoneMsg">🎉 أحسنت! لقد أجبت على كل الأسئلة! أنت نجم! ⭐</div>
+</div>
+
+<!-- ===================== PAGE: GAMES ===================== -->
+<div class="page" id="page-games">
+  <div class="page-header">
+    <span class="emoji-big">🎮</span>
+    <h1>الألعاب التعليمية</h1>
+    <p>تعلّم وانبسط في نفس الوقت!</p>
+  </div>
+
+  <!-- Game 1: Fill the Array -->
+  <div class="game-area">
+    <div class="game-title">🎨 لعبة ١: أملأ المصفوفة!</div>
+    <div class="game-desc">المهمة: أملأ المصفوفة بالكامل بالنقر على الخلايا الفارغة. اختر رمزك واملأها!</div>
+
+    <div style="margin-bottom:12px;">
+      <p style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">اختر رمزك:</p>
+      <div class="emoji-picker" id="game1-picker">
+        <div class="emoji-pick selected" onclick="selectGameEmoji(this,'🌟')">🌟</div>
+        <div class="emoji-pick" onclick="selectGameEmoji(this,'🐱')">🐱</div>
+        <div class="emoji-pick" onclick="selectGameEmoji(this,'🍕')">🍕</div>
+        <div class="emoji-pick" onclick="selectGameEmoji(this,'🎈')">🎈</div>
+        <div class="emoji-pick" onclick="selectGameEmoji(this,'🦄')">🦄</div>
+      </div>
+    </div>
+
+    <div id="fillGrid" class="fill-grid"></div>
+    <div id="fillProgress" style="text-align:center;font-size:14px;color:#64748b;margin:8px 0;"></div>
+    <div id="fillSuccess" class="confetti-msg"></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="newFillGame()">لعبة جديدة 🔄</button>
+      <button class="btn-primary" style="background:#ef4444" onclick="clearFillGame()">مسح 🗑️</button>
+    </div>
+  </div>
+
+  <!-- Game 2: Memory -->
+  <div class="game-area">
+    <div class="game-title">🧠 لعبة ٢: لعبة الذاكرة!</div>
+    <div class="game-desc">طابق كل مصفوفة مع اسمها الصحيح! انقر على بطاقتين متشابهتين.</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+      <div style="font-size:14px;color:#64748b;">المحاولات: <strong id="memTries">0</strong></div>
+      <div style="font-size:14px;color:#64748b;">تم إيجادها: <strong id="memFound">0</strong>/6</div>
+      <button class="btn-primary" style="font-size:13px;padding:8px 16px" onclick="initMemory()">إعادة 🔄</button>
+    </div>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <div id="memoryWin" class="confetti-msg"></div>
+  </div>
+
+  <!-- Game 3: Spot the Pattern -->
+  <div class="game-area">
+    <div class="game-title">🔍 لعبة ٣: اكتشف المصفوفة الخاطئة!</div>
+    <div class="game-desc">إحدى هذه المصفوفات ليست مصفوفة حقيقية (الصفوف غير متساوية). أيٌّها؟</div>
+    <div id="spotGame"></div>
+    <div id="spotFeedback" style="font-size:16px;font-weight:700;margin-top:14px;display:none;"></div>
+    <button class="btn-primary" style="margin-top:14px" onclick="newSpotGame()">مصفوفة جديدة 🔄</button>
+  </div>
+</div>
+
+<!-- ===================== PAGE: CHALLENGE ===================== -->
+<div class="page" id="page-challenge">
+  <div class="page-header">
+    <span class="emoji-big">⚡</span>
+    <h1>تحدي السرعة!</h1>
+    <p>أجب بسرعة قبل انتهاء الوقت!</p>
+  </div>
+
+  <div id="challengeIntro" style="text-align:center;">
+    <div style="font-size:60px;margin-bottom:16px;">🏆</div>
+    <p style="font-size:16px;color:#64748b;margin-bottom:24px;">أجب على أكبر عدد من الأسئلة بشكل صحيح في أقل وقت ممكن!</p>
+    <div class="stars" id="starsDisplay">
+      <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+    </div>
+    <p style="font-size:22px;font-family:'Baloo Bhaijaan 2',cursive;font-weight:800;margin:8px 0;">أعلى نتيجة: <span id="highScore">0</span></p>
+    <button class="btn-primary btn-orange" style="font-size:18px;padding:16px 40px;margin-top:16px" onclick="startChallenge()">🚀 ابدأ التحدي!</button>
+  </div>
+
+  <div id="challengeGame" style="display:none;">
+    <div class="challenge-timer">
+      <span id="timerNum">30</span>
+      <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+      <span>⏱</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:14px;color:#64748b;">
+      <span>النتيجة: <strong id="liveScore" style="color:var(--green);font-size:18px">0</strong></span>
+      <span>السؤال: <strong id="qNum">1</strong></span>
+    </div>
+    <div class="challenge-q" id="challengeQuestion"></div>
+    <div class="challenge-opts" id="challengeOpts"></div>
+    <div id="challengeFeedback" style="text-align:center;font-size:22px;margin-top:14px;min-height:36px;font-weight:800;"></div>
+  </div>
+
+  <div id="challengeEnd" style="display:none;text-align:center;">
+    <div style="font-size:70px;margin-bottom:10px;">🏅</div>
+    <p style="font-family:'Baloo Bhaijaan 2',cursive;font-size:28px;font-weight:800;color:#0369a1;margin-bottom:8px;">انتهى الوقت!</p>
+    <p style="font-size:18px;margin-bottom:4px;">نتيجتك:</p>
+    <div class="challenge-score" id="finalScore">0</div>
+    <div class="stars" id="endStars" style="margin:16px 0;font-size:40px;">
+      <span class="star" id="s1">⭐</span><span class="star" id="s2">⭐</span><span class="star" id="s3">⭐</span>
+    </div>
+    <p id="endMsg" style="font-size:16px;color:#64748b;margin-bottom:20px;"></p>
+    <div class="btn-row">
+      <button class="btn-primary btn-orange" onclick="startChallenge()">حاول مجددًا 🔄</button>
+      <button class="btn-primary btn-green" onclick="showPage('exercises')">التدريبات ✏️</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<script>
+// ========== NAV ==========
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nb-' + id).classList.add('active');
+  if (id === 'games') { initMemory(); initFillGame(); initSpotGame(); }
+  if (id === 'builder') { renderBuilderGrid(); }
+}
+
+// ========== LESSON STEPS ==========
+let currentStep = 0;
+function gotoStep(n) {
+  document.querySelectorAll('.step-slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.step-dot').forEach((d,i) => {
+    d.classList.remove('active');
+    if (i < n) d.classList.add('done'); else d.classList.remove('done');
+  });
+  document.getElementById('step-' + n).classList.add('active');
+  document.querySelectorAll('.step-dot')[n].classList.add('active');
+  currentStep = n;
+}
+
+// ========== BUILDER ==========
+let gridRows = 3, gridCols = 4, selectedEmoji = '⭐', gameEmoji = '🌟';
+const arabicNums = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩','١٠'];
+
+function toArabic(n) {
+  return String(n).split('').map(d => '٠١٢٣٤٥٦٧٨٩'[+d] || d).join('');
+}
+
+function changeGrid(type, delta) {
+  if (type === 'rows') { gridRows = Math.max(1, Math.min(6, gridRows + delta)); document.getElementById('rowsVal').textContent = toArabic(gridRows); }
+  else { gridCols = Math.max(1, Math.min(8, gridCols + delta)); document.getElementById('colsVal').textContent = toArabic(gridCols); }
+  renderBuilderGrid();
+}
+
+function renderBuilderGrid() {
+  const g = document.getElementById('builderGrid');
+  g.innerHTML = '';
+  const colors = ['#fef3c7','#dcfce7','#dbeafe','#ede9fe','#ffedd5','#fce7f3'];
+  for (let r = 0; r < gridRows; r++) {
+    const row = document.createElement('div');
+    row.className = 'array-row';
+    for (let c = 0; c < gridCols; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'array-cell';
+      cell.style.background = colors[r % colors.length];
+      cell.textContent = selectedEmoji;
+      cell.style.cursor = 'default';
+      row.appendChild(cell);
+    }
+    g.appendChild(row);
+  }
+  const total = gridRows * gridCols;
+  document.getElementById('builderInfo').textContent =
+    `المصفوفة: ${toArabic(gridRows)} × ${toArabic(gridCols)} = ${toArabic(total)} عنصرًا`;
+  updateWordProblem();
+}
+
+function selectEmoji(el, emoji) {
+  document.querySelectorAll('#page-builder .emoji-pick').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedEmoji = emoji;
+  renderBuilderGrid();
+}
+
+function fillAll() { renderBuilderGrid(); }
+function clearAll() {
+  const g = document.getElementById('builderGrid');
+  g.querySelectorAll('.array-cell').forEach(c => c.textContent = '');
+}
+
+// Word Problems
+const wordProblems = [
+  { rows: () => gridRows, cols: () => gridCols, text: () => `سامي رتّب ${toArabic(gridRows)} صفوف من الكتب في الرف، وفي كل صف ${toArabic(gridCols)} كتب. كم كتابًا رتّب سامي في المجموع؟`, answer: () => gridRows * gridCols },
+  { rows: () => gridRows, cols: () => gridCols, text: () => `في حديقة المدرسة زُرعت أشجار في ${toArabic(gridRows)} صفوف، وفي كل صف ${toArabic(gridCols)} أشجار. كم شجرة في الحديقة؟`, answer: () => gridRows * gridCols },
+  { rows: () => gridRows, cols: () => gridCols, text: () => `رتّبت ليلى كعكاتها في علبة على شكل مصفوفة ${toArabic(gridRows)} × ${toArabic(gridCols)}. كم كعكة في العلبة؟`, answer: () => gridRows * gridCols },
+];
+let wpIdx = 0;
+function updateWordProblem() {
+  const p = wordProblems[wpIdx % wordProblems.length];
+  document.getElementById('wordProblemText').textContent = p.text();
+  document.getElementById('wpAnswer').value = '';
+  document.getElementById('wpFeedback').style.display = 'none';
+}
+function newWordProblem() { wpIdx++; updateWordProblem(); }
+function checkWordProblem() {
+  const val = parseInt(document.getElementById('wpAnswer').value);
+  const correct = wordProblems[wpIdx % wordProblems.length].answer();
+  const fb = document.getElementById('wpFeedback');
+  fb.style.display = 'block';
+  if (val === correct) {
+    fb.textContent = `✅ ممتاز! الجواب الصحيح هو ${toArabic(correct)}`;
+    fb.style.color = 'var(--green)';
+  } else {
+    fb.textContent = `❌ حاول مجدداً! تلميح: ${toArabic(gridRows)} × ${toArabic(gridCols)} = ؟`;
+    fb.style.color = 'var(--red)';
+  }
+}
+
+// ========== EXERCISES ==========
+let exCorrect = 0, exWrong = 0, exTotal = 8;
+
+function checkMCQ(btn, exId, isCorrect) {
+  const ex = document.getElementById(exId);
+  if (ex.classList.contains('correct-ex') || ex.classList.contains('wrong-ex')) return;
+  const opts = ex.querySelectorAll('.ex-opt');
+  opts.forEach(o => o.classList.add('disabled'));
+  const fb = document.getElementById('fb-' + exId);
+  fb.classList.add('show');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    ex.classList.add('correct-ex');
+    fb.innerHTML = '<span class="feedback-correct">✅ أحسنت! إجابة صحيحة! 🎉</span>';
+    exCorrect++;
+  } else {
+    btn.classList.add('wrong');
+    ex.classList.add('wrong-ex');
+    fb.innerHTML = '<span class="feedback-wrong">❌ للأسف! حاول مجدداً في المرة القادمة.</span>';
+    exWrong++;
+    // highlight correct
+    opts.forEach(o => {
+      if (o !== btn) {
+        const oText = o.textContent;
+        // try to find correct one by checking if it was correct
+        o.addEventListener('click', function tempCheck() {}, {once:true});
+      }
+    });
+  }
+  updateScore();
+}
+
+function checkFill(exId, answer) {
+  const ex = document.getElementById(exId);
+  if (ex.classList.contains('correct-ex') || ex.classList.contains('wrong-ex')) return;
+  const input = document.getElementById('in-' + exId);
+  const val = parseInt(input.value);
+  const fb = document.getElementById('fb-' + exId);
+  fb.classList.add('show');
+  if (val === answer) {
+    input.classList.add('correct-input');
+    ex.classList.add('correct-ex');
+    fb.innerHTML = '<span class="feedback-correct">✅ رائع! إجابة صحيحة! 🎉</span>';
+    exCorrect++;
+  } else {
+    input.classList.add('wrong-input');
+    ex.classList.add('wrong-ex');
+    fb.innerHTML = `<span class="feedback-wrong">❌ الإجابة الصحيحة هي ${toArabic(answer)}</span>`;
+    exWrong++;
+  }
+  input.disabled = true;
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('correctCount').textContent = toArabic(exCorrect);
+  document.getElementById('wrongCount').textContent = toArabic(exWrong);
+  const done = exCorrect + exWrong;
+  const pct = done > 0 ? Math.round((exCorrect / done) * 100) : 0;
+  document.getElementById('scorePercent').textContent = toArabic(pct) + '%';
+  document.getElementById('progressFill').style.width = (exCorrect / exTotal * 100) + '%';
+  if (done === exTotal) {
+    const msg = document.getElementById('allDoneMsg');
+    msg.classList.add('show');
+    if (exCorrect === exTotal) msg.textContent = '🎉 مبروك! نتيجة مثالية! أنت بطل المصفوفات! 🏆';
+    else if (exCorrect >= 6) msg.textContent = `🌟 ممتاز! حصلت على ${toArabic(exCorrect)} من ${toArabic(exTotal)}!`;
+    else msg.textContent = `👍 أحسنت! حصلت على ${toArabic(exCorrect)} من ${toArabic(exTotal)}. راجع الدرس وحاول مجدداً!`;
+  }
+}
+
+// ========== GAME 1: Fill Grid ==========
+let fillRows = 3, fillCols = 4, filledCells = 0, totalCells = 0;
+
+function initFillGame() { newFillGame(); }
+
+function newFillGame() {
+  const configs = [[2,3],[2,4],[3,3],[3,4],[2,5],[4,3]];
+  const cfg = configs[Math.floor(Math.random() * configs.length)];
+  fillRows = cfg[0]; fillCols = cfg[1];
+  filledCells = 0; totalCells = fillRows * fillCols;
+  const g = document.getElementById('fillGrid');
+  g.innerHTML = '';
+  for (let r = 0; r < fillRows; r++) {
+    const row = document.createElement('div');
+    row.className = 'fill-row';
+    for (let c = 0; c < fillCols; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'fill-cell';
+      cell.dataset.filled = '0';
+      cell.onclick = function() {
+        if (this.dataset.filled === '0') {
+          this.textContent = gameEmoji;
+          this.classList.add('filled');
+          this.dataset.filled = '1';
+          filledCells++;
+          updateFillProgress();
+        }
+      };
+      row.appendChild(cell);
+    }
+    g.appendChild(row);
+  }
+  document.getElementById('fillSuccess').classList.remove('show');
+  updateFillProgress();
+}
+
+function updateFillProgress() {
+  const p = document.getElementById('fillProgress');
+  p.textContent = `تم ملء ${toArabic(filledCells)} من ${toArabic(totalCells)} خلية`;
+  if (filledCells === totalCells) {
+    const s = document.getElementById('fillSuccess');
+    s.textContent = `🎉 رائع! أكملت مصفوفة ${toArabic(fillRows)} × ${toArabic(fillCols)} = ${toArabic(totalCells)} عنصرًا!`;
+    s.classList.add('show');
+  }
+}
+
+function clearFillGame() {
+  filledCells = 0;
+  document.querySelectorAll('.fill-cell').forEach(c => {
+    c.textContent = '';
+    c.classList.remove('filled');
+    c.dataset.filled = '0';
+  });
+  document.getElementById('fillSuccess').classList.remove('show');
+  updateFillProgress();
+}
+
+function selectGameEmoji(el, emoji) {
+  document.querySelectorAll('#game1-picker .emoji-pick').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  gameEmoji = emoji;
+}
+
+// ========== GAME 2: Memory ==========
+const memoryPairs = [
+  { key: 'a', display: '2×3', arrayHtml: buildMiniArray(2,3,'🌼') },
+  { key: 'b', display: '3×4', arrayHtml: buildMiniArray(3,4,'🐸') },
+  { key: 'c', display: '2×5', arrayHtml: buildMiniArray(2,5,'⭐') },
+  { key: 'd', display: '4×2', arrayHtml: buildMiniArray(4,2,'🎈') },
+  { key: 'e', display: '3×3', arrayHtml: buildMiniArray(3,3,'🦊') },
+  { key: 'f', display: '1×4', arrayHtml: buildMiniArray(1,4,'🍓') },
+];
+
+function buildMiniArray(r, c, emoji) {
+  let html = '<div style="display:flex;flex-direction:column;gap:3px;">';
+  for (let i = 0; i < r; i++) {
+    html += '<div style="display:flex;gap:3px;">';
+    for (let j = 0; j < c; j++) html += `<span style="font-size:14px">${emoji}</span>`;
+    html += '</div>';
+  }
+  return html + '</div>';
+}
+
+let memFlipped = [], memMatched = 0, memTries = 0, memCanClick = true;
+
+function initMemory() {
+  memFlipped = []; memMatched = 0; memTries = 0;
+  document.getElementById('memTries').textContent = '0';
+  document.getElementById('memFound').textContent = '0';
+  document.getElementById('memoryWin').classList.remove('show');
+
+  // Create pairs: array card + label card
+  let cards = [];
+  memoryPairs.forEach(p => {
+    cards.push({ key: p.key, type: 'array', content: p.arrayHtml });
+    cards.push({ key: p.key, type: 'label', content: p.display });
+  });
+  // Shuffle
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+
+  const grid = document.getElementById('memoryGrid');
+  grid.innerHTML = '';
+  cards.forEach((card, idx) => {
+    const el = document.createElement('div');
+    el.className = 'mem-card';
+    el.dataset.key = card.key;
+    el.dataset.idx = idx;
+    el.innerHTML = `<div class="mem-card-front">${card.content}</div><div class="mem-card-back">❓</div>`;
+    el.onclick = function() { flipMemCard(this); };
+    grid.appendChild(el);
+  });
+}
+
+function flipMemCard(el) {
+  if (!memCanClick || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  memFlipped.push(el);
+  if (memFlipped.length === 2) {
+    memCanClick = false;
+    memTries++;
+    document.getElementById('memTries').textContent = memTries;
+    setTimeout(() => {
+      if (memFlipped[0].dataset.key === memFlipped[1].dataset.key) {
+        memFlipped.forEach(c => c.classList.add('matched'));
+        memMatched++;
+        document.getElementById('memFound').textContent = `${memMatched}`;
+        if (memMatched === memoryPairs.length) {
+          document.getElementById('memoryWin').textContent = `🏆 ممتاز! وجدت كل الأزواج في ${memTries} محاولة!`;
+          document.getElementById('memoryWin').classList.add('show');
+        }
+      } else {
+        memFlipped.forEach(c => c.classList.remove('flipped'));
+      }
+      memFlipped = [];
+      memCanClick = true;
+    }, 900);
+  }
+}
+
+// ========== GAME 3: Spot the fake ==========
+function initSpotGame() { newSpotGame(); }
+
+function newSpotGame() {
+  document.getElementById('spotFeedback').style.display = 'none';
+  const emojis = ['🌸','🐸','⭐','🦊','🍎','🎈'];
+  const e = emojis[Math.floor(Math.random() * emojis.length)];
+  // Create 3 real arrays and 1 fake
+  const configs = [[2,3],[3,2],[2,4],[4,2],[3,3],[2,5]];
+  const chosen = configs.sort(() => Math.random() - 0.5).slice(0, 3);
+  // fake: rows unequal
+  const fakeRows = 2 + Math.floor(Math.random() * 2);
+  const fakeCols = [2, 3, 4];
+  let fakeArr = [];
+  for (let r = 0; r < fakeRows; r++) {
+    fakeArr.push(fakeCols[r % fakeCols.length] + (r === 0 ? 1 : 0)); // first row has 1 extra
+  }
+
+  let allArrays = chosen.map(cfg => ({ rows: cfg[0], cols: cfg[1], fake: false }));
+  allArrays.push({ rows: fakeRows, colsArr: fakeArr, fake: true });
+  allArrays.sort(() => Math.random() - 0.5);
+
+  const container = document.getElementById('spotGame');
+  container.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;gap:16px;flex-wrap:wrap;';
+
+  allArrays.forEach((arr, i) => {
+    const box = document.createElement('div');
+    box.style.cssText = `background:white;border:3px solid #cbd5e1;border-radius:14px;padding:16px;cursor:pointer;transition:all .2s;text-align:center;`;
+    box.onmouseenter = () => box.style.borderColor = '#0284c7';
+    box.onmouseleave = () => { if (!box.dataset.clicked) box.style.borderColor = '#cbd5e1'; };
+
+    let arrayHtml = '<div style="display:flex;flex-direction:column;gap:5px;align-items:center;margin-bottom:8px;">';
+    if (arr.fake) {
+      for (let r = 0; r < arr.rows; r++) {
+        arrayHtml += '<div style="display:flex;gap:5px;">';
+        for (let c = 0; c < arr.colsArr[r]; c++) arrayHtml += `<span style="font-size:22px">${e}</span>`;
+        arrayHtml += '</div>';
+      }
+    } else {
+      for (let r = 0; r < arr.rows; r++) {
+        arrayHtml += '<div style="display:flex;gap:5px;">';
+        for (let c = 0; c < arr.cols; c++) arrayHtml += `<span style="font-size:22px">${e}</span>`;
+        arrayHtml += '</div>';
+      }
+    }
+    arrayHtml += '</div>';
+    box.innerHTML = arrayHtml + `<div style="font-size:12px;color:#64748b;font-weight:600;">مصفوفة ${i+1}</div>`;
+
+    box.onclick = function() {
+      if (document.querySelectorAll('[data-clicked]').length > 0) return;
+      this.dataset.clicked = '1';
+      const fb = document.getElementById('spotFeedback');
+      fb.style.display = 'block';
+      if (arr.fake) {
+        this.style.borderColor = 'var(--green)';
+        this.style.background = 'var(--green-light)';
+        fb.textContent = '✅ أحسنت! هذه ليست مصفوفة حقيقية لأن صفوفها غير متساوية!';
+        fb.style.color = 'var(--green)';
+      } else {
+        this.style.borderColor = 'var(--red)';
+        this.style.background = 'var(--red-light)';
+        fb.textContent = '❌ ليست هي! المصفوفة الخاطئة هي التي صفوفها غير متساوية.';
+        fb.style.color = 'var(--red)';
+      }
+    };
+    wrap.appendChild(box);
+  });
+  container.appendChild(wrap);
+}
+
+// ========== CHALLENGE ==========
+let challengeTimer, challengeScore = 0, highScore = 0, timeLeft = 30;
+
+const challengeQuestions = [
+  { q: 'كم عنصرًا في مصفوفة ٢ × ٣؟', opts: [4,6,8,5], ans: 6 },
+  { q: 'كم عنصرًا في مصفوفة ٣ × ٤؟', opts: [10,14,12,7], ans: 12 },
+  { q: 'كم عنصرًا في مصفوفة ٥ × ٢؟', opts: [7,8,10,12], ans: 10 },
+  { q: 'مصفوفة ٤ × ٤ كم عنصرًا فيها؟', opts: [8,16,12,20], ans: 16 },
+  { q: 'كم صفًا في مصفوفة ٣ × ٧؟', opts: [7,21,3,10], ans: 3 },
+  { q: 'كم عمودًا في مصفوفة ٦ × ٢؟', opts: [6,12,3,2], ans: 2 },
+  { q: 'مصفوفة فيها ١٥ عنصرًا — أيٌّها؟', opts: ['٣×٦','٥×٣','٤×٤','٢×٨'], ans: '٥×٣' },
+  { q: 'كم عنصرًا في مصفوفة ١ × ٨؟', opts: [9,7,8,4], ans: 8 },
+  { q: 'مصفوفة ٧ × ٣ كم عنصرًا فيها؟', opts: [10,21,18,24], ans: 21 },
+  { q: 'كم عنصرًا في مصفوفة ٤ × ٥؟', opts: [9,18,20,25], ans: 20 },
+  { q: 'مصفوفة ٢ × ٩ كم عنصرًا فيها؟', opts: [11,16,18,20], ans: 18 },
+  { q: 'كم صفًا في مصفوفة ٥ × ٦؟', opts: [6,30,5,11], ans: 5 },
+];
+let usedQs = [], currentQ = null;
+
+function startChallenge() {
+  challengeScore = 0; timeLeft = 30; usedQs = [];
+  document.getElementById('challengeIntro').style.display = 'none';
+  document.getElementById('challengeEnd').style.display = 'none';
+  document.getElementById('challengeGame').style.display = 'block';
+  document.getElementById('liveScore').textContent = '0';
+  nextChallengeQ();
+  challengeTimer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timerNum').textContent = timeLeft;
+    document.getElementById('timerFill').style.width = (timeLeft / 30 * 100) + '%';
+    if (timeLeft <= 0) endChallenge();
+  }, 1000);
+}
+
+function nextChallengeQ() {
+  const available = challengeQuestions.filter((_, i) => !usedQs.includes(i));
+  if (available.length === 0) { usedQs = []; }
+  const pool = challengeQuestions.filter((_, i) => !usedQs.includes(i));
+  const idx = Math.floor(Math.random() * pool.length);
+  const origIdx = challengeQuestions.indexOf(pool[idx]);
+  usedQs.push(origIdx);
+  currentQ = pool[idx];
+
+  document.getElementById('challengeQuestion').textContent = currentQ.q;
+  document.getElementById('qNum').textContent = usedQs.length;
+  document.getElementById('challengeFeedback').textContent = '';
+
+  const optsDiv = document.getElementById('challengeOpts');
+  optsDiv.innerHTML = '';
+  const shuffled = [...currentQ.opts].sort(() => Math.random() - 0.5);
+  shuffled.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'challenge-opt';
+    btn.textContent = toArabic(String(opt));
+    btn.onclick = function() { answerChallenge(opt, this); };
+    optsDiv.appendChild(btn);
+  });
+}
+
+function answerChallenge(val, btn) {
+  document.querySelectorAll('.challenge-opt').forEach(b => b.onclick = null);
+  const ansVal = currentQ.ans;
+  const correct = String(val) === String(ansVal);
+  if (correct) {
+    btn.classList.add('correct-ch');
+    challengeScore++;
+    document.getElementById('liveScore').textContent = toArabic(challengeScore);
+    document.getElementById('challengeFeedback').textContent = '✅ صح!';
+    document.getElementById('challengeFeedback').style.color = 'var(--green)';
+  } else {
+    btn.classList.add('wrong-ch');
+    document.querySelectorAll('.challenge-opt').forEach(b => {
+      if (String(b.textContent) === toArabic(String(ansVal))) b.classList.add('correct-ch');
+    });
+    document.getElementById('challengeFeedback').textContent = '❌ خطأ!';
+    document.getElementById('challengeFeedback').style.color = 'var(--red)';
+  }
+  setTimeout(nextChallengeQ, 600);
+}
+
+function endChallenge() {
+  clearInterval(challengeTimer);
+  document.getElementById('challengeGame').style.display = 'none';
+  document.getElementById('challengeEnd').style.display = 'block';
+  document.getElementById('finalScore').textContent = toArabic(challengeScore);
+  if (challengeScore > highScore) { highScore = challengeScore; document.getElementById('highScore').textContent = toArabic(highScore); }
+
+  const msgs = ['حاول مجددًا! 💪', 'جيد! واصل التدريب! 👍', 'ممتاز! أنت رائع! 🌟', 'مذهل! بطل المصفوفات! 🏆'];
+  const stars = challengeScore >= 10 ? 3 : challengeScore >= 6 ? 2 : challengeScore >= 3 ? 1 : 0;
+  const msgIdx = challengeScore >= 10 ? 3 : challengeScore >= 6 ? 2 : challengeScore >= 3 ? 1 : 0;
+  document.getElementById('endMsg').textContent = msgs[msgIdx];
+
+  const allStars = ['s1','s2','s3'];
+  allStars.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.textContent = i < stars ? '⭐' : '☆';
+    if (i < stars) setTimeout(() => el.classList.add('lit'), i * 300);
+  });
+}
+
+// ========== INIT ==========
+renderBuilderGrid();
+initMemory();
+initFillGame();
+initSpotGame();
+</script>
+</body>
+</html>
