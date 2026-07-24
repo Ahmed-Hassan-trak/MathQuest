@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الفصل الأول - الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a2e5a;
+    --accent: #f5a623;
+    --green: #27ae60;
+    --red: #e74c3c;
+    --blue: #2980b9;
+    --purple: #8e44ad;
+    --teal: #16a085;
+    --orange: #e67e22;
+    --light-bg: #f0f4ff;
+    --card-bg: #ffffff;
+    --text: #1a2e5a;
+    --shadow: 0 8px 32px rgba(26,46,90,0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #e8f0fe 0%, #fef9e7 50%, #e8f8f5 100%);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #1a2e5a 0%, #2980b9 60%, #16a085 100%);
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(245,166,35,0.18);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  .hero .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.88;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  .home-btn {
+    position: absolute;
+    top: 18px; right: 18px;
+    z-index: 5;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 700;
+    backdrop-filter: blur(6px);
+    transition: all 0.2s;
+  }
+  .home-btn:hover {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+  }
+  .home-btn svg { width: 15px; height: 15px; }
+  @media (max-width: 520px) {
+    .home-btn { top: 10px; right: 10px; padding: 6px 12px; font-size: 12px; }
+  }
+  .hero .stars {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+    animation: starSpin 3s linear infinite;
+  }
+  @keyframes starSpin {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  /* STUDENT INFO */
+  .student-info {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin: -30px auto 30px;
+    padding: 28px 32px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+  .student-info h2 { color: var(--primary); font-size: 1.3rem; margin-bottom: 16px; font-weight: 800; }
+  .student-info input {
+    border: 2px solid #dde4f5;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 1.1rem;
+    font-family: 'Tajawal', sans-serif;
+    width: 100%;
+    color: var(--primary);
+    background: #f8faff;
+    transition: border 0.2s;
+    text-align: center;
+  }
+  .student-info input:focus { outline: none; border-color: var(--accent); background: #fffef5; }
+  .btn-start {
+    background: linear-gradient(135deg, var(--accent), #e67e22);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 40px;
+    font-size: 1.2rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 16px;
+    box-shadow: 0 4px 18px rgba(245,166,35,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.45); }
+
+  /* LESSONS NAV */
+  .lessons-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0 16px;
+  }
+  .lesson-tab {
+    background: #fff;
+    border: 2.5px solid #dde4f5;
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--primary);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lesson-tab .icon { font-size: 1.2rem; }
+  .lesson-tab:hover, .lesson-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 4px 14px rgba(26,46,90,0.2);
+  }
+  .lesson-tab .status-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    display: inline-block;
+  }
+  .lesson-tab.done .status-dot { background: var(--green); }
+  .lesson-tab.active .status-dot { background: var(--accent); }
+
+  /* MAIN CONTENT */
+  .content-area {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  /* LESSON CARD */
+  .lesson-panel { display: none; }
+  .lesson-panel.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+
+  .lesson-header {
+    background: linear-gradient(135deg, var(--primary), var(--blue));
+    color: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .lesson-icon { font-size: 2.2rem; }
+  .lesson-header h2 { font-size: 1.4rem; font-weight: 900; }
+  .lesson-header p { opacity: 0.85; font-size: 0.95rem; margin-top: 4px; }
+
+  /* INFO CARD */
+  .info-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    border-right: 5px solid var(--accent);
+  }
+  .info-card h3 { color: var(--primary); font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; }
+  .info-card p { line-height: 1.8; font-size: 1rem; color: #444; }
+  .info-card ul { padding-right: 20px; }
+  .info-card ul li { line-height: 2; font-size: 1rem; color: #444; }
+
+  /* QUESTION CARD */
+  .q-section {
+    background: #fff;
+    border-radius: 0 0 20px 20px;
+    padding: 24px 28px 30px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+  }
+  .q-section h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed #e0e7ff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .question-block {
+    background: #f8faff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    border: 2px solid #e0e7ff;
+    transition: border 0.2s;
+  }
+  .question-block.correct { border-color: var(--green); background: #f0fff8; }
+  .question-block.wrong { border-color: var(--red); background: #fff5f5; }
+
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .q-num {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin-left: 8px;
+  }
+
+  /* OPTIONS */
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media(max-width:500px) { .options { grid-template-columns: 1fr; } }
+
+  .option-btn {
+    background: #fff;
+    border: 2.5px solid #dde4f5;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--primary);
+    transition: all 0.18s;
+    text-align: center;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--blue); background: #eef4fd; transform: translateY(-1px); }
+  .option-btn.selected-correct { background: var(--green); color: #fff; border-color: var(--green); }
+  .option-btn.selected-wrong { background: var(--red); color: #fff; border-color: var(--red); }
+  .option-btn.reveal-correct { background: #d5f5e3; border-color: var(--green); color: #1a5e38; }
+  .option-btn:disabled { cursor: default; }
+
+  /* INPUT QUESTION */
+  .input-answer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .input-answer input {
+    border: 2.5px solid #dde4f5;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 1.1rem;
+    font-family: 'Tajawal', sans-serif;
+    width: 130px;
+    text-align: center;
+    color: var(--primary);
+  }
+  .input-answer input:focus { outline: none; border-color: var(--accent); }
+  .btn-check {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-check:hover { background: var(--primary); }
+  .feedback {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: none;
+  }
+  .feedback.ok { background: #d5f5e3; color: #1a5e38; display: inline-block; }
+  .feedback.err { background: #fde8e8; color: #a93226; display: inline-block; }
+
+  /* VISUAL ELEMENTS */
+  .bar-chart-demo {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    padding: 16px 10px 0;
+    height: 120px;
+    border-bottom: 3px solid var(--primary);
+    border-right: 3px solid var(--primary);
+    margin: 14px 0 8px;
+    direction: ltr;
+    justify-content: center;
+  }
+  .bar-wrap { display: flex; flex-direction: column; align-items: center; }
+  .bar {
+    width: 36px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding-top: 4px;
+    transition: height 0.6s cubic-bezier(.4,2,.6,1);
+  }
+  .bar-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-top: 5px; }
+
+  .dot-chart-demo {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin: 14px 0;
+    direction: ltr;
+  }
+  .dot-col { display: flex; flex-direction: column-reverse; align-items: center; gap: 5px; }
+  .dot { width: 18px; height: 18px; border-radius: 50%; background: var(--blue); }
+  .dot-label { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-align: center; }
+
+  .ruler {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffe4a0, #ffd06e);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin: 12px 0;
+    border: 2px solid #c8a000;
+    direction: ltr;
+    overflow-x: auto;
+    position: relative;
+    height: 60px;
+  }
+  .ruler-tick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 18px;
+  }
+  .tick-line { width: 2px; background: #7a5c00; }
+  .tick-label { font-size: 0.75rem; font-weight: 700; color: #7a5c00; margin-top: 2px; }
+
+  /* PATTERN */
+  .pattern-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+    align-items: center;
+  }
+  .shape-item {
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    background: #f0f4ff;
+    border-radius: 10px;
+    border: 2px solid #dde4f5;
+  }
+  .shape-blank {
+    width: 44px; height: 44px;
+    border: 2.5px dashed var(--accent);
+    border-radius: 10px;
+    background: #fffef5;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* SUBMIT LESSON */
+  .btn-submit-lesson {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--green), #1e8449);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 1.2rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 24px;
+    box-shadow: 0 4px 18px rgba(39,174,96,0.3);
+    transition: all 0.2s;
+  }
+  .btn-submit-lesson:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(39,174,96,0.4); }
+
+  /* SCORE RESULT */
+  .lesson-result {
+    display: none;
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-top: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+  }
+  .lesson-result.show { display: block; }
+  .score-circle {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin: 0 auto 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  }
+  .score-circle .pct { font-size: 1rem; font-weight: 600; }
+  .score-circle.excellent { background: linear-gradient(135deg, #27ae60, #1e8449); color: #fff; }
+  .score-circle.good { background: linear-gradient(135deg, #2980b9, #1a5276); color: #fff; }
+  .score-circle.fair { background: linear-gradient(135deg, #e67e22, #ca6f1e); color: #fff; }
+  .score-circle.poor { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
+  .level-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 10px 0;
+  }
+  .level-badge.excellent { background: #d5f5e3; color: #1a5e38; }
+  .level-badge.good { background: #d6eaf8; color: #1a4f7e; }
+  .level-badge.fair { background: #fde8ce; color: #7e4c1a; }
+  .level-badge.poor { background: #fde8e8; color: #7e1a1a; }
+
+  /* FINAL REPORT */
+  .final-report {
+    display: none;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 860px;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.5s ease;
+  }
+  .final-report.show { display: block; }
+  .final-report h2 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .report-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  @media(max-width:600px) { .report-grid { grid-template-columns: 1fr; } }
+  .report-card {
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    border: 2px solid #e0e7ff;
+  }
+  .report-card .r-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .report-card .r-title { font-size: 0.85rem; font-weight: 700; color: #888; margin-bottom: 6px; }
+  .report-card .r-score { font-size: 1.5rem; font-weight: 900; }
+  .report-card .r-level { font-size: 0.85rem; font-weight: 700; margin-top: 4px; }
+  .report-card.excellent { background: #f0fff8; border-color: var(--green); }
+  .report-card.good { background: #eaf3fd; border-color: var(--blue); }
+  .report-card.fair { background: #fef9f0; border-color: var(--orange); }
+  .report-card.poor { background: #fff5f5; border-color: var(--red); }
+
+  .overall-score {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), var(--blue));
+    color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .overall-score .big-num { font-size: 4rem; font-weight: 900; line-height: 1; }
+  .overall-score .label { font-size: 1.1rem; opacity: 0.85; margin-top: 6px; }
+
+  .btn-print {
+    background: var(--purple);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 32px;
+    font-size: 1rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 6px;
+    transition: all 0.2s;
+  }
+  .btn-print:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-restart {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 32px;
+    font-size: 1rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0 6px;
+    transition: all 0.2s;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    background: #e0e7ff;
+    border-radius: 50px;
+    height: 8px;
+    margin: 10px 0 18px;
+  }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    border-radius: 50px;
+    height: 8px;
+    transition: width 0.5s ease;
+  }
+
+  /* GAME SECTION */
+  .game-section {
+    background: linear-gradient(135deg, #1a2e5a, #2980b9);
+    color: #fff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+  }
+  .game-section h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 14px; }
+  .drag-container { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+  .drag-item {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: grab;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .drag-item:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+  .drop-zone {
+    min-height: 50px;
+    border: 2.5px dashed rgba(255,255,255,0.5);
+    border-radius: 12px;
+    padding: 8px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    margin: 8px 0;
+  }
+  .drop-zone.drag-over { border-color: var(--accent); background: rgba(245,166,35,0.15); }
+
+  .hidden { display: none !important; }
+  .text-center { text-align: center; }
+  .mt-10 { margin-top: 10px; }
+
+  /* Celebration */
+  .confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+
+  @media print {
+    .lessons-nav, .btn-submit-lesson, .btn-print, .btn-restart, .hero, .student-info, .game-section { display: none; }
+    .final-report { display: block !important; box-shadow: none; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <a class="home-btn" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+    الرئيسية
+  </a>
+  <span class="stars">⭐ 🎓 ⭐</span>
+  <h1>مراجعة الفصل الأول</h1>
+  <div class="subtitle">الصف الثالث الابتدائي — الأنماط والتمثيل البياني والقياس</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp">
+
+  <!-- LESSONS NAV -->
+  <div class="lessons-nav" id="lessonsNav">
+    <button class="lesson-tab active" id="tab-0" onclick="showLesson(0)">
+      <span class="icon">🔷</span> الأنماط <span class="status-dot"></span>
+    </button>
+    <button class="lesson-tab" id="tab-1" onclick="showLesson(1)">
+      <span class="icon">📊</span> الأعمدة <span class="status-dot"></span>
+    </button>
+    <button class="lesson-tab" id="tab-2" onclick="showLesson(2)">
+      <span class="icon">⚫</span> النقاط <span class="status-dot"></span>
+    </button>
+    <button class="lesson-tab" id="tab-3" onclick="showLesson(3)">
+      <span class="icon">📏</span> السنتمتر <span class="status-dot"></span>
+    </button>
+    <button class="lesson-tab" id="tab-4" onclick="showLesson(4)">
+      <span class="icon">📐</span> المتر <span class="status-dot"></span>
+    </button>
+    <button class="lesson-tab" id="tab-5" onclick="showLesson(5)">
+      <span class="icon">🔬</span> المليمتر <span class="status-dot"></span>
+    </button>
+  </div>
+
+  <div class="content-area">
+    <!-- Progress -->
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="totalProgress" style="width:0%"></div>
+    </div>
+
+    <!-- ============ LESSON 0: PATTERNS ============ -->
+    <div class="lesson-panel active" id="lesson-0">
+      <div class="lesson-header" style="background:linear-gradient(135deg,#8e44ad,#2980b9)">
+        <div class="lesson-icon">🔷</div>
+        <div>
+          <h2>الأنماط</h2>
+          <p>تعرّف على الأنماط وأكمل المتتاليات بذكاء!</p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:0;border-radius:0;">
+        <h3>📘 ما هو النمط؟</h3>
+        <p>النمط هو تسلسل يتكرر بطريقة منتظمة. يمكن أن يكون النمط بالأشكال أو الأرقام أو الألوان.</p>
+        <div class="pattern-row" style="margin-top:12px;">
+          <div class="shape-item">🔴</div><div class="shape-item">🔵</div><div class="shape-item">🔴</div><div class="shape-item">🔵</div><div class="shape-item">🔴</div><div class="shape-item">🔵</div>
+        </div>
+        <p style="margin-top:6px;font-size:0.9rem;color:#666;">النمط هنا: أحمر ← أزرق ← أحمر ← أزرق (يتكرر كل 2)</p>
+      </div>
+
+      <div class="q-section">
+        <h3>✏️ التدريبات والأسئلة</h3>
+
+        <!-- Q1 -->
+        <div class="question-block" id="l0q1">
+          <div class="q-text"><span class="q-num">1</span> ما الشكل الذي يأتي بعد ذلك؟<br>
+            <div class="pattern-row" style="margin-top:10px;">
+              <div class="shape-item">⭐</div><div class="shape-item">🔵</div><div class="shape-item">⭐</div><div class="shape-item">🔵</div><div class="shape-blank">؟</div>
+            </div>
+          </div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l0q1','⭐ نجمة')">⭐ نجمة</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q1','🔵 دائرة')">🔵 دائرة</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q1','🔴 قلب')">🔴 قلب</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q1','🟡 مثلث')">🟡 مثلث</button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-block" id="l0q2">
+          <div class="q-text"><span class="q-num">2</span> أي رقم يكمل النمط التالي؟<br>
+            <div class="pattern-row" style="margin-top:10px;font-size:1.4rem;font-weight:900;color:var(--primary);">
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">2</div>
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">4</div>
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">6</div>
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">8</div>
+              <div class="shape-blank">؟</div>
+            </div>
+          </div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l0q2','9')">9</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q2','10')">10</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q2','11')">11</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q2','12')">12</button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-block" id="l0q3">
+          <div class="q-text"><span class="q-num">3</span> ما الرقم الناقص في النمط؟<br>
+            <div class="pattern-row" style="margin-top:10px;">
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">5</div>
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">10</div>
+              <div class="shape-blank">؟</div>
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">20</div>
+              <div class="shape-item" style="font-size:1.2rem;font-weight:900;">25</div>
+            </div>
+          </div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l0q3','12')">12</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q3','15')">15</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q3','18')">18</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q3','16')">16</button>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-block" id="l0q4">
+          <div class="q-text"><span class="q-num">4</span> النمط: 🔺🟦🔺🟦🔺 — كم مرة تكرر شكل النجمة ◆ ؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l0q4','1')">1</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q4','2')">2</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q4','3')">3 (المثلث)</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q4','0')">لم يتكرر</button>
+          </div>
+        </div>
+
+        <!-- Q5 - Input -->
+        <div class="question-block" id="l0q5">
+          <div class="q-text"><span class="q-num">5</span> النمط: 3 , 6 , 9 , 12 , ___ — اكتب الرقم التالي:</div>
+          <div class="input-answer">
+            <input type="number" id="l0q5-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l0q5','15')">تحقق ✓</button>
+            <span class="feedback" id="l0q5-fb"></span>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-block" id="l0q6">
+          <div class="q-text"><span class="q-num">6</span> أي مجموعة تمثل نمطاً صحيحاً؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l0q6','1,3,5,7,9')">1 , 3 , 5 , 7 , 9</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q6','2,4,7,8,10')">2 , 4 , 7 , 8 , 10</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q6','10,8,5,3,1')">10 , 8 , 5 , 3 , 1</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q6','1,2,4,5,7')">1 , 2 , 4 , 5 , 7</button>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-block" id="l0q7">
+          <div class="q-text"><span class="q-num">7</span> النمط: 🔴🔴🔵🔴🔴🔵🔴🔴___ — ما الشكل التالي؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l0q7','🔴')">🔴 أحمر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q7','🔵')">🔵 أزرق</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q7','🟡')">🟡 أصفر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l0q7','🟢')">🟢 أخضر</button>
+          </div>
+        </div>
+
+        <!-- Q8 - Input -->
+        <div class="question-block" id="l0q8">
+          <div class="q-text"><span class="q-num">8</span> النمط التنازلي: 20 , 17 , 14 , 11 , ___ — ما الرقم التالي؟</div>
+          <div class="input-answer">
+            <input type="number" id="l0q8-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l0q8','8')">تحقق ✓</button>
+            <span class="feedback" id="l0q8-fb"></span>
+          </div>
+        </div>
+
+        <button class="btn-submit-lesson" onclick="submitLesson(0)">✅ إنهاء درس الأنماط والانتقال للتقييم</button>
+      </div>
+      <div class="lesson-result" id="result-0"></div>
+    </div>
+
+    <!-- ============ LESSON 1: BAR CHART ============ -->
+    <div class="lesson-panel" id="lesson-1">
+      <div class="lesson-header" style="background:linear-gradient(135deg,#e67e22,#e74c3c)">
+        <div class="lesson-icon">📊</div>
+        <div>
+          <h2>التمثيل البياني بالأعمدة</h2>
+          <p>اقرأ وفهم وفسّر الرسوم البيانية بالأعمدة!</p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:0;border-radius:0;">
+        <h3>📘 التمثيل البياني بالأعمدة</h3>
+        <p>يستخدم أعمدة (مستطيلات) لتمثيل البيانات. كلما ارتفع العمود، كلما زادت القيمة.</p>
+        <div class="bar-chart-demo">
+          <div class="bar-wrap"><div class="bar" style="height:60px;background:#e74c3c;">6</div><div class="bar-label">تفاح</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:40px;background:#2980b9;">4</div><div class="bar-label">برتقال</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:80px;background:#27ae60;">8</div><div class="bar-label">موز</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:30px;background:#8e44ad;">3</div><div class="bar-label">عنب</div></div>
+          <div class="bar-wrap"><div class="bar" style="height:50px;background:#f39c12;">5</div><div class="bar-label">فراولة</div></div>
+        </div>
+        <p style="font-size:0.9rem;color:#666;margin-top:8px;">المحور الأفقي: نوع الفاكهة | المحور الرأسي: العدد</p>
+      </div>
+
+      <div class="q-section">
+        <h3>✏️ أسئلة على الرسم البياني بالأعمدة</h3>
+        <div class="info-card" style="background:#fff8f0;border-color:#e67e22;">
+          <h3>📊 بيانات الفصل الدراسي (الألوان المفضلة)</h3>
+          <div class="bar-chart-demo">
+            <div class="bar-wrap"><div class="bar" style="height:70px;background:#e74c3c;">7</div><div class="bar-label">أحمر</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:90px;background:#2980b9;">9</div><div class="bar-label">أزرق</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:40px;background:#27ae60;">4</div><div class="bar-label">أخضر</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:60px;background:#f39c12;">6</div><div class="bar-label">أصفر</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:50px;background:#8e44ad;">5</div><div class="bar-label">بنفسجي</div></div>
+          </div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="question-block" id="l1q1">
+          <div class="q-text"><span class="q-num">1</span> أي لون فضّله أكبر عدد من الطلاب؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l1q1','أحمر')">أحمر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q1','أزرق')">أزرق</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q1','أخضر')">أخضر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q1','أصفر')">أصفر</button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-block" id="l1q2">
+          <div class="q-text"><span class="q-num">2</span> كم طالباً اختار اللون الأخضر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l1q2','3')">3</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q2','4')">4</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q2','5')">5</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q2','6')">6</button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-block" id="l1q3">
+          <div class="q-text"><span class="q-num">3</span> ما مجموع من اختاروا الأحمر والأصفر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l1q3-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l1q3','13')">تحقق ✓</button>
+            <span class="feedback" id="l1q3-fb"></span>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-block" id="l1q4">
+          <div class="q-text"><span class="q-num">4</span> بكم يزيد عدد من اختاروا الأزرق عن من اختاروا البنفسجي؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l1q4','2')">2</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q4','3')">3</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q4','4')">4</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q4','5')">5</button>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-block" id="l1q5">
+          <div class="q-text"><span class="q-num">5</span> ما عدد الطلاب في الفصل كله؟</div>
+          <div class="input-answer">
+            <input type="number" id="l1q5-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l1q5','31')">تحقق ✓</button>
+            <span class="feedback" id="l1q5-fb"></span>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-block" id="l1q6">
+          <div class="q-text"><span class="q-num">6</span> أي لونين اختار نفس العدد تقريباً؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l1q6','أحمر وأصفر')">أحمر وأصفر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q6','أزرق وأحمر')">أزرق وأحمر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q6','أصفر وبنفسجي')">أصفر وبنفسجي</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q6','أخضر وبنفسجي')">أخضر وبنفسجي</button>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-block" id="l1q7">
+          <div class="q-text"><span class="q-num">7</span> ما استخدام الرسم البياني بالأعمدة؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l1q7','مقارنة البيانات بصرياً')">مقارنة البيانات بصرياً</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q7','قياس الأطوال')">قياس الأطوال</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q7','حل المسائل الحسابية')">حل المسائل الحسابية</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l1q7','رسم الأشكال الهندسية')">رسم الأشكال الهندسية</button>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question-block" id="l1q8">
+          <div class="q-text"><span class="q-num">8</span> لو أضفنا 3 طلاب يفضلون الأخضر، كم يصبح عدد طلاب الأخضر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l1q8-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l1q8','7')">تحقق ✓</button>
+            <span class="feedback" id="l1q8-fb"></span>
+          </div>
+        </div>
+
+        <button class="btn-submit-lesson" onclick="submitLesson(1)">✅ إنهاء درس الأعمدة والانتقال للتقييم</button>
+      </div>
+      <div class="lesson-result" id="result-1"></div>
+    </div>
+
+    <!-- ============ LESSON 2: DOT PLOT ============ -->
+    <div class="lesson-panel" id="lesson-2">
+      <div class="lesson-header" style="background:linear-gradient(135deg,#16a085,#27ae60)">
+        <div class="lesson-icon">⚫</div>
+        <div>
+          <h2>التمثيل البياني بالنقاط</h2>
+          <p>تعلّم قراءة الرسوم البيانية بالنقاط والتعبير عن البيانات!</p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:0;border-radius:0;">
+        <h3>📘 التمثيل البياني بالنقاط</h3>
+        <p>يستخدم نقاطاً أو رموزاً (×) لتمثيل البيانات. كل نقطة تساوي وحدة واحدة أو أكثر.</p>
+        <div style="margin-top:14px;">
+          <div style="display:flex;gap:30px;flex-wrap:wrap;direction:ltr;align-items:flex-end;border-bottom:2px solid var(--primary);padding-bottom:4px;">
+            <div class="dot-col">
+              <div class="dot" style="background:#e74c3c;"></div>
+              <div class="dot" style="background:#e74c3c;"></div>
+              <div class="dot" style="background:#e74c3c;"></div>
+              <div class="dot-label">الإثنين</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot" style="background:#2980b9;"></div>
+              <div class="dot" style="background:#2980b9;"></div>
+              <div class="dot" style="background:#2980b9;"></div>
+              <div class="dot" style="background:#2980b9;"></div>
+              <div class="dot" style="background:#2980b9;"></div>
+              <div class="dot-label">الثلاثاء</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot" style="background:#27ae60;"></div>
+              <div class="dot" style="background:#27ae60;"></div>
+              <div class="dot-label">الأربعاء</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot" style="background:#8e44ad;"></div>
+              <div class="dot" style="background:#8e44ad;"></div>
+              <div class="dot" style="background:#8e44ad;"></div>
+              <div class="dot" style="background:#8e44ad;"></div>
+              <div class="dot-label">الخميس</div>
+            </div>
+          </div>
+          <p style="font-size:0.85rem;color:#666;margin-top:6px;">عدد الكتب المقروءة كل يوم خلال الأسبوع</p>
+        </div>
+      </div>
+
+      <div class="q-section">
+        <h3>✏️ أسئلة على التمثيل بالنقاط</h3>
+        <div class="info-card" style="background:#f0fff8;border-color:#27ae60;">
+          <h3>🌡️ درجات حرارة أيام الأسبوع (نقاط = درجة)</h3>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;direction:ltr;align-items:flex-end;border-bottom:2px solid #27ae60;padding-bottom:6px;margin-top:10px;">
+            <div class="dot-col">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot-label">الأحد (5)</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot-label">الإثنين (7)</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot-label">الثلاثاء (3)</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot-label">الأربعاء (6)</div>
+            </div>
+            <div class="dot-col">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="dot-label">الخميس (4)</div>
+            </div>
+          </div>
+          <p style="font-size:0.85rem;color:#666;margin-top:6px;">كل نقطة = درجة مئوية واحدة</p>
+        </div>
+
+        <div class="question-block" id="l2q1">
+          <div class="q-text"><span class="q-num">1</span> أي يوم كانت درجة الحرارة الأعلى؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l2q1','الإثنين')">الإثنين</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q1','الأحد')">الأحد</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q1','الأربعاء')">الأربعاء</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q1','الخميس')">الخميس</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q2">
+          <div class="q-text"><span class="q-num">2</span> ما مجموع درجات الحرارة ليومَي الأحد والثلاثاء؟</div>
+          <div class="input-answer">
+            <input type="number" id="l2q2-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l2q2','8')">تحقق ✓</button>
+            <span class="feedback" id="l2q2-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q3">
+          <div class="q-text"><span class="q-num">3</span> بكم تزيد درجة الإثنين عن درجة الخميس؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l2q3','2')">2</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q3','3')">3</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q3','4')">4</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q3','5')">5</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q4">
+          <div class="q-text"><span class="q-num">4</span> ما عدد الأيام التي تجاوزت درجة حرارتها 5 درجات؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l2q4','1')">1</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q4','2')">2</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q4','3')">3</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q4','4')">4</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q5">
+          <div class="q-text"><span class="q-num">5</span> ما مجموع درجات الحرارة لكل أيام الأسبوع؟</div>
+          <div class="input-answer">
+            <input type="number" id="l2q5-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l2q5','25')">تحقق ✓</button>
+            <span class="feedback" id="l2q5-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q6">
+          <div class="q-text"><span class="q-num">6</span> لماذا نستخدم التمثيل بالنقاط؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l2q6','لتمثيل البيانات بشكل واضح وسريع')">لتمثيل البيانات بشكل واضح وسريع</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q6','لقياس المسافات')">لقياس المسافات</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q6','لرسم الأشكال')">لرسم الأشكال</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q6','لحل المعادلات')">لحل المعادلات</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q7">
+          <div class="q-text"><span class="q-num">7</span> أي يوم كان الأبرد؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l2q7','الثلاثاء')">الثلاثاء</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q7','الأحد')">الأحد</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q7','الخميس')">الخميس</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l2q7','الأربعاء')">الأربعاء</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l2q8">
+          <div class="q-text"><span class="q-num">8</span> لو أضفنا يوم الجمعة بدرجة 8، ما صار مجموع الأسبوع كله؟</div>
+          <div class="input-answer">
+            <input type="number" id="l2q8-inp" placeholder="؟" />
+            <button class="btn-check" onclick="checkInput('l2q8','33')">تحقق ✓</button>
+            <span class="feedback" id="l2q8-fb"></span>
+          </div>
+        </div>
+
+        <button class="btn-submit-lesson" onclick="submitLesson(2)">✅ إنهاء درس النقاط والانتقال للتقييم</button>
+      </div>
+      <div class="lesson-result" id="result-2"></div>
+    </div>
+
+    <!-- ============ LESSON 3: CM ============ -->
+    <div class="lesson-panel" id="lesson-3">
+      <div class="lesson-header" style="background:linear-gradient(135deg,#2980b9,#16a085)">
+        <div class="lesson-icon">📏</div>
+        <div>
+          <h2>قياس الأطوال بالسنتمتر (cm)</h2>
+          <p>تعلّم قياس الأشياء بوحدة السنتمتر!</p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:0;border-radius:0;">
+        <h3>📘 وحدة السنتمتر</h3>
+        <ul>
+          <li>السنتمتر (cm) يُستخدم لقياس أشياء صغيرة ومتوسطة الحجم.</li>
+          <li>100 سنتمتر = 1 متر</li>
+          <li>10 مليمتر = 1 سنتمتر</li>
+          <li>مثال: طول قلم الرصاص ≈ 18 cm</li>
+        </ul>
+        <div class="ruler" style="margin-top:14px;">
+          <div class="ruler-tick"><div class="tick-line" style="height:30px;"></div><div class="tick-label">0</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">1</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">2</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">3</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">4</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">5</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:30px;"></div><div class="tick-label">6</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">7</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">8</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">9</div></div>
+          <div class="ruler-tick"><div class="tick-line" style="height:20px;"></div><div class="tick-label">10</div></div>
+        </div>
+      </div>
+
+      <div class="q-section">
+        <h3>✏️ أسئلة على السنتمتر</h3>
+
+        <div class="question-block" id="l3q1">
+          <div class="q-text"><span class="q-num">1</span> كم سنتمتر في 1 متر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l3q1','10')">10</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q1','100')">100</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q1','1000')">1000</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q1','50')">50</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q2">
+          <div class="q-text"><span class="q-num">2</span> طول الكتاب 25 cm وطول القلم 18 cm. ما الفرق بينهما؟</div>
+          <div class="input-answer">
+            <input type="number" id="l3q2-inp" placeholder="؟ cm" />
+            <button class="btn-check" onclick="checkInput('l3q2','7')">تحقق ✓</button>
+            <span class="feedback" id="l3q2-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q3">
+          <div class="q-text"><span class="q-num">3</span> أي الأشياء يُقاس بالسنتمتر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l3q3','طول قلم الرصاص')">طول قلم الرصاص</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q3','المسافة بين مدينتين')">المسافة بين مدينتين</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q3','ارتفاع جبل')">ارتفاع جبل</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q3','طول نهر')">طول نهر</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q4">
+          <div class="q-text"><span class="q-num">4</span> ثلاثة أقلام أطوالها: 12 cm, 15 cm, 9 cm. ما مجموع أطوالها؟</div>
+          <div class="input-answer">
+            <input type="number" id="l3q4-inp" placeholder="؟ cm" />
+            <button class="btn-check" onclick="checkInput('l3q4','36')">تحقق ✓</button>
+            <span class="feedback" id="l3q4-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q5">
+          <div class="q-text"><span class="q-num">5</span> ورقة قياسها 30 cm. قصصنا منها 11 cm. كم تبقى؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l3q5','18')">18</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q5','19')">19</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q5','20')">20</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q5','21')">21</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q6">
+          <div class="q-text"><span class="q-num">6</span> إذا كان طول خيط 40 cm وقسّمناه على قسمَين متساويَين، كم طول كل قسم؟</div>
+          <div class="input-answer">
+            <input type="number" id="l3q6-inp" placeholder="؟ cm" />
+            <button class="btn-check" onclick="checkInput('l3q6','20')">تحقق ✓</button>
+            <span class="feedback" id="l3q6-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q7">
+          <div class="q-text"><span class="q-num">7</span> أيّ الوحدات أصغر: السنتمتر أم المتر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l3q7','السنتمتر')">السنتمتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q7','المتر')">المتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q7','متساويان')">متساويان</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q7','لا أعرف')">لا أعرف</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l3q8">
+          <div class="q-text"><span class="q-num">8</span> 250 cm = ___ m + ___ cm — كم متراً؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l3q8','2')">2 m وباقي</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q8','25')">25 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q8','2.5')">2.5 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l3q8','3')">3 m</button>
+          </div>
+        </div>
+
+        <button class="btn-submit-lesson" onclick="submitLesson(3)">✅ إنهاء درس السنتمتر والانتقال للتقييم</button>
+      </div>
+      <div class="lesson-result" id="result-3"></div>
+    </div>
+
+    <!-- ============ LESSON 4: METER ============ -->
+    <div class="lesson-panel" id="lesson-4">
+      <div class="lesson-header" style="background:linear-gradient(135deg,#e74c3c,#8e44ad)">
+        <div class="lesson-icon">📐</div>
+        <div>
+          <h2>قياس الأطوال بالمتر (m)</h2>
+          <p>تعرّف على وحدة المتر واستخدامها في الحياة!</p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:0;border-radius:0;">
+        <h3>📘 وحدة المتر</h3>
+        <ul>
+          <li>المتر (m) يُستخدم لقياس الأشياء الكبيرة نسبياً.</li>
+          <li>1 متر = 100 سنتمتر</li>
+          <li>1 كيلومتر = 1000 متر</li>
+          <li>أمثلة: طول الغرفة، ارتفاع الباب، طول حوض السباحة</li>
+        </ul>
+      </div>
+
+      <div class="q-section">
+        <h3>✏️ أسئلة على المتر</h3>
+
+        <div class="question-block" id="l4q1">
+          <div class="q-text"><span class="q-num">1</span> 3 أمتار = كم سنتمتر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l4q1-inp" placeholder="؟ cm" />
+            <button class="btn-check" onclick="checkInput('l4q1','300')">تحقق ✓</button>
+            <span class="feedback" id="l4q1-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q2">
+          <div class="q-text"><span class="q-num">2</span> طول حديقة 8 أمتار. طول حديقة أخرى 5 أمتار. ما مجموع الطولَين؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l4q2','11')">11 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q2','12')">12 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q2','13')">13 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q2','14')">14 m</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q3">
+          <div class="q-text"><span class="q-num">3</span> أي من هذه الأشياء يُقاس بالمتر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l4q3','ارتفاع الباب')">ارتفاع الباب</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q3','طول النملة')">طول النملة</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q3','سمك الورقة')">سمك الورقة</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q3','طول الإبرة')">طول الإبرة</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q4">
+          <div class="q-text"><span class="q-num">4</span> 500 cm = كم متر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l4q4-inp" placeholder="؟ m" />
+            <button class="btn-check" onclick="checkInput('l4q4','5')">تحقق ✓</button>
+            <span class="feedback" id="l4q4-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q5">
+          <div class="q-text"><span class="q-num">5</span> ملعب طوله 20 م وعرضه 10 م. ما محيطه (الطريق حوله)؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l4q5','30')">30 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q5','60')">60 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q5','200')">200 m</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q5','40')">40 m</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q6">
+          <div class="q-text"><span class="q-num">6</span> أيّ الوحدات أكبر: المتر أم السنتمتر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l4q6','المتر')">المتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q6','السنتمتر')">السنتمتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q6','متساويان')">متساويان</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q6','المليمتر')">المليمتر</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q7">
+          <div class="q-text"><span class="q-num">7</span> حبل طوله 12 م. قطعنا منه 4 م. كم تبقى؟</div>
+          <div class="input-answer">
+            <input type="number" id="l4q7-inp" placeholder="؟ m" />
+            <button class="btn-check" onclick="checkInput('l4q7','8')">تحقق ✓</button>
+            <span class="feedback" id="l4q7-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l4q8">
+          <div class="q-text"><span class="q-num">8</span> أيّ الجمل صحيحة؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l4q8','المتر أكبر من السنتمتر')">المتر أكبر من السنتمتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q8','السنتمتر أكبر من المتر')">السنتمتر أكبر من المتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q8','1m = 10 cm')">1m = 10 cm</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l4q8','1m = 1000 cm')">1m = 1000 cm</button>
+          </div>
+        </div>
+
+        <button class="btn-submit-lesson" onclick="submitLesson(4)">✅ إنهاء درس المتر والانتقال للتقييم</button>
+      </div>
+      <div class="lesson-result" id="result-4"></div>
+    </div>
+
+    <!-- ============ LESSON 5: MM ============ -->
+    <div class="lesson-panel" id="lesson-5">
+      <div class="lesson-header" style="background:linear-gradient(135deg,#f39c12,#e74c3c)">
+        <div class="lesson-icon">🔬</div>
+        <div>
+          <h2>قياس الأطوال بالمليمتر (mm)</h2>
+          <p>تعلّم الوحدة الأصغر للقياس!</p>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:0;border-radius:0;">
+        <h3>📘 وحدة المليمتر</h3>
+        <ul>
+          <li>المليمتر (mm) هو أصغر وحدة قياس شائعة.</li>
+          <li>10 مليمترات = 1 سنتمتر</li>
+          <li>1000 مليمتر = 1 متر</li>
+          <li>أمثلة: سمك الورقة، طول النملة، سُمك الزجاج</li>
+        </ul>
+      </div>
+
+      <div class="q-section">
+        <h3>✏️ أسئلة على المليمتر</h3>
+
+        <div class="question-block" id="l5q1">
+          <div class="q-text"><span class="q-num">1</span> كم مليمتر في 1 سنتمتر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l5q1','10')">10</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q1','100')">100</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q1','1000')">1000</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q1','5')">5</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q2">
+          <div class="q-text"><span class="q-num">2</span> 30 mm = كم سنتمتر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l5q2-inp" placeholder="؟ cm" />
+            <button class="btn-check" onclick="checkInput('l5q2','3')">تحقق ✓</button>
+            <span class="feedback" id="l5q2-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q3">
+          <div class="q-text"><span class="q-num">3</span> أيّ الأشياء يُقاس بالمليمتر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l5q3','سُمك ورقة الكتاب')">سُمك ورقة الكتاب</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q3','ارتفاع البناية')">ارتفاع البناية</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q3','طول الملعب')">طول الملعب</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q3','طول الشارع')">طول الشارع</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q4">
+          <div class="q-text"><span class="q-num">4</span> 5 cm = كم مليمتر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l5q4-inp" placeholder="؟ mm" />
+            <button class="btn-check" onclick="checkInput('l5q4','50')">تحقق ✓</button>
+            <span class="feedback" id="l5q4-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q5">
+          <div class="q-text"><span class="q-num">5</span> أيّ الوحدات الأصغر؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l5q5','المليمتر')">المليمتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q5','السنتمتر')">السنتمتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q5','المتر')">المتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q5','الكيلومتر')">الكيلومتر</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q6">
+          <div class="q-text"><span class="q-num">6</span> حبة رمل طولها 2 mm. كم حبة رمل تساوي 1 cm؟</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l5q6','5')">5</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q6','10')">10</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q6','2')">2</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q6','20')">20</button>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q7">
+          <div class="q-text"><span class="q-num">7</span> 1 متر = كم مليمتر؟</div>
+          <div class="input-answer">
+            <input type="number" id="l5q7-inp" placeholder="؟ mm" />
+            <button class="btn-check" onclick="checkInput('l5q7','1000')">تحقق ✓</button>
+            <span class="feedback" id="l5q7-fb"></span>
+          </div>
+        </div>
+
+        <div class="question-block" id="l5q8">
+          <div class="q-text"><span class="q-num">8</span> رتّب هذه الوحدات من الأصغر للأكبر: المتر، المليمتر، السنتمتر</div>
+          <div class="options">
+            <button class="option-btn" onclick="checkMCQ(this,'l5q8','مليمتر ← سنتمتر ← متر')">مليمتر ← سنتمتر ← متر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q8','سنتمتر ← مليمتر ← متر')">سنتمتر ← مليمتر ← متر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q8','متر ← سنتمتر ← مليمتر')">متر ← سنتمتر ← مليمتر</button>
+            <button class="option-btn" onclick="checkMCQ(this,'l5q8','متر ← مليمتر ← سنتمتر')">متر ← مليمتر ← سنتمتر</button>
+          </div>
+        </div>
+
+        <button class="btn-submit-lesson" onclick="submitLesson(5)">✅ إنهاء درس المليمتر والحصول على تقريرك</button>
+      </div>
+      <div class="lesson-result" id="result-5"></div>
+    </div>
+
+  </div><!-- /content-area -->
+</div><!-- /mainApp -->
+
+<!-- FINAL REPORT -->
+<div class="final-report" id="finalReport">
+  <h2>🏆 تقرير الأداء النهائي</h2>
+  <div class="overall-score" id="overallScoreDiv"></div>
+  <div class="report-grid" id="reportGrid"></div>
+  <div id="recommendations" style="background:#f8faff;border-radius:14px;padding:18px 20px;margin-bottom:20px;">
+    <h3 style="color:var(--primary);font-weight:800;margin-bottom:12px;">💡 التوصيات</h3>
+    <div id="recList"></div>
+  </div>
+  <div class="text-center">
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة التقرير</button>
+    <button class="btn-restart" onclick="restartQuiz()">🔄 إعادة المراجعة</button>
+  </div>
+</div>
+
+<script>
+  // ============ STATE ============
+  const CORRECT_ANSWERS = {
+    // Lesson 0: Patterns
+    l0q1: '⭐ نجمة',
+    l0q2: '10',
+    l0q3: '15',
+    l0q4: '0',  // ◆ didn't appear
+    l0q5: '15',
+    l0q6: '1,3,5,7,9',
+    l0q7: '🔵',
+    l0q8: '8',
+    // Lesson 1: Bar chart
+    l1q1: 'أزرق',
+    l1q2: '4',
+    l1q3: '13',
+    l1q4: '4',
+    l1q5: '31',
+    l1q6: 'أصفر وبنفسجي',
+    l1q7: 'مقارنة البيانات بصرياً',
+    l1q8: '7',
+    // Lesson 2: Dot plot
+    l2q1: 'الإثنين',
+    l2q2: '8',
+    l2q3: '3',
+    l2q4: '2',
+    l2q5: '25',
+    l2q6: 'لتمثيل البيانات بشكل واضح وسريع',
+    l2q7: 'الثلاثاء',
+    l2q8: '33',
+    // Lesson 3: cm
+    l3q1: '100',
+    l3q2: '7',
+    l3q3: 'طول قلم الرصاص',
+    l3q4: '36',
+    l3q5: '19',
+    l3q6: '20',
+    l3q7: 'السنتمتر',
+    l3q8: '2',
+    // Lesson 4: meter
+    l4q1: '300',
+    l4q2: '13',
+    l4q3: 'ارتفاع الباب',
+    l4q4: '5',
+    l4q5: '60',
+    l4q6: 'المتر',
+    l4q7: '8',
+    l4q8: 'المتر أكبر من السنتمتر',
+    // Lesson 5: mm
+    l5q1: '10',
+    l5q2: '3',
+    l5q3: 'سُمك ورقة الكتاب',
+    l5q4: '50',
+    l5q5: 'المليمتر',
+    l5q6: '5',
+    l5q7: '1000',
+    l5q8: 'مليمتر ← سنتمتر ← متر',
+  };
+
+  const lessonNames = ['الأنماط', 'التمثيل بالأعمدة', 'التمثيل بالنقاط', 'السنتمتر', 'المتر', 'المليمتر'];
+  const lessonIcons = ['🔷', '📊', '⚫', '📏', '📐', '🔬'];
+  const lessonQs = [
+    ['l0q1','l0q2','l0q3','l0q4','l0q5','l0q6','l0q7','l0q8'],
+    ['l1q1','l1q2','l1q3','l1q4','l1q5','l1q6','l1q7','l1q8'],
+    ['l2q1','l2q2','l2q3','l2q4','l2q5','l2q6','l2q7','l2q8'],
+    ['l3q1','l3q2','l3q3','l3q4','l3q5','l3q6','l3q7','l3q8'],
+    ['l4q1','l4q2','l4q3','l4q4','l4q5','l4q6','l4q7','l4q8'],
+    ['l5q1','l5q2','l5q3','l5q4','l5q5','l5q6','l5q7','l5q8'],
+  ];
+
+  let answers = {}; // {qid: true/false}
+  let lessonDone = [false,false,false,false,false,false];
+  let currentLesson = 0;
+
+  // ============ NAVIGATION ============
+  function showLesson(idx) {
+    document.querySelectorAll('.lesson-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.lesson-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('lesson-'+idx).classList.add('active');
+    document.getElementById('tab-'+idx).classList.add('active');
+    currentLesson = idx;
+  }
+
+  // ============ MCQ ============
+  function checkMCQ(btn, qid, answer) {
+    const block = document.getElementById(qid);
+    const btns = block.querySelectorAll('.option-btn');
+    btns.forEach(b => b.disabled = true);
+    const correct = CORRECT_ANSWERS[qid];
+    if (answer === correct) {
+      btn.classList.add('selected-correct');
+      answers[qid] = true;
+      block.classList.add('correct');
+    } else {
+      btn.classList.add('selected-wrong');
+      answers[qid] = false;
+      block.classList.add('wrong');
+      btns.forEach(b => {
+        if (b.textContent.trim().includes(correct) || b.getAttribute('onclick').includes("'"+correct+"'")) {
+          b.classList.add('reveal-correct');
+        }
+      });
+    }
+  }
+
+  // ============ INPUT ============
+  function checkInput(qid, correctVal) {
+    const inp = document.getElementById(qid+'-inp');
+    const fb = document.getElementById(qid+'-fb');
+    const block = document.getElementById(qid);
+    const val = inp.value.trim();
+    inp.disabled = true;
+    if (val === String(correctVal)) {
+      fb.textContent = '✅ أحسنت!';
+      fb.className = 'feedback ok';
+      answers[qid] = true;
+      block.classList.add('correct');
+    } else {
+      fb.textContent = `❌ الإجابة الصحيحة: ${correctVal}`;
+      fb.className = 'feedback err';
+      answers[qid] = false;
+      block.classList.add('wrong');
+    }
+  }
+
+  // ============ SUBMIT LESSON ============
+  function getLevel(pct) {
+    if (pct >= 88) return { label: 'ممتاز 🌟', cls: 'excellent', emoji: '🌟' };
+    if (pct >= 70) return { label: 'جيد جداً 👍', cls: 'good', emoji: '👍' };
+    if (pct >= 50) return { label: 'جيد 🙂', cls: 'fair', emoji: '🙂' };
+    return { label: 'يحتاج مراجعة 📖', cls: 'poor', emoji: '📖' };
+  }
+
+  function submitLesson(lessonIdx) {
+    const qs = lessonQs[lessonIdx];
+    let correct = 0;
+    // Check unanswered
+    qs.forEach(qid => {
+      if (answers[qid] === undefined) answers[qid] = false;
+    });
+    qs.forEach(qid => { if (answers[qid]) correct++; });
+    const total = qs.length;
+    const pct = Math.round((correct/total)*100);
+    const lvl = getLevel(pct);
+
+    lessonDone[lessonIdx] = true;
+    document.getElementById('tab-'+lessonIdx).classList.add('done');
+
+    const resultDiv = document.getElementById('result-'+lessonIdx);
+    resultDiv.classList.add('show');
+    resultDiv.innerHTML = `
+      <div class="score-circle ${lvl.cls}">${correct}/${total}<div class="pct">${pct}%</div></div>
+      <div class="level-badge ${lvl.cls}">${lvl.label}</div>
+      <p style="color:#666;margin-top:10px;font-size:1rem;">أجبت بشكل صحيح على <strong>${correct}</strong> من أصل <strong>${total}</strong> سؤالاً في درس <strong>${lessonNames[lessonIdx]}</strong></p>
+      ${lessonIdx < 5 ? `<button class="btn-start" style="margin-top:16px;" onclick="showLesson(${lessonIdx+1})">الدرس التالي: ${lessonNames[lessonIdx+1]} ${lessonIcons[lessonIdx+1]} ←</button>` : `<button class="btn-start" style="margin-top:16px;background:linear-gradient(135deg,#8e44ad,#2980b9);" onclick="showFinalReport()">📋 عرض التقرير النهائي</button>`}
+    `;
+
+    // Update progress
+    const doneCount = lessonDone.filter(Boolean).length;
+    document.getElementById('totalProgress').style.width = (doneCount/6*100) + '%';
+
+    // Auto scroll to result
+    setTimeout(() => resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 200);
+  }
+
+  // ============ FINAL REPORT ============
+  function showFinalReport() {
+    document.getElementById('mainApp').classList.add('hidden');
+    const report = document.getElementById('finalReport');
+    report.classList.add('show');
+
+    let totalCorrect = 0, totalQs = 0;
+    const cardColors = [];
+
+    const grid = document.getElementById('reportGrid');
+    grid.innerHTML = '';
+
+    lessonQs.forEach((qs, i) => {
+      let c = 0;
+      qs.forEach(qid => { if (answers[qid]) c++; });
+      totalCorrect += c;
+      totalQs += qs.length;
+      const pct = Math.round((c/qs.length)*100);
+      const lvl = getLevel(pct);
+      cardColors.push(lvl.cls);
+      grid.innerHTML += `
+        <div class="report-card ${lvl.cls}">
+          <div class="r-icon">${lessonIcons[i]}</div>
+          <div class="r-title">${lessonNames[i]}</div>
+          <div class="r-score" style="color:var(--${lvl.cls === 'excellent' ? 'green' : lvl.cls === 'good' ? 'blue' : lvl.cls === 'fair' ? 'orange' : 'red'})">${c}/${qs.length}</div>
+          <div class="r-level">${lvl.label}</div>
+          <div style="font-size:1.4rem;margin-top:4px;">${pct}%</div>
+        </div>
+      `;
+    });
+
+    const overallPct = Math.round((totalCorrect/totalQs)*100);
+    const overallLvl = getLevel(overallPct);
+    document.getElementById('overallScoreDiv').innerHTML = `
+      <div class="big-num">${overallPct}%</div>
+      <div class="label">النتيجة الإجمالية: ${totalCorrect} / ${totalQs} — ${overallLvl.label}</div>
+    `;
+
+    // Recommendations
+    const recList = document.getElementById('recList');
+    recList.innerHTML = '';
+    lessonQs.forEach((qs, i) => {
+      let c = 0;
+      qs.forEach(qid => { if (answers[qid]) c++; });
+      const pct = Math.round((c/qs.length)*100);
+      const lvl = getLevel(pct);
+      let rec = '';
+      if (lvl.cls === 'excellent') rec = `رائع! أنت متميز في درس ${lessonNames[i]}.`;
+      else if (lvl.cls === 'good') rec = `جيد جداً في ${lessonNames[i]}. راجع بعض المفاهيم لتصل للامتياز.`;
+      else if (lvl.cls === 'fair') rec = `درس ${lessonNames[i]} يحتاج مزيداً من التدريب والمراجعة.`;
+      else rec = `⚠️ درس ${lessonNames[i]} يحتاج مراجعة شاملة مع المعلم.`;
+      recList.innerHTML += `<div style="padding:8px 12px;margin-bottom:8px;border-radius:10px;background:#fff;border-right:4px solid var(--${lvl.cls === 'excellent' ? 'green' : lvl.cls === 'good' ? 'blue' : lvl.cls === 'fair' ? 'orange' : 'red'});font-size:0.95rem;color:#444;"><strong>${lessonIcons[i]} ${lessonNames[i]}:</strong> ${rec}</div>`;
+    });
+
+    if (overallPct >= 80) celebrate();
+    report.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ============ CELEBRATE ============
+  function celebrate() {
+    const emojis = ['⭐','🎉','🏆','🌟','✨','🎊','🎈'];
+    const canvas = document.createElement('div');
+    canvas.className = 'confetti';
+    document.body.appendChild(canvas);
+    for (let i = 0; i < 40; i++) {
+      const el = document.createElement('div');
+      el.style.cssText = `
+        position:absolute;top:-30px;
+        left:${Math.random()*100}vw;
+        font-size:${1.2+Math.random()*1.5}rem;
+        animation:fall ${2+Math.random()*3}s linear forwards;
+        animation-delay:${Math.random()*2}s;
+      `;
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      canvas.appendChild(el);
+    }
+    const style = document.createElement('style');
+    style.textContent = `@keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity:0; } }`;
+    document.head.appendChild(style);
+    setTimeout(() => canvas.remove(), 6000);
+  }
+
+  // ============ RESTART ============
+  function restartQuiz() {
+    answers = {};
+    lessonDone = [false,false,false,false,false,false];
+    document.getElementById('finalReport').classList.remove('show');
+    document.getElementById('mainApp').classList.remove('hidden');
+    document.getElementById('totalProgress').style.width = '0%';
+    document.querySelectorAll('.lesson-tab').forEach(t => { t.classList.remove('done','active'); });
+    document.querySelectorAll('.lesson-result').forEach(r => { r.classList.remove('show'); r.innerHTML = ''; });
+    document.querySelectorAll('.question-block').forEach(b => { b.classList.remove('correct','wrong'); });
+    document.querySelectorAll('.option-btn').forEach(b => { b.classList.remove('selected-correct','selected-wrong','reveal-correct'); b.disabled = false; });
+    document.querySelectorAll('input[type=number]').forEach(i => { i.value=''; i.disabled=false; });
+    document.querySelectorAll('.feedback').forEach(f => { f.className='feedback'; f.textContent=''; });
+    showLesson(0);
+    document.getElementById('tab-0').classList.add('active');
+  }
+</script>
+</body>
+</html>
