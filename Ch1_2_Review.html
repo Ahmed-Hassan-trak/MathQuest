@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الرياضيات - الصف الثالث الابتدائي</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;900&display=swap');
+
+  :root {
+    --primary: #FF6B35;
+    --secondary: #4ECDC4;
+    --accent: #FFE66D;
+    --purple: #9B59B6;
+    --green: #2ECC71;
+    --blue: #3498DB;
+    --red: #E74C3C;
+    --dark: #1a1a2e;
+    --card-bg: #ffffff;
+    --text: #2d3436;
+    --light-bg: #f8f9ff;
+    --shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(2px 2px at 10% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 30% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 70% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 20% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.5) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    animation: fadeDown 0.8s ease;
+  }
+
+  .header .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    color: var(--dark);
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .header h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .header h1 span {
+    color: var(--accent);
+  }
+
+  .header p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+
+  /* SCORE DISPLAY */
+  .score-bar {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 0 auto 30px;
+    max-width: 500px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    text-align: center;
+    color: white;
+  }
+
+  .score-item .val {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+  }
+
+  .score-item .lbl {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 28px;
+    scrollbar-width: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.7);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255,107,53,0.4);
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--primary), #ff8f65);
+  }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeUp 0.5s ease; }
+  .section.active { display: block; }
+
+  /* LESSON CARDS GRID */
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .lesson-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    border-radius: 0 20px 0 80px;
+    opacity: 0.15;
+  }
+
+  .lesson-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+  }
+
+  .lesson-card .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .lesson-card h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .lesson-card p {
+    font-size: 0.85rem;
+    color: #636e72;
+    line-height: 1.6;
+  }
+
+  .lesson-card .card-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 12px;
+  }
+
+  .card-c1 { border-top: 5px solid var(--primary); }
+  .card-c1::before { background: var(--primary); }
+  .card-c1 .card-tag { background: rgba(255,107,53,0.12); color: var(--primary); }
+
+  .card-c2 { border-top: 5px solid var(--purple); }
+  .card-c2::before { background: var(--purple); }
+  .card-c2 .card-tag { background: rgba(155,89,182,0.12); color: var(--purple); }
+
+  .card-c3 { border-top: 5px solid var(--blue); }
+  .card-c3::before { background: var(--blue); }
+  .card-c3 .card-tag { background: rgba(52,152,219,0.12); color: var(--blue); }
+
+  .card-c4 { border-top: 5px solid var(--green); }
+  .card-c4::before { background: var(--green); }
+  .card-c4 .card-tag { background: rgba(46,204,113,0.12); color: var(--green); }
+
+  /* LESSON DETAIL */
+  .lesson-detail {
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+
+  .lesson-detail .back-btn {
+    background: var(--light-bg);
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    color: var(--dark);
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .lesson-detail .back-btn:hover { background: #e0e0e0; }
+
+  .lesson-title-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #f0f0f0;
+  }
+
+  .lesson-title-bar .big-icon { font-size: 3rem; }
+  .lesson-title-bar h2 { font-size: 1.6rem; font-weight: 900; color: var(--dark); }
+  .lesson-title-bar p { color: #636e72; font-size: 0.95rem; }
+
+  /* CONCEPT BOX */
+  .concept-box {
+    background: linear-gradient(135deg, #667eea15, #764ba215);
+    border-right: 5px solid var(--purple);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+
+  .concept-box h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--purple);
+    margin-bottom: 10px;
+  }
+
+  .concept-box p, .concept-box ul {
+    color: var(--dark);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .concept-box ul { padding-right: 20px; }
+
+  /* VISUAL DEMO */
+  .visual-demo {
+    background: var(--light-bg);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .visual-demo h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  /* Pattern blocks */
+  .pattern-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .pblock {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+
+  .pblock:hover { transform: scale(1.15) rotate(5deg); }
+
+  .pblock.question {
+    background: #fff3cd !important;
+    border: 3px dashed #ffc107 !important;
+    cursor: pointer;
+  }
+
+  /* Number visual */
+  .num-visual {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .num-block {
+    background: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    min-width: 80px;
+  }
+
+  .num-block .val {
+    font-size: 1.8rem;
+    font-weight: 900;
+    display: block;
+  }
+
+  .num-block .lbl {
+    font-size: 0.75rem;
+    color: #636e72;
+    margin-top: 4px;
+  }
+
+  /* Bar chart */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 16px;
+    height: 160px;
+    padding: 10px;
+  }
+
+  .bar-item { text-align: center; }
+
+  .bar-fill {
+    width: 48px;
+    border-radius: 8px 8px 0 0;
+    transition: height 1s ease;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .bar-fill .bar-val {
+    position: absolute;
+    top: -24px;
+    width: 100%;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .bar-lbl { font-size: 0.8rem; font-weight: 600; margin-top: 6px; color: var(--dark); }
+
+  /* Dot chart */
+  .dot-row { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .dot-lbl { width: 60px; font-size: 0.85rem; font-weight: 600; text-align: left; }
+  .dot { width: 16px; height: 16px; border-radius: 50%; display: inline-block; margin: 1px; }
+
+  /* Ruler */
+  .ruler-visual {
+    background: #fff9e6;
+    border: 2px solid #ffd43b;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: monospace;
+    overflow-x: auto;
+  }
+
+  /* Multiplication grid */
+  .mult-grid {
+    display: inline-grid;
+    grid-template-columns: repeat(5, 50px);
+    gap: 6px;
+    margin: 10px auto;
+  }
+
+  .mult-cell {
+    width: 50px; height: 50px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .mult-cell:hover { background: var(--accent); transform: scale(1.1); }
+  .mult-cell.highlighted { background: var(--accent); animation: pulse 0.5s ease; }
+
+  /* EXERCISES */
+  .exercises-section h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .question-card {
+    background: var(--light-bg);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .question-card.correct { border-color: var(--green); background: rgba(46,204,113,0.05); }
+  .question-card.wrong { border-color: var(--red); background: rgba(231,76,60,0.05); }
+
+  .question-card p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .option-btn {
+    padding: 12px 16px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    color: var(--dark);
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: rgba(255,107,53,0.06);
+    transform: translateY(-2px);
+  }
+
+  .option-btn.correct-ans {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  .option-btn.wrong-ans {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+  }
+
+  .feedback-msg {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: none;
+  }
+
+  .feedback-msg.show { display: block; }
+  .feedback-msg.correct { color: var(--green); }
+  .feedback-msg.wrong { color: var(--red); }
+
+  /* FILL BLANK */
+  .fill-blank-input {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    width: 120px;
+    margin: 0 6px;
+    transition: border-color 0.3s;
+    direction: ltr;
+  }
+
+  .fill-blank-input:focus { outline: none; border-color: var(--blue); }
+  .fill-blank-input.correct-input { border-color: var(--green); background: rgba(46,204,113,0.1); }
+  .fill-blank-input.wrong-input { border-color: var(--red); background: rgba(231,76,60,0.1); }
+
+  .check-btn {
+    background: linear-gradient(135deg, var(--blue), #5dade2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+  }
+
+  .check-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(52,152,219,0.4); }
+
+  /* GAME SECTION */
+  .game-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+
+  .game-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
+  .game-card p { color: #636e72; margin-bottom: 20px; }
+
+  .game-display {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .game-question {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 20px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .game-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .game-opt-btn {
+    padding: 16px;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 14px;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .game-opt-btn:hover:not(:disabled) {
+    background: rgba(255,230,109,0.2);
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+
+  .game-opt-btn.correct { background: rgba(46,204,113,0.3); border-color: var(--green); }
+  .game-opt-btn.wrong { background: rgba(231,76,60,0.3); border-color: var(--red); }
+
+  .game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .game-stat {
+    text-align: center;
+    color: white;
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 12px;
+  }
+
+  .game-stat .g-val { font-size: 1.6rem; font-weight: 900; color: var(--accent); display: block; }
+  .game-stat .g-lbl { font-size: 0.75rem; opacity: 0.7; }
+
+  .start-btn {
+    background: linear-gradient(135deg, var(--primary), #ff8f65);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 24px rgba(255,107,53,0.4);
+  }
+
+  .start-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,107,53,0.5); }
+
+  /* TIMER */
+  .timer-ring {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary) var(--pct, 100%), rgba(255,255,255,0.1) 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+
+  .timer-ring .inner {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--accent);
+  }
+
+  /* ASSESSMENT */
+  .assessment-intro {
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .assessment-intro h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; }
+  .assessment-intro p { color: #636e72; margin-bottom: 24px; font-size: 1rem; }
+
+  .level-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .level-card {
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.3s;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+  }
+
+  .level-card:hover { transform: translateY(-4px); }
+  .level-card.selected { border-color: var(--primary); transform: translateY(-4px); }
+
+  .level-easy { background: #e8f8f0; color: var(--green); }
+  .level-med { background: #fff3cd; color: #e67e22; }
+  .level-hard { background: #fde8e8; color: var(--red); }
+
+  /* RESULTS */
+  .result-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .result-emoji { font-size: 4rem; margin-bottom: 16px; }
+
+  .result-score-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+  }
+
+  .result-score-circle .pct { font-size: 1rem; opacity: 0.8; }
+
+  .result-bars { margin-top: 24px; }
+
+  .r-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .r-bar-label { width: 120px; text-align: right; }
+
+  .r-bar-track {
+    flex: 1;
+    height: 14px;
+    background: #f0f0f0;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+
+  .r-bar-fill {
+    height: 100%;
+    border-radius: 7px;
+    transition: width 1s ease;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .confetti {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 2rem;
+    animation: confettiFall 3s ease-in forwards;
+  }
+
+  @keyframes confettiFall {
+    from { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hidden { display: none !important; }
+
+  .stars-display {
+    font-size: 2rem;
+    margin: 10px 0;
+    letter-spacing: 4px;
+  }
+
+  /* SECTION CHAPTER HEADER */
+  .chapter-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .chapter-header h2 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 900;
+  }
+
+  .chapter-header p { color: rgba(255,255,255,0.6); margin-top: 6px; }
+
+  .chapter-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0 16px;
+  }
+
+  .chapter-divider span {
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--dark);
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 6px 18px;
+    border-radius: 50px;
+  }
+
+  .chapter-divider hr {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .options-grid { grid-template-columns: 1fr; }
+    .game-options { grid-template-columns: 1fr 1fr; }
+    .num-visual { gap: 8px; }
+    .num-block .val { font-size: 1.4rem; }
+  }
+#homeBtn{position:fixed;top:16px;right:16px;z-index:1000;display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Cairo',sans-serif;font-weight:700;
+  font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .15s,background .15s}
+#homeBtn:hover{transform:scale(1.05);background:rgba(0,0,0,.5)}
+#homeBtn svg{width:18px;height:18px;flex-shrink:0}
+@media(max-width:480px){#homeBtn{padding:8px 14px;font-size:12px}#homeBtn svg{width:15px;height:15px}}
+</style>
+</head>
+<body>
+<a href="index.html" id="homeBtn" title="العودة للشاشة الرئيسية">
+  <span>الرئيسية</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h4v-6h3v6h4a1 1 0 0 0 1-1v-9"/></svg>
+</a>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">🎓 الصف الثالث الابتدائي</div>
+    <h1>مراجعة <span>الرياضيات</span> الشاملة</h1>
+    <p>الفصلان الأول والثاني — تعلّم، تدرّب، العب، وقيّم نفسك!</p>
+  </div>
+
+  <!-- SCORE BAR -->
+  <div class="score-bar">
+    <div class="score-item">
+      <span class="val" id="totalScore">0</span>
+      <span class="lbl">النقاط المكتسبة</span>
+    </div>
+    <div class="score-item">
+      <span class="val" id="totalCorrect">0</span>
+      <span class="lbl">إجابات صحيحة</span>
+    </div>
+    <div class="score-item">
+      <span class="val" id="starsDisplay">⭐</span>
+      <span class="lbl">مستواك</span>
+    </div>
+  </div>
+
+  <!-- NAV TABS -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showSection('lessons')">📚 الدروس</button>
+    <button class="tab-btn" onclick="showSection('exercises')">✏️ التدريبات</button>
+    <button class="tab-btn" onclick="showSection('games')">🎮 الألعاب</button>
+    <button class="tab-btn" onclick="showSection('activities')">🎨 الأنشطة</button>
+    <button class="tab-btn" onclick="showSection('assessment')">📊 التقييم</button>
+  </div>
+
+  <!-- ======= LESSONS SECTION ======= -->
+  <div id="section-lessons" class="section active">
+
+    <div id="lessons-grid-view">
+      <div class="chapter-header">
+        <h2>🗂️ اختر الدرس</h2>
+        <p>اضغط على أي درس للاطلاع على الشرح والأنشطة التفاعلية</p>
+      </div>
+
+      <div class="chapter-divider">
+        <hr><span>📘 الفصل الأول</span><hr>
+      </div>
+
+      <div class="lessons-grid">
+        <div class="lesson-card card-c1" onclick="openLesson('l1')">
+          <div class="card-icon">🔷</div>
+          <h3>الدرس ١: الأنماط</h3>
+          <p>التعرف على الأنماط واستكمالها وإيجاد القاعدة الخفية</p>
+          <span class="card-tag">الفصل الأول</span>
+        </div>
+        <div class="lesson-card card-c2" onclick="openLesson('l2')">
+          <div class="card-icon">📊</div>
+          <h3>الدرس ٢: التمثيل البياني بالأعمدة</h3>
+          <p>قراءة الأعمدة البيانية وتفسير البيانات</p>
+          <span class="card-tag">الفصل الأول</span>
+        </div>
+        <div class="lesson-card card-c3" onclick="openLesson('l3')">
+          <div class="card-icon">🔵</div>
+          <h3>الدرس ٣: التمثيل البياني بالنقاط</h3>
+          <p>قراءة المخططات النقطية وتحليل البيانات</p>
+          <span class="card-tag">الفصل الأول</span>
+        </div>
+        <div class="lesson-card card-c4" onclick="openLesson('l4')">
+          <div class="card-icon">📏</div>
+          <h3>الدرس ٤: قياس الأطوال بالسنتيمتر</h3>
+          <p>استخدام المسطرة وقياس الأشياء بالسنتيمتر</p>
+          <span class="card-tag">الفصل الأول</span>
+        </div>
+        <div class="lesson-card card-c1" onclick="openLesson('l5')">
+          <div class="card-icon">📐</div>
+          <h3>الدرس ٥: قياس الأطوال بالمتر</h3>
+          <p>معرفة المتر وعلاقته بالسنتيمتر</p>
+          <span class="card-tag">الفصل الأول</span>
+        </div>
+        <div class="lesson-card card-c2" onclick="openLesson('l6')">
+          <div class="card-icon">🔬</div>
+          <h3>الدرس ٦: قياس الأطوال بالمليمتر</h3>
+          <p>المليمتر ودقة القياس للأشياء الصغيرة</p>
+          <span class="card-tag">الفصل الأول</span>
+        </div>
+      </div>
+
+      <div class="chapter-divider">
+        <hr><span>📗 الفصل الثاني</span><hr>
+      </div>
+
+      <div class="lessons-grid">
+        <div class="lesson-card card-c3" onclick="openLesson('l7')">
+          <div class="card-icon">🏗️</div>
+          <h3>الدرس ١: الآلاف</h3>
+          <p>فهم الأعداد من ١٠٠٠ إلى ٩٩٩٩</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+        <div class="lesson-card card-c4" onclick="openLesson('l8')">
+          <div class="card-icon">🔢</div>
+          <h3>الدرس ٢: مزيد من الآلاف</h3>
+          <p>قراءة وكتابة الأعداد في الآلاف بعمق</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+        <div class="lesson-card card-c1" onclick="openLesson('l9')">
+          <div class="card-icon">💯</div>
+          <h3>الدرس ٣: عشرات الآلاف - مئات الآلاف</h3>
+          <p>الأعداد الكبيرة حتى ٩٩٩٫٩٩٩</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+        <div class="lesson-card card-c2" onclick="openLesson('l10')">
+          <div class="card-icon">📝</div>
+          <h3>الدرس ٤: صيغ مختلفة لكتابة الأعداد</h3>
+          <p>الصيغة الاعتيادية والمفككة واللفظية</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+        <div class="lesson-card card-c3" onclick="openLesson('l11')">
+          <div class="card-icon">🗃️</div>
+          <h3>الدرس ٥: المصفوفات</h3>
+          <p>ترتيب الأشياء في صفوف وأعمدة</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+        <div class="lesson-card card-c4" onclick="openLesson('l12')">
+          <div class="card-icon">✖️</div>
+          <h3>الدرس ٦: مفهوم الضرب</h3>
+          <p>الضرب كجمع متكرر وفهم الأساس</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+        <div class="lesson-card card-c1" onclick="openLesson('l13')">
+          <div class="card-icon">🔄</div>
+          <h3>الدرس ٧: خاصية الإبدال في الضرب</h3>
+          <p>أ × ب = ب × أ — الضرب لا يتأثر بالترتيب</p>
+          <span class="card-tag">الفصل الثاني</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON DETAIL VIEW -->
+    <div id="lesson-detail-view" class="hidden"></div>
+  </div>
+
+  <!-- ======= EXERCISES SECTION ======= -->
+  <div id="section-exercises" class="section">
+    <div class="lesson-detail">
+      <div class="chapter-header">
+        <h2 style="color:var(--dark)">✏️ تدريبات موسعة</h2>
+        <p style="color:#636e72">حل التدريبات واحصل على نقاط!</p>
+      </div>
+
+      <div id="exercises-container"></div>
+
+      <div style="text-align:center; margin-top:20px;">
+        <button class="start-btn" onclick="loadMoreExercises()">🔄 تدريبات جديدة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= GAMES SECTION ======= -->
+  <div id="section-games" class="section">
+    <div class="chapter-header">
+      <h2>🎮 ألعاب تعليمية</h2>
+      <p>تعلّم وأنت تلعب!</p>
+    </div>
+
+    <!-- GAME 1: Number Blast -->
+    <div class="game-card">
+      <h3>🚀 انفجار الأرقام — الضرب السريع</h3>
+      <p>احسب ناتج الضرب بسرعة قبل انتهاء الوقت!</p>
+      <div class="game-display">
+        <div class="game-stats">
+          <div class="game-stat"><span class="g-val" id="g1-score">0</span><span class="g-lbl">النقاط</span></div>
+          <div class="timer-ring" id="g1-timer-ring" style="--pct:100%">
+            <div class="inner" id="g1-timer">10</div>
+          </div>
+          <div class="game-stat"><span class="g-val" id="g1-streak">0</span><span class="g-lbl">متتالية</span></div>
+        </div>
+        <div class="game-question" id="g1-question">اضغط ابدأ!</div>
+        <div class="game-options" id="g1-options"></div>
+      </div>
+      <button class="start-btn" id="g1-btn" onclick="startGame1()">🚀 ابدأ اللعبة</button>
+    </div>
+
+    <!-- GAME 2: Pattern Finder -->
+    <div class="game-card">
+      <h3>🔍 اكتشف النمط</h3>
+      <p>أكمل النمط باختيار الشكل الصحيح!</p>
+      <div class="game-display">
+        <div class="game-stats">
+          <div class="game-stat"><span class="g-val" id="g2-score">0</span><span class="g-lbl">النقاط</span></div>
+          <div class="game-stat"><span class="g-val" id="g2-round">0</span><span class="g-lbl">الجولة</span></div>
+        </div>
+        <div class="game-question" id="g2-display" style="font-size:1.8rem; flex-wrap:wrap; gap:6px; min-height:60px;"></div>
+        <div class="game-options" id="g2-options"></div>
+      </div>
+      <button class="start-btn" id="g2-btn" onclick="startGame2()">🔍 ابدأ اللعبة</button>
+    </div>
+
+    <!-- GAME 3: Place Value -->
+    <div class="game-card">
+      <h3>🏗️ بناء الأعداد</h3>
+      <p>خمّن العدد الصحيح من القيمة المكانية!</p>
+      <div class="game-display">
+        <div class="game-stats">
+          <div class="game-stat"><span class="g-val" id="g3-score">0</span><span class="g-lbl">النقاط</span></div>
+          <div class="game-stat"><span class="g-val" id="g3-level">1</span><span class="g-lbl">المستوى</span></div>
+        </div>
+        <div class="game-question" id="g3-question" style="font-size:1.1rem; text-align:center; color:white;"></div>
+        <div class="game-options" id="g3-options" style="grid-template-columns:1fr 1fr;max-width:380px;"></div>
+      </div>
+      <button class="start-btn" id="g3-btn" onclick="startGame3()">🏗️ ابدأ اللعبة</button>
+    </div>
+  </div>
+
+  <!-- ======= ACTIVITIES SECTION ======= -->
+  <div id="section-activities" class="section">
+    <div class="lesson-detail">
+      <div class="chapter-header">
+        <h2 style="color:var(--dark)">🎨 أنشطة تفاعلية</h2>
+        <p style="color:#636e72">أنشطة مرح لتعزيز الفهم</p>
+      </div>
+
+      <!-- Activity 1: Pattern Creator -->
+      <div style="background:var(--light-bg); border-radius:16px; padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:12px;">🔷 نشاط ١: صمّم نمطك الخاص!</h3>
+        <p style="color:#636e72; font-size:0.9rem; margin-bottom:16px;">اضغط على الأشكال لإنشاء نمط، ثم اطلب من صديقك إكماله!</p>
+        <div class="pattern-row" id="pattern-builder" style="justify-content:flex-start; flex-wrap:wrap;"></div>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="check-btn" onclick="addToPattern('🔴')">🔴</button>
+          <button class="check-btn" onclick="addToPattern('🔵')">🔵</button>
+          <button class="check-btn" onclick="addToPattern('🟡')">🟡</button>
+          <button class="check-btn" onclick="addToPattern('⭐')">⭐</button>
+          <button class="check-btn" onclick="addToPattern('🔷')">🔷</button>
+          <button class="check-btn" onclick="addToPattern('❤️')">❤️</button>
+          <button class="check-btn" style="background:var(--red);" onclick="clearPattern()">🗑️ مسح</button>
+          <button class="check-btn" style="background:var(--green);" onclick="analyzePattern()">🔍 تحليل النمط</button>
+        </div>
+        <div id="pattern-analysis" style="margin-top:12px; font-weight:700; color:var(--purple); font-size:0.95rem;"></div>
+      </div>
+
+      <!-- Activity 2: Measurement Estimator -->
+      <div style="background:var(--light-bg); border-radius:16px; padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:12px;">📏 نشاط ٢: مقياس التقدير</h3>
+        <p style="color:#636e72; font-size:0.9rem; margin-bottom:16px;">قدّر طول الشيء ثم اختر الوحدة المناسبة</p>
+        <div id="measurement-activity"></div>
+      </div>
+
+      <!-- Activity 3: Array Builder -->
+      <div style="background:var(--light-bg); border-radius:16px; padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:12px;">🗃️ نشاط ٣: بانى المصفوفات</h3>
+        <p style="color:#636e72; font-size:0.9rem; margin-bottom:16px;">اختر عدد الصفوف والأعمدة لبناء مصفوفة وحساب ناتج الضرب</p>
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
+          <label style="font-weight:700;">الصفوف: <input type="range" id="rows-slider" min="1" max="9" value="3" oninput="buildArray()" style="margin-right:8px;"> <span id="rows-val">3</span></label>
+          <label style="font-weight:700;">الأعمدة: <input type="range" id="cols-slider" min="1" max="9" value="4" oninput="buildArray()" style="margin-right:8px;"> <span id="cols-val">4</span></label>
+        </div>
+        <div id="array-display" style="text-align:center;"></div>
+        <div id="array-result" style="font-size:1.4rem; font-weight:900; color:var(--primary); text-align:center; margin-top:14px;"></div>
+      </div>
+
+      <!-- Activity 4: Number Forms -->
+      <div style="background:var(--light-bg); border-radius:16px; padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:12px;">📝 نشاط ٤: محوّل صيغ الأعداد</h3>
+        <p style="color:#636e72; font-size:0.9rem; margin-bottom:16px;">أدخل أي عدد وشاهد صيغه المختلفة</p>
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
+          <input type="number" id="number-input" placeholder="أدخل عدداً (مثال: 4523)" min="1" max="999999"
+            style="border:2px solid #e0e0e0; border-radius:12px; padding:12px 16px; font-family:'Cairo',sans-serif; font-size:1rem; font-weight:700; flex:1; min-width:200px; direction:ltr;"
+            oninput="convertNumber()">
+        </div>
+        <div id="number-forms"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======= ASSESSMENT SECTION ======= -->
+  <div id="section-assessment" class="section">
+    <div id="assessment-intro-view">
+      <div class="assessment-intro">
+        <div style="font-size:3rem; margin-bottom:12px;">📊</div>
+        <h2>تقييم شامل</h2>
+        <p>اختبر مستواك في جميع دروس الفصلين الأول والثاني</p>
+        <div class="level-cards">
+          <div class="level-card level-easy" id="lvl-easy" onclick="selectLevel('easy')">
+            <div style="font-size:2rem; margin-bottom:8px;">😊</div>
+            <div style="font-size:1.1rem;">سهل</div>
+            <div style="font-size:0.8rem; opacity:0.7; margin-top:4px;">10 أسئلة</div>
+          </div>
+          <div class="level-card level-med" id="lvl-med" onclick="selectLevel('medium')">
+            <div style="font-size:2rem; margin-bottom:8px;">🤔</div>
+            <div style="font-size:1.1rem;">متوسط</div>
+            <div style="font-size:0.8rem; opacity:0.7; margin-top:4px;">15 سؤالاً</div>
+          </div>
+          <div class="level-card level-hard" id="lvl-hard" onclick="selectLevel('hard')">
+            <div style="font-size:2rem; margin-bottom:8px;">💪</div>
+            <div style="font-size:1.1rem;">صعب</div>
+            <div style="font-size:0.8rem; opacity:0.7; margin-top:4px;">20 سؤالاً</div>
+          </div>
+        </div>
+        <button class="start-btn" id="start-assessment-btn" onclick="startAssessment()" style="opacity:0.5; pointer-events:none;">🚀 ابدأ التقييم</button>
+      </div>
+    </div>
+    <div id="assessment-quiz-view" class="hidden"></div>
+    <div id="assessment-result-view" class="hidden"></div>
+  </div>
+
+</div><!-- end container -->
+
+<script>
+// =========================================================
+//  GLOBAL STATE
+// =========================================================
+let totalScore = 0;
+let totalCorrect = 0;
+let selectedLevel = null;
+let patternArr = [];
+let g1Timer, g1Active = false, g1Score = 0, g1Streak = 0;
+let g2Score = 0, g2Round = 0, g2Active = false;
+let g3Score = 0, g3Level = 1, g3Active = false;
+
+function addScore(pts) {
+  totalScore += pts;
+  totalCorrect++;
+  document.getElementById('totalScore').textContent = totalScore;
+  document.getElementById('totalCorrect').textContent = totalCorrect;
+  updateStars();
+}
+
+function updateStars() {
+  const s = document.getElementById('starsDisplay');
+  if (totalScore < 10) s.textContent = '⭐';
+  else if (totalScore < 30) s.textContent = '⭐⭐';
+  else if (totalScore < 60) s.textContent = '⭐⭐⭐';
+  else s.textContent = '🏆';
+}
+
+function confettiPop() {
+  const emojis = ['🎉','⭐','🌟','✨','🎊','💫'];
+  for (let i = 0; i < 12; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.animationDelay = (Math.random() * 0.5) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3500);
+  }
+}
+
+// =========================================================
+//  TABS
+// =========================================================
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'exercises') loadMoreExercises();
+  if (name === 'activities') initActivities();
+}
+
+// =========================================================
+//  LESSONS
+// =========================================================
+const lessons = {
+  l1: {
+    icon: '🔷', title: 'الأنماط',
+    desc: 'التعرف على الأنماط واستكمالها',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>النمط هو تسلسل متكرر له قاعدة. يمكن أن يكون النمط:</p>
+      <ul>
+        <li>نمط أشكال: 🔴🔵🔴🔵🔴...</li>
+        <li>نمط أرقام: 2، 4، 6، 8، ...</li>
+        <li>نمط ألوان أو أحجام</li>
+      </ul>
+      <p>للعثور على قاعدة النمط: ابحث عن ما يتكرر!</p>`,
+    visual: 'pattern',
+    exercises: [
+      { q: 'ما الشكل التالي في النمط؟ 🔴 🔵 🟡 🔴 🔵 ___', opts: ['🟡', '🔴', '🔵', '🟢'], ans: 0 },
+      { q: 'ما الرقم التالي؟ 2، 4، 6، 8، ___', opts: ['9', '10', '11', '12'], ans: 1 },
+      { q: 'ما الرقم التالي؟ 5، 10، 15، 20، ___', opts: ['22', '25', '28', '30'], ans: 1 },
+    ]
+  },
+  l2: {
+    icon: '📊', title: 'التمثيل البياني بالأعمدة',
+    desc: 'قراءة وتفسير المخططات العمودية',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>التمثيل البياني بالأعمدة يستخدم أعمدة لمقارنة كميات مختلفة.</p>
+      <ul>
+        <li>المحور الأفقي: يُظهر الفئات</li>
+        <li>المحور الرأسي: يُظهر الأعداد</li>
+        <li>كلما ارتفع العمود، كلما زادت القيمة</li>
+      </ul>`,
+    visual: 'bar',
+    exercises: [
+      { q: 'في مخطط الفاكهة: تفاح=8، برتقال=5، موز=3. ما أكثر فاكهة؟', opts: ['تفاح', 'برتقال', 'موز', 'متساوية'], ans: 0 },
+      { q: 'في نفس المخطط، ما مجموع التفاح والموز؟', opts: ['8', '11', '13', '16'], ans: 1 },
+    ]
+  },
+  l3: {
+    icon: '🔵', title: 'التمثيل البياني بالنقاط',
+    desc: 'قراءة المخططات النقطية',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>المخطط النقطي يستخدم نقاطًا (•) فوق خط الأعداد لتمثيل البيانات.</p>
+      <ul>
+        <li>كل نقطة تمثل قيمة واحدة</li>
+        <li>عدّ النقاط فوق كل رقم لمعرفة تكراره</li>
+        <li>مفيد لإظهار تكرار البيانات</li>
+      </ul>`,
+    visual: 'dot',
+    exercises: [
+      { q: 'في مخطط نقطي: عدد النقاط فوق 3 هو 4، وفوق 5 هو 2. أيهما أكثر تكراراً؟', opts: ['العدد 3', 'العدد 5', 'متساويان', 'لا يمكن معرفة ذلك'], ans: 0 },
+    ]
+  },
+  l4: {
+    icon: '📏', title: 'قياس الأطوال بالسنتيمتر',
+    desc: 'استخدام المسطرة لقياس الأشياء',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>السنتيمتر (سم) وحدة قياس للأطوال القصيرة.</p>
+      <ul>
+        <li>100 سنتيمتر = 1 متر</li>
+        <li>ابدأ القياس من الصفر على المسطرة</li>
+        <li>أمثلة: قلم رصاص ≈ 17 سم، كتاب ≈ 25 سم</li>
+      </ul>`,
+    visual: 'ruler_cm',
+    exercises: [
+      { q: 'قلم طوله 15 سم وآخر طوله 9 سم. ما الفرق بينهما؟', opts: ['4 سم', '6 سم', '7 سم', '24 سم'], ans: 1 },
+      { q: '100 سنتيمتر = ___', opts: ['10 متر', '1 متر', '0.1 متر', '1000 متر'], ans: 1 },
+    ]
+  },
+  l5: {
+    icon: '📐', title: 'قياس الأطوال بالمتر',
+    desc: 'المتر ووحدات القياس الكبيرة',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>المتر (م) يُستخدم لقياس الأشياء الأكبر.</p>
+      <ul>
+        <li>1 متر = 100 سنتيمتر</li>
+        <li>طول الباب ≈ 2 متر</li>
+        <li>طول الفصل ≈ 8 أمتار</li>
+        <li>للتحويل: اضرب الأمتار × 100 للحصول على سنتيمتر</li>
+      </ul>`,
+    visual: 'ruler_m',
+    exercises: [
+      { q: '3 أمتار = ___ سنتيمتر', opts: ['30', '300', '3000', '3'], ans: 1 },
+      { q: 'طول غرفة 5 أمتار. كم سنتيمتراً؟', opts: ['50', '500', '5000', '0.05'], ans: 1 },
+    ]
+  },
+  l6: {
+    icon: '🔬', title: 'قياس الأطوال بالمليمتر',
+    desc: 'المليمتر لقياس الأشياء الدقيقة جداً',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>المليمتر (مم) أصغر وحدة قياس شائعة.</p>
+      <ul>
+        <li>10 مليمترات = 1 سنتيمتر</li>
+        <li>1000 مليمتر = 1 متر</li>
+        <li>سُمك عملة معدنية ≈ 2 مم</li>
+      </ul>`,
+    visual: 'ruler_mm',
+    exercises: [
+      { q: '10 مليمتر = ___ سنتيمتر', opts: ['100', '0.1', '1', '10'], ans: 2 },
+      { q: '5 سنتيمتر = ___ مليمتر', opts: ['0.5', '50', '500', '5'], ans: 1 },
+    ]
+  },
+  l7: {
+    icon: '🏗️', title: 'الآلاف',
+    desc: 'الأعداد من 1000 إلى 9999',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>الآلاف هي المرتبة الرابعة في نظام العد.</p>
+      <ul>
+        <li>1000 = ألف = عشر مئات</li>
+        <li>مثال: 3452 = 3 آلاف + 4 مئات + 5 عشرات + 2 آحاد</li>
+        <li>الرقم على يسار المئات هو رقم الآلاف</li>
+      </ul>`,
+    visual: 'place_value',
+    exercises: [
+      { q: 'في العدد 4728، ما قيمة الرقم 7؟', opts: ['7', '70', '700', '7000'], ans: 2 },
+      { q: 'ما عدد الآلاف في 3056؟', opts: ['0', '3', '5', '6'], ans: 1 },
+    ]
+  },
+  l8: {
+    icon: '🔢', title: 'مزيد من الآلاف',
+    desc: 'قراءة وكتابة الآلاف بعمق',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>لقراءة عدد في الآلاف:</p>
+      <ul>
+        <li>اقرأ الآلاف أولاً ثم قل "ألف"</li>
+        <li>ثم اقرأ الباقي</li>
+        <li>مثال: 7340 = سبعة آلاف وثلاثمائة وأربعون</li>
+      </ul>`,
+    visual: 'place_value',
+    exercises: [
+      { q: 'ما كتابة "ستة آلاف وأربعمائة وثمانية وعشرون" بالأرقام؟', opts: ['6048', '6428', '6480', '4628'], ans: 1 },
+      { q: 'أيٌّ من الأعداد التالية أكبر؟', opts: ['3999', '4001', '3998', '4000'], ans: 1 },
+    ]
+  },
+  l9: {
+    icon: '💯', title: 'عشرات الآلاف - مئات الآلاف',
+    desc: 'الأعداد الكبيرة حتى 999,999',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <ul>
+        <li>عشرات الآلاف: 10,000 — 99,999</li>
+        <li>مئات الآلاف: 100,000 — 999,999</li>
+        <li>مثال: 352,741 = 3 مئات ألف + 5 عشرات ألف + 2 ألف + 7 مئات + 4 عشرات + 1</li>
+      </ul>`,
+    visual: 'big_number',
+    exercises: [
+      { q: 'في العدد 542,316، ما قيمة الرقم 5؟', opts: ['500', '5000', '500000', '50000'], ans: 2 },
+      { q: 'كم مرتبة في العدد 78,430؟', opts: ['4', '5', '6', '3'], ans: 1 },
+    ]
+  },
+  l10: {
+    icon: '📝', title: 'صيغ مختلفة لكتابة الأعداد',
+    desc: 'الصيغة الاعتيادية والمفككة واللفظية',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>للعدد 4523 ثلاث صيغ:</p>
+      <ul>
+        <li>الاعتيادية: 4523</li>
+        <li>المفككة: 4000 + 500 + 20 + 3</li>
+        <li>اللفظية: أربعة آلاف وخمسمائة وثلاثة وعشرون</li>
+      </ul>`,
+    visual: 'number_forms',
+    exercises: [
+      { q: 'ما الصيغة المفككة للعدد 3207؟', opts: ['3000+200+7', '3000+20+7', '300+200+7', '3000+200+70'], ans: 0 },
+      { q: '6000 + 400 + 50 + 8 = ___', opts: ['6480', '6458', '6548', '6458'], ans: 1 },
+    ]
+  },
+  l11: {
+    icon: '🗃️', title: 'المصفوفات',
+    desc: 'الصفوف والأعمدة وعلاقتها بالضرب',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>المصفوفة هي ترتيب الأشياء في صفوف وأعمدة متساوية.</p>
+      <ul>
+        <li>مصفوفة 3×4 = 3 صفوف × 4 أعمدة = 12 عنصر</li>
+        <li>عدد العناصر = عدد الصفوف × عدد الأعمدة</li>
+      </ul>`,
+    visual: 'array',
+    exercises: [
+      { q: 'مصفوفة بها 4 صفوف و 6 أعمدة. كم عدد عناصرها؟', opts: ['10', '20', '24', '28'], ans: 2 },
+      { q: 'مصفوفة بها 5 × 3. ما الحساب الصحيح؟', opts: ['5+3', '5-3', '5×3', '5÷3'], ans: 2 },
+    ]
+  },
+  l12: {
+    icon: '✖️', title: 'مفهوم الضرب',
+    desc: 'الضرب كجمع متكرر',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>الضرب هو جمع نفس العدد مرات متعددة.</p>
+      <ul>
+        <li>3 × 4 = 4 + 4 + 4 = 12</li>
+        <li>5 × 2 = 2 + 2 + 2 + 2 + 2 = 10</li>
+        <li>أي عدد × 0 = 0</li>
+        <li>أي عدد × 1 = نفس العدد</li>
+      </ul>`,
+    visual: 'multiply',
+    exercises: [
+      { q: '4 × 3 = ___', opts: ['7', '9', '12', '16'], ans: 2 },
+      { q: '6 × 5 = ___', opts: ['11', '25', '30', '36'], ans: 2 },
+      { q: '7 × 0 = ___', opts: ['7', '0', '1', '70'], ans: 1 },
+    ]
+  },
+  l13: {
+    icon: '🔄', title: 'خاصية الإبدال في الضرب',
+    desc: 'أ × ب = ب × أ',
+    concept: `<h4>💡 المفهوم الأساسي</h4>
+      <p>خاصية الإبدال تعني أن ترتيب العوامل لا يغير الناتج.</p>
+      <ul>
+        <li>3 × 5 = 5 × 3 = 15</li>
+        <li>7 × 2 = 2 × 7 = 14</li>
+        <li>هذا يساعدنا على استخدام حقائق الضرب التي نعرفها!</li>
+      </ul>`,
+    visual: 'commutative',
+    exercises: [
+      { q: 'إذا كان 6 × 4 = 24، فما قيمة 4 × 6؟', opts: ['20', '24', '28', '42'], ans: 1 },
+      { q: '8 × 3 = 3 × ___', opts: ['3', '6', '8', '24'], ans: 2 },
+    ]
+  }
+};
+
+function openLesson(id) {
+  const l = lessons[id];
+  document.getElementById('lessons-grid-view').classList.add('hidden');
+  const detail = document.getElementById('lesson-detail-view');
+  detail.classList.remove('hidden');
+
+  let visualHTML = buildVisual(l.visual, l);
+
+  detail.innerHTML = `
+    <div class="lesson-detail">
+      <button class="back-btn" onclick="closeLesson()">← العودة للدروس</button>
+      <div class="lesson-title-bar">
+        <div class="big-icon">${l.icon}</div>
+        <div>
+          <h2>${l.title}</h2>
+          <p>${l.desc}</p>
+        </div>
+      </div>
+      <div class="concept-box">${l.concept}</div>
+      <div class="visual-demo">
+        <h4>🎮 تصوّر المفهوم</h4>
+        ${visualHTML}
+      </div>
+      <div class="exercises-section">
+        <h3>✏️ تدرّب الآن</h3>
+        ${buildLessonExercises(l.exercises, id)}
+      </div>
+    </div>`;
+}
+
+function closeLesson() {
+  document.getElementById('lessons-grid-view').classList.remove('hidden');
+  document.getElementById('lesson-detail-view').classList.add('hidden');
+}
+
+function buildVisual(type, l) {
+  if (type === 'pattern') return `
+    <div class="pattern-row">
+      <div class="pblock" style="background:#ffcccc;">🔴</div>
+      <div class="pblock" style="background:#cce5ff;">🔵</div>
+      <div class="pblock" style="background:#fff3cd;">🟡</div>
+      <div class="pblock" style="background:#ffcccc;">🔴</div>
+      <div class="pblock" style="background:#cce5ff;">🔵</div>
+      <div class="pblock question" onclick="revealPattern(this,'🟡')">❓</div>
+      <div class="pblock" style="background:#ffcccc;">🔴</div>
+    </div>
+    <p style="font-size:0.85rem; color:#636e72;">اضغط على ❓ لاكتشاف الجواب!</p>`;
+
+  if (type === 'bar') return `
+    <div class="bar-chart">
+      ${[['🍎 تفاح','#ff6b6b',80,8],['🍊 برتقال','#ffa94d',50,5],['🍌 موز','#ffe066',30,3],['🍇 عنب','#da77f2',60,6]].map(([name,color,h,v])=>`
+      <div class="bar-item">
+        <div class="bar-fill" style="height:${h}px; background:${color};">
+          <span class="bar-val" style="color:${color};">${v}</span>
+        </div>
+        <div class="bar-lbl">${name}</div>
+      </div>`).join('')}
+    </div>`;
+
+  if (type === 'dot') return `
+    <div style="text-align:right; padding:10px;">
+      ${[[1,2],[2,4],[3,5],[4,3],[5,1]].map(([n,c])=>`
+      <div class="dot-row">
+        <span style="width:20px; font-weight:700; color:var(--dark);">${n}</span>
+        ${Array(c).fill('<span class="dot" style="background:var(--primary);"></span>').join('')}
+        <span style="font-size:0.8rem; color:#636e72; margin-right:6px;">(${c})</span>
+      </div>`).join('')}
+    </div>`;
+
+  if (type === 'ruler_cm') return `
+    <div class="ruler-visual">
+      <div style="display:flex; gap:0; font-size:0.75rem; font-weight:700; color:var(--dark);">
+        ${Array.from({length:11},(_,i)=>`<div style="width:28px; text-align:center; border-left:2px solid #999; padding:4px 0;">${i}</div>`).join('')}
+      </div>
+      <div style="font-size:0.8rem; color:#666; margin-top:6px;">| سنتيمتر |</div>
+    </div>`;
+
+  if (type === 'ruler_m' || type === 'ruler_mm') return `
+    <div class="num-visual">
+      ${type==='ruler_m'?`
+      <div class="num-block"><span class="val" style="color:var(--primary);">1</span><span class="lbl">متر</span></div>
+      <div style="display:flex;align-items:center;font-size:1.5rem;font-weight:900;">=</div>
+      <div class="num-block"><span class="val" style="color:var(--blue);">100</span><span class="lbl">سم</span></div>`:`
+      <div class="num-block"><span class="val" style="color:var(--primary);">10</span><span class="lbl">مم</span></div>
+      <div style="display:flex;align-items:center;font-size:1.5rem;font-weight:900;">=</div>
+      <div class="num-block"><span class="val" style="color:var(--blue);">1</span><span class="lbl">سم</span></div>`}
+    </div>`;
+
+  if (type === 'place_value') return `
+    <div class="num-visual">
+      ${[['3','آلاف','var(--primary)'],['4','مئات','var(--purple)'],['5','عشرات','var(--blue)'],['2','آحاد','var(--green)']].map(([v,l,c])=>`
+      <div class="num-block"><span class="val" style="color:${c};">${v}</span><span class="lbl">${l}</span></div>`).join('')}
+    </div>
+    <p style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-top:14px;">= 3452</p>`;
+
+  if (type === 'big_number') return `
+    <div class="num-visual" style="flex-wrap:wrap; justify-content:center;">
+      ${[['3','مئات ألف','var(--primary)'],['5','عشرات ألف','var(--purple)'],['2','آلاف','var(--blue)'],['7','مئات','var(--green)'],['4','عشرات','var(--red)'],['1','آحاد','#e67e22']].map(([v,l,c])=>`
+      <div class="num-block" style="min-width:65px;"><span class="val" style="color:${c}; font-size:1.4rem;">${v}</span><span class="lbl">${l}</span></div>`).join('')}
+    </div>
+    <p style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-top:14px;">= 352,741</p>`;
+
+  if (type === 'number_forms') return `
+    <div style="text-align:right;">
+      <div style="background:rgba(255,107,53,0.1); border-radius:12px; padding:14px; margin-bottom:10px;">
+        <strong>الصيغة الاعتيادية:</strong> 4523
+      </div>
+      <div style="background:rgba(155,89,182,0.1); border-radius:12px; padding:14px; margin-bottom:10px;">
+        <strong>الصيغة المفككة:</strong> 4000 + 500 + 20 + 3
+      </div>
+      <div style="background:rgba(52,152,219,0.1); border-radius:12px; padding:14px;">
+        <strong>الصيغة اللفظية:</strong> أربعة آلاف وخمسمائة وثلاثة وعشرون
+      </div>
+    </div>`;
+
+  if (type === 'array') return `
+    <div class="mult-grid" id="demo-array">
+      ${Array(12).fill(null).map((_,i)=>`<div class="mult-cell" style="animation-delay:${i*0.05}s;">⭐</div>`).join('')}
+    </div>
+    <p style="font-size:1rem; font-weight:800; color:var(--dark); margin-top:12px;">3 صفوف × 4 أعمدة = 12 عنصراً</p>`;
+
+  if (type === 'multiply') return `
+    <div style="font-size:1.3rem; text-align:center;">
+      <div style="background:rgba(255,107,53,0.1); border-radius:12px; padding:16px; margin-bottom:10px; font-weight:700;">
+        3 × 4 = 4 + 4 + 4 = <span style="color:var(--primary); font-size:1.6rem;">12</span>
+      </div>
+      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:10px;">
+        ${Array(3).fill(null).map(()=>`<div style="display:flex; gap:4px;">${Array(4).fill('🟠').join('')}</div>`).join('<span style="font-size:1.5rem;">+</span>')}
+      </div>
+    </div>`;
+
+  if (type === 'commutative') return `
+    <div style="display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap;">
+      <div style="background:rgba(255,107,53,0.1); border-radius:14px; padding:20px; text-align:center;">
+        <div style="font-size:1.4rem; font-weight:900; color:var(--primary); margin-bottom:10px;">3 × 5</div>
+        <div>${Array(3).fill(null).map(()=>`<div>${Array(5).fill('🟠').join('')}</div>`).join('')}</div>
+        <div style="font-size:1.2rem; font-weight:800; margin-top:10px;">= 15</div>
+      </div>
+      <div style="font-size:2rem;">🟰</div>
+      <div style="background:rgba(78,205,196,0.1); border-radius:14px; padding:20px; text-align:center;">
+        <div style="font-size:1.4rem; font-weight:900; color:var(--secondary); margin-bottom:10px;">5 × 3</div>
+        <div>${Array(5).fill(null).map(()=>`<div>${Array(3).fill('🟢').join('')}</div>`).join('')}</div>
+        <div style="font-size:1.2rem; font-weight:800; margin-top:10px;">= 15</div>
+      </div>
+    </div>`;
+
+  return '<p>تصوير تفاعلي</p>';
+}
+
+function buildLessonExercises(exs, lessonId) {
+  return exs.map((ex, i) => `
+    <div class="question-card" id="lq-${lessonId}-${i}">
+      <p>${ex.q}</p>
+      <div class="options-grid">
+        ${ex.opts.map((opt, j) => `
+          <button class="option-btn" onclick="checkLessonAnswer('${lessonId}', ${i}, ${j}, ${ex.ans})">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="feedback-msg" id="lfb-${lessonId}-${i}"></div>
+    </div>`).join('');
+}
+
+function revealPattern(el, answer) {
+  el.textContent = answer;
+  el.style.background = '#d4edda';
+  el.style.border = '3px solid var(--green)';
+  confettiPop();
+}
+
+function checkLessonAnswer(lid, qi, chosen, correct) {
+  const card = document.getElementById(`lq-${lid}-${qi}`);
+  const fb = document.getElementById(`lfb-${lid}-${qi}`);
+  const btns = card.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[correct].classList.add('correct-ans');
+  fb.classList.add('show');
+  if (chosen === correct) {
+    btns[chosen].classList.add('correct-ans');
+    fb.textContent = '✅ أحسنت! إجابة صحيحة!';
+    fb.classList.add('correct');
+    card.classList.add('correct');
+    addScore(5);
+    confettiPop();
+  } else {
+    btns[chosen].classList.add('wrong-ans');
+    fb.textContent = `❌ الإجابة الصحيحة هي: ${lessons[lid].exercises[qi].opts[correct]}`;
+    fb.classList.add('wrong');
+    card.classList.add('wrong');
+  }
+}
+
+// =========================================================
+//  EXERCISES
+// =========================================================
+const allExercises = [
+  // Patterns
+  { topic: 'الأنماط', q: 'ما الرقم التالي؟ 3، 6، 9، 12، ___', opts: ['13','14','15','16'], ans: 2 },
+  { topic: 'الأنماط', q: 'ما الرقم التالي؟ 100، 90، 80، 70، ___', opts: ['50','55','60','65'], ans: 2 },
+  { topic: 'الأنماط', q: 'النمط: 🌙⭐🌙⭐🌙___ ، ما الشكل التالي؟', opts: ['🌙','⭐','🌟','☀️'], ans: 1 },
+  // Measurements
+  { topic: 'القياس', q: 'كم سنتيمتر في 2 متر؟', opts: ['20','200','2000','2'], ans: 1 },
+  { topic: 'القياس', q: 'كم مليمتر في 3 سنتيمتر؟', opts: ['3','30','300','0.3'], ans: 1 },
+  { topic: 'القياس', q: 'أيهما أطول: 50 سم أم 1 متر؟', opts: ['50 سم','1 متر','متساويان','لا يمكن معرفة ذلك'], ans: 1 },
+  { topic: 'القياس', q: '1 متر = ___ سنتيمتر', opts: ['10','100','1000','10000'], ans: 1 },
+  // Place Value
+  { topic: 'القيمة المكانية', q: 'ما قيمة الرقم 6 في العدد 6,234؟', opts: ['6','600','6000','60'], ans: 2 },
+  { topic: 'القيمة المكانية', q: 'في العدد 45,678، الرقم 4 في مرتبة...', opts: ['الآلاف','عشرات الآلاف','مئات الآلاف','المئات'], ans: 1 },
+  { topic: 'القيمة المكانية', q: 'ما الصيغة المفككة لـ 5308؟', opts: ['5000+300+8','5000+30+8','500+300+8','5000+300+80'], ans: 0 },
+  { topic: 'القيمة المكانية', q: '20000 + 3000 + 400 + 5 = ___', opts: ['23045','23405','23450','23455'], ans: 1 },
+  // Multiplication
+  { topic: 'الضرب', q: '5 × 6 = ___', opts: ['25','30','35','11'], ans: 1 },
+  { topic: 'الضرب', q: '8 × 4 = ___', opts: ['32','28','36','24'], ans: 0 },
+  { topic: 'الضرب', q: '9 × 3 = ___', opts: ['27','24','30','21'], ans: 0 },
+  { topic: 'الضرب', q: 'إذا كان 7 × 5 = 35، فما قيمة 5 × 7؟', opts: ['57','30','35','45'], ans: 2 },
+  { topic: 'الضرب', q: 'مصفوفة 6 × 4 = ___', opts: ['10','20','24','28'], ans: 2 },
+  // Bar charts
+  { topic: 'التمثيل البياني', q: 'في مخطط فصل: ذكور=18، إناث=15. ما المجموع؟', opts: ['30','33','36','38'], ans: 1 },
+  { topic: 'التمثيل البياني', q: 'في مخطط أعمدة، العمود الأطول يمثل...', opts: ['أصغر قيمة','متوسط القيم','أكبر قيمة','لا شيء'], ans: 2 },
+];
+
+let exerciseOrder = [];
+let exerciseIndex = 0;
+let currentBatch = [];
+
+function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
+function loadMoreExercises() {
+  exerciseOrder = shuffle([...allExercises]);
+  exerciseIndex = 0;
+  renderExercises();
+}
+
+function renderExercises() {
+  const container = document.getElementById('exercises-container');
+  currentBatch = exerciseOrder.slice(exerciseIndex, exerciseIndex + 5);
+  container.innerHTML = currentBatch.map((ex, i) => `
+    <div class="question-card" id="eq-${i}">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="background:rgba(255,107,53,0.1); color:var(--primary); font-size:0.78rem; font-weight:700; padding:3px 10px; border-radius:20px;">${ex.topic}</span>
+      </div>
+      <p>${ex.q}</p>
+      <div class="options-grid">
+        ${ex.opts.map((opt, j) => `
+          <button class="option-btn" onclick="checkExercise(${i}, ${j})">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="feedback-msg" id="efb-${i}"></div>
+    </div>`).join('');
+}
+
+function checkExercise(qi, chosen) {
+  const ex = currentBatch[qi];
+  const correct = ex.ans;
+  const card = document.getElementById(`eq-${qi}`);
+  const fb = document.getElementById(`efb-${qi}`);
+  const btns = card.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[correct].classList.add('correct-ans');
+  fb.classList.add('show');
+  if (chosen === correct) {
+    fb.textContent = '✅ ممتاز!';
+    fb.classList.add('correct');
+    card.classList.add('correct');
+    addScore(5);
+    if (Math.random() > 0.5) confettiPop();
+  } else {
+    btns[chosen].classList.add('wrong-ans');
+    fb.textContent = `❌ الصواب: ${ex.opts[correct]}`;
+    fb.classList.add('wrong');
+    card.classList.add('wrong');
+  }
+}
+
+// =========================================================
+//  GAME 1: Multiplication Blast
+// =========================================================
+const multFacts = [];
+for (let a = 1; a <= 9; a++) for (let b = 1; b <= 9; b++) multFacts.push([a, b, a*b]);
+
+function startGame1() {
+  g1Active = true; g1Score = 0; g1Streak = 0;
+  document.getElementById('g1-score').textContent = 0;
+  document.getElementById('g1-streak').textContent = 0;
+  document.getElementById('g1-btn').textContent = '🔄 إعادة';
+  nextGame1Question();
+}
+
+function nextGame1Question() {
+  if (!g1Active) return;
+  clearInterval(g1Timer);
+  const fact = multFacts[Math.floor(Math.random() * multFacts.length)];
+  const correct = fact[2];
+  document.getElementById('g1-question').textContent = `${fact[0]} × ${fact[1]} = ?`;
+  let timeLeft = 10;
+  updateTimerRing('g1-timer-ring', 'g1-timer', 10, 10);
+  g1Timer = setInterval(() => {
+    timeLeft--;
+    updateTimerRing('g1-timer-ring', 'g1-timer', timeLeft, 10);
+    if (timeLeft <= 0) {
+      clearInterval(g1Timer);
+      g1Streak = 0;
+      document.getElementById('g1-streak').textContent = g1Streak;
+      showGame1Options([], correct);
+      setTimeout(nextGame1Question, 1200);
+    }
+  }, 1000);
+
+  const wrongs = new Set();
+  while (wrongs.size < 3) {
+    let w = correct + Math.floor(Math.random() * 10) - 5;
+    if (w !== correct && w > 0) wrongs.add(w);
+  }
+  const opts = shuffle([correct, ...wrongs]);
+  showGame1Options(opts, correct);
+}
+
+function showGame1Options(opts, correct) {
+  const container = document.getElementById('g1-options');
+  container.innerHTML = opts.map(o => `
+    <button class="game-opt-btn" onclick="answerGame1(this, ${o}, ${correct})">${o}</button>
+  `).join('');
+}
+
+function answerGame1(btn, chosen, correct) {
+  clearInterval(g1Timer);
+  document.querySelectorAll('.game-opt-btn').forEach(b => b.disabled = true);
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    g1Score += 10 + g1Streak * 2;
+    g1Streak++;
+    addScore(2);
+    if (g1Streak >= 3) confettiPop();
+  } else {
+    btn.classList.add('wrong');
+    g1Streak = 0;
+    document.querySelectorAll('.game-opt-btn').forEach(b => {
+      if (parseInt(b.textContent) === correct) b.classList.add('correct');
+    });
+  }
+  document.getElementById('g1-score').textContent = g1Score;
+  document.getElementById('g1-streak').textContent = g1Streak;
+  setTimeout(nextGame1Question, 1200);
+}
+
+function updateTimerRing(ringId, timerId, current, max) {
+  const pct = (current / max) * 100;
+  const color = current > 5 ? 'var(--primary)' : 'var(--red)';
+  document.getElementById(ringId).style.setProperty('--pct', pct + '%');
+  document.getElementById(ringId).style.background = `conic-gradient(${color} ${pct}%, rgba(255,255,255,0.1) 0%)`;
+  document.getElementById(timerId).textContent = current;
+}
+
+// =========================================================
+//  GAME 2: Pattern Finder
+// =========================================================
+const patternSets = [
+  { seq: [2,4,6,8], next: 10, wrong: [9,11,12] },
+  { seq: [5,10,15,20], next: 25, wrong: [22,24,28] },
+  { seq: [1,3,5,7], next: 9, wrong: [8,10,11] },
+  { seq: [10,20,30,40], next: 50, wrong: [45,55,60] },
+  { seq: [3,6,9,12], next: 15, wrong: [13,14,16] },
+  { seq: [100,90,80,70], next: 60, wrong: [55,65,75] },
+  { seq: [2,4,8,16], next: 32, wrong: [18,24,30] },
+  { seq: [1,4,9,16], next: 25, wrong: [20,22,24] },
+];
+
+function startGame2() {
+  g2Active = true; g2Score = 0; g2Round = 0;
+  document.getElementById('g2-score').textContent = 0;
+  document.getElementById('g2-round').textContent = 0;
+  document.getElementById('g2-btn').textContent = '🔄 إعادة';
+  nextGame2Question();
+}
+
+function nextGame2Question() {
+  if (!g2Active) return;
+  const p = patternSets[Math.floor(Math.random() * patternSets.length)];
+  g2Round++;
+  document.getElementById('g2-round').textContent = g2Round;
+  document.getElementById('g2-display').innerHTML =
+    p.seq.map(n => `<span style="background:rgba(255,230,109,0.2); border:2px solid rgba(255,230,109,0.4); border-radius:10px; padding:8px 14px; font-weight:900; font-size:1.6rem;">${n}</span>`).join(' ، ') +
+    ' ، <span style="background:rgba(255,255,255,0.1); border:2px dashed rgba(255,255,255,0.4); border-radius:10px; padding:8px 14px; font-size:1.6rem;">❓</span>';
+
+  const opts = shuffle([p.next, ...p.wrong]);
+  document.getElementById('g2-options').innerHTML = opts.map(o => `
+    <button class="game-opt-btn" onclick="answerGame2(this, ${o}, ${p.next})">${o}</button>
+  `).join('');
+}
+
+function answerGame2(btn, chosen, correct) {
+  document.querySelectorAll('#g2-options .game-opt-btn').forEach(b => b.disabled = true);
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    g2Score += 10;
+    addScore(2);
+    confettiPop();
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('#g2-options .game-opt-btn').forEach(b => {
+      if (parseInt(b.textContent) === correct) b.classList.add('correct');
+    });
+  }
+  document.getElementById('g2-score').textContent = g2Score;
+  setTimeout(nextGame2Question, 1500);
+}
+
+// =========================================================
+//  GAME 3: Place Value Builder
+// =========================================================
+function startGame3() {
+  g3Active = true; g3Score = 0; g3Level = 1;
+  document.getElementById('g3-score').textContent = 0;
+  document.getElementById('g3-level').textContent = 1;
+  document.getElementById('g3-btn').textContent = '🔄 إعادة';
+  nextGame3Question();
+}
+
+function nextGame3Question() {
+  const digits = g3Level <= 3 ? 4 : g3Level <= 6 ? 5 : 6;
+  const max = Math.pow(10, digits);
+  const min = Math.pow(10, digits - 1);
+  const num = Math.floor(Math.random() * (max - min)) + min;
+  const numStr = num.toLocaleString('ar-EG');
+
+  const s = num.toString();
+  const placeNames = ['آحاد','عشرات','مئات','آلاف','عشرات آلاف','مئات آلاف'];
+  const pos = Math.floor(Math.random() * s.length);
+  const placeIdx = s.length - 1 - pos;
+  const digit = parseInt(s[pos]);
+  const placeValue = digit * Math.pow(10, placeIdx);
+
+  document.getElementById('g3-question').innerHTML = `
+    <div style="margin-bottom:12px; font-size:1rem;">العدد: <strong style="font-size:2rem; color:var(--accent);">${num.toLocaleString()}</strong></div>
+    <div>ما <strong style="color:var(--accent);">قيمة الرقم ${digit}</strong> (في مرتبة ${placeNames[placeIdx]})؟</div>`;
+
+  const wrongs = new Set();
+  while (wrongs.size < 3) {
+    const w = placeValue + (Math.floor(Math.random() * 4) - 2) * Math.pow(10, placeIdx);
+    if (w !== placeValue && w >= 0) wrongs.add(w);
+  }
+  const opts = shuffle([placeValue, ...wrongs]);
+  document.getElementById('g3-options').innerHTML = opts.map(o => `
+    <button class="game-opt-btn" onclick="answerGame3(this, ${o}, ${placeValue})">${o.toLocaleString()}</button>
+  `).join('');
+}
+
+function answerGame3(btn, chosen, correct) {
+  document.querySelectorAll('#g3-options .game-opt-btn').forEach(b => b.disabled = true);
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    g3Score += 15;
+    g3Level++;
+    addScore(3);
+    if (g3Level % 3 === 0) confettiPop();
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('#g3-options .game-opt-btn').forEach(b => {
+      if (parseInt(b.textContent.replace(/,/g,'')) === correct) b.classList.add('correct');
+    });
+  }
+  document.getElementById('g3-score').textContent = g3Score;
+  document.getElementById('g3-level').textContent = g3Level;
+  setTimeout(nextGame3Question, 1500);
+}
+
+// =========================================================
+//  ACTIVITIES
+// =========================================================
+function initActivities() {
+  buildArray();
+  buildMeasurementActivity();
+}
+
+function addToPattern(shape) {
+  patternArr.push(shape);
+  renderPatternBuilder();
+}
+
+function clearPattern() {
+  patternArr = [];
+  renderPatternBuilder();
+  document.getElementById('pattern-analysis').textContent = '';
+}
+
+function renderPatternBuilder() {
+  const pb = document.getElementById('pattern-builder');
+  pb.innerHTML = patternArr.map(s => `
+    <div class="pblock" style="background:#f0f8ff; border:2px solid #cce5ff;">${s}</div>
+  `).join('') || '<span style="color:#aaa; font-size:0.9rem;">اضغط الأزرار أدناه لإضافة أشكال</span>';
+}
+
+function analyzePattern() {
+  const el = document.getElementById('pattern-analysis');
+  if (patternArr.length < 2) {
+    el.textContent = 'أضف المزيد من الأشكال لتحليل النمط!';
+    return;
+  }
+  // Simple period detection
+  for (let p = 1; p <= Math.floor(patternArr.length / 2); p++) {
+    let isPattern = true;
+    for (let i = p; i < patternArr.length; i++) {
+      if (patternArr[i] !== patternArr[i % p]) { isPattern = false; break; }
+    }
+    if (isPattern) {
+      const unit = patternArr.slice(0, p).join('');
+      el.textContent = `✅ وجدتُ نمطاً! الوحدة الأساسية: ${unit} (تتكرر كل ${p} شكل)`;
+      return;
+    }
+  }
+  el.textContent = '🤔 لم أجد نمطاً واضحاً بعد، أضف المزيد!';
+}
+
+function buildArray() {
+  const r = parseInt(document.getElementById('rows-slider').value);
+  const c = parseInt(document.getElementById('cols-slider').value);
+  document.getElementById('rows-val').textContent = r;
+  document.getElementById('cols-val').textContent = c;
+  const display = document.getElementById('array-display');
+  display.innerHTML = Array(r).fill(null).map(() =>
+    `<div style="display:flex; justify-content:center; gap:6px; margin-bottom:6px;">
+      ${Array(c).fill('<span style="font-size:1.6rem; animation:pulse 0.5s ease;">⭐</span>').join('')}
+    </div>`
+  ).join('');
+  document.getElementById('array-result').textContent = `${r} × ${c} = ${r*c} عنصراً`;
+}
+
+function buildMeasurementActivity() {
+  const items = [
+    { name: 'قلم رصاص', img: '✏️', answer: 'cm', question: 'طول قلم الرصاص' },
+    { name: 'غرفة الدراسة', img: '🏠', answer: 'm', question: 'طول غرفة الدراسة' },
+    { name: 'سُمك عملة معدنية', img: '🪙', answer: 'mm', question: 'سُمك عملة معدنية' },
+    { name: 'ارتفاع باب', img: '🚪', answer: 'm', question: 'ارتفاع الباب' },
+  ];
+  const item = items[Math.floor(Math.random() * items.length)];
+  document.getElementById('measurement-activity').innerHTML = `
+    <div style="text-align:center;">
+      <div style="font-size:4rem; margin-bottom:12px;">${item.img}</div>
+      <p style="font-size:1.1rem; font-weight:700; margin-bottom:16px;">${item.question}</p>
+      <p style="color:#636e72; font-size:0.9rem; margin-bottom:16px;">ما الوحدة المناسبة للقياس؟</p>
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        ${['mm مليمتر', 'cm سنتيمتر', 'm متر'].map((u, i) => {
+          const units = ['mm','cm','m'];
+          return `<button class="check-btn" style="background:${units[i]===item.answer?'var(--green)':'var(--blue)'}; opacity:0.9;"
+            onclick="checkMeasurement(this,'${units[i]}','${item.answer}')">${u}</button>`;
+        }).join('')}
+      </div>
+      <div id="meas-feedback" style="font-size:1rem; font-weight:700; margin-top:14px; min-height:24px;"></div>
+    </div>`;
+}
+
+function checkMeasurement(btn, chosen, correct) {
+  document.querySelectorAll('#measurement-activity .check-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('meas-feedback');
+  if (chosen === correct) {
+    btn.style.background = 'var(--green)';
+    fb.textContent = '✅ ممتاز! اخترت الوحدة الصحيحة!';
+    fb.style.color = 'var(--green)';
+    addScore(3);
+    confettiPop();
+  } else {
+    btn.style.background = 'var(--red)';
+    fb.textContent = `❌ الوحدة الصحيحة هي: ${correct === 'mm' ? 'مليمتر' : correct === 'cm' ? 'سنتيمتر' : 'متر'}`;
+    fb.style.color = 'var(--red)';
+  }
+  setTimeout(buildMeasurementActivity, 2000);
+}
+
+function convertNumber() {
+  const n = parseInt(document.getElementById('number-input').value);
+  const container = document.getElementById('number-forms');
+  if (!n || n < 1 || n > 999999) {
+    container.innerHTML = '<p style="color:#aaa;">أدخل عدداً بين 1 و 999,999</p>';
+    return;
+  }
+  const s = n.toString();
+  // Build expanded form
+  const placeVals = [];
+  for (let i = 0; i < s.length; i++) {
+    const d = parseInt(s[i]);
+    const pv = d * Math.pow(10, s.length - 1 - i);
+    if (pv > 0) placeVals.push(pv.toLocaleString());
+  }
+
+  const words = numberToArabic(n);
+
+  container.innerHTML = `
+    <div style="background:rgba(255,107,53,0.1); border-radius:12px; padding:14px; margin-bottom:10px;">
+      <strong style="color:var(--primary);">الصيغة الاعتيادية:</strong>
+      <span style="font-size:1.3rem; font-weight:800; margin-right:10px; direction:ltr;">${n.toLocaleString()}</span>
+    </div>
+    <div style="background:rgba(155,89,182,0.1); border-radius:12px; padding:14px; margin-bottom:10px;">
+      <strong style="color:var(--purple);">الصيغة المفككة:</strong>
+      <span style="font-size:1.1rem; font-weight:700; margin-right:10px; direction:ltr;">${placeVals.join(' + ')}</span>
+    </div>
+    <div style="background:rgba(52,152,219,0.1); border-radius:12px; padding:14px;">
+      <strong style="color:var(--blue);">الصيغة اللفظية:</strong>
+      <span style="font-size:1rem; font-weight:700; margin-right:10px;">${words}</span>
+    </div>`;
+}
+
+function numberToArabic(n) {
+  if (n === 0) return 'صفر';
+  const ones = ['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة',
+    'أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+  const tens = ['','','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+  const hundreds = ['','مئة','مئتان','ثلاثمائة','أربعمائة','خمسمائة','ستمائة','سبعمائة','ثمانمائة','تسعمائة'];
+
+  let result = '';
+  let rem = n;
+
+  if (rem >= 100000) {
+    const h = Math.floor(rem / 100000);
+    result += (h === 1 ? 'مئة' : h === 2 ? 'مئتا' : hundreds[h]) + ' ألف ';
+    rem %= 100000;
+  }
+  if (rem >= 10000) {
+    const t = Math.floor(rem / 10000);
+    result += (t < 20 ? ones[t] : tens[t] + (rem % 10000 >= 1000 ? ' و' : '')) + ' آلاف ';
+    rem %= 10000;
+  }
+  if (rem >= 1000) {
+    const k = Math.floor(rem / 1000);
+    result += (k === 1 ? 'ألف' : k === 2 ? 'ألفان' : ones[k] + ' آلاف') + ' ';
+    rem %= 1000;
+  }
+  if (rem >= 100) {
+    result += hundreds[Math.floor(rem / 100)] + ' ';
+    rem %= 100;
+  }
+  if (rem >= 20) {
+    result += ones[rem % 10] + (rem % 10 > 0 ? ' و' : '') + tens[Math.floor(rem / 10)] + ' ';
+  } else if (rem > 0) {
+    result += ones[rem] + ' ';
+  }
+  return result.trim() || 'صفر';
+}
+
+// =========================================================
+//  ASSESSMENT
+// =========================================================
+let assessmentLevel = null;
+let assessmentQuestions = [];
+let assessmentAnswers = [];
+let assessmentCurrent = 0;
+
+function selectLevel(lvl) {
+  selectedLevel = lvl;
+  document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('lvl-' + lvl).classList.add('selected');
+  const btn = document.getElementById('start-assessment-btn');
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'auto';
+}
+
+const assessmentPool = [
+  // Easy
+  { d: 'easy', topic: 'الأنماط', q: 'ما الرقم التالي؟ 2، 4، 6، 8، ___', opts: ['9','10','12','11'], ans: 1 },
+  { d: 'easy', topic: 'القياس', q: '1 متر = ___ سنتيمتر', opts: ['10','100','1000','50'], ans: 1 },
+  { d: 'easy', topic: 'الضرب', q: '3 × 4 = ___', opts: ['7','10','12','15'], ans: 2 },
+  { d: 'easy', topic: 'الضرب', q: '2 × 5 = ___', opts: ['3','7','10','25'], ans: 2 },
+  { d: 'easy', topic: 'الأعداد', q: 'في العدد 1234، الرقم 1 في مرتبة...', opts: ['الآحاد','المئات','الألف','العشرات'], ans: 2 },
+  { d: 'easy', topic: 'المصفوفات', q: 'مصفوفة 2 × 3 = ___ عنصراً', opts: ['5','6','8','9'], ans: 1 },
+  { d: 'easy', topic: 'التمثيل البياني', q: 'في مخطط أعمدة، أطول عمود يمثل أكبر...', opts: ['فئة','عدد','لون','شكل'], ans: 1 },
+  { d: 'easy', topic: 'الضرب', q: '5 × 1 = ___', opts: ['1','5','10','0'], ans: 1 },
+  { d: 'easy', topic: 'القياس', q: '10 مليمتر = ___ سنتيمتر', opts: ['0.1','10','100','1'], ans: 3 },
+  { d: 'easy', topic: 'الأعداد', q: 'أكبر عدد من أربع مراتب هو...', opts: ['999','9999','99999','1000'], ans: 1 },
+  // Medium
+  { d: 'medium', topic: 'الأعداد', q: 'ما الصيغة المفككة لـ 4207؟', opts: ['4000+200+7','4000+20+7','400+200+7','4000+200+70'], ans: 0 },
+  { d: 'medium', topic: 'الضرب', q: '6 × 7 = ___', opts: ['36','42','48','56'], ans: 1 },
+  { d: 'medium', topic: 'الضرب', q: 'إذا كان 8 × 3 = 24، فما قيمة 3 × 8؟', opts: ['11','83','24','38'], ans: 2 },
+  { d: 'medium', topic: 'القياس', q: '5 أمتار = ___ سنتيمتر', opts: ['50','500','5000','5'], ans: 1 },
+  { d: 'medium', topic: 'الأعداد', q: 'أيٌّ من الأعداد في مرتبة عشرات الآلاف؟', opts: ['9999','100000','45000','999'], ans: 2 },
+  { d: 'medium', topic: 'المصفوفات', q: 'مصفوفة 5 × 8 = ___', opts: ['13','35','40','45'], ans: 2 },
+  { d: 'medium', topic: 'الأنماط', q: 'ما الرقم التالي؟ 100، 90، 80، 70، ___', opts: ['55','60','65','75'], ans: 1 },
+  { d: 'medium', topic: 'الأعداد', q: '30000 + 5000 + 200 + 40 + 3 = ___', opts: ['35243','35423','35243','35234'], ans: 0 },
+  { d: 'medium', topic: 'الضرب', q: '9 × 6 = ___', opts: ['45','48','54','63'], ans: 2 },
+  { d: 'medium', topic: 'القياس', q: '3 سنتيمتر = ___ مليمتر', opts: ['3','13','30','300'], ans: 2 },
+  { d: 'medium', topic: 'التمثيل البياني', q: 'إذا كان في مخطط: قطط=6، كلاب=4، أرانب=8، ما المجموع؟', opts: ['16','18','20','22'], ans: 1 },
+  { d: 'medium', topic: 'الأعداد', q: 'في العدد 52,406، ما قيمة الرقم 5؟', opts: ['5000','50000','500','500000'], ans: 1 },
+  { d: 'medium', topic: 'الضرب', q: '7 × 7 = ___', opts: ['14','42','49','56'], ans: 2 },
+  { d: 'medium', topic: 'الأعداد', q: '"ثلاثة وعشرون ألفاً وأربعمائة وخمسة" بالأرقام هو...', opts: ['23045','23405','23450','32405'], ans: 1 },
+  { d: 'medium', topic: 'الضرب', q: 'أيهما يساوي 4 × 6؟', opts: ['4+6','4-6','6×4','4÷6'], ans: 2 },
+  // Hard
+  { d: 'hard', topic: 'الأعداد', q: 'في العدد 745,362، ما قيمة الرقم 7؟', opts: ['7000','70000','700000','7'], ans: 2 },
+  { d: 'hard', topic: 'الضرب', q: '9 × 8 = ___', opts: ['63','72','81','54'], ans: 1 },
+  { d: 'hard', topic: 'القياس', q: '2.5 متر = ___ سنتيمتر', opts: ['25','250','2500','0.25'], ans: 1 },
+  { d: 'hard', topic: 'الأنماط', q: 'النمط: 2، 4، 8، 16، ___ (نمط ضرب)', opts: ['18','24','32','48'], ans: 2 },
+  { d: 'hard', topic: 'الأعداد', q: 'رتّب تصاعدياً: 42085، 42508، 42058، 42580', opts: ['42085,42058,42508,42580','42058,42085,42508,42580','42580,42508,42085,42058','42085,42508,42058,42580'], ans: 1 },
+  { d: 'hard', topic: 'الضرب', q: 'مصفوفة 7 × 9 = ___', opts: ['54','63','56','49'], ans: 1 },
+  { d: 'hard', topic: 'الأعداد', q: 'الفرق بين أكبر وأصغر عدد مؤلف من 5 أرقام:', opts: ['89999','90000','9999','99999'], ans: 0 },
+  { d: 'hard', topic: 'القياس', q: 'ما الوحدة المناسبة لقياس المسافة من مصر إلى فرنسا؟', opts: ['سم','مم','متر','كيلومتر'], ans: 3 },
+  { d: 'hard', topic: 'الضرب', q: 'إذا كان 6 × 9 = 54، فما قيمة 9 × 6 ÷ 9؟', opts: ['6','9','54','3'], ans: 0 },
+  { d: 'hard', topic: 'الأعداد', q: 'ما عدد الأرقام في مرتبة المئات في العدد 3,456,789؟ (من العدد المُعطى)', opts: ['3','5','7','6'], ans: 2 },
+  { d: 'hard', topic: 'الضرب', q: 'فصل به 6 صفوف، كل صف 7 طلاب. كم مجموع الطلاب؟', opts: ['13','36','42','48'], ans: 2 },
+  { d: 'hard', topic: 'الأنماط', q: '1, 1, 2, 3, 5, 8, ___', opts: ['9','11','13','15'], ans: 2 },
+  { d: 'hard', topic: 'المصفوفات', q: 'إذا كانت المصفوفة 9 × 9، كم يساوي عدد عناصرها؟', opts: ['18','72','81','90'], ans: 2 },
+  { d: 'hard', topic: 'الأعداد', q: '400000 + 60000 + 3000 + 200 + 40 + 7 = ___', opts: ['463247','463427','463274','436247'], ans: 0 },
+  { d: 'hard', topic: 'الضرب', q: 'ما قيمة ◻ في: ◻ × 8 = 72؟', opts: ['6','7','8','9'], ans: 3 },
+];
+
+function startAssessment() {
+  if (!selectedLevel) return;
+  const count = selectedLevel === 'easy' ? 10 : selectedLevel === 'medium' ? 15 : 20;
+  const pool = assessmentPool.filter(q => q.d === selectedLevel);
+  assessmentQuestions = shuffle([...pool]).slice(0, Math.min(count, pool.length));
+  assessmentAnswers = [];
+  assessmentCurrent = 0;
+
+  document.getElementById('assessment-intro-view').classList.add('hidden');
+  document.getElementById('assessment-quiz-view').classList.remove('hidden');
+  renderAssessmentQuestion();
+}
+
+function renderAssessmentQuestion() {
+  const q = assessmentQuestions[assessmentCurrent];
+  const total = assessmentQuestions.length;
+  const pct = Math.round((assessmentCurrent / total) * 100);
+
+  document.getElementById('assessment-quiz-view').innerHTML = `
+    <div class="lesson-detail">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+        <span style="font-weight:800; color:var(--dark);">السؤال ${assessmentCurrent + 1} من ${total}</span>
+        <span style="background:rgba(255,107,53,0.1); color:var(--primary); padding:4px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">${q.topic}</span>
+      </div>
+      <div style="background:var(--light-bg); border-radius:12px; height:10px; margin-bottom:24px; overflow:hidden;">
+        <div style="height:100%; background:linear-gradient(90deg,var(--primary),var(--accent)); width:${pct}%; transition:width 0.5s; border-radius:12px;"></div>
+      </div>
+      <div class="question-card" style="border:none; background:white; box-shadow:var(--shadow);">
+        <p style="font-size:1.15rem;">${q.q}</p>
+        <div class="options-grid">
+          ${q.opts.map((opt, j) => `
+            <button class="option-btn" onclick="answerAssessment(${j})">${opt}</button>
+          `).join('')}
+        </div>
+        <div class="feedback-msg" id="assess-fb"></div>
+      </div>
+    </div>`;
+}
+
+function answerAssessment(chosen) {
+  const q = assessmentQuestions[assessmentCurrent];
+  const card = document.querySelector('.question-card');
+  const fb = document.getElementById('assess-fb');
+  const btns = card.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[q.ans].classList.add('correct-ans');
+  fb.classList.add('show');
+
+  const isCorrect = chosen === q.ans;
+  assessmentAnswers.push({ correct: isCorrect, topic: q.topic });
+
+  if (isCorrect) {
+    if (chosen !== q.ans) btns[chosen].classList.add('wrong-ans');
+    fb.textContent = '✅ إجابة صحيحة!';
+    fb.classList.add('correct');
+    addScore(10);
+  } else {
+    btns[chosen].classList.add('wrong-ans');
+    fb.textContent = `❌ الصواب: ${q.opts[q.ans]}`;
+    fb.classList.add('wrong');
+  }
+
+  setTimeout(() => {
+    assessmentCurrent++;
+    if (assessmentCurrent < assessmentQuestions.length) {
+      renderAssessmentQuestion();
+    } else {
+      showAssessmentResults();
+    }
+  }, 1400);
+}
+
+function showAssessmentResults() {
+  const correct = assessmentAnswers.filter(a => a.correct).length;
+  const total = assessmentAnswers.length;
+  const pct = Math.round((correct / total) * 100);
+
+  // By topic
+  const topics = {};
+  assessmentAnswers.forEach(a => {
+    if (!topics[a.topic]) topics[a.topic] = { c: 0, t: 0 };
+    topics[a.topic].t++;
+    if (a.correct) topics[a.topic].c++;
+  });
+
+  const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '🌟' : pct >= 50 ? '👍' : '📚';
+  const msg = pct >= 90 ? 'ممتاز جداً!' : pct >= 70 ? 'جيد جداً! استمر!' : pct >= 50 ? 'جيد! تحتاج للمزيد من التدريب' : 'راجع الدروس مرة أخرى';
+  const bgColor = pct >= 70 ? 'linear-gradient(135deg,var(--green),#58d68d)' : pct >= 50 ? 'linear-gradient(135deg,#e67e22,#f39c12)' : 'linear-gradient(135deg,var(--red),#ec7063)';
+
+  if (pct >= 70) confettiPop();
+
+  document.getElementById('assessment-quiz-view').classList.add('hidden');
+  document.getElementById('assessment-result-view').classList.remove('hidden');
+  document.getElementById('assessment-result-view').innerHTML = `
+    <div class="result-card">
+      <div class="result-emoji">${emoji}</div>
+      <h2 style="font-size:1.8rem; font-weight:900; margin-bottom:8px;">${msg}</h2>
+      <div class="result-score-circle" style="background:${bgColor};">
+        ${correct}/${total}
+        <span class="pct">${pct}%</span>
+      </div>
+      <div class="stars-display">${pct >= 90 ? '⭐⭐⭐' : pct >= 70 ? '⭐⭐' : '⭐'}</div>
+      <div class="result-bars">
+        <h4 style="font-size:1rem; font-weight:800; margin-bottom:14px; text-align:right;">الأداء حسب الموضوع:</h4>
+        ${Object.entries(topics).map(([topic, data]) => {
+          const tp = Math.round((data.c / data.t) * 100);
+          const color = tp >= 80 ? 'var(--green)' : tp >= 60 ? '#e67e22' : 'var(--red)';
+          return `
+          <div class="r-bar-row">
+            <span class="r-bar-label">${topic}</span>
+            <div class="r-bar-track">
+              <div class="r-bar-fill" style="width:${tp}%; background:${color};"></div>
+            </div>
+            <span style="font-size:0.85rem; min-width:40px;">${data.c}/${data.t}</span>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="margin-top:24px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="start-btn" onclick="restartAssessment()" style="background:linear-gradient(135deg,var(--secondary),#45b7aa);">🔄 إعادة التقييم</button>
+        <button class="start-btn" onclick="showSection('lessons')" style="background:linear-gradient(135deg,var(--purple),#8e44ad);">📚 راجع الدروس</button>
+      </div>
+    </div>`;
+}
+
+function restartAssessment() {
+  document.getElementById('assessment-result-view').classList.add('hidden');
+  document.getElementById('assessment-intro-view').classList.remove('hidden');
+  selectedLevel = null;
+  document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected'));
+  const btn = document.getElementById('start-assessment-btn');
+  btn.style.opacity = '0.5';
+  btn.style.pointerEvents = 'none';
+}
+
+// =========================================================
+//  INIT
+// =========================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadMoreExercises();
+  renderPatternBuilder();
+});
+</script>
+</body>
+</html>
