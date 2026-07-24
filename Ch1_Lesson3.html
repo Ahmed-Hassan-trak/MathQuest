@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التمثيل البياني بالصور والنقاط — الصف الثالث</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint:    #00C9A7;
+  --mint-lt: #E0FBF5;
+  --coral:   #FF6B6B;
+  --coral-lt:#FFF0F0;
+  --sky:     #4ECDC4;
+  --gold:    #FFD93D;
+  --gold-lt: #FFFBEA;
+  --purple:  #A855F7;
+  --purple-lt:#F5EEFF;
+  --navy:    #1A1A2E;
+  --ink:     #2D2D44;
+  --muted:   #6B7280;
+  --border:  #E5E7EB;
+  --surface: #FFFFFF;
+  --bg:      #F0FDF9;
+  --radius:  18px;
+  --rad-sm:  10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  direction:rtl;
+}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,#00C9A7 0%,#4ECDC4 45%,#45B7D1 100%);
+  padding:2.5rem 1.5rem 4rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bubbles span{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,0.12);
+  animation:float 6s ease-in-out infinite;
+}
+.hero-bubbles span:nth-child(1){width:120px;height:120px;top:-30px;left:10%;animation-delay:0s}
+.hero-bubbles span:nth-child(2){width:80px;height:80px;top:20px;right:15%;animation-delay:1.5s}
+.hero-bubbles span:nth-child(3){width:60px;height:60px;bottom:10px;left:30%;animation-delay:3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-emoji{font-size:60px;line-height:1;margin-bottom:.5rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15))}
+.hero h1{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:2.1rem;font-weight:800;
+  color:#fff;
+  text-shadow:0 2px 16px rgba(0,0,0,.18);
+  margin-bottom:.4rem;
+}
+.hero p{color:rgba(255,255,255,.9);font-size:1.05rem}
+.hero-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.hero-tag{
+  background:rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:20px;
+  padding:4px 14px;font-size:13px;font-weight:500;
+}
+
+/* ── TABS ── */
+.tabs-wrap{
+  background:#fff;
+  box-shadow:0 2px 16px rgba(0,0,0,.08);
+  position:sticky;top:0;z-index:100;
+}
+.tabs{display:flex;overflow-x:auto;padding:0 .75rem;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{
+  flex-shrink:0;padding:.85rem 1.1rem;
+  border:none;background:none;
+  font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;
+  color:var(--muted);cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
+}
+.tab-btn:hover{color:var(--mint)}
+.tab-btn.active{color:var(--mint);border-bottom-color:var(--mint)}
+
+/* ── LAYOUT ── */
+.content{max-width:860px;margin:0 auto;padding:2rem 1rem 5rem}
+.section{display:none}
+.section.active{display:block;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CARDS ── */
+.card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:0 4px 24px rgba(0,201,167,.09);
+  border:1px solid rgba(0,201,167,.15);
+  padding:1.75rem;
+  margin-bottom:1.5rem;
+}
+.card-title{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:1.25rem;font-weight:700;
+  color:var(--ink);
+  margin-bottom:1rem;
+  display:flex;align-items:center;gap:10px;
+}
+.card-title .badge-num{
+  background:var(--mint);color:#fff;
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;flex-shrink:0;
+}
+
+/* ── INFO BOXES ── */
+.info-box{
+  background:var(--mint-lt);
+  border-right:4px solid var(--mint);
+  border-radius:var(--rad-sm);
+  padding:1rem 1.25rem;
+  margin-bottom:1.25rem;
+  color:#065F46;font-size:15px;line-height:1.85;
+}
+.info-box strong{color:#00796B}
+.tip-box{
+  background:var(--gold-lt);
+  border-right:4px solid var(--gold);
+  border-radius:var(--rad-sm);
+  padding:1rem 1.25rem;
+  margin:.75rem 0;
+  color:#78350F;font-size:14px;line-height:1.8;
+}
+.purple-box{
+  background:var(--purple-lt);
+  border-right:4px solid var(--purple);
+  border-radius:var(--rad-sm);
+  padding:1rem 1.25rem;
+  margin-bottom:1.25rem;
+  color:#4C1D95;font-size:15px;line-height:1.85;
+}
+
+/* ── PICTOGRAPH ── */
+.picto-table{width:100%;border-collapse:collapse;margin:1rem 0}
+.picto-table td{padding:8px 10px;font-size:14px}
+.picto-table .row-label{font-weight:600;color:var(--ink);white-space:nowrap;min-width:90px}
+.picto-table .icons-cell{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.pic-icon{font-size:22px;line-height:1;display:inline-block;transition:transform .15s}
+.pic-icon:hover{transform:scale(1.25)}
+.picto-frame{
+  background:#FAFFF9;
+  border:1.5px solid rgba(0,201,167,.25);
+  border-radius:var(--rad-sm);
+  padding:1.25rem;
+  margin:1rem 0;
+}
+.picto-key{
+  font-size:13px;color:var(--muted);
+  margin-top:.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.picto-key span.ki{font-size:22px}
+
+/* ── DOT PLOT ── */
+.dot-plot-wrap{
+  background:#FAFFF9;
+  border:1.5px solid rgba(78,205,196,.3);
+  border-radius:var(--rad-sm);
+  padding:1.5rem 1.25rem 1rem;
+  margin:1rem 0;
+  overflow-x:auto;
+}
+.dot-plot-inner{
+  display:flex;
+  align-items:flex-end;
+  gap:0;
+  min-width:360px;
+}
+.dot-col{
+  display:flex;
+  flex-direction:column-reverse;
+  align-items:center;
+  flex:1;
+  min-width:44px;
+}
+.dot{
+  width:22px;height:22px;
+  border-radius:50%;
+  margin-bottom:4px;
+  transition:transform .2s;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+}
+.dot:hover{transform:scale(1.3)}
+.dot-axis{
+  border-top:2.5px solid var(--ink);
+  width:100%;margin-top:4px;
+  display:flex;align-items:center;justify-content:center;
+  padding-top:4px;
+  font-size:13px;font-weight:600;color:var(--ink);
+}
+.dot-axis-label{
+  text-align:center;
+  font-size:12px;color:var(--muted);
+  margin-top:.25rem;
+}
+
+/* ── QUESTIONS ── */
+.q-block{
+  border:1px solid var(--border);
+  border-radius:var(--rad-sm);
+  padding:1.25rem;
+  margin-bottom:1rem;
+  transition:border-color .2s;
+}
+.q-block.ok{border-color:var(--mint);background:var(--mint-lt)}
+.q-block.no{border-color:var(--coral);background:var(--coral-lt)}
+.q-text{
+  font-size:15px;font-weight:600;
+  color:var(--ink);margin-bottom:12px;line-height:1.7;
+}
+.q-num{color:var(--mint);font-weight:800}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt-btn{
+  border:1.5px solid var(--border);
+  border-radius:var(--rad-sm);
+  padding:10px 14px;
+  background:var(--surface);
+  font-family:'Tajawal',sans-serif;
+  font-size:14px;color:var(--ink);
+  cursor:pointer;transition:all .15s;text-align:center;
+}
+.opt-btn:hover:not(:disabled){border-color:var(--mint);background:var(--mint-lt);color:#065F46}
+.opt-btn.correct{border-color:var(--mint)!important;background:var(--mint-lt)!important;color:#065F46!important;font-weight:700}
+.opt-btn.wrong{border-color:var(--coral)!important;background:var(--coral-lt)!important;color:#7F1D1D!important;font-weight:700}
+.opt-btn:disabled{cursor:not-allowed}
+.fb-msg{
+  margin-top:10px;padding:8px 12px;
+  border-radius:8px;font-size:14px;font-weight:600;
+  display:none;
+}
+.fb-msg.show{display:block}
+.fb-msg.ok{background:var(--mint-lt);color:#065F46}
+.fb-msg.no{background:var(--coral-lt);color:#7F1D1D}
+
+/* ── SCORE ── */
+.score-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem}
+.sc-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--rad-sm);
+  padding:1rem;text-align:center;
+}
+.sc-card .sc-n{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:2rem;font-weight:800;color:var(--mint);
+}
+.sc-card .sc-l{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* ── DRAG GAME ── */
+.game-area{
+  background:#FAFFF9;
+  border:2px dashed rgba(0,201,167,.4);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  user-select:none;
+}
+.drag-icons{
+  display:flex;flex-wrap:wrap;gap:10px;
+  justify-content:center;margin-bottom:1.5rem;
+}
+.drag-icon{
+  font-size:28px;
+  cursor:grab;
+  transition:transform .15s;
+  padding:6px;border-radius:8px;
+  border:1.5px solid transparent;
+}
+.drag-icon:hover{transform:scale(1.2);border-color:var(--mint);background:var(--mint-lt)}
+.drag-icon.dragging{opacity:.4;cursor:grabbing}
+.drop-rows{display:flex;flex-direction:column;gap:10px}
+.drop-row{
+  display:flex;align-items:center;gap:10px;
+  background:#fff;
+  border:1.5px solid var(--border);
+  border-radius:var(--rad-sm);
+  padding:10px 14px;
+  min-height:60px;
+}
+.drop-row.over{border-color:var(--mint);background:var(--mint-lt)}
+.drop-label{font-weight:600;font-size:14px;min-width:90px;color:var(--ink)}
+.drop-zone{
+  flex:1;display:flex;flex-wrap:wrap;gap:6px;
+  min-height:38px;align-items:center;
+}
+.dropped-icon{
+  font-size:24px;
+  cursor:pointer;transition:transform .15s;
+}
+.dropped-icon:hover{transform:scale(1.2) rotate(-10deg)}
+.game-count{
+  font-size:14px;font-weight:700;color:var(--mint);
+  min-width:30px;text-align:center;
+}
+
+/* ── MEMORY GAME ── */
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;margin:1rem 0;
+}
+.mem-card{
+  aspect-ratio:1;
+  border-radius:12px;
+  border:2px solid var(--border);
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;cursor:pointer;
+  transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.mem-card .front,.mem-card .back{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;font-size:24px;
+  backface-visibility:hidden;
+  transition:transform .35s;
+}
+.mem-card .back{
+  background:linear-gradient(135deg,var(--mint),var(--sky));
+  transform:rotateY(180deg);
+  font-size:20px;font-weight:700;
+  color:#fff;
+}
+.mem-card.flipped .front{transform:rotateY(180deg)}
+.mem-card.flipped .back{transform:rotateY(0)}
+.mem-card.matched{border-color:var(--mint);background:var(--mint-lt)}
+.mem-card.matched .back{background:linear-gradient(135deg,#00C9A7,#00796B)}
+
+/* ── FILL QUIZ ── */
+.fill-row{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.fill-label{font-size:15px;font-weight:600;color:var(--ink)}
+.fill-input{
+  border:2px solid var(--border);
+  border-radius:8px;
+  padding:6px 12px;
+  font-family:'Tajawal',sans-serif;
+  font-size:15px;color:var(--ink);
+  width:80px;text-align:center;
+  transition:border-color .2s;
+}
+.fill-input:focus{outline:none;border-color:var(--mint)}
+.fill-input.correct{border-color:var(--mint);background:var(--mint-lt);color:#065F46}
+.fill-input.wrong{border-color:var(--coral);background:var(--coral-lt);color:#7F1D1D}
+
+/* ── MASTERY PROGRESS ── */
+.prog-wrap{background:var(--border);border-radius:20px;height:14px;overflow:hidden;margin:6px 0 4px}
+.prog-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--mint),var(--sky));transition:width .5s ease}
+
+/* ── CERTIFICATE ── */
+.cert{
+  background:linear-gradient(135deg,#FFFBEA,#FEF3C7);
+  border:3px solid var(--gold);
+  border-radius:24px;
+  padding:2rem;text-align:center;
+  margin-top:1.5rem;
+  animation:popIn .5s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.cert h2{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+  font-size:1.7rem;color:#78350F;margin-bottom:.5rem;
+}
+.cert p{font-size:15px;color:#92400E}
+.cert-stars{font-size:2.5rem;margin-top:.75rem;animation:bounce .6s .3s ease both}
+@keyframes bounce{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:var(--rad-sm);
+  border:none;font-family:'Tajawal',sans-serif;
+  font-size:15px;font-weight:700;cursor:pointer;
+  transition:all .18s;
+}
+.btn-mint{background:var(--mint);color:#fff}
+.btn-mint:hover{background:#00A88E;transform:translateY(-1px)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{background:#E05555;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:2px solid var(--mint);color:var(--mint)}
+.btn-outline:hover{background:var(--mint-lt)}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-purple:hover{background:#9333EA;transform:translateY(-1px)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem}
+
+/* ── DATA TABLE ── */
+.dtable{width:100%;border-collapse:collapse;margin:1rem 0}
+.dtable th{background:var(--mint);color:#fff;padding:10px 14px;font-size:14px;font-weight:600}
+.dtable td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:14px;text-align:center}
+.dtable tr:last-child td{border-bottom:none}
+.dtable tr:nth-child(even) td{background:#F0FDF9}
+
+/* ── STEPS ── */
+.step-list{counter-reset:step}
+.step{display:flex;gap:14px;margin-bottom:1.25rem;align-items:flex-start}
+.step-n{
+  background:var(--mint);color:#fff;
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:16px;flex-shrink:0;margin-top:2px;
+}
+.step-c strong{display:block;font-size:15px;color:#00796B;margin-bottom:3px}
+.step-c p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ── COMPARE ── */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1rem 0}
+.compare-card{
+  border-radius:var(--rad-sm);padding:1.25rem;text-align:center;
+}
+.compare-card.left{background:linear-gradient(135deg,#E0FBF5,#CCFBF1);border:1.5px solid var(--mint)}
+.compare-card.right{background:linear-gradient(135deg,#F5EEFF,#EDE9FE);border:1.5px solid var(--purple)}
+.compare-card h3{font-size:1rem;font-weight:700;margin-bottom:.75rem}
+.compare-card.left h3{color:#065F46}
+.compare-card.right h3{color:#4C1D95}
+
+/* ── RESPONSIVE ── */
+@media(max-width:540px){
+  .hero h1{font-size:1.5rem}
+  .opts{grid-template-columns:1fr}
+  .score-row{grid-template-columns:repeat(3,1fr)}
+  .memory-grid{grid-template-columns:repeat(3,1fr)}
+  .compare-grid{grid-template-columns:1fr}
+}
+
+/* ── WHEEL GAME ── */
+.wheel-wrap{text-align:center;margin:1rem 0}
+.wheel-canvas{border-radius:50%;border:4px solid var(--mint);box-shadow:0 4px 24px rgba(0,201,167,.2)}
+.wheel-pointer{font-size:2.5rem;line-height:1;margin-bottom:-.5rem}
+.wheel-result{
+  margin-top:1rem;padding:.75rem 1.5rem;
+  border-radius:var(--rad-sm);
+  background:var(--mint-lt);color:#065F46;
+  font-size:15px;font-weight:700;
+  display:none;
+}
+/* ── HOME BUTTON ── */
+#homeBtn{
+  position:fixed;top:16px;right:16px;z-index:1000;
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.95);color:#065F46;
+  border:none;border-radius:99px;padding:10px 16px;
+  font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.15);
+  transition:all .2s;text-decoration:none;
+}
+#homeBtn:hover{background:#fff;transform:translateY(-1px)}
+@media(max-width:480px){#homeBtn{top:10px;right:10px;padding:8px 12px;font-size:13px}}
+</style>
+</head>
+<body>
+
+<a id="homeBtn" href="index.html">🏠 الصفحة الرئيسية</a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bubbles">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hero-emoji">🖼️📍</div>
+  <h1>التمثيل البياني بالصور والنقاط</h1>
+  <p>تدريبات تفاعلية وألعاب تعليمية ممتعة — الصف الثالث الابتدائي</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🖼️ الرسم بالصور</span>
+    <span class="hero-tag">📍 الرسم بالنقاط</span>
+    <span class="hero-tag">🎮 ألعاب تعليمية</span>
+    <span class="hero-tag">🏆 اختبار الإتقان</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('intro')"><span>📖</span> المقدمة</button>
+    <button class="tab-btn" onclick="showTab('picto')"><span>🖼️</span> الرسم بالصور</button>
+    <button class="tab-btn" onclick="showTab('dot')"><span>📍</span> الرسم بالنقاط</button>
+    <button class="tab-btn" onclick="showTab('drag')"><span>✋</span> لعبة السحب</button>
+    <button class="tab-btn" onclick="showTab('memory')"><span>🧠</span> لعبة الذاكرة</button>
+    <button class="tab-btn" onclick="showTab('practice')"><span>✏️</span> التدريبات</button>
+    <button class="tab-btn" onclick="showTab('mastery')"><span>🏆</span> اختبار الإتقان</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════ INTRO ══════════ -->
+<div class="section active" id="tab-intro">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">١</span> ما هو التمثيل البياني بالصور؟</div>
+    <div class="info-box">
+      التمثيل البياني بالصور هو طريقة نُمثّل بها البيانات باستخدام <strong>رموز أو صور صغيرة</strong>.<br>
+      كل صورة تمثّل عدداً معيناً من الوحدات تُسمى <strong>المفتاح</strong>.<br><br>
+      مثال: 🍎 = 2 تفاحات &nbsp;|&nbsp; 🍎🍎🍎 = 6 تفاحات
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card left">
+        <h3>🖼️ الرسم بالصور</h3>
+        <p style="font-size:13px;color:#065F46;line-height:1.8">
+          • يستخدم رموزاً أو صوراً<br>
+          • كل صورة = عدد محدد<br>
+          • سهل القراءة والفهم<br>
+          • مناسب للمقارنات البسيطة
+        </p>
+      </div>
+      <div class="compare-card right">
+        <h3>📍 الرسم بالنقاط</h3>
+        <p style="font-size:13px;color:#4C1D95;line-height:1.8">
+          • يستخدم نقاطاً أو علامات ×<br>
+          • كل نقطة = وحدة واحدة<br>
+          • يوضح التوزيع بدقة<br>
+          • مناسب للأعداد الكثيرة
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">٢</span> خطوات قراءة الرسم بالصور</div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-n">١</div>
+        <div class="step-c">
+          <strong>اقرأ العنوان</strong>
+          <p>العنوان يخبرك بموضوع البيانات التي تُعرضها الصورة.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">٢</div>
+        <div class="step-c">
+          <strong>تحقق من المفتاح</strong>
+          <p>المفتاح يُخبرك كم وحدة تمثّل كل صورة. هذا أهم خطوة!</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">٣</div>
+        <div class="step-c">
+          <strong>عُدّ الصور في كل صف</strong>
+          <p>اعدد عدد الصور لكل فئة، ثم اضرب في قيمة المفتاح.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">٤</div>
+        <div class="step-c">
+          <strong>أجب عن الأسئلة</strong>
+          <p>قارن بين الصفوف، اجمع، أو اطرح للإجابة عن الأسئلة.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      💡 <strong>نصيحة ذهبية:</strong> إذا كانت صورة نصفية (½) فهي تساوي نصف قيمة المفتاح!
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-mint" onclick="showTab('picto')">التالي: الرسم بالصور ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ PICTO ══════════ -->
+<div class="section" id="tab-picto">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">١</span> مثال: أنواع الحيوانات في حديقة الحيوان</div>
+    <div class="info-box">
+      يُظهر الجدول أعداد الحيوانات. كل صورة تساوي <strong>4 حيوانات</strong>.
+    </div>
+
+    <div class="picto-frame">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:1rem;color:var(--ink)">
+        الحيوانات في حديقة الحيوان
+      </div>
+      <table class="picto-table" id="zoo-picto"></table>
+      <div class="picto-key">
+        <span class="ki">🦁</span>
+        <span>المفتاح: كل صورة = <strong>4 حيوانات</strong></span>
+      </div>
+    </div>
+
+    <div id="picto-q1"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-mint" onclick="showTab('dot')">التالي: الرسم بالنقاط ←</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">٢</span> مثال: الفواكه التي بيعت في السوق</div>
+    <div class="purple-box">
+      <strong>🔑 المفتاح:</strong> كل صورة = 3 كيلوغرامات
+    </div>
+
+    <div class="picto-frame">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:1rem;color:var(--ink)">
+        الفواكه المبيعة في السوق
+      </div>
+      <table class="picto-table" id="fruit-picto"></table>
+      <div class="picto-key">
+        <span class="ki">🍎</span>
+        <span>المفتاح: كل صورة = <strong>3 كيلوغرامات</strong></span>
+      </div>
+    </div>
+
+    <div id="picto-q2"></div>
+  </div>
+
+</div>
+
+<!-- ══════════ DOT PLOT ══════════ -->
+<div class="section" id="tab-dot">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">١</span> ما هو الرسم البياني بالنقاط؟</div>
+    <div class="info-box">
+      الرسم البياني بالنقاط (مخطط النقاط) يُستخدم لتمثيل البيانات حيث <strong>كل نقطة = وحدة واحدة</strong>.<br>
+      النقاط تُرتّب فوق بعضها في أعمدة فوق محور أفقي.
+    </div>
+
+    <div class="card-title" style="font-size:1rem;margin-top:.5rem">مثال: درجات الحرارة يومياً (°م)</div>
+
+    <div class="dot-plot-wrap">
+      <div class="dot-plot-inner" id="temp-dot-plot"></div>
+      <div class="dot-axis-label">درجة الحرارة بالمئوية</div>
+    </div>
+    <div class="picto-key">
+      <span style="font-size:22px">🔵</span>
+      <span>كل نقطة = يوم واحد</span>
+    </div>
+
+    <div id="dot-q1"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-mint" onclick="showTab('drag')">التالي: لعبة السحب ←</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">٢</span> مثال: أحذية الطلاب (المقاس)</div>
+    <div class="purple-box">
+      الجدول يُظهر مقاسات أحذية 20 طالباً في الفصل.
+    </div>
+
+    <table class="dtable">
+      <tr><th>المقاس</th><th>36</th><th>37</th><th>38</th><th>39</th><th>40</th></tr>
+      <tr><td><strong>عدد الطلاب</strong></td><td>3</td><td>6</td><td>7</td><td>3</td><td>1</td></tr>
+    </table>
+
+    <div class="dot-plot-wrap">
+      <div class="dot-plot-inner" id="shoe-dot-plot"></div>
+      <div class="dot-axis-label">مقاس الحذاء</div>
+    </div>
+    <div class="picto-key">
+      <span style="font-size:22px">🟣</span>
+      <span>كل نقطة = طالب واحد</span>
+    </div>
+
+    <div id="dot-q2"></div>
+  </div>
+
+</div>
+
+<!-- ══════════ DRAG GAME ══════════ -->
+<div class="section" id="tab-drag">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">🎮</span> لعبة السحب والإفلات: أنشئ الرسم البياني!</div>
+    <div class="info-box">
+      <strong>كيف تلعب:</strong> اسحب الصور من الأعلى وأفلتها في الصف المناسب.<br>
+      اضغط على أي صورة موضوعة لإزالتها. <strong>المفتاح: كل صورة = 2 وحدات</strong>
+    </div>
+
+    <div class="tip-box">
+      🎯 <strong>الهدف:</strong> ضع الصور بشكل صحيح وفق البيانات الموجودة في الجدول.
+    </div>
+
+    <table class="dtable" style="margin-bottom:1.25rem">
+      <tr><th>الفاكهة</th><th>🍎 تفاح</th><th>🍌 موز</th><th>🍇 عنب</th><th>🍊 برتقال</th></tr>
+      <tr><td><strong>الكمية (كجم)</strong></td><td>6</td><td>4</td><td>8</td><td>2</td></tr>
+    </table>
+
+    <div class="game-area">
+      <div class="drag-icons" id="drag-source">
+        <!-- filled by JS -->
+      </div>
+      <div class="drop-rows" id="drop-rows">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-mint" onclick="checkDrag()">✓ تحقق من إجابتي</button>
+      <button class="btn btn-outline" onclick="resetDrag()">🔄 إعادة تعيين</button>
+    </div>
+    <div id="drag-result" style="display:none;margin-top:1rem" class="info-box"></div>
+  </div>
+
+</div>
+
+<!-- ══════════ MEMORY GAME ══════════ -->
+<div class="section" id="tab-memory">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">🧠</span> لعبة الذاكرة: طابق الصورة مع الرقم!</div>
+    <div class="info-box">
+      اقلب بطاقتين — إذا طابقت <strong>صورة</strong> مع <strong>رقمها الصحيح</strong> ربحت الزوج!<br>
+      كل رمز = <strong>3 وحدات</strong>، طابق الصورة مع العدد الصحيح لعدد الرموز.
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px">
+      <div style="font-size:15px;font-weight:700;color:var(--ink)">
+        الأزواج: <span id="mem-pairs" style="color:var(--mint)">0</span> / 6
+      </div>
+      <div style="font-size:15px;font-weight:700;color:var(--ink)">
+        المحاولات: <span id="mem-tries" style="color:var(--coral)">0</span>
+      </div>
+      <button class="btn btn-outline" onclick="resetMemory()" style="padding:6px 16px;font-size:13px">🔄 لعبة جديدة</button>
+    </div>
+
+    <div class="memory-grid" id="memory-grid"></div>
+
+    <div id="mem-win" style="display:none" class="cert">
+      <div style="font-size:52px;margin-bottom:.5rem">🎉</div>
+      <h2>أحسنت! لقد فزت!</h2>
+      <p>أنجزت اللعبة في <span id="mem-final-tries">0</span> محاولة!</p>
+      <div class="cert-stars">⭐⭐⭐</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ PRACTICE ══════════ -->
+<div class="section" id="tab-practice">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">✏️</span> تدريبات شاملة</div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="pr-score">0</div><div class="sc-l">إجابات صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="pr-total">0</div><div class="sc-l">المحاولات</div></div>
+      <div class="sc-card"><div class="sc-n" id="pr-pct">—</div><div class="sc-l">نسبة النجاح</div></div>
+    </div>
+
+    <!-- Practice chart 1: pictograph -->
+    <div class="picto-frame">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:1rem">
+        الألعاب المفضلة لطلاب الفصل الثالث
+      </div>
+      <table class="picto-table" id="games-picto"></table>
+      <div class="picto-key">
+        <span class="ki">🎮</span>
+        <span>المفتاح: كل صورة = <strong>5 طلاب</strong></span>
+      </div>
+    </div>
+
+    <div id="practice-questions"></div>
+
+    <div class="btn-group">
+      <button class="btn btn-mint" onclick="showTab('mastery')">التالي: اختبار الإتقان ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ MASTERY ══════════ -->
+<div class="section" id="tab-mastery">
+
+  <div class="card">
+    <div class="card-title"><span class="badge-num">🏆</span> اختبار الإتقان النهائي</div>
+    <div class="info-box">
+      أجب عن <strong>جميع الأسئلة</strong> للحصول على شهادة الإتقان!<br>
+      تحتاج إلى <strong>80% أو أكثر</strong> للنجاح. 💪
+    </div>
+
+    <div style="margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span style="color:var(--muted)">تقدّمك في الاختبار</span>
+        <span id="m-prog-text" style="color:var(--mint);font-weight:700">0 / 12</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" id="m-prog-bar" style="width:0%"></div></div>
+    </div>
+
+    <!-- Mastery pictograph -->
+    <div class="picto-frame">
+      <div style="font-family:'Baloo Bhaijaan 2',sans-serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:1rem">
+        وسائل المواصلات التي يستخدمها الطلاب للمجيء إلى المدرسة
+      </div>
+      <table class="picto-table" id="transport-picto"></table>
+      <div class="picto-key">
+        <span class="ki">🚌</span>
+        <span>المفتاح: كل صورة = <strong>4 طلاب</strong></span>
+      </div>
+    </div>
+
+    <!-- Mastery dot plot -->
+    <div style="margin-top:1.5rem;font-family:'Baloo Bhaijaan 2',sans-serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:.5rem">
+      عدد الكتب التي قرأها كل طالب في الشهر
+    </div>
+    <div class="dot-plot-wrap">
+      <div class="dot-plot-inner" id="mastery-dot-plot"></div>
+      <div class="dot-axis-label">عدد الكتب</div>
+    </div>
+    <div class="picto-key" style="margin-bottom:1rem">
+      <span style="font-size:22px">🟠</span>
+      <span>كل نقطة = طالب واحد</span>
+    </div>
+
+    <div id="mastery-questions"></div>
+
+    <div class="btn-group" style="margin-top:1.5rem">
+      <button class="btn btn-mint" id="submit-mastery" onclick="submitMastery()" style="display:none">
+        🏆 احسب نتيجتي النهائية
+      </button>
+    </div>
+    <div id="mastery-result"></div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════
+const zooPictoData = [
+  {label:'🦁 أسود', icon:'🦁', count:3},
+  {label:'🐘 أفيال', icon:'🐘', count:5},
+  {label:'🦒 زرافات', icon:'🦒', count:2},
+  {label:'🐊 تماسيح', icon:'🐊', count:4},
+];
+const fruitPictoData = [
+  {label:'🍎 تفاح', icon:'🍎', count:4},
+  {label:'🍌 موز', icon:'🍌', count:2},
+  {label:'🍇 عنب', icon:'🍇', count:5},
+  {label:'🍊 برتقال', icon:'🍊', count:3},
+];
+const gamesPictoData = [
+  {label:'⚽ كرة القدم', icon:'⚽', count:4},
+  {label:'🏀 كرة السلة', icon:'🏀', count:2},
+  {label:'🎾 تنس', icon:'🎾', count:3},
+  {label:'🏊 سباحة', icon:'🏊', count:1},
+];
+const transportPictoData = [
+  {label:'🚌 حافلة', icon:'🚌', count:5},
+  {label:'🚗 سيارة', icon:'🚗', count:3},
+  {label:'🚶 مشياً', icon:'🚶', count:4},
+  {label:'🚲 دراجة', icon:'🚲', count:2},
+];
+
+const tempDotData = {labels:[28,29,30,31,32], counts:[2,4,5,3,1], color:'#4ECDC4', emoji:'🌡️'};
+const shoeDotData = {labels:[36,37,38,39,40], counts:[3,6,7,3,1], color:'#A855F7', emoji:'👟'};
+const masteryDotData = {labels:[1,2,3,4,5], counts:[2,5,8,4,1], color:'#FF8C42', emoji:'📚'};
+
+// ═══════════════════════════════════════════════
+// RENDER PICTOGRAPH
+// ═══════════════════════════════════════════════
+function renderPicto(tableId, data) {
+  const table = document.getElementById(tableId);
+  table.innerHTML = '';
+  data.forEach(row => {
+    const tr = document.createElement('tr');
+    let icons = '';
+    for(let i=0;i<row.count;i++) icons += `<span class="pic-icon" title="${row.icon} = ${row.icon} وحدات">${row.icon}</span>`;
+    tr.innerHTML = `
+      <td class="row-label">${row.label}</td>
+      <td><div class="icons-cell">${icons}</div></td>
+    `;
+    table.appendChild(tr);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER DOT PLOT
+// ═══════════════════════════════════════════════
+function renderDotPlot(containerId, data) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  const maxCount = Math.max(...data.counts);
+  data.labels.forEach((label, i) => {
+    const col = document.createElement('div');
+    col.className = 'dot-col';
+    const axisDiv = document.createElement('div');
+    axisDiv.className = 'dot-axis';
+    axisDiv.textContent = label;
+    col.appendChild(axisDiv);
+    for(let d=0;d<data.counts[i];d++){
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.background = data.color;
+      dot.style.boxShadow = `0 2px 8px ${data.color}55`;
+      dot.title = `${label}: ${d+1}`;
+      dot.innerHTML = data.emoji;
+      dot.style.fontSize = '14px';
+      col.insertBefore(dot, axisDiv);
+    }
+    container.appendChild(col);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// QUESTIONS HELPER
+// ═══════════════════════════════════════════════
+let practiceScore=0, practiceTotal=0;
+
+function renderQuestions(containerId, questions, trackScore) {
+  const cont = document.getElementById(containerId);
+  cont.innerHTML = '';
+  questions.forEach((q,i) => {
+    const block = document.createElement('div');
+    block.className = 'q-block';
+    block.id = containerId+'_q'+i;
+    block.innerHTML = `
+      <div class="q-text"><span class="q-num">س${arabicNum(i+1)}:</span> ${q.text}</div>
+      <div class="opts">${q.options.map((o,j)=>
+        `<button class="opt-btn" onclick="answerQ('${containerId}',${i},${j},${q.correct},${trackScore})">${o}</button>`
+      ).join('')}</div>
+      <div class="fb-msg" id="${containerId}_fb${i}"></div>
+    `;
+    cont.appendChild(block);
+  });
+}
+
+function answerQ(cid, qi, chosen, correct, trackScore) {
+  const block = document.getElementById(cid+'_q'+qi);
+  if(block.classList.contains('ok')||block.classList.contains('no')) return;
+  const btns = block.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
+  const fb = document.getElementById(cid+'_fb'+qi);
+  if(chosen===correct){
+    btns[chosen].classList.add('correct');
+    block.classList.add('ok');
+    fb.textContent='✅ إجابة صحيحة! رائع! 🎉';
+    fb.className='fb-msg show ok';
+    if(trackScore){practiceScore++;updatePracticeScore();}
+  } else {
+    btns[chosen].classList.add('wrong');
+    btns[correct].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent=`❌ الإجابة الصحيحة: ${block.querySelectorAll('.opt-btn')[correct].textContent}`;
+    fb.className='fb-msg show no';
+  }
+  if(trackScore){practiceTotal++;updatePracticeScore();}
+}
+
+function updatePracticeScore(){
+  document.getElementById('pr-score').textContent=practiceScore;
+  document.getElementById('pr-total').textContent=practiceTotal;
+  const pct=practiceTotal>0?Math.round(practiceScore/practiceTotal*100):0;
+  document.getElementById('pr-pct').textContent=pct+'%';
+}
+
+// ═══════════════════════════════════════════════
+// PICTO QUESTIONS
+// ═══════════════════════════════════════════════
+const zooQ = [
+  {text:'كم عدد الأسود في الحديقة؟ (كل صورة = 4)',options:['8','10','12','16'],correct:2},
+  {text:'أي الحيوانات أكثر عدداً في الحديقة؟',options:['أسود','أفيال','زرافات','تماسيح'],correct:1},
+  {text:'ما مجموع الأسود والزرافات معاً؟',options:['16','18','20','24'],correct:2},
+];
+const fruitQ = [
+  {text:'كم كيلوغراماً من العنب تم بيعه؟ (كل صورة = 3)',options:['9','12','15','18'],correct:2},
+  {text:'ما الفاكهة الأقل مبيعاً؟',options:['تفاح','موز','عنب','برتقال'],correct:1},
+  {text:'ما الفرق بين مبيعات التفاح والموز؟',options:['3 كجم','6 كجم','9 كجم','12 كجم'],correct:1},
+];
+const tempQ = [
+  {text:'كم يوماً كانت الحرارة 30 درجة؟',options:['3','4','5','6'],correct:2},
+  {text:'ما أكثر درجة حرارة تكررت؟',options:['28°','29°','30°','31°'],correct:2},
+  {text:'كم إجمالي الأيام الممثّلة في الرسم؟',options:['13','14','15','16'],correct:2},
+];
+const shoeQ = [
+  {text:'كم طالباً يرتدون مقاس 38؟',options:['5','6','7','8'],correct:2},
+  {text:'ما المقاس الأقل شيوعاً؟',options:['36','37','39','40'],correct:3},
+  {text:'كم طالباً يرتدون مقاس 37 أو 38 معاً؟',options:['11','12','13','14'],correct:2},
+];
+
+// ═══════════════════════════════════════════════
+// PRACTICE QUESTIONS
+// ═══════════════════════════════════════════════
+const practiceQ = [
+  {text:'كم طالباً يفضّلون كرة القدم؟ (كل صورة = 5 طلاب)',options:['15','20','25','30'],correct:1},
+  {text:'ما اللعبة الأقل شعبية بين الطلاب؟',options:['كرة القدم','كرة السلة','تنس','سباحة'],correct:3},
+  {text:'كم طالباً يفضّلون كرة السلة أو التنس معاً؟',options:['20','25','30','35'],correct:1},
+  {text:'ما الفرق بين أكثر الألعاب وأقلها شعبية؟',options:['10','15','20','25'],correct:1},
+  {text:'ما مجموع جميع الطلاب الذين شاركوا في الاستطلاع؟',options:['45','50','55','60'],correct:1},
+  {text:'إذا انضم 5 طلاب جدد يفضّلون السباحة، كم ستكون صورها؟',options:['صورتان','3 صور','صورة ونصف','صورة واحدة'],correct:0},
+];
+
+// ═══════════════════════════════════════════════
+// DRAG & DROP GAME
+// ═══════════════════════════════════════════════
+const dragData = [
+  {label:'🍎 تفاح', emoji:'🍎', target:3, id:'apple'},
+  {label:'🍌 موز', emoji:'🍌', target:2, id:'banana'},
+  {label:'🍇 عنب', emoji:'🍇', target:4, id:'grape'},
+  {label:'🍊 برتقال', emoji:'🍊', target:1, id:'orange'},
+];
+let dragState = {apple:[],banana:[],grape:[],orange:[]};
+let currentDrag = null;
+
+function initDrag(){
+  const source = document.getElementById('drag-source');
+  source.innerHTML='';
+  // Create pool of 12 icons
+  const pool=[];
+  dragData.forEach(d=>{for(let i=0;i<4;i++) pool.push({...d})});
+  pool.sort(()=>Math.random()-.5);
+  pool.forEach((item,idx)=>{
+    const span=document.createElement('span');
+    span.className='drag-icon';
+    span.textContent=item.emoji;
+    span.draggable=true;
+    span.dataset.fruit=item.id;
+    span.dataset.emoji=item.emoji;
+    span.id='di_'+idx;
+    span.addEventListener('dragstart',e=>{
+      currentDrag={emoji:item.emoji,fruitId:item.id,sourceId:span.id};
+      span.classList.add('dragging');
+    });
+    span.addEventListener('dragend',()=>span.classList.remove('dragging'));
+    source.appendChild(span);
+  });
+
+  // Drop rows
+  const rows=document.getElementById('drop-rows');
+  rows.innerHTML='';
+  dragData.forEach(d=>{
+    const row=document.createElement('div');
+    row.className='drop-row';
+    row.innerHTML=`<div class="drop-label">${d.label}</div><div class="drop-zone" id="zone-${d.id}"></div><div class="game-count" id="count-${d.id}">0</div>`;
+    row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('over')});
+    row.addEventListener('dragleave',()=>row.classList.remove('over'));
+    row.addEventListener('drop',e=>{
+      e.preventDefault();
+      row.classList.remove('over');
+      if(currentDrag && currentDrag.fruitId===d.id){
+        // Remove from source
+        const srcEl=document.getElementById(currentDrag.sourceId);
+        if(srcEl) srcEl.remove();
+        // Add to zone
+        const zone=document.getElementById('zone-'+d.id);
+        const icon=document.createElement('span');
+        icon.className='dropped-icon';
+        icon.textContent=currentDrag.emoji;
+        icon.title='انقر لإزالتها';
+        icon.onclick=()=>{
+          icon.remove();
+          dragState[d.id].pop();
+          document.getElementById('count-'+d.id).textContent=dragState[d.id].length;
+        };
+        zone.appendChild(icon);
+        dragState[d.id].push(currentDrag.emoji);
+        document.getElementById('count-'+d.id).textContent=dragState[d.id].length;
+        currentDrag=null;
+      } else if(currentDrag){
+        // Wrong fruit - flash red
+        row.style.background='var(--coral-lt)';
+        row.style.borderColor='var(--coral)';
+        setTimeout(()=>{row.style.background='';row.style.borderColor='';},600);
+      }
+    });
+    rows.appendChild(row);
+  });
+  dragState={apple:[],banana:[],grape:[],orange:[]};
+  document.getElementById('drag-result').style.display='none';
+}
+
+function resetDrag(){initDrag()}
+
+function checkDrag(){
+  let correct=0;
+  let msg='<strong>نتيجة التحقق:</strong><br>';
+  dragData.forEach(d=>{
+    const placed=dragState[d.id].length;
+    const expected=d.target;
+    if(placed===expected){
+      correct++;
+      msg+=`✅ ${d.label}: ${placed} صور — صحيح!<br>`;
+    } else {
+      msg+=`❌ ${d.label}: وضعت ${placed} صور، المطلوب ${expected} صور<br>`;
+    }
+  });
+  const pct=Math.round(correct/dragData.length*100);
+  msg+=`<br><strong>نتيجتك: ${correct}/${dragData.length} (${pct}%)</strong>`;
+  if(correct===dragData.length) msg+=' 🏆 ممتاز!';
+  const res=document.getElementById('drag-result');
+  res.style.display='block';
+  res.style.borderRight=correct===dragData.length?'4px solid var(--mint)':'4px solid var(--coral)';
+  res.innerHTML=msg;
+}
+
+// ═══════════════════════════════════════════════
+// MEMORY GAME
+// ═══════════════════════════════════════════════
+const memPairs=[
+  {id:'a',front:'🎈🎈🎈',back:'9'},{id:'b',front:'⭐⭐',back:'6'},
+  {id:'c',front:'🌸🌸🌸🌸',back:'12'},{id:'d',front:'🍕',back:'3'},
+  {id:'e',front:'🦋🦋🦋🦋🦋',back:'15'},{id:'f',front:'🎵🎵',back:'6'},
+  {id:'g',front:'⭐',back:'3'},{id:'h',front:'🌸🌸',back:'6'},
+  {id:'i',front:'🎈',back:'3'},{id:'j',front:'🍕🍕🍕🍕',back:'12'},
+  {id:'k',front:'🦋',back:'3'},{id:'l',front:'🎵🎵🎵',back:'9'},
+];
+let memFlipped=[],memMatched=[],memLocked=false,memTries=0;
+
+function buildMemoryCards(){
+  // Build pairs: each emoji set matches its count*3 value
+  const cards=[
+    {id:'m1',content:'🎈🎈🎈',type:'img',value:'9'},
+    {id:'m2',content:'9',type:'num',value:'9'},
+    {id:'m3',content:'⭐⭐',type:'img',value:'6'},
+    {id:'m4',content:'6',type:'num',value:'6'},
+    {id:'m5',content:'🌸🌸🌸🌸',type:'img',value:'12'},
+    {id:'m6',content:'12',type:'num',value:'12'},
+    {id:'m7',content:'🍕',type:'img',value:'3'},
+    {id:'m8',content:'3',type:'num',value:'3'},
+    {id:'m9',content:'🦋🦋🦋🦋🦋',type:'img',value:'15'},
+    {id:'m10',content:'15',type:'num',value:'15'},
+    {id:'m11',content:'🎵🎵🎵',type:'img',value:'9'},
+    {id:'m12',content:'🎵🎵🎵🎵🎵',type:'img',value:'15'},
+  ];
+  // Actually use cleaner pairs
+  return [
+    {id:'p1a',content:'🎈🎈🎈',type:'img',value:'9'},
+    {id:'p1b',content:'9',type:'num',value:'9'},
+    {id:'p2a',content:'⭐⭐',type:'img',value:'6'},
+    {id:'p2b',content:'6',type:'num',value:'6'},
+    {id:'p3a',content:'🌸🌸🌸🌸',type:'img',value:'12'},
+    {id:'p3b',content:'12',type:'num',value:'12'},
+    {id:'p4a',content:'🍕',type:'img',value:'3'},
+    {id:'p4b',content:'3',type:'num',value:'3'},
+    {id:'p5a',content:'🦋🦋🦋🦋🦋',type:'img',value:'15'},
+    {id:'p5b',content:'15',type:'num',value:'15'},
+    {id:'p6a',content:'🎵🎵🎵🎵🎵🎵',type:'img',value:'18'},
+    {id:'p6b',content:'18',type:'num',value:'18'},
+  ];
+}
+
+function resetMemory(){
+  memFlipped=[];memMatched=[];memLocked=false;memTries=0;
+  document.getElementById('mem-pairs').textContent='0';
+  document.getElementById('mem-tries').textContent='0';
+  document.getElementById('mem-win').style.display='none';
+  const cards=buildMemoryCards().sort(()=>Math.random()-.5);
+  const grid=document.getElementById('memory-grid');
+  grid.innerHTML='';
+  cards.forEach(card=>{
+    const el=document.createElement('div');
+    el.className='mem-card';
+    el.id='mc_'+card.id;
+    el.dataset.value=card.value;
+    el.innerHTML=`
+      <div class="front" style="background:linear-gradient(135deg,#E0FBF5,#CCFBF1);font-size:${card.type==='img'?'18px':'28px'};font-weight:800;color:#065F46">?</div>
+      <div class="back">${card.content}</div>
+    `;
+    el.addEventListener('click',()=>flipMemCard(el,card));
+    grid.appendChild(el);
+  });
+}
+
+function flipMemCard(el,card){
+  if(memLocked||el.classList.contains('flipped')||el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  memFlipped.push({el,card});
+  if(memFlipped.length===2){
+    memTries++;
+    document.getElementById('mem-tries').textContent=memTries;
+    memLocked=true;
+    setTimeout(checkMemMatch,700);
+  }
+}
+
+function checkMemMatch(){
+  const [a,b]=memFlipped;
+  if(a.card.value===b.card.value && a.card.id!==b.card.id){
+    a.el.classList.add('matched');
+    b.el.classList.add('matched');
+    memMatched.push(a.card.value);
+    const pairs=memMatched.length;
+    document.getElementById('mem-pairs').textContent=pairs;
+    if(pairs===6){
+      setTimeout(()=>{
+        document.getElementById('mem-final-tries').textContent=memTries;
+        document.getElementById('mem-win').style.display='block';
+      },400);
+    }
+  } else {
+    a.el.classList.remove('flipped');
+    b.el.classList.remove('flipped');
+  }
+  memFlipped=[];memLocked=false;
+}
+
+// ═══════════════════════════════════════════════
+// MASTERY
+// ═══════════════════════════════════════════════
+const masteryQ=[
+  // Transport pictograph questions
+  {text:'م١: كم طالباً يأتون بالحافلة؟ (كل صورة = 4)',options:['16','18','20','22'],correct:2},
+  {text:'م٢: ما وسيلة المواصلات الأكثر استخداماً؟',options:['حافلة','سيارة','مشياً','دراجة'],correct:0},
+  {text:'م٣: كم طالباً يأتون بالسيارة أو الدراجة معاً؟',options:['16','18','20','24'],correct:2},
+  {text:'م٤: ما الفرق بين الحافلة والدراجة في العدد؟',options:['8','10','12','14'],correct:2},
+  {text:'م٥: ما مجموع كل الطلاب في الرسم البياني؟',options:['52','56','60','64'],correct:1},
+  {text:'م٦: إذا كانت كل صورة حافلة = 4، فكم صورة تمثّل 12 طالباً؟',options:['2 صور','3 صور','4 صور','5 صور'],correct:1},
+  // Dot plot questions
+  {text:'م٧: كم طالباً قرأوا 3 كتب؟',options:['6','7','8','9'],correct:2},
+  {text:'م٨: ما عدد الكتب الذي قرأه أكبر عدد من الطلاب؟',options:['1','2','3','4'],correct:2},
+  {text:'م٩: كم طالباً قرأوا أكثر من كتابين؟',options:['11','12','13','14'],correct:2},
+  {text:'م١٠: ما مجموع الطلاب الممثّلين في مخطط النقاط؟',options:['18','19','20','21'],correct:2},
+  {text:'م١١: ما الفرق بين أكثر وأقل طالب قرأوا نفس العدد؟',options:['5','6','7','8'],correct:1},
+  {text:'م١٢: لو أضفنا 3 طلاب قرأوا كتابَين، كم طالباً سيكون إجمالاً؟',options:['21','22','23','24'],correct:2},
+];
+let masteryAnswers=new Array(12).fill(null);
+let masteryAnswered=0;
+
+function renderMasteryQuestions(){
+  const cont=document.getElementById('mastery-questions');
+  cont.innerHTML='';
+  masteryQ.forEach((q,i)=>{
+    const block=document.createElement('div');
+    block.className='q-block';
+    block.id='mq_'+i;
+    block.innerHTML=`
+      <div class="q-text">${q.text}</div>
+      <div class="opts">${q.options.map((o,j)=>
+        `<button class="opt-btn" id="mopt_${i}_${j}" onclick="answerMastery(${i},${j})">${o}</button>`
+      ).join('')}</div>
+    `;
+    cont.appendChild(block);
+  });
+  document.getElementById('submit-mastery').style.display='flex';
+}
+
+function answerMastery(qi,chosen){
+  const allBtns=document.querySelectorAll(`[id^="mopt_${qi}_"]`);
+  allBtns.forEach(b=>{b.style.borderColor='';b.style.background='';b.style.color='';});
+  masteryAnswers[qi]=chosen;
+  allBtns[chosen].style.borderColor='var(--mint)';
+  allBtns[chosen].style.background='var(--mint-lt)';
+  allBtns[chosen].style.color='#065F46';
+  masteryAnswered=masteryAnswers.filter(a=>a!==null).length;
+  const pct=(masteryAnswered/masteryQ.length)*100;
+  document.getElementById('m-prog-bar').style.width=pct+'%';
+  document.getElementById('m-prog-text').textContent=masteryAnswered+' / '+masteryQ.length;
+}
+
+function submitMastery(){
+  let correct=0;
+  masteryQ.forEach((q,i)=>{
+    const chosen=masteryAnswers[i];
+    const allBtns=document.querySelectorAll(`[id^="mopt_${i}_"]`);
+    allBtns.forEach(b=>{b.disabled=true;b.style.borderColor='';b.style.background='';b.style.color='';});
+    if(chosen!==null){
+      if(chosen===q.correct){correct++;allBtns[chosen].classList.add('correct');document.getElementById('mq_'+i).classList.add('ok');}
+      else{allBtns[chosen].classList.add('wrong');allBtns[q.correct].classList.add('correct');document.getElementById('mq_'+i).classList.add('no');}
+    } else {
+      allBtns[q.correct].classList.add('correct');
+    }
+  });
+  const score=Math.round(correct/masteryQ.length*100);
+  const res=document.getElementById('mastery-result');
+  if(score>=80){
+    res.innerHTML=`
+      <div class="cert">
+        <div style="font-size:64px;margin-bottom:.5rem">🏆</div>
+        <h2>تهانينا! أتقنت الدرس!</h2>
+        <p style="font-size:1.1rem;margin:.5rem 0">نتيجتك: <strong>${correct} / ${masteryQ.length}</strong> (${score}%)</p>
+        <p>أنت الآن تتقن قراءة وتحليل التمثيل البياني بالصور والنقاط! 🌟</p>
+        <div class="cert-stars">⭐⭐⭐</div>
+      </div>`;
+  } else {
+    res.innerHTML=`
+      <div style="background:var(--coral-lt);border:2px solid var(--coral);border-radius:20px;padding:1.5rem;text-align:center">
+        <div style="font-size:48px;margin-bottom:.5rem">💪</div>
+        <h2 style="color:#7F1D1D;font-family:'Baloo Bhaijaan 2';margin-bottom:.5rem">استمر في التدريب!</h2>
+        <p style="color:#7F1D1D">نتيجتك: <strong>${correct} / ${masteryQ.length}</strong> (${score}%) — تحتاج 80% للنجاح</p>
+        <button class="btn btn-mint" style="margin-top:1rem" onclick="retryMastery()">🔄 أعد الاختبار</button>
+      </div>`;
+  }
+  res.style.display='block';
+  document.getElementById('submit-mastery').style.display='none';
+  document.getElementById('m-prog-bar').style.width='100%';
+  document.getElementById('m-prog-text').textContent='12 / 12';
+}
+
+function retryMastery(){
+  masteryAnswers=new Array(12).fill(null);masteryAnswered=0;
+  document.getElementById('mastery-result').style.display='none';
+  document.getElementById('m-prog-bar').style.width='0%';
+  document.getElementById('m-prog-text').textContent='0 / 12';
+  renderMasteryQuestions();
+}
+
+// ═══════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════
+function showTab(name){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  const tabs=['intro','picto','dot','drag','memory','practice','mastery'];
+  const idx=tabs.indexOf(name);
+  if(idx>=0) document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function arabicNum(n){
+  return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+window.onload=function(){
+  // Pictographs
+  renderPicto('zoo-picto',zooPictoData);
+  renderPicto('fruit-picto',fruitPictoData);
+  renderPicto('games-picto',gamesPictoData);
+  renderPicto('transport-picto',transportPictoData);
+  // Dot plots
+  renderDotPlot('temp-dot-plot',tempDotData);
+  renderDotPlot('shoe-dot-plot',shoeDotData);
+  renderDotPlot('mastery-dot-plot',masteryDotData);
+  // Questions
+  renderQuestions('picto-q1',zooQ,false);
+  renderQuestions('picto-q2',fruitQ,false);
+  renderQuestions('dot-q1',tempQ,false);
+  renderQuestions('dot-q2',shoeQ,false);
+  renderQuestions('practice-questions',practiceQ,true);
+  renderMasteryQuestions();
+  // Games
+  initDrag();
+  resetMemory();
+};
+</script>
+</body>
+</html>
