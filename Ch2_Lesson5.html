@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عشرات الآلاف ومئات الآلاف — الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ════════ PLACE VALUE COLOR SYSTEM ════════ */
+:root {
+  --pv1-c:#7C3AED; --pv1-lt:#EDE9FE; --pv1-dk:#5B21B6;  /* مئات الآلاف */
+  --pv2-c:#1D4ED8; --pv2-lt:#DBEAFE; --pv2-dk:#1E40AF;  /* عشرات الآلاف */
+  --pv3-c:#0D9488; --pv3-lt:#CCFBF1; --pv3-dk:#0F766E;  /* آلاف */
+  --pv4-c:#16A34A; --pv4-lt:#DCFCE7; --pv4-dk:#15803D;  /* مئات */
+  --pv5-c:#D97706; --pv5-lt:#FEF3C7; --pv5-dk:#B45309;  /* عشرات */
+  --pv6-c:#DC2626; --pv6-lt:#FEE2E2; --pv6-dk:#B91C1C;  /* آحاد */
+
+  --navy:#0F172A; --navy2:#1E293B; --navy3:#334155;
+  --gold:#F59E0B; --gold-lt:#FEF3C7;
+  --sur:#FFFFFF; --bg:#F8FAFF;
+  --txt:#0F172A; --mu:#64748B; --br:#E2E8F0;
+  --gn:#16A34A; --gn-lt:#DCFCE7;
+  --re:#DC2626; --re-lt:#FEE2E2;
+  --rad:18px; --sh:0 4px 24px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--txt);direction:rtl}
+
+/* ── UNLOCK ── */
+#homeBtn{position:fixed;top:16px;right:16px;z-index:1000;display:flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;background:rgba(15,23,42,.55);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Cairo',sans-serif;font-weight:700;
+  font-size:14px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .15s,background .15s}
+#homeBtn:hover{transform:scale(1.05);background:rgba(15,23,42,.75)}
+#homeBtn svg{width:18px;height:18px;flex-shrink:0}
+@media(max-width:480px){#homeBtn{padding:8px 14px;font-size:12px}#homeBtn svg{width:15px;height:15px}}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0F172A 0%,#1E3A5F 45%,#0D4A5F 100%);padding:3rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden}
+.hero-stars{position:absolute;inset:0;pointer-events:none}
+.hero-star{position:absolute;border-radius:50%;background:#fff;animation:twinkle 2s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.hero-emoji{font-size:58px;line-height:1;margin-bottom:.6rem;position:relative;z-index:1}
+.hero h1{font-family:'Cairo',sans-serif;font-size:2.3rem;font-weight:900;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.3);margin-bottom:.5rem;position:relative;z-index:1}
+.hero p{color:rgba(255,255,255,.85);font-size:1.05rem;position:relative;z-index:1}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:1rem;position:relative;z-index:1}
+.hero-badge{background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.5);color:var(--gold);border-radius:20px;padding:5px 14px;font-size:13px;font-weight:700}
+
+/* ── PLACE VALUE RIBBON ── */
+.pv-ribbon{background:var(--navy2);padding:.85rem 1rem;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;justify-content:center;flex-wrap:nowrap}
+.pv-ribbon::-webkit-scrollbar{display:none}
+.pv-chip{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;flex-shrink:0;border:2px solid transparent;cursor:pointer;transition:all .2s}
+
+/* ── TABS ── */
+.tabs-wrap{background:var(--sur);box-shadow:0 2px 16px rgba(0,0,0,.08);position:sticky;top:0;z-index:100}
+.tabs{display:flex;overflow-x:auto;padding:0 .75rem;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:.85rem 1.1rem;border:none;background:none;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;color:var(--mu);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.tab-btn:hover{color:var(--gold)}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ── LAYOUT ── */
+.content{max-width:900px;margin:0 auto;padding:2rem 1rem 6rem}
+.section{display:none}
+.section.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ── CARDS ── */
+.card{background:var(--sur);border-radius:var(--rad);box-shadow:var(--sh);padding:1.75rem;margin-bottom:1.5rem;border:1px solid rgba(0,0,0,.04)}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
+.card-badge{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.card-title-text{font-family:'Cairo',sans-serif;font-size:1.15rem;font-weight:700;color:var(--txt)}
+.card-sub{font-size:13px;color:var(--mu);margin-top:2px}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:15px;line-height:1.85;border-right:4px solid}
+.ib-gold{background:var(--gold-lt);border-color:var(--gold);color:#78350F}
+.ib-purple{background:var(--pv1-lt);border-color:var(--pv1-c);color:var(--pv1-dk)}
+.ib-blue{background:var(--pv2-lt);border-color:var(--pv2-c);color:var(--pv2-dk)}
+.ib-teal{background:var(--pv3-lt);border-color:var(--pv3-c);color:var(--pv3-dk)}
+.ib-green{background:var(--pv4-lt);border-color:var(--pv4-c);color:var(--pv4-dk)}
+.info-box strong{font-weight:800}
+.tip-box{background:var(--gold-lt);border-right:4px solid var(--gold);border-radius:12px;padding:.85rem 1.25rem;margin:.75rem 0;color:#78350F;font-size:14px;line-height:1.8}
+
+/* ════ PLACE VALUE TABLE ════ */
+.pv-table-wrap{overflow-x:auto;margin:1rem 0;border-radius:14px;box-shadow:var(--sh)}
+.pv-table{width:100%;border-collapse:collapse;min-width:560px}
+.pv-table th{padding:12px 8px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;color:#fff;text-align:center;border:1px solid rgba(255,255,255,.15)}
+.pv-table td{padding:14px 8px;text-align:center;font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;border:1px solid rgba(0,0,0,.06)}
+.pv-table td.pv-digit{border-radius:8px;margin:2px;transition:all .3s}
+.th1{background:var(--pv1-c)} .th2{background:var(--pv2-c)} .th3{background:var(--pv3-c)}
+.th4{background:var(--pv4-c)} .th5{background:var(--pv5-c)} .th6{background:var(--pv6-c)}
+.td1{background:var(--pv1-lt);color:var(--pv1-c)} .td2{background:var(--pv2-lt);color:var(--pv2-c)}
+.td3{background:var(--pv3-lt);color:var(--pv3-c)} .td4{background:var(--pv4-lt);color:var(--pv4-c)}
+.td5{background:var(--pv5-lt);color:var(--pv5-c)} .td6{background:var(--pv6-lt);color:var(--pv6-c)}
+.th-val{font-size:11px;opacity:.85;display:block;font-weight:600;margin-top:2px}
+
+/* ════ BIG NUMBER DISPLAY ════ */
+.big-number{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  font-family:'Cairo',sans-serif;font-size:3.5rem;font-weight:900;
+  background:var(--navy);border-radius:16px;padding:1.25rem 2rem;
+  margin:1rem 0;letter-spacing:.05em;flex-wrap:wrap;
+  box-shadow:0 8px 32px rgba(15,23,42,.25);
+}
+.big-number .digit{transition:all .3s;cursor:pointer;padding:0 2px;border-radius:6px}
+.big-number .sep{color:rgba(255,255,255,.4);font-size:2.5rem;margin:0 2px}
+.d1{color:#C4B5FD} .d2{color:#93C5FD} .d3{color:#5EEAD4}
+.d4{color:#86EFAC} .d5{color:#FCD34D} .d6{color:#FCA5A5}
+.digit:hover{background:rgba(255,255,255,.15);transform:scale(1.15)}
+.digit.highlighted{background:rgba(255,255,255,.25);transform:scale(1.2)}
+
+/* ════ NUMBER BUILDER ════ */
+.builder-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  gap:8px;margin:1.25rem 0;
+}
+.builder-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.builder-col .col-label{font-size:11px;font-weight:800;text-align:center;margin-bottom:4px;line-height:1.3}
+.builder-btn{width:38px;height:38px;border-radius:10px;border:none;font-size:18px;font-weight:900;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.builder-btn:active{transform:scale(.9)}
+.builder-digit{
+  width:52px;height:52px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;
+  transition:all .2s;
+}
+.builder-val{font-size:10px;font-weight:700;text-align:center;margin-top:2px;opacity:.75}
+
+/* ════ EXPANDED FORM ════ */
+.expanded-display{
+  display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+  background:var(--navy2);border-radius:14px;padding:1rem 1.25rem;
+  margin:.75rem 0;font-family:'Cairo',sans-serif;
+}
+.exp-part{
+  display:flex;align-items:center;gap:4px;
+  padding:5px 12px;border-radius:10px;
+  font-size:14px;font-weight:700;
+}
+.exp-op{color:rgba(255,255,255,.6);font-size:1.1rem;font-weight:900}
+.exp-zero{opacity:.3}
+
+/* ════ ARABIC READING ════ */
+.arabic-reading{
+  background:linear-gradient(135deg,var(--pv1-lt),var(--pv2-lt));
+  border:2px solid var(--pv1-c);border-radius:14px;
+  padding:1rem 1.5rem;margin:.75rem 0;
+  text-align:center;font-family:'Cairo',sans-serif;
+  font-size:1.1rem;font-weight:700;color:var(--pv1-dk);
+  line-height:1.8;
+}
+.reading-label{font-size:12px;color:var(--mu);font-family:'Tajawal',sans-serif;margin-bottom:4px}
+
+/* ════ PRACTICE Q-BLOCKS ════ */
+.score-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.sc-card{background:var(--sur);border:1.5px solid var(--br);border-radius:14px;padding:.85rem;text-align:center}
+.sc-n{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900}
+.sc-l{font-size:11px;color:var(--mu);margin-top:2px}
+.q-block{border:1.5px solid var(--br);border-radius:14px;padding:1.25rem;margin-bottom:1rem;transition:all .2s}
+.q-block.ok{border-color:var(--gn);background:var(--gn-lt)}
+.q-block.no{border-color:var(--re);background:var(--re-lt)}
+.q-text{font-size:15px;font-weight:600;color:var(--txt);margin-bottom:12px;line-height:1.7}
+.q-num{font-weight:800;color:var(--gold)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt-btn{border:1.5px solid var(--br);border-radius:10px;padding:10px 12px;background:var(--sur);font-family:'Tajawal',sans-serif;font-size:14px;color:var(--txt);cursor:pointer;transition:all .15s;text-align:center;line-height:1.4}
+.opt-btn:hover:not(:disabled){border-color:var(--gold);background:var(--gold-lt);color:#78350F}
+.opt-btn.correct{border-color:var(--gn)!important;background:var(--gn-lt)!important;color:var(--pv4-dk)!important;font-weight:700}
+.opt-btn.wrong{border-color:var(--re)!important;background:var(--re-lt)!important;color:var(--pv6-dk)!important;font-weight:700}
+.opt-btn:disabled{cursor:not-allowed}
+.fb-msg{margin-top:10px;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:600;display:none}
+.fb-msg.show{display:block}
+.fb-msg.ok{background:var(--gn-lt);color:var(--pv4-dk)}
+.fb-msg.no{background:var(--re-lt);color:var(--pv6-dk)}
+
+/* ════ COMPARISON GAME ════ */
+.cmp-arena{
+  background:var(--navy);border-radius:20px;
+  padding:2rem;text-align:center;margin:1rem 0;
+}
+.cmp-numbers{
+  display:flex;align-items:center;justify-content:center;
+  gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;
+}
+.cmp-num{
+  font-family:'Cairo',sans-serif;font-size:2.2rem;font-weight:900;
+  color:#fff;background:rgba(255,255,255,.08);
+  padding:.75rem 1.5rem;border-radius:14px;
+  border:2px solid rgba(255,255,255,.15);
+  letter-spacing:.05em;
+}
+.cmp-num span.d{padding:0 1px}
+.cmp-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cmp-btn{
+  width:72px;height:72px;border-radius:50%;border:none;
+  font-size:2rem;font-weight:900;cursor:pointer;
+  transition:all .2s;font-family:'Cairo',sans-serif;
+  color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.3);
+}
+.cmp-btn:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.cmp-btn:active{transform:scale(.95)}
+.cmp-gt{background:var(--pv1-c)}
+.cmp-eq{background:var(--pv3-c)}
+.cmp-lt{background:var(--pv6-c)}
+.cmp-score-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:1.25rem}
+.cmp-sc{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:.75rem 1.5rem;text-align:center}
+.cmp-sc .n{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold)}
+.cmp-sc .l{font-size:12px;color:rgba(255,255,255,.6)}
+.cmp-feedback{
+  min-height:40px;margin-top:1rem;
+  font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:700;
+  border-radius:12px;padding:.6rem 1.25rem;
+  transition:all .3s;
+}
+.cmp-feedback.show-ok{background:rgba(22,163,74,.2);color:#4ADE80;display:block}
+.cmp-feedback.show-no{background:rgba(220,38,38,.2);color:#FCA5A5;display:block}
+.cmp-feedback.hidden{display:none}
+
+/* ════ MASTERY TEST ════ */
+.prog-wrap{background:var(--br);border-radius:20px;height:12px;overflow:hidden;margin:6px 0 4px}
+.prog-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--pv1-c),var(--gold));transition:width .6s ease}
+.sec-div{display:flex;align-items:center;gap:10px;margin:1.25rem 0}
+.sec-div-line{flex:1;height:1px;background:var(--br)}
+.sec-div-label{font-size:12px;font-weight:800;color:var(--mu);white-space:nowrap;padding:4px 12px;border:1px solid var(--br);border-radius:10px;background:var(--sur)}
+
+/* ════ LEVEL BADGES ════ */
+.lv-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700}
+.lv0{background:var(--re-lt);color:var(--pv6-dk);border:2px solid var(--re)}
+.lv1{background:var(--gold-lt);color:#78350F;border:2px solid var(--gold)}
+.lv2{background:var(--pv2-lt);color:var(--pv2-dk);border:2px solid var(--pv2-c)}
+.lv3{background:var(--gn-lt);color:var(--pv4-dk);border:2px solid var(--gn)}
+
+/* ════ TOPIC RESULT CARD ════ */
+.trc{display:flex;align-items:center;gap:12px;padding:14px 16px;margin-bottom:10px;border-radius:14px;border:1.5px solid var(--br);background:var(--sur)}
+.trc-icon{font-size:26px}
+.trc-info{flex:1}
+.trc-name{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:4px}
+.trc-fill{height:8px;background:var(--br);border-radius:10px;overflow:hidden;margin-bottom:4px}
+.trc-bar{height:100%;border-radius:10px;transition:width .8s ease}
+
+/* ════ CERTIFICATE ════ */
+.cert{background:linear-gradient(135deg,var(--navy),var(--navy2));border:3px solid var(--gold);border-radius:24px;padding:2rem;text-align:center;margin-top:1.5rem;animation:popIn .5s cubic-bezier(.34,1.56,.64,1)}
+.cert h2{font-family:'Cairo',sans-serif;font-size:1.7rem;color:var(--gold);margin-bottom:.5rem}
+.cert p{color:rgba(255,255,255,.85);font-size:15px}
+.cert-stars{font-size:2.5rem;margin-top:.75rem;animation:bounce 1s ease infinite}
+
+/* ════ DIGIT EXPLORER (click) ════ */
+.explorer-card{
+  background:var(--navy);border-radius:16px;padding:1.5rem;
+  margin:1rem 0;
+}
+.explore-row{
+  display:flex;align-items:center;gap:12px;padding:10px 14px;
+  border-radius:12px;margin-bottom:8px;cursor:pointer;
+  transition:all .2s;border:2px solid transparent;
+}
+.explore-row:hover{border-color:rgba(255,255,255,.2);transform:translateX(-4px)}
+.explore-row.active-row{border-color:var(--gold);background:rgba(245,158,11,.1)}
+.explore-pos{font-size:12px;font-weight:700;min-width:100px;color:rgba(255,255,255,.7)}
+.explore-digit-badge{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:900;flex-shrink:0}
+.explore-value{font-family:'Cairo',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;flex:1}
+.explore-value-sub{font-size:12px;color:rgba(255,255,255,.5)}
+
+/* ════ RULE BOXES ════ */
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0}
+.rule-card{border-radius:14px;padding:1.25rem;text-align:center}
+.rule-card .rc-n{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900;margin:.5rem 0}
+.rule-card .rc-eq{font-size:13px;font-weight:700}
+.rule-card .rc-icon{font-size:36px}
+
+/* ════ BUTTONS ════ */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;border:none;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--pv5-dk);transform:translateY(-1px)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy2);transform:translateY(-1px)}
+.btn-gn{background:var(--gn);color:#fff}
+.btn-gn:hover{background:var(--pv4-dk);transform:translateY(-1px)}
+.btn-out{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.btn-out:hover{background:var(--gold-lt)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem}
+
+@media(max-width:540px){
+  .hero h1{font-size:1.5rem}
+  .big-number{font-size:2.2rem;padding:1rem}
+  .opts{grid-template-columns:1fr}
+  .builder-grid{grid-template-columns:repeat(3,1fr)}
+  .rule-grid{grid-template-columns:1fr}
+  .cmp-num{font-size:1.6rem}
+  .cmp-btn{width:58px;height:58px;font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<a href="index.html" id="homeBtn" title="العودة للشاشة الرئيسية">
+  <span>الرئيسية</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1h4v-6h3v6h4a1 1 0 0 0 1-1v-9"/></svg>
+</a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-stars" id="heroStars"></div>
+  <div class="hero-emoji" style="animation:bounce 2s infinite">🔢</div>
+  <h1>عشرات الآلاف ومئات الآلاف</h1>
+  <p>الصف الثالث الابتدائي | رياضيات</p>
+  <div class="hero-badges">
+    <span class="hero-badge">🏗️ بناء الأعداد</span>
+    <span class="hero-badge">📐 القيم المكانية</span>
+    <span class="hero-badge">🔤 القراءة والكتابة</span>
+    <span class="hero-badge">📝 الصيغة التوسيعية</span>
+    <span class="hero-badge">⚖️ المقارنة</span>
+    <span class="hero-badge">🏆 اختبار الإتقان</span>
+  </div>
+</div>
+
+<!-- PLACE VALUE RIBBON -->
+<div class="pv-ribbon" id="pvRibbon">
+  <div class="pv-chip" style="background:rgba(124,58,237,.2);border-color:var(--pv1-c);color:#C4B5FD">مئات الآلاف — 100,000</div>
+  <div class="pv-chip" style="background:rgba(29,78,216,.2);border-color:var(--pv2-c);color:#93C5FD">عشرات الآلاف — 10,000</div>
+  <div class="pv-chip" style="background:rgba(13,148,136,.2);border-color:var(--pv3-c);color:#5EEAD4">آلاف — 1,000</div>
+  <div class="pv-chip" style="background:rgba(22,163,74,.2);border-color:var(--pv4-c);color:#86EFAC">مئات — 100</div>
+  <div class="pv-chip" style="background:rgba(217,119,6,.2);border-color:var(--pv5-c);color:#FCD34D">عشرات — 10</div>
+  <div class="pv-chip" style="background:rgba(220,38,38,.2);border-color:var(--pv6-c);color:#FCA5A5">آحاد — 1</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-btn-explore" onclick="showTab('explore')">🔍 الاستكشاف</button>
+    <button class="tab-btn" id="tab-btn-builder" onclick="showTab('builder')">🏗️ بناء الأعداد</button>
+    <button class="tab-btn" id="tab-btn-practice" onclick="showTab('practice')">✏️ التدريبات</button>
+    <button class="tab-btn" id="tab-btn-game" onclick="showTab('game')">🎮 لعبة المقارنة</button>
+    <button class="tab-btn" id="tab-btn-mastery" onclick="showTab('mastery')">🏆 اختبار الإتقان</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════ EXPLORE ══════════════════════ -->
+<div class="section active" id="tab-explore">
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--gold-lt)">🌍</div>
+      <div><div class="card-title-text">ماذا تعرف عن الأعداد الكبيرة؟</div><div class="card-sub">نبدأ بالاستكشاف</div></div>
+    </div>
+    <div class="info-box ib-gold">
+      الأعداد الكبيرة تُستخدم في كل مكان — عدد سكان مدينة، ثمن سيارة، مسافة بين مدينتين...<br>
+      <strong>لنتعلّم كيف نقرأها ونفهمها!</strong>
+    </div>
+
+    <div class="rule-grid">
+      <div class="rule-card" style="background:var(--pv2-lt);border:2px solid var(--pv2-c)">
+        <div class="rc-icon">🔟</div>
+        <div class="rc-n" style="color:var(--pv2-c)">10,000</div>
+        <div class="rc-eq" style="color:var(--pv2-dk)">عشرة آلاف<br>= 10 × 1,000</div>
+      </div>
+      <div class="rule-card" style="background:var(--pv1-lt);border:2px solid var(--pv1-c)">
+        <div class="rc-icon">💯</div>
+        <div class="rc-n" style="color:var(--pv1-c)">100,000</div>
+        <div class="rc-eq" style="color:var(--pv1-dk)">مئة ألف<br>= 10 × 10,000</div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      💡 كلما ذهبنا يساراً في الجدول ارتفعت القيمة 10 أضعاف!<br>
+      1 ← 10 ← 100 ← 1,000 ← 10,000 ← 100,000
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--pv1-lt)">📊</div>
+      <div><div class="card-title-text">جدول القيم المكانية</div><div class="card-sub">كل خانة لها اسم وقيمة</div></div>
+    </div>
+    <div class="pv-table-wrap">
+      <table class="pv-table">
+        <tr>
+          <th class="th1">مئات الآلاف<span class="th-val">100,000</span></th>
+          <th class="th2">عشرات الآلاف<span class="th-val">10,000</span></th>
+          <th class="th3">آلاف<span class="th-val">1,000</span></th>
+          <th class="th4">مئات<span class="th-val">100</span></th>
+          <th class="th5">عشرات<span class="th-val">10</span></th>
+          <th class="th6">آحاد<span class="th-val">1</span></th>
+        </tr>
+        <tr>
+          <td class="td1 pv-digit">4</td>
+          <td class="td2 pv-digit">5</td>
+          <td class="td3 pv-digit">6</td>
+          <td class="td4 pv-digit">7</td>
+          <td class="td5 pv-digit">8</td>
+          <td class="td6 pv-digit">9</td>
+        </tr>
+      </table>
+    </div>
+    <div class="arabic-reading">
+      <div class="reading-label">قراءة العدد 456,789</div>
+      أربعمئة وستة وخمسون ألفاً وسبعمئة وتسعة وثمانون
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--navy2)">🔍</div>
+      <div><div class="card-title-text">مستكشف القيم المكانية</div><div class="card-sub">انقر على أي رقم لمعرفة قيمته</div></div>
+    </div>
+    <div class="info-box ib-purple">
+      العدد المثال: <strong style="font-size:1.2rem">456,789</strong><br>
+      انقر على أي صف أدناه لرؤية القيمة الكاملة لكل رقم
+    </div>
+
+    <div class="explorer-card">
+      <div class="big-number" id="explorer-num">
+        <span class="digit d1" onclick="highlightRow(0)">4</span>
+        <span class="digit d2" onclick="highlightRow(1)">5</span>
+        <span class="sep">,</span>
+        <span class="digit d3" onclick="highlightRow(2)">6</span>
+        <span class="digit d4" onclick="highlightRow(3)">7</span>
+        <span class="digit d5" onclick="highlightRow(4)">8</span>
+        <span class="digit d6" onclick="highlightRow(5)">9</span>
+      </div>
+
+      <div id="explorer-rows">
+        <div class="explore-row" id="erow-0" onclick="highlightRow(0)">
+          <div class="explore-pos">مئات الآلاف</div>
+          <div class="explore-digit-badge" style="background:var(--pv1-lt);color:var(--pv1-c)">4</div>
+          <div class="explore-value">4 × 100,000 = <strong>400,000</strong><div class="explore-value-sub">أربعمئة ألف</div></div>
+        </div>
+        <div class="explore-row" id="erow-1" onclick="highlightRow(1)">
+          <div class="explore-pos">عشرات الآلاف</div>
+          <div class="explore-digit-badge" style="background:var(--pv2-lt);color:var(--pv2-c)">5</div>
+          <div class="explore-value">5 × 10,000 = <strong>50,000</strong><div class="explore-value-sub">خمسون ألفاً</div></div>
+        </div>
+        <div class="explore-row" id="erow-2" onclick="highlightRow(2)">
+          <div class="explore-pos">آلاف</div>
+          <div class="explore-digit-badge" style="background:var(--pv3-lt);color:var(--pv3-c)">6</div>
+          <div class="explore-value">6 × 1,000 = <strong>6,000</strong><div class="explore-value-sub">ستة آلاف</div></div>
+        </div>
+        <div class="explore-row" id="erow-3" onclick="highlightRow(3)">
+          <div class="explore-pos">مئات</div>
+          <div class="explore-digit-badge" style="background:var(--pv4-lt);color:var(--pv4-c)">7</div>
+          <div class="explore-value">7 × 100 = <strong>700</strong><div class="explore-value-sub">سبعمئة</div></div>
+        </div>
+        <div class="explore-row" id="erow-4" onclick="highlightRow(4)">
+          <div class="explore-pos">عشرات</div>
+          <div class="explore-digit-badge" style="background:var(--pv5-lt);color:var(--pv5-c)">8</div>
+          <div class="explore-value">8 × 10 = <strong>80</strong><div class="explore-value-sub">ثمانون</div></div>
+        </div>
+        <div class="explore-row" id="erow-5" onclick="highlightRow(5)">
+          <div class="explore-pos">آحاد</div>
+          <div class="explore-digit-badge" style="background:var(--pv6-lt);color:var(--pv6-c)">9</div>
+          <div class="explore-value">9 × 1 = <strong>9</strong><div class="explore-value-sub">تسعة</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-gold" onclick="showTab('builder')">التالي: ابنِ أعداداً بنفسك ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ BUILDER ══════════════════════ -->
+<div class="section" id="tab-builder">
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--gold-lt)">🏗️</div>
+      <div><div class="card-title-text">بناء الأعداد بنفسك!</div><div class="card-sub">حرّك الأرقام واستكشف</div></div>
+    </div>
+    <div class="info-box ib-teal">
+      استخدم الأزرار <strong>▲ ▼</strong> لتغيير كل خانة وشاهد كيف يتغير العدد والصيغة التوسيعية والقراءة تلقائياً!
+    </div>
+
+    <!-- Digit Builder -->
+    <div class="builder-grid" id="builder-controls"></div>
+
+    <!-- Big Number Display -->
+    <div class="big-number" id="builder-display">
+      <span class="digit d1" id="bd1">1</span>
+      <span class="digit d2" id="bd2">0</span>
+      <span class="sep">,</span>
+      <span class="digit d3" id="bd3">0</span>
+      <span class="digit d4" id="bd4">0</span>
+      <span class="digit d5" id="bd5">0</span>
+      <span class="digit d6" id="bd6">0</span>
+    </div>
+
+    <!-- Place Value Table -->
+    <div class="pv-table-wrap">
+      <table class="pv-table">
+        <tr>
+          <th class="th1">مئات الآلاف<span class="th-val">100,000</span></th>
+          <th class="th2">عشرات الآلاف<span class="th-val">10,000</span></th>
+          <th class="th3">آلاف<span class="th-val">1,000</span></th>
+          <th class="th4">مئات<span class="th-val">100</span></th>
+          <th class="th5">عشرات<span class="th-val">10</span></th>
+          <th class="th6">آحاد<span class="th-val">1</span></th>
+        </tr>
+        <tr>
+          <td class="td1 pv-digit" id="bt1">1</td>
+          <td class="td2 pv-digit" id="bt2">0</td>
+          <td class="td3 pv-digit" id="bt3">0</td>
+          <td class="td4 pv-digit" id="bt4">0</td>
+          <td class="td5 pv-digit" id="bt5">0</td>
+          <td class="td6 pv-digit" id="bt6">0</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Expanded Form -->
+    <div style="font-size:13px;font-weight:700;color:var(--mu);margin-bottom:.5rem">📝 الصيغة التوسيعية:</div>
+    <div class="expanded-display" id="builder-expanded"></div>
+
+    <!-- Arabic Reading -->
+    <div style="font-size:13px;font-weight:700;color:var(--mu);margin-bottom:.5rem;margin-top:.75rem">🔤 قراءة العدد بالعربية:</div>
+    <div class="arabic-reading" id="builder-reading">
+      <div class="reading-label">القراءة</div>
+      <span id="builder-reading-text">عشرة آلاف</span>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-gold" onclick="setBuilderNumber(456789)">جرّب: 456,789</button>
+      <button class="btn btn-navy" onclick="setBuilderNumber(100000)">جرّب: 100,000</button>
+      <button class="btn btn-gn" onclick="setBuilderNumber(325000)">جرّب: 325,000</button>
+      <button class="btn btn-out" onclick="randomBuilderNumber()">🎲 عدد عشوائي</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--pv1-lt)">💡</div>
+      <div><div class="card-title-text">قواعد مهمة</div></div>
+    </div>
+    <div class="rule-grid">
+      <div class="rule-card" style="background:var(--pv1-lt);border:2px solid var(--pv1-c)">
+        <div class="rc-icon">🔟</div>
+        <div class="rc-n" style="color:var(--pv1-c);font-size:1.3rem">10 × عشرة آلاف</div>
+        <div class="rc-eq" style="color:var(--pv1-dk)">= مئة ألف (100,000)</div>
+      </div>
+      <div class="rule-card" style="background:var(--pv2-lt);border:2px solid var(--pv2-c)">
+        <div class="rc-icon">🔟</div>
+        <div class="rc-n" style="color:var(--pv2-c);font-size:1.3rem">10 × ألف</div>
+        <div class="rc-eq" style="color:var(--pv2-dk)">= عشرة آلاف (10,000)</div>
+      </div>
+      <div class="rule-card" style="background:var(--pv3-lt);border:2px solid var(--pv3-c)">
+        <div class="rc-icon">🔢</div>
+        <div class="rc-n" style="color:var(--pv3-c);font-size:1.3rem">6 خانات</div>
+        <div class="rc-eq" style="color:var(--pv3-dk)">أكبر عدد 6 خانات = 999,999</div>
+      </div>
+      <div class="rule-card" style="background:var(--pv4-lt);border:2px solid var(--pv4-c)">
+        <div class="rc-icon">⬅️</div>
+        <div class="rc-n" style="color:var(--pv4-c);font-size:1.3rem">كلما ← ارتفع</div>
+        <div class="rc-eq" style="color:var(--pv4-dk)">كل خانة = 10 × الخانة بعدها</div>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-gold" onclick="showTab('practice')">التالي: التدريبات ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ PRACTICE ══════════════════════ -->
+<div class="section" id="tab-practice">
+
+  <!-- SUB-SECTION 1: Place Values -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--pv1-lt)">📐</div>
+      <div><div class="card-title-text">القيم المكانية</div><div class="card-sub">اكتشف قيمة ومرتبة كل رقم</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-pv-c" style="color:var(--pv1-c)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-pv-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-pv-p" style="color:var(--gn)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-pv"></div>
+  </div>
+
+  <!-- SUB-SECTION 2: Reading & Writing -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--pv2-lt)">🔤</div>
+      <div><div class="card-title-text">القراءة والكتابة</div><div class="card-sub">اقرأ الأعداد الكبيرة واكتبها</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-rw-c" style="color:var(--pv2-c)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-rw-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-rw-p" style="color:var(--gn)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-rw"></div>
+  </div>
+
+  <!-- SUB-SECTION 3: Expanded Form -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--pv3-lt)">📝</div>
+      <div><div class="card-title-text">الصيغة التوسيعية</div><div class="card-sub">فكّك العدد إلى قيمه</div></div>
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-ex-c" style="color:var(--pv3-c)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-ex-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-ex-p" style="color:var(--gn)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-ex"></div>
+  </div>
+
+  <!-- SUB-SECTION 4: Comparison -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--pv5-lt)">⚖️</div>
+      <div><div class="card-title-text">المقارنة والترتيب</div><div class="card-sub">أيّها أكبر؟ أيّها أصغر؟</div></div>
+    </div>
+    <div class="info-box ib-gold">
+      <strong>📌 قاعدة المقارنة:</strong><br>
+      ١. قارن عدد الأرقام — الأكثر أرقاماً هو الأكبر<br>
+      ٢. إذا تساوى عدد الأرقام — قارن من اليسار خانة بخانة<br>
+      ٣. أول خانة تختلف تحدد الأكبر
+    </div>
+    <div class="score-row">
+      <div class="sc-card"><div class="sc-n" id="sc-cmp-c" style="color:var(--pv5-c)">0</div><div class="sc-l">صحيحة</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-cmp-t" style="color:var(--mu)">0</div><div class="sc-l">إجمالي</div></div>
+      <div class="sc-card"><div class="sc-n" id="sc-cmp-p" style="color:var(--gn)">—</div><div class="sc-l">النسبة</div></div>
+    </div>
+    <div id="q-cmp"></div>
+    <div class="btn-group">
+      <button class="btn btn-gold" onclick="showTab('game')">التالي: لعبة المقارنة ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ GAME ══════════════════════ -->
+<div class="section" id="tab-game">
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--navy2)">🎮</div>
+      <div><div class="card-title-text">لعبة المقارنة السريعة!</div><div class="card-sub">10 جولات — من يحصل على 10/10؟</div></div>
+    </div>
+    <div class="info-box ib-gold">
+      انظر إلى العددين ثم اضغط على العلامة الصحيحة: <strong>&gt; أكبر من</strong> | <strong>= يساوي</strong> | <strong>&lt; أصغر من</strong>
+    </div>
+
+    <div class="cmp-arena">
+      <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:.75rem">الجولة <span id="game-round" style="color:var(--gold);font-weight:700">1</span> من 10</div>
+      <div class="cmp-numbers">
+        <div class="cmp-num" id="game-num-a">---</div>
+        <div style="font-size:2rem;color:rgba(255,255,255,.3);font-weight:900">؟</div>
+        <div class="cmp-num" id="game-num-b">---</div>
+      </div>
+      <div class="cmp-btns">
+        <button class="cmp-btn cmp-gt" onclick="submitCmp('gt')" id="cmp-gt-btn">&gt;</button>
+        <button class="cmp-btn cmp-eq" onclick="submitCmp('eq')" id="cmp-eq-btn">=</button>
+        <button class="cmp-btn cmp-lt" onclick="submitCmp('lt')" id="cmp-lt-btn">&lt;</button>
+      </div>
+      <div class="cmp-feedback hidden" id="cmp-feedback"></div>
+      <div class="cmp-score-row">
+        <div class="cmp-sc"><div class="n" id="cmp-correct">0</div><div class="l">صحيحة ✅</div></div>
+        <div class="cmp-sc"><div class="n" id="cmp-wrong">0</div><div class="l">خاطئة ❌</div></div>
+        <div class="cmp-sc"><div class="n" id="cmp-streak" style="color:#FCA5A5">0</div><div class="l">تتالي 🔥</div></div>
+      </div>
+    </div>
+
+    <div id="game-result" style="display:none" class="card" style="background:var(--navy)">
+      <!-- filled by JS -->
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-gold" onclick="restartGame()">🔄 لعبة جديدة</button>
+      <button class="btn btn-navy" onclick="showTab('mastery')">التالي: اختبار الإتقان ←</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ MASTERY ══════════════════════ -->
+<div class="section" id="tab-mastery">
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-badge" style="background:var(--gold-lt)">🏆</div>
+      <div><div class="card-title-text">اختبار الإتقان الشامل</div><div class="card-sub">15 سؤالاً — 3 أسئلة من كل موضوع</div></div>
+    </div>
+    <div class="info-box ib-gold">
+      أجب عن جميع الأسئلة ثم اضغط "احسب نتيجتي".<br>
+      ستحصل على تحليل دقيق لمستواك في <strong>كل موضوع على حدة</strong> 🎯
+    </div>
+    <div style="margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+        <span style="color:var(--mu)">تقدّمك</span>
+        <span id="m-prog-text" style="color:var(--gold);font-weight:700">0 / 15</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" id="m-prog-bar" style="width:0%"></div></div>
+    </div>
+    <div id="q-mastery"></div>
+    <div class="btn-group" style="margin-top:1.5rem">
+      <button class="btn btn-gold" id="submit-mastery-btn" onclick="submitMastery()" style="display:none;font-size:15px;padding:14px 28px">🏆 احسب نتيجتي وحدّد مستواي</button>
+    </div>
+    <div id="mastery-result"></div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ══════════════════════════════════════════════════════
+// ARABIC NUMBER READER
+// ══════════════════════════════════════════════════════
+const _ones=['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة'];
+const _tens=['','عشرة','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+const _huns=['','مئة','مئتان','ثلاثمئة','أربعمئة','خمسمئة','ستمئة','سبعمئة','ثمانمئة','تسعمئة'];
+const _hunsK=['','مئة','مئتا','ثلاثمئة','أربعمئة','خمسمئة','ستمئة','سبعمئة','ثمانمئة','تسعمئة'];
+
+function _readUnder100(n){
+  if(n<=0)return'';
+  if(n<10)return _ones[n];
+  if(n===10)return'عشرة';
+  if(n===11)return'أحد عشر';
+  if(n===12)return'اثنا عشر';
+  if(n<20){const r=n-10;const bases=['','أحد','اثنا','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة'];return bases[r]+' عشر';}
+  const t=Math.floor(n/10),o=n%10;
+  if(o===0)return _tens[t];
+  return _ones[o]+' و'+_tens[t];
+}
+
+function _readUnder1000(n,forK=false){
+  if(n<=0)return'';
+  const h=Math.floor(n/100),rem=n%100;
+  const parts=[];
+  if(h>0)parts.push(forK?_hunsK[h]:_huns[h]);
+  if(rem>0)parts.push(_readUnder100(rem));
+  return parts.join(' و');
+}
+
+function numberToArabic(n){
+  if(n===0)return'صفر';
+  const th=Math.floor(n/1000),rem=n%1000;
+  const parts=[];
+  if(th>0){
+    let tPart='';
+    if(th===1)tPart='ألف';
+    else if(th===2)tPart='ألفان';
+    else if(th>=3&&th<=10){const fOnes=['','إحدى','اثنتا','ثلاث','أربع','خمس','ست','سبع','ثماني','تسع'];tPart=fOnes[th]+' آلاف';}
+    else if(th>=11&&th<=99)tPart=_readUnder100(th)+' ألفاً';
+    else tPart=_readUnder1000(th,true)+' ألف';
+    parts.push(tPart);
+  }
+  if(rem>0)parts.push(_readUnder1000(rem));
+  return parts.join(' و');
+}
+
+// ══════════════════════════════════════════════════════
+// HERO STARS
+// ══════════════════════════════════════════════════════
+function initStars(){
+  const container=document.getElementById('heroStars');
+  for(let i=0;i<30;i++){
+    const s=document.createElement('div');
+    s.className='hero-star';
+    const sz=Math.random()*3+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${1.5+Math.random()*2}s`;
+    container.appendChild(s);
+  }
+}
+
+// ══════════════════════════════════════════════════════
+// PLACE VALUE EXPLORER
+// ══════════════════════════════════════════════════════
+function highlightRow(idx){
+  document.querySelectorAll('.explore-row').forEach((r,i)=>{
+    r.classList.toggle('active-row',i===idx);
+  });
+  const digits=document.querySelectorAll('#explorer-num .digit');
+  digits.forEach((d,i)=>d.classList.toggle('highlighted',i===idx));
+}
+
+// ══════════════════════════════════════════════════════
+// NUMBER BUILDER
+// ══════════════════════════════════════════════════════
+const PV=[
+  {name:'مئات الآلاف',short:'م.آلاف',val:100000,cls:'pv1',col:'var(--pv1-c)',bg:'var(--pv1-lt)'},
+  {name:'عشرات الآلاف',short:'ع.آلاف',val:10000,cls:'pv2',col:'var(--pv2-c)',bg:'var(--pv2-lt)'},
+  {name:'آلاف',short:'آلاف',val:1000,cls:'pv3',col:'var(--pv3-c)',bg:'var(--pv3-lt)'},
+  {name:'مئات',short:'مئات',val:100,cls:'pv4',col:'var(--pv4-c)',bg:'var(--pv4-lt)'},
+  {name:'عشرات',short:'عشرات',val:10,cls:'pv5',col:'var(--pv5-c)',bg:'var(--pv5-lt)'},
+  {name:'آحاد',short:'آحاد',val:1,cls:'pv6',col:'var(--pv6-c)',bg:'var(--pv6-lt)'},
+];
+let builderDigits=[1,0,0,0,0,0];
+
+function initBuilder(){
+  const grid=document.getElementById('builder-controls');
+  grid.innerHTML='';
+  PV.forEach((pv,i)=>{
+    const col=document.createElement('div');
+    col.className='builder-col';
+    col.innerHTML=`
+      <div class="col-label" style="color:${pv.col}">${pv.name}</div>
+      <button class="builder-btn" style="background:${pv.col};color:#fff" onclick="changeDigit(${i},1)">▲</button>
+      <div class="builder-digit" id="bdig-${i}" style="background:${pv.bg};color:${pv.col}">${builderDigits[i]}</div>
+      <button class="builder-btn" style="background:${pv.bg};color:${pv.col};border:2px solid ${pv.col}" onclick="changeDigit(${i},-1)">▼</button>
+      <div class="builder-val" style="color:${pv.col}">${pv.short}</div>
+    `;
+    grid.appendChild(col);
+  });
+  updateBuilder();
+}
+
+function changeDigit(idx,delta){
+  builderDigits[idx]=Math.max(0,Math.min(9,builderDigits[idx]+delta));
+  // Prevent leading zero for 6-digit numbers (first digit)
+  if(idx===0&&builderDigits[idx]===0){
+    const remaining=builderDigits.slice(1).some(d=>d>0);
+    if(remaining)builderDigits[0]=0; else builderDigits[0]=1;
+  }
+  document.getElementById('bdig-'+idx).textContent=builderDigits[idx];
+  updateBuilder();
+}
+
+function updateBuilder(){
+  const n=builderDigits.reduce((sum,d,i)=>sum+d*PV[i].val,0);
+
+  // Update big display
+  const ids=['bd1','bd2','bd3','bd4','bd5','bd6'];
+  builderDigits.forEach((d,i)=>{document.getElementById(ids[i]).textContent=d;});
+  for(let i=1;i<=6;i++) document.getElementById('bt'+i).textContent=builderDigits[i-1];
+
+  // Update expanded form
+  const expDiv=document.getElementById('builder-expanded');
+  const parts=[];
+  PV.forEach((pv,i)=>{
+    if(builderDigits[i]>0) parts.push({val:builderDigits[i]*pv.val,col:pv.col,bg:pv.bg});
+  });
+  if(parts.length===0){
+    expDiv.innerHTML='<span style="color:rgba(255,255,255,.4)">صفر</span>';
+  } else {
+    expDiv.innerHTML=parts.map((p,i)=>
+      `${i>0?'<span class="exp-op">+</span>':''}<span class="exp-part" style="background:${p.bg};color:${p.col}">${p.val.toLocaleString('ar-EG').replace(/٬/g,',')}</span>`
+    ).join('');
+  }
+
+  // Update Arabic reading
+  const reading=n>0?numberToArabic(n):'صفر';
+  document.getElementById('builder-reading-text').textContent=reading;
+}
+
+function setBuilderNumber(n){
+  const digits=[];
+  let temp=n;
+  for(let i=5;i>=0;i--){const d=Math.floor(temp/PV[i].val);digits[5-i]=d;temp-=d*PV[i].val;}
+  builderDigits=digits;
+  for(let i=0;i<6;i++) document.getElementById('bdig-'+i).textContent=builderDigits[i];
+  updateBuilder();
+}
+
+function randomBuilderNumber(){
+  const n=Math.floor(Math.random()*900000)+100000;
+  setBuilderNumber(n);
+}
+
+// ══════════════════════════════════════════════════════
+// SCORE TRACKING
+// ══════════════════════════════════════════════════════
+const secScores={
+  pv:{c:0,t:0,ans:new Array(5).fill(false)},
+  rw:{c:0,t:0,ans:new Array(5).fill(false)},
+  ex:{c:0,t:0,ans:new Array(5).fill(false)},
+  cmp:{c:0,t:0,ans:new Array(5).fill(false)},
+};
+
+function updateSecScore(sec){
+  const s=secScores[sec];
+  document.getElementById('sc-'+sec+'-c').textContent=s.c;
+  document.getElementById('sc-'+sec+'-t').textContent=s.t;
+  document.getElementById('sc-'+sec+'-p').textContent=s.t>0?Math.round(s.c/s.t*100)+'%':'—';
+}
+
+function answerQ(sec,qi,chosen,correct,exp){
+  const s=secScores[sec];if(s.ans[qi])return;
+  s.ans[qi]=true;s.t++;
+  const block=document.getElementById('qb-'+sec+'-'+qi);
+  const btns=block.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById('fb-'+sec+'-'+qi);
+  if(chosen===correct){
+    s.c++;btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ أحسنت! إجابة صحيحة 🌟';fb.className='fb-msg show ok';
+  } else {
+    btns[chosen].classList.add('wrong');btns[correct].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent='❌ الإجابة الصحيحة: '+btns[correct].textContent+(exp?' — '+exp:'');
+    fb.className='fb-msg show no';
+  }
+  updateSecScore(sec);
+}
+
+function buildQs(sec,qs,containerId){
+  const cont=document.getElementById(containerId);
+  cont.innerHTML='';
+  qs.forEach((q,i)=>{
+    const d=document.createElement('div');
+    d.className='q-block';d.id='qb-'+sec+'-'+i;
+    d.innerHTML=`
+      <div class="q-text"><span class="q-num">${arNum(i+1)}.</span> ${q.t}</div>
+      <div class="opts">${q.o.map((o,j)=>`<button class="opt-btn" onclick="answerQ('${sec}',${i},${j},${q.c},'${q.e||''}')">${o}</button>`).join('')}</div>
+      <div class="fb-msg" id="fb-${sec}-${i}"></div>
+    `;
+    cont.appendChild(d);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// QUESTIONS DATA
+// ══════════════════════════════════════════════════════
+const Qs={
+  pv:[
+    {t:'ما قيمة الرقم <strong style="color:var(--pv2-c);font-size:1.2em">5</strong> في العدد 2<strong style="color:var(--pv2-c)">5</strong>4,736؟',
+     o:['5,000','50,000','500,000','500'],c:1,e:'5 في مرتبة عشرات الآلاف = 5 × 10,000 = 50,000'},
+    {t:'في العدد 382,194 — ما المرتبة التي يحتلها الرقم <strong style="color:var(--pv2-c);font-size:1.2em">8</strong>؟',
+     o:['مئات الآلاف','عشرات الآلاف','آلاف','مئات'],c:1,e:'382,194 → 3=م.آ، 8=ع.آ'},
+    {t:'أيّ العدود التالية فيه الرقم <strong style="color:var(--pv1-c)">6</strong> في مرتبة مئات الآلاف؟',
+     o:['256,789','625,341','562,890','526,170'],c:1,e:'625,341: الرقم الأول 6 في مرتبة مئات الآلاف'},
+    {t:'ما قيمة الرقم <strong style="color:var(--pv3-c);font-size:1.2em">3</strong> في العدد 80<strong style="color:var(--pv3-c)">3</strong>,421؟',
+     o:['300','30,000','3,000','300,000'],c:2,e:'3 في مرتبة الآلاف = 3 × 1,000 = 3,000'},
+    {t:'في العدد 4<strong style="color:var(--pv2-c)">7</strong>9,350 — ما الرقم الذي يحتل مرتبة عشرات الآلاف؟',
+     o:['4','7','9','3'],c:1,e:'479,350: 4=م.آ، 7=ع.آ، 9=آ'},
+  ],
+  rw:[
+    {t:'ما قراءة العدد <strong>73,000</strong>؟',
+     o:['سبعة وثلاثون ألفاً','ثلاثة وسبعون ألفاً','سبعة وسبعون ألفاً','ثلاثة وسبعون مئة ألف'],c:1,e:'73 ألفاً = ثلاثة وسبعون ألفاً'},
+    {t:'أيّ عدد يمثّل "<strong>مئتا ألف وخمسمئة وعشرون</strong>"؟',
+     o:['200,052','200,520','205,200','20,520'],c:1,e:'200,000 + 520 = 200,520'},
+    {t:'ما قراءة العدد <strong>450,000</strong>؟',
+     o:['أربعة وخمسون ألفاً','أربعمئة وخمسون','أربعمئة وخمسون ألفاً','خمسة وأربعون ألفاً'],c:2,e:'450,000 = أربعمئة وخمسون ألفاً'},
+    {t:'أيّ عدد يمثّل "<strong>ستة وثمانون ألفاً وسبعمئة وأربعة</strong>"؟',
+     o:['86,740','86,074','86,704','68,704'],c:2,e:'86,000 + 700 + 4 = 86,704'},
+    {t:'ما قراءة العدد <strong>100,100</strong>؟',
+     o:['مئة وألف ومئة','مئة ألف ومئة','مئة ألف وألف','عشرة آلاف ومئة'],c:1,e:'100,000 + 100 = مئة ألف ومئة'},
+  ],
+  ex:[
+    {t:'ما الصيغة التوسيعية للعدد <strong>237,845</strong>؟',
+     o:['200,000 + 37,000 + 845',
+        '200,000 + 30,000 + 7,000 + 800 + 40 + 5',
+        '230,000 + 7,000 + 845',
+        '200,000 + 30,000 + 7,000 + 800 + 45'],c:1,e:'كل خانة على حدة: 200000+30000+7000+800+40+5'},
+    {t:'ما العدد الذي تمثّله الصيغة التوسيعية: <strong>500,000 + 40,000 + 3,000 + 200 + 70 + 6</strong>؟',
+     o:['543,276','503,276','543,267','540,276'],c:0,e:'اجمع الأجزاء: 543,276'},
+    {t:'أكمل الفراغ: <strong>369,042 = 300,000 + ___ + 9,000 + 40 + 2</strong>',
+     o:['6,000','60,000','600,000','600'],c:1,e:'369,042: الخانة الثانية 6 في عشرات الآلاف = 60,000'},
+    {t:'أيّ الصيغ التوسيعية التالية فيها صفر في مرتبة الآلاف؟',
+     o:['300,000 + 50,000 + 4,000 + 200 + 10 + 8',
+        '400,000 + 20,000 + 600 + 70 + 3',
+        '200,000 + 10,000 + 2,000 + 500',
+        '500,000 + 30,000 + 1,000 + 400 + 90'],c:1,e:'الخيار ب لا يحتوي جزء الآلاف، أي الآلاف = 0'},
+    {t:'ما الصيغة التوسيعية للعدد <strong>800,006</strong>؟',
+     o:['800,000 + 600','800,000 + 6','800,000 + 60','800,000 + 6,000'],c:1,e:'800,006: مئات الآلاف=8، آحاد=6، كل الباقي أصفار'},
+  ],
+  cmp:[
+    {t:'أيّهما أكبر: <strong>387,654</strong> أم <strong>378,654</strong>؟',
+     o:['387,654','378,654','متساويان','لا يمكن التحديد'],c:0,e:'عشرات الآلاف: 8 > 7، إذن 387,654 أكبر'},
+    {t:'أيّ علامة تكمل الجملة: <strong>520,000</strong> ___ <strong>502,000</strong>؟',
+     o:['>','<','=','لا يمكن التحديد'],c:0,e:'عشرات الآلاف: 2 > 0، إذن 520,000 أكبر'},
+    {t:'رتّب الأعداد التالية <strong>تصاعدياً</strong>: 625,300 | 625,030 | 625,003',
+     o:['625,003 &lt; 625,030 &lt; 625,300','625,300 &lt; 625,030 &lt; 625,003','625,030 &lt; 625,003 &lt; 625,300','625,003 &lt; 625,300 &lt; 625,030'],c:0,e:'قارن المئات: 3>0>0 في 625,300|030|003'},
+    {t:'ما <strong>أكبر</strong> عدد من 6 أرقام يمكن تكوينه من الأرقام: 4، 9، 1، 7، 0، 3 (كل رقم مرة واحدة)؟',
+     o:['974,310','970,431','974,301','497,310'],c:0,e:'رتّب الأرقام تنازلياً: 9-7-4-3-1-0'},
+    {t:'ما <strong>أصغر</strong> عدد من 6 أرقام يمكن تكوينه من: 5، 2، 8، 0، 6، 1؟',
+     o:['012,568','102,568','120,568','012,856'],c:1,e:'أصغر رقم غير صفري في الأول: 1، ثم 0،2،5،6،8'},
+  ],
+};
+
+// ══════════════════════════════════════════════════════
+// COMPARISON GAME
+// ══════════════════════════════════════════════════════
+let gameRound=1,gameCorrect=0,gameWrong=0,gameStreak=0,gameLocked=false,gameAnswer='';
+const TOTAL_ROUNDS=10;
+
+function generateGamePair(){
+  const r=Math.random();
+  let a,b;
+  if(r<0.1){// equal
+    a=Math.floor(Math.random()*900000)+100000;b=a;
+  } else if(r<0.55){// 6 digit vs 6 digit
+    a=Math.floor(Math.random()*900000)+100000;
+    b=Math.floor(Math.random()*900000)+100000;
+    while(a===b)b=Math.floor(Math.random()*900000)+100000;
+  } else {// close numbers
+    a=Math.floor(Math.random()*900000)+100000;
+    const diff=Math.floor(Math.random()*1000)+1;
+    b=a+(Math.random()<0.5?diff:-diff);
+    b=Math.max(100000,Math.min(999999,b));
+  }
+  return{a,b};
+}
+
+function formatCmpNum(n,id){
+  const s=n.toString().padStart(6,'0');
+  const colors=['d1','d2','d3','d4','d5','d6'];
+  let html=s.slice(0,3).split('').map((c,i)=>`<span class="d ${colors[i]}">${c}</span>`).join('');
+  html+=',';
+  html+=s.slice(3).split('').map((c,i)=>`<span class="d ${colors[i+3]}">${c}</span>`).join('');
+  document.getElementById(id).innerHTML=html;
+}
+
+function startGameRound(){
+  if(gameRound>TOTAL_ROUNDS){showGameResult();return;}
+  gameLocked=false;
+  const pair=generateGamePair();
+  window._gameA=pair.a;window._gameB=pair.b;
+  formatCmpNum(pair.a,'game-num-a');
+  formatCmpNum(pair.b,'game-num-b');
+  if(pair.a>pair.b)gameAnswer='gt';
+  else if(pair.a<pair.b)gameAnswer='lt';
+  else gameAnswer='eq';
+  document.getElementById('game-round').textContent=gameRound;
+  const fb=document.getElementById('cmp-feedback');
+  fb.className='cmp-feedback hidden';fb.textContent='';
+  ['cmp-gt-btn','cmp-eq-btn','cmp-lt-btn'].forEach(id=>document.getElementById(id).disabled=false);
+}
+
+function submitCmp(ans){
+  if(gameLocked)return;
+  gameLocked=true;
+  ['cmp-gt-btn','cmp-eq-btn','cmp-lt-btn'].forEach(id=>document.getElementById(id).disabled=true);
+  const fb=document.getElementById('cmp-feedback');
+  if(ans===gameAnswer){
+    gameCorrect++;gameStreak++;
+    const msgs=['✅ ممتاز!','✅ رائع!','✅ أحسنت!','✅ صحيح!'];
+    fb.textContent=msgs[Math.floor(Math.random()*msgs.length)];
+    fb.className='cmp-feedback show-ok';
+  } else {
+    gameWrong++;gameStreak=0;
+    const correct={gt:'>',eq:'=',lt:'<'}[gameAnswer];
+    fb.textContent=`❌ الإجابة الصحيحة: ${window._gameA.toLocaleString()} ${correct} ${window._gameB.toLocaleString()}`;
+    fb.className='cmp-feedback show-no';
+  }
+  document.getElementById('cmp-correct').textContent=gameCorrect;
+  document.getElementById('cmp-wrong').textContent=gameWrong;
+  document.getElementById('cmp-streak').textContent=gameStreak;
+  gameRound++;
+  setTimeout(()=>{startGameRound();},1800);
+}
+
+function showGameResult(){
+  const pct=Math.round(gameCorrect/TOTAL_ROUNDS*100);
+  const res=document.getElementById('game-result');
+  let html='';
+  if(pct>=80){
+    html=`<div style="text-align:center;padding:1rem">
+      <div style="font-size:52px;margin-bottom:.5rem">🏆</div>
+      <div style="font-family:'Cairo';font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:.5rem">نتيجة رائعة!</div>
+      <div style="color:var(--mu)">أجبت بشكل صحيح على <strong style="color:var(--gn)">${gameCorrect}</strong> من ${TOTAL_ROUNDS} (${pct}%)</div>
+    </div>`;
+  } else {
+    html=`<div style="text-align:center;padding:1rem">
+      <div style="font-size:48px;margin-bottom:.5rem">💪</div>
+      <div style="font-family:'Cairo';font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:.5rem">استمر في التدريب!</div>
+      <div style="color:var(--mu)">أجبت بشكل صحيح على <strong>${gameCorrect}</strong> من ${TOTAL_ROUNDS} (${pct}%)</div>
+    </div>`;
+  }
+  res.innerHTML=html;res.style.display='block';
+}
+
+function restartGame(){
+  gameRound=1;gameCorrect=0;gameWrong=0;gameStreak=0;
+  document.getElementById('cmp-correct').textContent=0;
+  document.getElementById('cmp-wrong').textContent=0;
+  document.getElementById('cmp-streak').textContent=0;
+  document.getElementById('game-result').style.display='none';
+  startGameRound();
+}
+
+// ══════════════════════════════════════════════════════
+// MASTERY TEST
+// ══════════════════════════════════════════════════════
+const masteryQs=[
+  // القيم المكانية (0-2)
+  {topic:'pv',t:'[القيم المكانية] ما قيمة الرقم <strong style="color:var(--pv2-c)">9</strong> في العدد 1<strong style="color:var(--pv2-c)">9</strong>0,435؟',
+   o:['9,000','90,000','900,000','900'],c:1,e:'9 في عشرات الآلاف = 90,000'},
+  {topic:'pv',t:'[القيم المكانية] في العدد 563,820 — ما الرقم الذي يحتل مرتبة مئات الآلاف؟',
+   o:['6','5','3','8'],c:1,e:'563,820: الرقم الأول من اليسار 5 في مرتبة مئات الآلاف'},
+  {topic:'pv',t:'[القيم المكانية] كم عدد أرقام العدد "خمسة وسبعون ألفاً وثلاثمئة" = 75,300؟',
+   o:['4 أرقام','5 أرقام','6 أرقام','7 أرقام'],c:1,e:'75,300 يتكون من 5 أرقام'},
+  // القراءة والكتابة (3-5)
+  {topic:'rw',t:'[القراءة] ما قراءة العدد <strong>340,000</strong>؟',
+   o:['ثلاثة وأربعون ألفاً','ثلاثمئة وأربعون','ثلاثمئة وأربعون ألفاً','ثلاثة وأربعون مئة ألف'],c:2,e:'340,000 = ثلاثمئة وأربعون ألفاً'},
+  {topic:'rw',t:'[القراءة] أيّ عدد يمثّل "<strong>سبعمئة ألف وثمانون</strong>"؟',
+   o:['700,800','700,080','70,080','700,008'],c:1,e:'700,000 + 80 = 700,080'},
+  {topic:'rw',t:'[القراءة] ما قراءة العدد <strong>15,400</strong>؟',
+   o:['خمسة عشر ألفاً وأربعون','خمسة عشر ألفاً وأربعمئة','خمسون ألفاً وأربعمئة','خمسة عشر ألفاً وأربع'],c:1,e:'15,000 + 400 = خمسة عشر ألفاً وأربعمئة'},
+  // الصيغة التوسيعية (6-8)
+  {topic:'ex',t:'[الصيغة التوسيعية] ما الصيغة التوسيعية للعدد <strong>708,050</strong>؟',
+   o:['700,000 + 800 + 50','700,000 + 80,000 + 50','700,000 + 8,000 + 50','700,000 + 8,000 + 500'],c:2,e:'7=م.آ، 0=ع.آ، 8=آ، 0=م، 5=ع، 0=أ → 700,000+8,000+50'},
+  {topic:'ex',t:'[الصيغة التوسيعية] ما العدد: <strong>600,000 + 70,000 + 500 + 30 + 1</strong>؟',
+   o:['670,531','607,531','670,351','607,035'],c:0,e:'600,000+70,000+500+30+1 = 670,531'},
+  {topic:'ex',t:'[الصيغة التوسيعية] أكمل: <strong>482,067 = 400,000 + 80,000 + ___ + 60 + 7</strong>',
+   o:['200','2,000','20,000','200,000'],c:1,e:'482,067: خانة الآلاف = 2 → 2,000'},
+  // المقارنة (9-11)
+  {topic:'cmp',t:'[المقارنة] أيّ علامة تكمل: <strong>749,999</strong> ___ <strong>750,000</strong>؟',
+   o:['>','<','=','لا يمكن'],c:1,e:'عشرات الآلاف: 4 < 5 → 749,999 أصغر'},
+  {topic:'cmp',t:'[المقارنة] أيّهما أكبر: <strong>899,999</strong> أم <strong>900,000</strong>؟',
+   o:['899,999','900,000','متساويان','لا يمكن'],c:1,e:'مئات الآلاف: 8 < 9 → 900,000 أكبر'},
+  {topic:'cmp',t:'[المقارنة] رتّب <strong>تنازلياً</strong>: 405,000 | 450,000 | 504,000',
+   o:['504,000 > 450,000 > 405,000','405,000 > 450,000 > 504,000','450,000 > 504,000 > 405,000','405,000 > 504,000 > 450,000'],c:0,e:'مئات الآلاف: 5>4>4، ثم عشرات الآلاف 0>5 → 504>450>405'},
+  // تطبيقي (12-14)
+  {topic:'app',t:'[تطبيقي] محمد لديه <strong>345,000</strong> جنيه وأحمد لديه <strong>354,000</strong> جنيه. مَن يملك مالاً أكثر؟',
+   o:['محمد','أحمد','متساويان','لا يمكن التحديد'],c:1,e:'عشرات الآلاف: 5 > 4 → أحمد يملك أكثر'},
+  {topic:'app',t:'[تطبيقي] ما العدد الذي يأتي مباشرةً بعد <strong>299,999</strong>؟',
+   o:['299,998','300,000','299,000','300,001'],c:1,e:'299,999 + 1 = 300,000'},
+  {topic:'app',t:'[تطبيقي] ما مجموع قيمة الرقم 7 في مرتبة مئات الآلاف وقيمة الرقم 3 في مرتبة الآلاف؟',
+   o:['703','73,000','703,000','7,300'],c:2,e:'7 في م.آ = 700,000 و 3 في آ = 3,000 → مجموعهما 703,000'},
+];
+
+const masteryAnswers=new Array(15).fill(null);
+let masteryAnswered=0;
+
+function buildMasteryQs(){
+  const cont=document.getElementById('q-mastery');
+  cont.innerHTML='';
+  const topicDividers={pv:'📐 القيم المكانية',rw:'🔤 القراءة والكتابة',ex:'📝 الصيغة التوسيعية',cmp:'⚖️ المقارنة والترتيب',app:'🧮 التطبيق والمسائل'};
+  let lastTopic='';
+  masteryQs.forEach((q,i)=>{
+    if(q.topic!==lastTopic){
+      lastTopic=q.topic;
+      const div=document.createElement('div');
+      div.className='sec-div';
+      div.innerHTML=`<div class="sec-div-line"></div><div class="sec-div-label">${topicDividers[q.topic]}</div><div class="sec-div-line"></div>`;
+      cont.appendChild(div);
+    }
+    const block=document.createElement('div');
+    block.className='q-block';block.id='mqb-'+i;
+    block.innerHTML=`
+      <div class="q-text"><span class="q-num">${arNum(i+1)}.</span> ${q.t}</div>
+      <div class="opts">${q.o.map((o,j)=>`<button class="opt-btn" id="mopt-${i}-${j}" onclick="answerMastery(${i},${j})">${o}</button>`).join('')}</div>
+    `;
+    cont.appendChild(block);
+  });
+  document.getElementById('submit-mastery-btn').style.display='flex';
+}
+
+function answerMastery(qi,chosen){
+  const allBtns=document.querySelectorAll(`[id^="mopt-${qi}-"]`);
+  allBtns.forEach(b=>{b.style.borderColor='';b.style.background='';b.style.color='';});
+  const wasAnswered=(masteryAnswers[qi]!==null);
+  masteryAnswers[qi]=chosen;
+  allBtns[chosen].style.borderColor='var(--gold)';
+  allBtns[chosen].style.background='var(--gold-lt)';
+  allBtns[chosen].style.color='#78350F';
+  if(!wasAnswered)masteryAnswered++;
+  const pct=(masteryAnswered/15)*100;
+  document.getElementById('m-prog-bar').style.width=pct+'%';
+  document.getElementById('m-prog-text').textContent=masteryAnswered+' / 15';
+}
+
+function submitMastery(){
+  const topicOrder=['pv','rw','ex','cmp','app'];
+  const topicNames={pv:'القيم المكانية',rw:'القراءة والكتابة',ex:'الصيغة التوسيعية',cmp:'المقارنة والترتيب',app:'التطبيق والمسائل'};
+  const topicIcons={pv:'📐',rw:'🔤',ex:'📝',cmp:'⚖️',app:'🧮'};
+  const topicColors={pv:getComputedStyle(document.documentElement).getPropertyValue('--pv1-c'),
+                     rw:getComputedStyle(document.documentElement).getPropertyValue('--pv2-c'),
+                     ex:getComputedStyle(document.documentElement).getPropertyValue('--pv3-c'),
+                     cmp:getComputedStyle(document.documentElement).getPropertyValue('--pv5-c'),
+                     app:getComputedStyle(document.documentElement).getPropertyValue('--pv4-c')};
+
+  let totalCorrect=0;
+  masteryQs.forEach((q,i)=>{
+    const chosen=masteryAnswers[i];
+    const allBtns=document.querySelectorAll(`[id^="mopt-${i}-"]`);
+    allBtns.forEach(b=>{b.disabled=true;b.style.borderColor='';b.style.background='';b.style.color='';});
+    if(chosen!==null){
+      if(chosen===q.c){totalCorrect++;allBtns[chosen].classList.add('correct');document.getElementById('mqb-'+i).classList.add('ok');}
+      else{allBtns[chosen].classList.add('wrong');allBtns[q.c].classList.add('correct');document.getElementById('mqb-'+i).classList.add('no');}
+    } else {allBtns[q.c].classList.add('correct');}
+  });
+
+  const topicScores={};
+  let qIdx=0;
+  topicOrder.forEach(t=>{
+    const cnt=masteryQs.filter(q=>q.topic===t).length;
+    let s=0;
+    masteryQs.forEach((q,i)=>{if(q.topic===t&&masteryAnswers[i]===q.c)s++;});
+    topicScores[t]=s;
+  });
+
+  const totalPct=Math.round(totalCorrect/15*100);
+  const res=document.getElementById('mastery-result');
+
+  let html='';
+  if(totalPct>=80){
+    html+=`<div class="cert">
+      <div style="font-size:64px;margin-bottom:.5rem">🏆</div>
+      <h2>تهانينا! أتقنت الدرس!</h2>
+      <p style="font-size:1.05rem;margin:.5rem 0">نتيجتك الإجمالية: <strong style="color:var(--gold)">${totalCorrect} / 15</strong> (${totalPct}%)</p>
+      <p>أنت تفهم الأعداد الكبيرة جيداً جداً 🌟</p>
+      <div class="cert-stars">⭐⭐⭐</div>
+    </div>`;
+  } else {
+    html+=`<div style="background:var(--navy2);border:2px solid var(--gold);border-radius:20px;padding:1.5rem;text-align:center;margin-top:1rem">
+      <div style="font-size:48px;margin-bottom:.5rem">💪</div>
+      <h2 style="font-family:'Cairo';color:var(--gold);margin-bottom:.5rem">استمر في المراجعة!</h2>
+      <p style="color:rgba(255,255,255,.8)">نتيجتك: <strong>${totalCorrect} / 15</strong> (${totalPct}%) — تحتاج إلى 80% للنجاح</p>
+    </div>`;
+  }
+
+  html+=`<div style="margin-top:1.5rem">
+    <div style="font-family:'Cairo';font-size:1.05rem;font-weight:700;color:var(--txt);margin-bottom:1rem">📋 تحليل مستواك في كل موضوع:</div>`;
+
+  topicOrder.forEach(t=>{
+    const s=topicScores[t];
+    const total=masteryQs.filter(q=>q.topic===t).length;
+    const lv=getLevel(s,total);
+    const fillPct=Math.round(s/total*100);
+    html+=`<div class="trc">
+      <div class="trc-icon">${topicIcons[t]}</div>
+      <div class="trc-info">
+        <div class="trc-name">${topicNames[t]}</div>
+        <div class="trc-fill">
+          <div class="trc-bar" style="width:${fillPct}%;background:${topicColors[t].trim()}"></div>
+        </div>
+        <div style="font-size:12px;color:var(--mu)">أجبت بشكل صحيح على ${s} من ${total}</div>
+      </div>
+      <div><span class="lv-badge ${lv.cls}">${lv.text}</span></div>
+    </div>`;
+  });
+
+  const weak=topicOrder.filter(t=>topicScores[t]<Math.ceil(masteryQs.filter(q=>q.topic===t).length*0.67));
+  if(weak.length>0){
+    html+=`<div class="info-box ib-gold" style="margin-top:1rem">
+      <strong>💡 توصيات:</strong><br>
+      ${weak.map(t=>`• راجع موضوع <strong>${topicNames[t]}</strong> مرة أخرى`).join('<br>')}
+    </div>`;
+  }
+
+  html+=`</div><div class="btn-group" style="margin-top:1rem">
+    <button class="btn btn-gold" onclick="retryMastery()">🔄 أعد الاختبار</button>
+    <button class="btn btn-navy" onclick="showTab('explore')">📖 راجع الدرس</button>
+  </div>`;
+
+  res.innerHTML=html;res.style.display='block';
+  document.getElementById('submit-mastery-btn').style.display='none';
+  document.getElementById('m-prog-bar').style.width='100%';
+  document.getElementById('m-prog-text').textContent='15 / 15';
+}
+
+function retryMastery(){
+  masteryAnswers.fill(null);masteryAnswered=0;
+  document.getElementById('mastery-result').style.display='none';
+  document.getElementById('m-prog-bar').style.width='0%';
+  document.getElementById('m-prog-text').textContent='0 / 15';
+  buildMasteryQs();
+}
+
+// ══════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════
+function getLevel(s,total){
+  const p=s/total;
+  if(p>=0.9)return{cls:'lv3',text:'متقن ⭐⭐⭐'};
+  if(p>=0.67)return{cls:'lv2',text:'جيد جداً ⭐⭐'};
+  if(p>=0.34)return{cls:'lv1',text:'يحتاج مراجعة ⭐'};
+  return{cls:'lv0',text:'يحتاج تدريباً إضافياً'};
+}
+
+function showTab(name){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.getElementById('tab-btn-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function arNum(n){return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d])}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+window.onload=function(){
+  initStars();
+  initBuilder();
+  buildQs('pv',Qs.pv,'q-pv');
+  buildQs('rw',Qs.rw,'q-rw');
+  buildQs('ex',Qs.ex,'q-ex');
+  buildQs('cmp',Qs.cmp,'q-cmp');
+  buildMasteryQs();
+  startGameRound();
+};
+</script>
+</body>
+</html>
