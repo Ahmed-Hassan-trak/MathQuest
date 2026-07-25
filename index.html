@@ -238,6 +238,19 @@
   }
   .lesson-title{ font-size:0.95rem; line-height:1.5; }
  
+  .lesson-link.locked{ position:relative; }
+  .lesson-link.locked .lesson-num{ background: rgba(243,239,227,0.08); }
+  .lesson-link.locked::after{
+    content:"🔒";
+    margin-inline-start:auto;
+    font-size:0.85rem;
+    opacity:0.75;
+    flex:none;
+  }
+  .lesson-link.locked:hover, .lesson-link.locked:focus-visible{
+    border-color: var(--chalk-yellow);
+  }
+ 
   .c1{ --accent: var(--chalk-teal); }
   .c2{ --accent: var(--chalk-coral); }
   .c3{ --accent: var(--chalk-violet); }
@@ -290,6 +303,124 @@
     .compass-path{ animation:none; stroke-dashoffset:0; }
     .doodle{ animation:none; opacity:1; }
     .cta, .lesson-link{ transition:none; }
+  }
+ 
+  /* ================= PAYWALL MODAL ================= */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:50;
+    background: rgba(10,14,11,0.72);
+    backdrop-filter: blur(3px);
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+    opacity:0; visibility:hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+  .modal-overlay.open{ opacity:1; visibility:visible; }
+  .modal-box{
+    position:relative;
+    width:min(440px, 100%);
+    background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+    border:1px solid var(--line-soft);
+    border-radius:20px;
+    padding:32px 28px 28px;
+    text-align:center;
+    box-shadow: 0 30px 60px -18px var(--shadow-deep);
+    transform: translateY(14px) scale(0.97);
+    transition: transform 0.25s ease;
+  }
+  .modal-overlay.open .modal-box{ transform:translateY(0) scale(1); }
+  .modal-close{
+    position:absolute; top:14px; left:14px;
+    width:32px; height:32px;
+    border-radius:50%;
+    border:1px solid var(--line-soft);
+    background:transparent;
+    color:var(--chalk-white-dim);
+    font-size:1.1rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .modal-close:hover{ background: rgba(243,239,227,0.08); color:var(--chalk-white); }
+  .modal-lock{
+    width:56px; height:56px;
+    margin:0 auto 16px;
+    border-radius:50%;
+    background: rgba(242,193,78,0.12);
+    border:2px solid var(--chalk-yellow);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem;
+  }
+  .modal-box h3{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:700;
+    font-size:1.4rem;
+    margin:0 0 10px;
+    color:var(--chalk-white);
+  }
+  .modal-box p{
+    color:var(--chalk-white-dim);
+    font-size:0.98rem;
+    line-height:1.85;
+    margin:0 0 20px;
+  }
+  .modal-offer{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    margin:0 0 22px;
+    flex-wrap:wrap;
+  }
+  .modal-offer .old-price{
+    font-family:"Cairo", sans-serif;
+    font-size:1.1rem;
+    color:var(--chalk-white-dim);
+    text-decoration:line-through;
+    opacity:0.7;
+  }
+  .modal-offer .new-price{
+    font-family:"Cairo", sans-serif;
+    font-weight:800;
+    font-size:1.9rem;
+    color:var(--chalk-yellow);
+  }
+  .modal-offer .currency{ font-size:1rem; font-weight:600; }
+  .modal-badge{
+    display:inline-block;
+    font-family:"Cairo", sans-serif;
+    font-weight:700;
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    color:var(--bg-2);
+    background:var(--chalk-coral);
+    padding:5px 12px;
+    border-radius:20px;
+    margin-bottom:16px;
+  }
+  .modal-cta{
+    display:block;
+    width:100%;
+    font-family:"Cairo", sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    color:var(--bg-2);
+    background:var(--chalk-yellow);
+    padding:14px 20px;
+    border-radius:40px;
+    text-decoration:none;
+    border:2px solid var(--chalk-yellow);
+    cursor:pointer;
+    box-shadow: 0 10px 24px -8px rgba(242,193,78,0.45);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    margin-bottom:12px;
+  }
+  .modal-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 28px -8px rgba(242,193,78,0.55); }
+  .modal-dismiss{
+    display:inline-block;
+    background:none; border:none;
+    color:var(--chalk-white-dim);
+    font-size:0.85rem;
+    text-decoration:underline;
+    cursor:pointer;
+    padding:6px;
   }
 </style>
 </head>
@@ -415,43 +546,43 @@
         <h3>الفصل الثالث</h3>
       </div>
       <div class="lesson-grid">
-        <a class="lesson-link c3" href="Ch3_Lesson1.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson1.html">
           <span class="lesson-num">١</span>
           <span class="lesson-title">مسائل كلامية على الضرب</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson2.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson2.html">
           <span class="lesson-num">٢</span>
           <span class="lesson-title">تطبيقات حياتية على الضرب</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson3.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson3.html">
           <span class="lesson-num">٣</span>
           <span class="lesson-title">مضاعفات العددين ٢، ٣</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson4.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson4.html">
           <span class="lesson-num">٤</span>
           <span class="lesson-title">مضاعفات العددين ١٠، ٥</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson5.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson5.html">
           <span class="lesson-num">٥</span>
           <span class="lesson-title">عوامل العدد باستخدام المصفوفات</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson6.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson6.html">
           <span class="lesson-num">٦</span>
           <span class="lesson-title">الوقت</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson7.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson7.html">
           <span class="lesson-num">٧</span>
           <span class="lesson-title">تطبيقات حياتية على الوقت</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson8.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson8.html">
           <span class="lesson-num">٨</span>
           <span class="lesson-title">مفهوم القسمة</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson9.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson9.html">
           <span class="lesson-num">٩</span>
           <span class="lesson-title">تطبيقات حياتية على القسمة</span>
         </a>
-        <a class="lesson-link c3" href="Ch3_Lesson10.html">
+        <a class="lesson-link c3 locked" href="Ch3_Lesson10.html">
           <span class="lesson-num">١٠</span>
           <span class="lesson-title">العلاقة بين الضرب والقسمة</span>
         </a>
@@ -463,31 +594,31 @@
         <h3>الفصل الرابع</h3>
       </div>
       <div class="lesson-grid">
-        <a class="lesson-link c4" href="Ch4_Lesson1.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson1.html">
           <span class="lesson-num">١</span>
           <span class="lesson-title">المضلعات</span>
         </a>
-        <a class="lesson-link c4" href="Ch4_Lesson2.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson2.html">
           <span class="lesson-num">٢</span>
           <span class="lesson-title">خواص الأشكال الرباعية</span>
         </a>
-        <a class="lesson-link c4" href="Ch4_Lesson3.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson3.html">
           <span class="lesson-num">٣</span>
           <span class="lesson-title">المساحة</span>
         </a>
-        <a class="lesson-link c4" href="Ch4_Lesson4.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson4.html">
           <span class="lesson-num">٤</span>
           <span class="lesson-title">مستطيلات متساوية المساحة</span>
         </a>
-        <a class="lesson-link c4" href="Ch4_Lesson5.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson5.html">
           <span class="lesson-num">٥</span>
           <span class="lesson-title">المساحة باستخدام النماذج</span>
         </a>
-        <a class="lesson-link c4" href="Ch4_Lesson6.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson6.html">
           <span class="lesson-num">٦</span>
           <span class="lesson-title">المساحة بتقسيم المصفوفات</span>
         </a>
-        <a class="lesson-link c4" href="Ch4_Lesson7.html">
+        <a class="lesson-link c4 locked" href="Ch4_Lesson7.html">
           <span class="lesson-num">٧</span>
           <span class="lesson-title">خاصية التوزيع في الضرب</span>
         </a>
@@ -499,35 +630,35 @@
         <h3>الفصل الخامس</h3>
       </div>
       <div class="lesson-grid">
-        <a class="lesson-link c1" href="Ch5_Lesson1.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson1.html">
           <span class="lesson-num">١</span>
           <span class="lesson-title">محيط المضلعات</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson2.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson2.html">
           <span class="lesson-num">٢</span>
           <span class="lesson-title">المحيط والمساحة</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson3.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson3.html">
           <span class="lesson-num">٣</span>
           <span class="lesson-title">المساحة باستخدام الأبعاد</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson4.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson4.html">
           <span class="lesson-num">٤</span>
           <span class="lesson-title">المساحة باستراتيجيات متنوعة</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson5.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson5.html">
           <span class="lesson-num">٥</span>
           <span class="lesson-title">محيطات مختلفة لنفس المساحة</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson6.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson6.html">
           <span class="lesson-num">٦</span>
           <span class="lesson-title">مساحات مختلفة لنفس المحيط</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson7.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson7.html">
           <span class="lesson-num">٧</span>
           <span class="lesson-title">تطبيقات حياتية على المحيط والمساحة</span>
         </a>
-        <a class="lesson-link c1" href="Ch5_Lesson8.html">
+        <a class="lesson-link c1 locked" href="Ch5_Lesson8.html">
           <span class="lesson-num">٨</span>
           <span class="lesson-title">الضرب في مضاعفات العدد ١٠</span>
         </a>
@@ -539,39 +670,39 @@
         <h3>الفصل السادس</h3>
       </div>
       <div class="lesson-grid">
-        <a class="lesson-link c2" href="Ch6_Lesson1.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson1.html">
           <span class="lesson-num">١</span>
           <span class="lesson-title">أنماط الضرب في مضاعفات العدد ١٠</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson2.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson2.html">
           <span class="lesson-num">٢</span>
           <span class="lesson-title">استراتيجيات الضرب في العدد ٩</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson3.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson3.html">
           <span class="lesson-num">٣</span>
           <span class="lesson-title">حقائق الضرب والجمع</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson4.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson4.html">
           <span class="lesson-num">٤</span>
           <span class="lesson-title">مقارنة وترتيب الأعداد بصيغ متنوعة</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson5.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson5.html">
           <span class="lesson-num">٥</span>
           <span class="lesson-title">استراتيجيات الجمع</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson6.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson6.html">
           <span class="lesson-num">٦</span>
           <span class="lesson-title">استراتيجيات الطرح</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson7.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson7.html">
           <span class="lesson-num">٧</span>
           <span class="lesson-title">تطبيقات حياتية على الجمع والطرح</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson8.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson8.html">
           <span class="lesson-num">٨</span>
           <span class="lesson-title">السعة</span>
         </a>
-        <a class="lesson-link c2" href="Ch6_Lesson9.html">
+        <a class="lesson-link c2 locked" href="Ch6_Lesson9.html">
           <span class="lesson-num">٩</span>
           <span class="lesson-title">قراءة السعة</span>
         </a>
@@ -603,6 +734,61 @@
   <span>صُمم لمساعدة طلابنا على تعلّم الرياضيات بمتعة</span>
 </footer>
  
+<div class="modal-overlay" id="paywallModal" role="dialog" aria-modal="true" aria-labelledby="paywallTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalCloseBtn" aria-label="إغلاق">✕</button>
+    <div class="modal-lock" aria-hidden="true">🔒</div>
+    <span class="modal-badge">عرض لمدة محدودة</span>
+    <h3 id="paywallTitle">افتحوا باقي المنهج لطفلكم</h3>
+    <p>الدرس ده جزء من باقي فصول Math Quest. اشتركوا دلوقتي واحصلوا على كل الفصول والدروس والتمارين التفاعلية كاملة، بسعر خاص لفترة محدودة.</p>
+    <div class="modal-offer">
+      <span class="old-price">٢٠٠ <span class="currency">جنيه</span></span>
+      <span class="new-price">١٥٠ <span class="currency">جنيه</span></span>
+    </div>
+    <a class="modal-cta" href="#" id="modalBuyBtn">اشترك دلوقتي بالعرض</a>
+    <button class="modal-dismiss" id="modalLaterBtn">مش دلوقتي، أكمل تصفح</button>
+  </div>
+</div>
+ 
+<script>
+  (function(){
+    var modal = document.getElementById('paywallModal');
+    var closeBtn = document.getElementById('modalCloseBtn');
+    var laterBtn = document.getElementById('modalLaterBtn');
+    var lockedLinks = document.querySelectorAll('.lesson-link.locked');
+ 
+    function openModal(){
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+ 
+    lockedLinks.forEach(function(link){
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        openModal();
+      });
+    });
+ 
+    closeBtn.addEventListener('click', closeModal);
+    laterBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+ 
+    // TODO: غيّر رابط زرار "اشترك دلوقتي" ده لرابط صفحة الدفع/الشراء الفعلية
+    document.getElementById('modalBuyBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      alert('من فضلك ضيف هنا رابط صفحة الاشتراك أو الدفع الخاصة بيك.');
+    });
+  })();
+</script>
+ 
 </body>
 </html>
- 
