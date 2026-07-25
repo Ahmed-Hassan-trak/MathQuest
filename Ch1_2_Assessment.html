@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقييم الفصلين الأول والثاني — الصف الثالث الابتدائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --t1:#7C3AED; --t1l:#EDE9FE; --t1d:#5B21B6;
+  --t2:#0369A1; --t2l:#E0F2FE; --t2d:#0C4A6E;
+  --t3:#0E7490; --t3l:#CFFAFE; --t3d:#164E63;
+  --t4:#047857; --t4l:#D1FAE5; --t4d:#064E3B;
+  --t5:#B45309; --t5l:#FEF3C7; --t5d:#78350F;
+  --t6:#B91C1C; --t6l:#FEE2E2; --t6d:#7F1D1D;
+  --navy:#0F172A; --navy2:#1E293B;
+  --gold:#F59E0B; --gold-lt:#FEF3C7;
+  --bg:#F1F5F9; --sur:#FFFFFF;
+  --txt:#0F172A; --mu:#64748B; --br:#E2E8F0;
+  --succ:#16A34A; --succ-lt:#DCFCE7;
+  --err:#DC2626;  --err-lt:#FEE2E2;
+  --rad:14px; --sh:0 4px 20px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--txt);direction:rtl;min-height:100vh}
+
+/* ── HEADER ── */
+.app-header{background:var(--navy);padding:1.25rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.app-logo{display:flex;align-items:center;gap:10px}
+.app-logo-icon{font-size:28px}
+.app-logo-text{font-family:'Cairo',sans-serif;font-weight:900;color:#fff;font-size:1.05rem}
+.app-logo-sub{font-size:12px;color:rgba(255,255,255,.55)}
+.home-site-btn{display:inline-flex;align-items:center;gap:6px;
+  padding:.5rem 1rem;border-radius:30px;
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);
+  color:#fff;text-decoration:none;font-size:13px;font-weight:700;
+  font-family:'Tajawal',sans-serif;transition:all .2s;white-space:nowrap}
+.home-site-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4);transform:translateY(-2px)}
+.home-site-btn svg{width:15px;height:15px;flex-shrink:0}
+.overall-progress-wrap{display:flex;align-items:center;gap:10px}
+.ov-label{font-size:13px;color:rgba(255,255,255,.65);font-weight:600}
+.ov-bar{width:140px;height:8px;background:rgba(255,255,255,.15);border-radius:10px;overflow:hidden}
+.ov-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--t1));border-radius:10px;transition:width .5s ease}
+.ov-pct{font-size:13px;color:var(--gold);font-weight:800;min-width:34px}
+
+/* ── SIDEBAR + LAYOUT ── */
+.app-body{display:flex;min-height:calc(100vh - 66px)}
+.sidebar{width:240px;background:var(--navy2);flex-shrink:0;padding:1rem .75rem;
+  position:sticky;top:0;height:calc(100vh - 66px);overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}
+.sidebar-label{font-size:11px;font-weight:800;color:rgba(255,255,255,.4);
+  letter-spacing:.08em;text-transform:uppercase;padding:.5rem .5rem .25rem;margin-top:.5rem}
+.nav-item{display:flex;align-items:center;gap:10px;padding:.65rem .75rem;
+  border-radius:10px;cursor:pointer;transition:all .2s;margin-bottom:2px;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,.65);position:relative}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-item.active{color:#fff;font-weight:800}
+.nav-item .nav-icon{font-size:16px;flex-shrink:0}
+.nav-item .nav-badge{margin-right:auto;font-size:11px;font-weight:800;
+  padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.1)}
+.nav-item .nav-score{margin-right:auto;font-size:11px;font-weight:800;
+  padding:2px 8px;border-radius:10px;display:none}
+.nav-item .nav-check{margin-right:auto;font-size:14px;display:none}
+.nav-item.topic-done .nav-score{display:block}
+.nav-item.topic-done .nav-badge{display:none}
+.nav-item.topic-done .nav-check{display:block}
+
+/* ── MAIN CONTENT ── */
+.main{flex:1;padding:1.5rem;max-width:860px;overflow-x:hidden}
+.page{display:none}
+.page.active{display:block}
+
+/* ── STUDENT INFO PAGE ── */
+.welcome-card{background:linear-gradient(135deg,var(--navy),#1E3A5F);
+  border-radius:20px;padding:2.5rem;margin-bottom:1.5rem;text-align:center;
+  border:1px solid rgba(255,255,255,.08)}
+.welcome-card h1{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;
+  color:#fff;margin-bottom:.5rem}
+.welcome-card p{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:1.5rem}
+.student-input{width:100%;max-width:340px;padding:14px 18px;
+  border:2px solid rgba(255,255,255,.15);border-radius:12px;
+  background:rgba(255,255,255,.08);color:#fff;
+  font-family:'Tajawal',sans-serif;font-size:16px;font-weight:600;text-align:center}
+.student-input::placeholder{color:rgba(255,255,255,.4)}
+.student-input:focus{outline:none;border-color:var(--gold)}
+
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem}
+.ov-card{background:var(--sur);border-radius:var(--rad);padding:1.25rem;
+  box-shadow:var(--sh);text-align:center;border:1px solid var(--br)}
+.ov-card .ovc-icon{font-size:28px;margin-bottom:.4rem}
+.ov-card .ovc-label{font-size:12px;color:var(--mu);margin-bottom:.2rem}
+.ov-card .ovc-val{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:900}
+
+/* ── TOPIC PAGE ── */
+.topic-header{border-radius:16px;padding:1.25rem 1.5rem;
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:14px;color:#fff}
+.topic-header .th-icon{font-size:36px}
+.topic-header .th-title{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:800}
+.topic-header .th-sub{font-size:13px;opacity:.8;margin-top:2px}
+.topic-header .th-progress{margin-right:auto;text-align:left}
+.th-pbar{width:100px;height:6px;background:rgba(255,255,255,.2);border-radius:10px;overflow:hidden;margin-top:4px}
+.th-pfill{height:100%;background:rgba(255,255,255,.9);border-radius:10px;transition:width .4s}
+
+/* ── CHART DISPLAY ── */
+.chart-box{background:var(--sur);border-radius:var(--rad);padding:1.25rem;
+  margin-bottom:1.25rem;box-shadow:var(--sh);border:1px solid var(--br)}
+.chart-title-text{text-align:center;font-family:'Cairo',sans-serif;font-size:14px;
+  font-weight:700;color:var(--txt);margin-bottom:1rem}
+.bar-chart-wrap{display:flex;align-items:flex-end;height:160px;gap:0;
+  border-bottom:2px solid #374151;border-right:2px solid #374151;
+  position:relative;direction:ltr;padding-right:2px;margin:0 36px 0 8px}
+.b-group{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;padding:0 6px}
+.b-bar{width:100%;max-width:52px;border-radius:5px 5px 0 0;position:relative}
+.b-val{position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  font-size:11px;font-weight:800;color:var(--txt);white-space:nowrap}
+.b-lbl{margin-top:5px;font-size:11px;color:var(--mu);text-align:center;direction:rtl}
+.y-axis{position:absolute;right:-36px;top:0;height:100%;
+  display:flex;flex-direction:column;justify-content:space-between;padding-bottom:1px}
+.y-val{font-size:10px;color:var(--mu)}
+.gridlines{position:absolute;inset:0;pointer-events:none}
+.gline{position:absolute;left:0;right:0;border-top:1px dashed #E2E8F0}
+
+.dot-plot-wrap{overflow-x:auto}
+.dp-inner{display:flex;align-items:flex-end;min-width:320px}
+.dp-col{display:flex;flex-direction:column-reverse;align-items:center;flex:1;min-width:48px}
+.dp-dot{width:22px;height:22px;border-radius:50%;margin-bottom:3px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:12px;transition:transform .15s}
+.dp-dot:hover{transform:scale(1.25)}
+.dp-axis{border-top:2.5px solid var(--txt);width:100%;margin-top:3px;
+  display:flex;align-items:center;justify-content:center;padding-top:4px;
+  font-size:13px;font-weight:700}
+
+/* ── LEVEL SECTIONS ── */
+.level-header{display:flex;align-items:center;gap:10px;margin:1.25rem 0 .75rem;
+  padding:.65rem 1rem;border-radius:10px;border-right:4px solid}
+.lh-badge{font-size:12px;font-weight:800;padding:3px 12px;border-radius:20px}
+.lh-title{font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700}
+.lh-score{margin-right:auto;font-size:13px;font-weight:700}
+.level-basic .level-header{background:#F8F5FF;border-color:var(--t1);color:var(--t1d)}
+.level-mid   .level-header{background:#FFF8E1;border-color:var(--t5);color:var(--t5d)}
+.level-adv   .level-header{background:#FEE2E2;border-color:var(--t6);color:var(--t6d)}
+.lh-badge-basic{background:var(--t1l);color:var(--t1d)}
+.lh-badge-mid{background:var(--t5l);color:var(--t5d)}
+.lh-badge-adv{background:var(--err-lt);color:var(--t6d)}
+
+/* ── QUESTION BLOCKS ── */
+.q-block{background:var(--sur);border:1.5px solid var(--br);border-radius:12px;
+  padding:1.1rem 1.25rem;margin-bottom:.85rem;transition:all .2s}
+.q-block.ok{border-color:var(--succ);background:var(--succ-lt)}
+.q-block.no{border-color:var(--err);background:var(--err-lt)}
+.q-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.q-num-badge{width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;color:#fff;margin-top:1px}
+.q-text{font-size:14px;font-weight:600;color:var(--txt);line-height:1.65;flex:1}
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opt{border:1.5px solid var(--br);border-radius:8px;padding:8px 12px;
+  background:var(--sur);font-family:'Tajawal',sans-serif;font-size:13px;
+  color:var(--txt);cursor:pointer;transition:all .15s;text-align:center;line-height:1.4}
+.opt:hover:not(:disabled){border-color:var(--t1);background:var(--t1l);color:var(--t1d)}
+.opt.correct{border-color:var(--succ)!important;background:var(--succ-lt)!important;
+  color:var(--succ)!important;font-weight:700}
+.opt.wrong{border-color:var(--err)!important;background:var(--err-lt)!important;
+  color:var(--err)!important;font-weight:700}
+.opt:disabled{cursor:not-allowed}
+.q-fb{margin-top:8px;padding:6px 12px;border-radius:8px;font-size:13px;
+  font-weight:600;display:none}
+.q-fb.show{display:block}
+.q-fb.ok{background:var(--succ-lt);color:var(--succ)}
+.q-fb.no{background:var(--err-lt);color:var(--err)}
+
+/* ── TOPIC SCORE SUMMARY ── */
+.topic-summary{background:linear-gradient(135deg,var(--navy),var(--navy2));
+  border-radius:16px;padding:1.5rem;margin-top:1.5rem;color:#fff;text-align:center;
+  display:none}
+.ts-num{font-family:'Cairo',sans-serif;font-size:3rem;font-weight:900;color:var(--gold)}
+.ts-label{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:1rem}
+.ts-level-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:1rem}
+.ts-level-card{background:rgba(255,255,255,.07);border-radius:10px;padding:.75rem;text-align:center}
+.ts-level-name{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:3px}
+.ts-level-score{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:800}
+
+/* ── FINAL ASSESSMENT ── */
+.final-banner{background:linear-gradient(135deg,#1A0A3C,#0F172A);
+  border-radius:16px;padding:1.5rem;margin-bottom:1.25rem;
+  border:2px solid rgba(245,158,11,.3);text-align:center}
+.fb-title{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:900;
+  color:var(--gold);margin-bottom:.4rem}
+.fb-sub{font-size:14px;color:rgba(255,255,255,.65)}
+.progress-bar-wrap{background:var(--br);border-radius:20px;height:10px;overflow:hidden;margin:6px 0 4px}
+.progress-bar-fill{height:100%;border-radius:20px;
+  background:linear-gradient(90deg,var(--t1),var(--gold));transition:width .5s ease}
+
+/* ── REPORT ── */
+.report-page{max-width:860px}
+.report-header{background:var(--navy);border-radius:16px;padding:2rem;
+  margin-bottom:1.5rem;text-align:center;border:2px solid rgba(245,158,11,.3)}
+.rh-student{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold);margin-bottom:.25rem}
+.rh-sub{color:rgba(255,255,255,.6);font-size:14px}
+.rh-date{font-size:12px;color:rgba(255,255,255,.4);margin-top:.5rem}
+.report-overall{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;
+  background:var(--sur);border-radius:var(--rad);padding:1.5rem;
+  margin-bottom:1.5rem;box-shadow:var(--sh);align-items:center}
+.ro-circle{width:110px;height:110px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:6px solid;flex-shrink:0}
+.ro-score{font-family:'Cairo',sans-serif;font-size:1.8rem;font-weight:900}
+.ro-total{font-size:12px;color:var(--mu)}
+.ro-info h2{font-family:'Cairo',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.3rem}
+.ro-grade{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;
+  border-radius:20px;font-size:13px;font-weight:800;margin-bottom:.6rem}
+.ro-desc{font-size:14px;color:var(--mu);line-height:1.7}
+
+.topics-analysis{background:var(--sur);border-radius:var(--rad);
+  padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--sh)}
+.ta-title{font-family:'Cairo',sans-serif;font-size:1.05rem;font-weight:700;
+  color:var(--txt);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.ta-row{display:flex;align-items:center;gap:12px;padding:.85rem 0;border-bottom:1px solid var(--br)}
+.ta-row:last-child{border-bottom:none}
+.ta-icon{font-size:22px;flex-shrink:0}
+.ta-info{flex:1}
+.ta-name{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:4px}
+.ta-bar-bg{height:8px;background:var(--br);border-radius:10px;overflow:hidden;margin-bottom:3px}
+.ta-bar-fill{height:100%;border-radius:10px;transition:width 1s ease}
+.ta-meta{font-size:11px;color:var(--mu)}
+.ta-badge{flex-shrink:0;font-size:12px;font-weight:800;padding:4px 12px;border-radius:20px;min-width:80px;text-align:center}
+.ta-level-breakdown{display:flex;gap:6px;margin-top:6px}
+.ta-lb{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+
+.level-defs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem}
+.ld-card{border-radius:12px;padding:1rem;border:2px solid}
+.ld-range{font-size:11px;font-weight:700;margin-bottom:.25rem}
+.ld-name{font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;margin-bottom:.2rem}
+.ld-desc{font-size:12px;line-height:1.6}
+
+.recs-section{background:var(--sur);border-radius:var(--rad);
+  padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--sh)}
+.rec-topic{display:flex;gap:12px;padding:.85rem 0;border-bottom:1px solid var(--br)}
+.rec-topic:last-child{border-bottom:none}
+.rec-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.rec-name{font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;margin-bottom:.25rem}
+.rec-text{font-size:13px;color:var(--mu);line-height:1.7}
+
+.final-section-score{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem}
+.fss-card{background:var(--sur);border-radius:var(--rad);padding:1.25rem;
+  box-shadow:var(--sh);text-align:center;border:2px solid var(--br)}
+.fss-num{font-family:'Cairo',sans-serif;font-size:1.9rem;font-weight:900}
+.fss-label{font-size:12px;color:var(--mu);margin-top:2px}
+
+.chart-comparison{background:var(--sur);border-radius:var(--rad);
+  padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--sh)}
+.cc-row{display:flex;align-items:center;gap:12px;margin-bottom:.85rem}
+.cc-label{min-width:130px;font-size:13px;font-weight:600;text-align:left;direction:rtl}
+.cc-bar-bg{flex:1;height:20px;background:var(--br);border-radius:10px;overflow:hidden;position:relative}
+.cc-bar-fill{height:100%;border-radius:10px;transition:width 1.2s ease;
+  display:flex;align-items:center;justify-content:flex-end;padding-right:6px}
+.cc-val{font-size:11px;font-weight:800;color:#fff;white-space:nowrap}
+.cc-pct{min-width:40px;font-size:13px;font-weight:700;text-align:left;direction:ltr}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;
+  border-radius:10px;border:none;font-family:'Tajawal',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;transition:all .18s}
+.btn-primary{background:var(--t1);color:#fff}
+.btn-primary:hover{background:var(--t1d);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:#D97706;transform:translateY(-1px)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--navy2);transform:translateY(-1px)}
+.btn-print{background:#fff;color:var(--navy);border:2px solid var(--br)}
+.btn-print:hover{border-color:var(--t1);color:var(--t1)}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.25rem}
+
+/* CERT */
+.cert{background:linear-gradient(135deg,var(--navy),#1E3A5F);
+  border:3px solid var(--gold);border-radius:20px;padding:2rem;
+  text-align:center;margin-top:1rem;animation:certIn .5s ease}
+@keyframes certIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.cert h2{font-family:'Cairo',sans-serif;font-size:1.6rem;color:var(--gold)}
+
+@media(max-width:700px){
+  .sidebar{display:none}
+  .overview-grid{grid-template-columns:1fr 1fr}
+  .opts-grid{grid-template-columns:1fr}
+  .report-overall{grid-template-columns:1fr}
+  .level-defs{grid-template-columns:1fr}
+  .final-section-score{grid-template-columns:1fr}
+}
+@media print{
+  .sidebar,.app-header,.btn-group{display:none!important}
+  .report-page{max-width:100%;padding:0}
+  .report-header,.topics-analysis,.recs-section,.chart-comparison,.level-defs{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="app-logo">
+    <div class="app-logo-icon">📋</div>
+    <div>
+      <div class="app-logo-text">تقييم الفصلين الأول والثاني</div>
+      <div class="app-logo-sub">الصف الثالث الابتدائي | رياضيات</div>
+    </div>
+  </div>
+  <div class="overall-progress-wrap">
+    <span class="ov-label">التقدم الكلي</span>
+    <div class="ov-bar"><div class="ov-fill" id="ovFill" style="width:0%"></div></div>
+    <span class="ov-pct" id="ovPct">0%</span>
+    <a class="home-site-btn" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+      الشاشة الرئيسية
+    </a>
+  </div>
+</header>
+
+<div class="app-body">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-label">لوحة التقييم</div>
+  <div class="nav-item active" id="nav-home" onclick="showPage('home')">
+    <span class="nav-icon">🏠</span> الرئيسية
+    <span class="nav-badge" style="background:rgba(245,158,11,.2);color:var(--gold)">ابدأ</span>
+  </div>
+
+  <div class="sidebar-label" style="margin-top:.5rem">📗 الفصل الأول</div>
+  <div class="nav-item" id="nav-patterns" onclick="showPage('patterns')">
+    <span class="nav-icon">🔢</span>
+    <span>الأنماط</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-patterns" style="color:#C4B5FD">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-barchart" onclick="showPage('barchart')">
+    <span class="nav-icon">📊</span>
+    <span>التمثيل بالأعمدة</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-barchart" style="color:#93C5FD">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-dotplot" onclick="showPage('dotplot')">
+    <span class="nav-icon">📍</span>
+    <span>التمثيل بالنقاط</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-dotplot" style="color:#67E8F9">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-cm" onclick="showPage('cm')">
+    <span class="nav-icon">📏</span>
+    <span>قياس بالسنتيمتر</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-cm" style="color:#6EE7B7">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-meters" onclick="showPage('meters')">
+    <span class="nav-icon">🏫</span>
+    <span>قياس بالمتر</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-meters" style="color:#FCD34D">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-mm" onclick="showPage('mm')">
+    <span class="nav-icon">🔬</span>
+    <span>قياس بالمليمتر</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-mm" style="color:#FCA5A5">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+
+  <div class="nav-item" id="nav-final" onclick="showPage('final')">
+    <span class="nav-icon">📝</span>
+    <span>تقييم ختامي ف١</span>
+    <span class="nav-badge" style="background:rgba(245,158,11,.15);color:var(--gold)">20 سؤالاً</span>
+  </div>
+
+  <div class="sidebar-label" style="margin-top:.5rem">📘 الفصل الثاني</div>
+  <div class="nav-item" id="nav-th" onclick="showPage('th')">
+    <span class="nav-icon">🧮</span>
+    <span>الآلاف</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-th" style="color:#F9A8D4">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-moreth" onclick="showPage('moreth')">
+    <span class="nav-icon">📈</span>
+    <span>مزيد من الآلاف</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-moreth" style="color:#A5B4FC">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-tenhun" onclick="showPage('tenhun')">
+    <span class="nav-icon">💯</span>
+    <span>عشرات و مئات الآلاف</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-tenhun" style="color:#5EEAD4">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-forms" onclick="showPage('forms')">
+    <span class="nav-icon">✍️</span>
+    <span>صيغ كتابة الأعداد</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-forms" style="color:#FDBA74">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-arrays" onclick="showPage('arrays')">
+    <span class="nav-icon">🔳</span>
+    <span>المصفوفات</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-arrays" style="color:#BEF264">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-multconcept" onclick="showPage('multconcept')">
+    <span class="nav-icon">✖️</span>
+    <span>مفهوم الضرب</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-multconcept" style="color:#F0ABFC">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-commute" onclick="showPage('commute')">
+    <span class="nav-icon">🔄</span>
+    <span>خاصية الابدال في الضرب</span>
+    <span class="nav-badge">15 سؤالاً</span>
+    <span class="nav-score" id="nav-score-commute" style="color:#7DD3FC">0/15</span>
+    <span class="nav-check">✓</span>
+  </div>
+  <div class="nav-item" id="nav-final2" onclick="showPage('final2')">
+    <span class="nav-icon">📝</span>
+    <span>تقييم ختامي ف٢</span>
+    <span class="nav-badge" style="background:rgba(245,158,11,.15);color:var(--gold)">20 سؤالاً</span>
+  </div>
+
+  <div class="sidebar-label" style="margin-top:.5rem">🏆 التقييم النهائي الشامل</div>
+  <div class="nav-item" id="nav-finalAll" onclick="showPage('finalAll')">
+    <span class="nav-icon">🏆</span>
+    <span>ختامي الفصلين معاً</span>
+    <span class="nav-badge" style="background:rgba(245,158,11,.2);color:var(--gold)">26 سؤالاً</span>
+  </div>
+
+  <div class="sidebar-label" style="margin-top:.5rem">التقرير الكامل</div>
+  <div class="nav-item" id="nav-report" onclick="generateAndShowReport()">
+    <span class="nav-icon">📊</span>
+    <span>التقرير الشامل</span>
+    <span class="nav-badge" style="background:rgba(16,185,129,.15);color:#6EE7B7">تقرير</span>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="welcome-card">
+    <div style="font-size:56px;margin-bottom:.75rem">📋</div>
+    <h1>نظام التقييم الشامل — الفصلان الأول والثاني</h1>
+    <p>261 سؤالاً موزعة على 13 درساً بثلاثة مستويات<br>أدخل اسمك واختر الفصل الذي تريد البدء به</p>
+    <input class="student-input" type="text" id="studentNameInput" placeholder="اكتب اسمك هنا..." maxlength="40">
+  </div>
+
+  <div class="overview-grid">
+    <div class="ov-card">
+      <div class="ovc-icon">📚</div>
+      <div class="ovc-label">إجمالي الأسئلة</div>
+      <div class="ovc-val" style="color:var(--t1)">261</div>
+    </div>
+    <div class="ov-card">
+      <div class="ovc-icon">🎯</div>
+      <div class="ovc-label">الدروس المُقيَّمة</div>
+      <div class="ovc-val" style="color:var(--t2)">13</div>
+    </div>
+    <div class="ov-card">
+      <div class="ovc-icon">⭐</div>
+      <div class="ovc-label">مستويات التقييم</div>
+      <div class="ovc-val" style="color:var(--t5)">3</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.25rem">
+    <div style="background:linear-gradient(135deg,#1E3A5F,#0F172A);border-radius:16px;padding:1.5rem;text-align:center;border:2px solid rgba(124,58,237,.35);cursor:pointer" onclick="startChapter(1)">
+      <div style="font-size:34px;margin-bottom:.4rem">📗</div>
+      <div style="font-family:'Cairo',sans-serif;font-weight:800;color:#fff;font-size:1.05rem">الفصل الأول</div>
+      <div style="color:rgba(255,255,255,.6);font-size:12px;margin:.3rem 0 .8rem">6 دروس + تقييم ختامي — 110 سؤالاً</div>
+      <div style="display:inline-block;padding:8px 18px;border-radius:20px;background:var(--t1);color:#fff;font-size:13px;font-weight:700">ابدأ الفصل الأول ←</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#1E3A5F,#0F172A);border-radius:16px;padding:1.5rem;text-align:center;border:2px solid rgba(190,24,93,.35);cursor:pointer" onclick="startChapter(2)">
+      <div style="font-size:34px;margin-bottom:.4rem">📘</div>
+      <div style="font-family:'Cairo',sans-serif;font-weight:800;color:#fff;font-size:1.05rem">الفصل الثاني</div>
+      <div style="color:rgba(255,255,255,.6);font-size:12px;margin:.3rem 0 .8rem">7 دروس + تقييم ختامي — 125 سؤالاً</div>
+      <div style="display:inline-block;padding:8px 18px;border-radius:20px;background:#BE185D;color:#fff;font-size:13px;font-weight:700">ابدأ الفصل الثاني ←</div>
+    </div>
+  </div>
+
+  <div style="background:var(--sur);border-radius:var(--rad);padding:1.5rem;box-shadow:var(--sh);margin-bottom:1.25rem">
+    <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.75rem">📗 هيكل الفصل الأول</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+      <div style="display:flex;gap:10px;padding:.75rem;background:var(--t1l);border-radius:10px;align-items:center">
+        <span style="font-size:20px">🔢</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t1d)">الأنماط</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:var(--t2l);border-radius:10px;align-items:center">
+        <span style="font-size:20px">📊</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t2d)">التمثيل بالأعمدة</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:var(--t3l);border-radius:10px;align-items:center">
+        <span style="font-size:20px">📍</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t3d)">التمثيل بالنقاط</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:var(--t4l);border-radius:10px;align-items:center">
+        <span style="font-size:20px">📏</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t4d)">قياس بالسنتيمتر</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:var(--t5l);border-radius:10px;align-items:center">
+        <span style="font-size:20px">🏫</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t5d)">قياس بالمتر</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:var(--t6l);border-radius:10px;align-items:center">
+        <span style="font-size:20px">🔬</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--t6d)">قياس بالمليمتر</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+    </div>
+    <div style="margin-top:.85rem;padding:.75rem;background:var(--gold-lt);border-radius:10px;display:flex;gap:10px;align-items:center">
+      <span style="font-size:20px">📝</span>
+      <div><div style="font-size:13px;font-weight:700;color:var(--t5d)">التقييم الختامي — الفصل الأول</div><div style="font-size:11px;color:var(--mu)">20 سؤالاً من جميع دروس الفصل الأول</div></div>
+    </div>
+  </div>
+
+  <div style="background:var(--sur);border-radius:var(--rad);padding:1.5rem;box-shadow:var(--sh);margin-bottom:1.25rem">
+    <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.75rem">📘 هيكل الفصل الثاني</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+      <div style="display:flex;gap:10px;padding:.75rem;background:#BE185D20;border-radius:10px;align-items:center">
+        <span style="font-size:20px">🧮</span>
+        <div><div style="font-size:13px;font-weight:700;color:#831843">الآلاف</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:#4338CA20;border-radius:10px;align-items:center">
+        <span style="font-size:20px">📈</span>
+        <div><div style="font-size:13px;font-weight:700;color:#312E81">مزيد من الآلاف</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:#0F766E20;border-radius:10px;align-items:center">
+        <span style="font-size:20px">💯</span>
+        <div><div style="font-size:13px;font-weight:700;color:#134E4A">عشرات و مئات الآلاف</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:#C2410C20;border-radius:10px;align-items:center">
+        <span style="font-size:20px">✍️</span>
+        <div><div style="font-size:13px;font-weight:700;color:#7C2D12">صيغ كتابة الأعداد</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:#4D7C0F20;border-radius:10px;align-items:center">
+        <span style="font-size:20px">🔳</span>
+        <div><div style="font-size:13px;font-weight:700;color:#365314">المصفوفات</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:#A21CAF20;border-radius:10px;align-items:center">
+        <span style="font-size:20px">✖️</span>
+        <div><div style="font-size:13px;font-weight:700;color:#701A75">مفهوم الضرب</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:.75rem;background:#0284C720;border-radius:10px;align-items:center;grid-column:1/-1">
+        <span style="font-size:20px">🔄</span>
+        <div><div style="font-size:13px;font-weight:700;color:#075985">خاصية الابدال في الضرب</div><div style="font-size:11px;color:var(--mu)">15 سؤالاً</div></div>
+      </div>
+    </div>
+    <div style="margin-top:.85rem;padding:.75rem;background:var(--gold-lt);border-radius:10px;display:flex;gap:10px;align-items:center">
+      <span style="font-size:20px">📝</span>
+      <div><div style="font-size:13px;font-weight:700;color:var(--t5d)">التقييم الختامي — الفصل الثاني</div><div style="font-size:11px;color:var(--mu)">20 سؤالاً من جميع دروس الفصل الثاني</div></div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#1A0A3C,#0F172A);border-radius:16px;padding:1.25rem 1.5rem;box-shadow:var(--sh);margin-bottom:1.25rem;border:2px solid rgba(245,158,11,.4);display:flex;gap:12px;align-items:center">
+    <span style="font-size:28px">🏆</span>
+    <div>
+      <div style="font-family:'Cairo',sans-serif;font-weight:800;color:var(--gold);font-size:1rem">التقييم الختامي الشامل — الفصلان معاً</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.65);margin-top:2px">26 سؤالاً (سؤالان من كل درس) تغطّي كل دروس الفصل الأول والثاني في تقييم واحد نهائي</div>
+    </div>
+  </div>
+
+  <div style="background:var(--sur);border-radius:var(--rad);padding:1.25rem;box-shadow:var(--sh);margin-bottom:1.25rem">
+    <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.75rem">🎯 مستويات الأسئلة</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <div style="padding:6px 14px;background:var(--t1l);border-radius:20px;font-size:13px;font-weight:700;color:var(--t1d)">🟣 أساسي (5 أسئلة)</div>
+      <div style="padding:6px 14px;background:var(--t5l);border-radius:20px;font-size:13px;font-weight:700;color:var(--t5d)">🟡 متوسط (5 أسئلة)</div>
+      <div style="padding:6px 14px;background:var(--t6l);border-radius:20px;font-size:13px;font-weight:700;color:var(--t6d)">🔴 متقدم (5 أسئلة)</div>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-navy" onclick="goToFinalAllFromHome()" style="background:linear-gradient(135deg,#1A0A3C,#0F172A);border:1.5px solid var(--gold)">🏆 التقييم الختامي الشامل مباشرة</button>
+    <button class="btn btn-gold" onclick="startChapter(1)">▶ ابدأ الفصل الأول ←</button>
+    <button class="btn btn-primary" style="background:#BE185D" onclick="startChapter(2)">▶ ابدأ الفصل الثاني ←</button>
+  </div>
+</div>
+
+<!-- PATTERNS PAGE -->
+<div class="page" id="page-patterns">
+  <div class="topic-header" style="background:linear-gradient(135deg,var(--t1),var(--t1d))">
+    <span class="th-icon">🔢</span>
+    <div>
+      <div class="th-title">الأنماط</div>
+      <div class="th-sub">Patterns — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7);text-align:left">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-patterns" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8);text-align:left" id="prog-patterns-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-patterns"></div>
+  <div class="topic-summary" id="sum-patterns">
+    <div class="ts-num" id="sum-patterns-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-patterns-1" style="color:#C4B5FD">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-patterns-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-patterns-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="showPage('barchart')">التالي: التمثيل بالأعمدة ←</button>
+  </div>
+</div>
+
+<!-- BAR CHART PAGE -->
+<div class="page" id="page-barchart">
+  <div class="topic-header" style="background:linear-gradient(135deg,var(--t2),var(--t2d))">
+    <span class="th-icon">📊</span>
+    <div>
+      <div class="th-title">التمثيل البياني بالأعمدة</div>
+      <div class="th-sub">Bar Charts — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-barchart" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-barchart-txt">0/15</div>
+    </div>
+  </div>
+  <!-- Bar Chart Visualization -->
+  <div class="chart-box" id="barChartViz"></div>
+  <div id="q-barchart"></div>
+  <div class="topic-summary" id="sum-barchart">
+    <div class="ts-num" id="sum-barchart-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-barchart-1" style="color:#93C5FD">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-barchart-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-barchart-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:var(--t2)" onclick="showPage('dotplot')">التالي: التمثيل بالنقاط ←</button>
+  </div>
+</div>
+
+<!-- DOT PLOT PAGE -->
+<div class="page" id="page-dotplot">
+  <div class="topic-header" style="background:linear-gradient(135deg,var(--t3),var(--t3d))">
+    <span class="th-icon">📍</span>
+    <div>
+      <div class="th-title">التمثيل البياني بالنقاط</div>
+      <div class="th-sub">Dot Plots — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-dotplot" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-dotplot-txt">0/15</div>
+    </div>
+  </div>
+  <!-- Dot Plot Visualization -->
+  <div class="chart-box" id="dotPlotViz"></div>
+  <div id="q-dotplot"></div>
+  <div class="topic-summary" id="sum-dotplot">
+    <div class="ts-num" id="sum-dotplot-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-dotplot-1" style="color:#67E8F9">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-dotplot-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-dotplot-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:var(--t3)" onclick="showPage('cm')">التالي: قياس بالسنتيمتر ←</button>
+  </div>
+</div>
+
+<!-- CM PAGE -->
+<div class="page" id="page-cm">
+  <div class="topic-header" style="background:linear-gradient(135deg,var(--t4),var(--t4d))">
+    <span class="th-icon">📏</span>
+    <div>
+      <div class="th-title">قياس الأطوال بالسنتيمتر</div>
+      <div class="th-sub">Centimeters — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-cm" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-cm-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-cm"></div>
+  <div class="topic-summary" id="sum-cm">
+    <div class="ts-num" id="sum-cm-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-cm-1" style="color:#6EE7B7">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-cm-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-cm-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:var(--t4)" onclick="showPage('meters')">التالي: قياس بالمتر ←</button>
+  </div>
+</div>
+
+<!-- METERS PAGE -->
+<div class="page" id="page-meters">
+  <div class="topic-header" style="background:linear-gradient(135deg,var(--t5),var(--t5d))">
+    <span class="th-icon">🏫</span>
+    <div>
+      <div class="th-title">قياس الأطوال بالمتر</div>
+      <div class="th-sub">Meters — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-meters" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-meters-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-meters"></div>
+  <div class="topic-summary" id="sum-meters">
+    <div class="ts-num" id="sum-meters-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-meters-1" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-meters-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-meters-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:var(--t5)" onclick="showPage('mm')">التالي: قياس بالمليمتر ←</button>
+  </div>
+</div>
+
+<!-- MM PAGE -->
+<div class="page" id="page-mm">
+  <div class="topic-header" style="background:linear-gradient(135deg,var(--t6),var(--t6d))">
+    <span class="th-icon">🔬</span>
+    <div>
+      <div class="th-title">قياس الأطوال بالمليمتر</div>
+      <div class="th-sub">Millimeters — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-mm" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-mm-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-mm"></div>
+  <div class="topic-summary" id="sum-mm">
+    <div class="ts-num" id="sum-mm-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-mm-1" style="color:#FCA5A5">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-mm-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-mm-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-gold" onclick="showPage('final')">التالي: التقييم الشامل ←</button>
+  </div>
+</div>
+
+<!-- FINAL ASSESSMENT PAGE (CHAPTER 1) -->
+<div class="page" id="page-final">
+  <div class="final-banner">
+    <div class="fb-title">📝 التقييم الختامي — الفصل الأول</div>
+    <div class="fb-sub">20 سؤالاً من جميع دروس الفصل الأول</div>
+  </div>
+  <div style="background:var(--sur);border-radius:var(--rad);padding:1rem 1.25rem;margin-bottom:1rem;box-shadow:var(--sh)">
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+      <span style="color:var(--mu);font-weight:600">تقدّمك في التقييم الختامي</span>
+      <span id="final-prog-txt" style="color:var(--t1);font-weight:800">0 / 20</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="final-prog-bar" style="width:0%"></div></div>
+  </div>
+  <div id="q-final"></div>
+  <div class="btn-group" style="margin-top:1.5rem">
+    <button class="btn btn-primary" style="background:#BE185D" onclick="showPage('th')">الانتقال إلى الفصل الثاني ←</button>
+    <button class="btn btn-navy" onclick="generateAndShowReport()">📊 عرض التقرير الشامل</button>
+  </div>
+</div>
+
+<!-- ═══════════ CHAPTER 2 PAGES ═══════════ -->
+
+<!-- THOUSANDS PAGE -->
+<div class="page" id="page-th">
+  <div class="topic-header" style="background:linear-gradient(135deg,#BE185D,#831843)">
+    <span class="th-icon">🧮</span>
+    <div>
+      <div class="th-title">الآلاف</div>
+      <div class="th-sub">Thousands — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-th" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-th-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-th"></div>
+  <div class="topic-summary" id="sum-th">
+    <div class="ts-num" id="sum-th-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-th-1" style="color:#F9A8D4">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-th-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-th-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:#BE185D" onclick="showPage('moreth')">التالي: مزيد من الآلاف ←</button>
+  </div>
+</div>
+
+<!-- MORE THOUSANDS PAGE -->
+<div class="page" id="page-moreth">
+  <div class="topic-header" style="background:linear-gradient(135deg,#4338CA,#312E81)">
+    <span class="th-icon">📈</span>
+    <div>
+      <div class="th-title">مزيد من الآلاف</div>
+      <div class="th-sub">More Thousands — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-moreth" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-moreth-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-moreth"></div>
+  <div class="topic-summary" id="sum-moreth">
+    <div class="ts-num" id="sum-moreth-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-moreth-1" style="color:#A5B4FC">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-moreth-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-moreth-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:#4338CA" onclick="showPage('tenhun')">التالي: عشرات و مئات الآلاف ←</button>
+  </div>
+</div>
+
+<!-- TENS/HUNDREDS OF THOUSANDS PAGE -->
+<div class="page" id="page-tenhun">
+  <div class="topic-header" style="background:linear-gradient(135deg,#0F766E,#134E4A)">
+    <span class="th-icon">💯</span>
+    <div>
+      <div class="th-title">عشرات الآلاف - مئات الآلاف</div>
+      <div class="th-sub">Tens &amp; Hundreds of Thousands — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-tenhun" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-tenhun-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-tenhun"></div>
+  <div class="topic-summary" id="sum-tenhun">
+    <div class="ts-num" id="sum-tenhun-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-tenhun-1" style="color:#5EEAD4">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-tenhun-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-tenhun-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:#0F766E" onclick="showPage('forms')">التالي: صيغ كتابة الأعداد ←</button>
+  </div>
+</div>
+
+<!-- NUMBER FORMS PAGE -->
+<div class="page" id="page-forms">
+  <div class="topic-header" style="background:linear-gradient(135deg,#C2410C,#7C2D12)">
+    <span class="th-icon">✍️</span>
+    <div>
+      <div class="th-title">صيغ مختلفة لكتابة الأعداد</div>
+      <div class="th-sub">Number Forms — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-forms" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-forms-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-forms"></div>
+  <div class="topic-summary" id="sum-forms">
+    <div class="ts-num" id="sum-forms-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-forms-1" style="color:#FDBA74">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-forms-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-forms-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:#C2410C" onclick="showPage('arrays')">التالي: المصفوفات ←</button>
+  </div>
+</div>
+
+<!-- ARRAYS PAGE -->
+<div class="page" id="page-arrays">
+  <div class="topic-header" style="background:linear-gradient(135deg,#4D7C0F,#365314)">
+    <span class="th-icon">🔳</span>
+    <div>
+      <div class="th-title">المصفوفات</div>
+      <div class="th-sub">Arrays — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-arrays" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-arrays-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-arrays"></div>
+  <div class="topic-summary" id="sum-arrays">
+    <div class="ts-num" id="sum-arrays-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-arrays-1" style="color:#BEF264">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-arrays-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-arrays-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:#4D7C0F" onclick="showPage('multconcept')">التالي: مفهوم الضرب ←</button>
+  </div>
+</div>
+
+<!-- MULTIPLICATION CONCEPT PAGE -->
+<div class="page" id="page-multconcept">
+  <div class="topic-header" style="background:linear-gradient(135deg,#A21CAF,#701A75)">
+    <span class="th-icon">✖️</span>
+    <div>
+      <div class="th-title">مفهوم الضرب</div>
+      <div class="th-sub">Concept of Multiplication — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-multconcept" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-multconcept-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-multconcept"></div>
+  <div class="topic-summary" id="sum-multconcept">
+    <div class="ts-num" id="sum-multconcept-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-multconcept-1" style="color:#F0ABFC">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-multconcept-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-multconcept-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" style="background:#A21CAF" onclick="showPage('commute')">التالي: خاصية الابدال ←</button>
+  </div>
+</div>
+
+<!-- COMMUTATIVE PROPERTY PAGE -->
+<div class="page" id="page-commute">
+  <div class="topic-header" style="background:linear-gradient(135deg,#0284C7,#075985)">
+    <span class="th-icon">🔄</span>
+    <div>
+      <div class="th-title">خاصية الابدال في الضرب</div>
+      <div class="th-sub">Commutative Property — 15 سؤالاً بثلاثة مستويات</div>
+    </div>
+    <div class="th-progress">
+      <div style="font-size:11px;color:rgba(255,255,255,.7)">التقدم</div>
+      <div class="th-pbar"><div class="th-pfill" id="prog-commute" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.8)" id="prog-commute-txt">0/15</div>
+    </div>
+  </div>
+  <div id="q-commute"></div>
+  <div class="topic-summary" id="sum-commute">
+    <div class="ts-num" id="sum-commute-score">0</div>
+    <div class="ts-label">نتيجتك من 15 سؤالاً</div>
+    <div class="ts-level-grid">
+      <div class="ts-level-card"><div class="ts-level-name">أساسي</div><div class="ts-level-score" id="sl-commute-1" style="color:#7DD3FC">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متوسط</div><div class="ts-level-score" id="sl-commute-2" style="color:#FCD34D">0/5</div></div>
+      <div class="ts-level-card"><div class="ts-level-name">متقدم</div><div class="ts-level-score" id="sl-commute-3" style="color:#FCA5A5">0/5</div></div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-gold" onclick="showPage('final2')">التالي: التقييم الختامي ف٢ ←</button>
+  </div>
+</div>
+
+<!-- FINAL ASSESSMENT PAGE (CHAPTER 2) -->
+<div class="page" id="page-final2">
+  <div class="final-banner" style="border-color:rgba(190,24,93,.35)">
+    <div class="fb-title" style="color:#F472B6">📝 التقييم الختامي — الفصل الثاني</div>
+    <div class="fb-sub">20 سؤالاً من جميع دروس الفصل الثاني</div>
+  </div>
+  <div style="background:var(--sur);border-radius:var(--rad);padding:1rem 1.25rem;margin-bottom:1rem;box-shadow:var(--sh)">
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+      <span style="color:var(--mu);font-weight:600">تقدّمك في التقييم الختامي</span>
+      <span id="final2-prog-txt" style="color:#BE185D;font-weight:800">0 / 20</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="final2-prog-bar" style="width:0%;background:linear-gradient(90deg,#BE185D,var(--gold))"></div></div>
+  </div>
+  <div id="q-final2"></div>
+  <div style="margin-top:1.5rem;display:none" id="final2-submit-wrap">
+    <button class="btn btn-gold" onclick="generateAndShowReport()" style="font-size:15px;padding:14px 28px">📊 عرض التقرير الشامل</button>
+  </div>
+  <div class="btn-group" style="margin-top:1rem">
+    <button class="btn btn-navy" onclick="showPage('finalAll')">📝 الانتقال للتقييم الختامي الشامل (الفصلان معاً) ←</button>
+  </div>
+</div>
+
+<!-- FINAL ASSESSMENT PAGE (CHAPTERS 1 & 2 COMBINED) -->
+<div class="page" id="page-finalAll">
+  <div class="final-banner" style="border-color:rgba(245,158,11,.5);background:linear-gradient(135deg,#1A0A3C,#0F172A)">
+    <div class="fb-title">🏆 التقييم الختامي الشامل — الفصل الأول والثاني معاً</div>
+    <div class="fb-sub">26 سؤالاً (سؤالان من كل درس) تغطّي جميع دروس الفصلين</div>
+  </div>
+  <div style="background:var(--sur);border-radius:var(--rad);padding:1rem 1.25rem;margin-bottom:1rem;box-shadow:var(--sh)">
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+      <span style="color:var(--mu);font-weight:600">تقدّمك في التقييم الختامي الشامل</span>
+      <span id="finalAll-prog-txt" style="color:var(--gold);font-weight:800">0 / 26</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="finalAll-prog-bar" style="width:0%"></div></div>
+  </div>
+  <div id="q-finalAll"></div>
+  <div style="margin-top:1.5rem;display:none" id="finalAll-submit-wrap">
+    <button class="btn btn-gold" onclick="generateAndShowReport()" style="font-size:15px;padding:14px 28px">📊 عرض التقرير الشامل النهائي</button>
+  </div>
+</div>
+
+<!-- REPORT PAGE -->
+<div class="page" id="page-report">
+  <div class="report-page" id="reportContent">
+    <div style="text-align:center;padding:3rem;color:var(--mu)">
+      <div style="font-size:48px;margin-bottom:1rem">📊</div>
+      <div style="font-size:16px;font-weight:600">أكمل على الأقل بعض التقييمات أولاً لإنشاء التقرير</div>
+      <div class="btn-group" style="justify-content:center;margin-top:1rem">
+        <button class="btn btn-primary" onclick="showPage('patterns')">ابدأ التقييم</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA: ALL QUESTIONS
+// ═══════════════════════════════════════════
+
+const TOPICS_META={
+  patterns:{name:'الأنماط',icon:'🔢',color:'var(--t1)',colorHex:'#7C3AED',lColor:'var(--t1l)',dColor:'var(--t1d)',ch:1},
+  barchart:{name:'التمثيل بالأعمدة',icon:'📊',color:'var(--t2)',colorHex:'#0369A1',lColor:'var(--t2l)',dColor:'var(--t2d)',ch:1},
+  dotplot:{name:'التمثيل بالنقاط',icon:'📍',color:'var(--t3)',colorHex:'#0E7490',lColor:'var(--t3l)',dColor:'var(--t3d)',ch:1},
+  cm:{name:'قياس بالسنتيمتر',icon:'📏',color:'var(--t4)',colorHex:'#047857',lColor:'var(--t4l)',dColor:'var(--t4d)',ch:1},
+  meters:{name:'قياس بالمتر',icon:'🏫',color:'var(--t5)',colorHex:'#B45309',lColor:'var(--t5l)',dColor:'var(--t5d)',ch:1},
+  mm:{name:'قياس بالمليمتر',icon:'🔬',color:'var(--t6)',colorHex:'#B91C1C',lColor:'var(--t6l)',dColor:'var(--t6d)',ch:1},
+  th:{name:'الآلاف',icon:'🧮',colorHex:'#BE185D',dColor:'#831843',ch:2},
+  moreth:{name:'مزيد من الآلاف',icon:'📈',colorHex:'#4338CA',dColor:'#312E81',ch:2},
+  tenhun:{name:'عشرات الآلاف - مئات الآلاف',icon:'💯',colorHex:'#0F766E',dColor:'#134E4A',ch:2},
+  forms:{name:'صيغ مختلفة لكتابة الأعداد',icon:'✍️',colorHex:'#C2410C',dColor:'#7C2D12',ch:2},
+  arrays:{name:'المصفوفات',icon:'🔳',colorHex:'#4D7C0F',dColor:'#365314',ch:2},
+  multconcept:{name:'مفهوم الضرب',icon:'✖️',colorHex:'#A21CAF',dColor:'#701A75',ch:2},
+  commute:{name:'خاصية الابدال في الضرب',icon:'🔄',colorHex:'#0284C7',dColor:'#075985',ch:2},
+};
+const CH1_TOPICS=['patterns','barchart','dotplot','cm','meters','mm'];
+const CH2_TOPICS=['th','moreth','tenhun','forms','arrays','multconcept','commute'];
+const ALL_TOPICS=[...CH1_TOPICS,...CH2_TOPICS];
+
+const QData={
+patterns:[
+  // Level 1 (basic) - 0 to 4
+  {t:'2، 4، 6، <u>___</u>، 10 — ما العدد الناقص في النمط؟',o:['6','7','8','9'],c:2,lv:1,e:'كل عدد يزيد بمقدار 2'},
+  {t:'ما الشكل التالي في النمط: 🌟🔴🌟🔴🌟<u>___</u>؟',o:['🌟','🔴','🟢','🔵'],c:1,lv:1,e:'الوحدة المتكررة هي 🌟🔴'},
+  {t:'5، 10، 15، <u>___</u>، 25 — ما العدد الناقص؟',o:['18','19','20','21'],c:2,lv:1,e:'كل عدد يزيد بمقدار 5'},
+  {t:'ما الشكل التالي: ⭐⭐🔵⭐⭐🔵⭐⭐<u>___</u>؟',o:['⭐','🔵','🟡','❤️'],c:1,lv:1,e:'الوحدة هي ⭐⭐🔵 والتالي 🔵'},
+  {t:'100، 90، 80، <u>___</u>، 60 — ما العدد الناقص؟',o:['65','70','75','78'],c:1,lv:1,e:'كل عدد ينقص بمقدار 10'},
+  // Level 2 (mid) - 5 to 9
+  {t:'3، 6، 9، 12، <u>___</u>، 18 — ما العدد الناقص؟',o:['13','14','15','16'],c:2,lv:2,e:'مضاعفات 3، الناقص = 15'},
+  {t:'ما الشكل التالي: 🍎🍌🍇🍎🍌<u>___</u>؟',o:['🍎','🍌','🍇','🍊'],c:2,lv:2,e:'الوحدة هي 🍎🍌🍇'},
+  {t:'نمط تنازلي: 30، <u>___</u>، 24، 21 — ما العدد الناقص؟',o:['25','26','27','28'],c:2,lv:2,e:'كل عدد ينقص بمقدار 3، الناقص = 27'},
+  {t:'7، 14، 21، <u>___</u>، 35 — ما العدد الناقص؟',o:['25','26','27','28'],c:3,lv:2,e:'مضاعفات 7، الناقص = 28'},
+  {t:'ما وصف النمط التالي: 2، 4، 8، 16، 32؟',o:['يتزايد بمقدار ثابت','يتناقص بمقدار ثابت','يتضاعف في كل خطوة','لا يوجد نمط'],c:2,lv:2,e:'كل عدد يُضرب في 2'},
+  // Level 3 (advanced) - 10 to 14
+  {t:'45، 40، 35، <u>___</u>، 25، 20 — ما العدد الناقص؟',o:['28','29','30','31'],c:2,lv:3,e:'كل عدد ينقص بمقدار 5، الناقص = 30'},
+  {t:'<u>___</u>، 12، 18، 24، 30 — ما العدد الناقص في البداية؟',o:['3','4','5','6'],c:3,lv:3,e:'كل عدد يزيد بمقدار 6، الناقص = 6'},
+  {t:'1، 2، 4، 8، <u>___</u>، 32 — ما العدد الناقص؟',o:['12','14','16','18'],c:2,lv:3,e:'كل عدد يتضاعف، الناقص = 16'},
+  {t:'نمط: أ، أأ، أأأ، <u>___</u> — ما الوحدة الرابعة؟',o:['أأأأ','أأأأأ','أأأ','أ'],c:0,lv:3,e:'كل مرة يُضاف حرف واحد'},
+  {t:'زُرعت 3 شجيرات في الصف الأول، 6 في الثاني، 9 في الثالث. كم في الصف الخامس؟',o:['12','15','18','21'],c:1,lv:3,e:'النمط: 3×الرقم. الصف الخامس = 3×5 = 15'},
+],
+barchart:[
+  // Using: أحمد=8, سارة=12, علي=5, منى=10, خالد=7
+  {t:'انظر إلى الرسم البياني — من قرأ أكثر عدد من الكتب؟',o:['أحمد','سارة','علي','منى'],c:1,lv:1,e:'سارة = 12 كتاباً وهو الأعلى'},
+  {t:'كم كتاباً قرأ علي؟',o:['4','5','6','7'],c:1,lv:1,e:'علي قرأ 5 كتب'},
+  {t:'كم كتاباً قرأ أحمد؟',o:['6','7','8','9'],c:2,lv:1,e:'أحمد قرأ 8 كتب'},
+  {t:'من قرأ أقل عدد من الكتب؟',o:['أحمد','سارة','علي','خالد'],c:2,lv:1,e:'علي قرأ 5 كتب وهو الأقل'},
+  {t:'كم كتاباً قرأت منى؟',o:['8','9','10','11'],c:2,lv:1,e:'منى قرأت 10 كتب'},
+  {t:'ما الفرق في عدد الكتب بين سارة وعلي؟',o:['5','6','7','8'],c:2,lv:2,e:'12 - 5 = 7 كتب'},
+  {t:'ما مجموع كتب أحمد وخالد معاً؟',o:['13','14','15','16'],c:2,lv:2,e:'8 + 7 = 15 كتاباً'},
+  {t:'كم طالباً قرأ أكثر من 7 كتب؟',o:['1','2','3','4'],c:2,lv:2,e:'أحمد(8)، سارة(12)، منى(10) = 3 طلاب'},
+  {t:'أيّهما أكثر قراءةً: أحمد أم منى؟',o:['أحمد','منى','متساويان','لا يمكن التحديد'],c:1,lv:2,e:'منى (10) > أحمد (8)'},
+  {t:'ما مجموع كتب جميع الطلاب الخمسة؟',o:['40','42','44','46'],c:1,lv:2,e:'8+12+5+10+7 = 42 كتاباً'},
+  {t:'إذا قرأ علي 4 كتب أخرى، هل سيتجاوز خالد في عدد الكتب؟',o:['نعم، يتجاوزه','لا، لا يتجاوزه','سيصبح مساوياً له','لا يمكن التحديد'],c:0,lv:3,e:'علي 5+4=9 > خالد 7، نعم يتجاوزه'},
+  {t:'ما متوسط عدد الكتب التي قرأها الطلاب (تقريباً)؟',o:['7','8','9','10'],c:1,lv:3,e:'42 ÷ 5 = 8.4 ≈ 8 كتب'},
+  {t:'كم كتاباً تحتاج سارة لتقرأ حتى يصبح عدد كتبها ضعف عدد كتب أحمد؟',o:['2','3','4','5'],c:2,lv:3,e:'ضعف أحمد = 16، سارة تحتاج 16-12 = 4 كتب'},
+  {t:'أيّ الطلاب معاً يساوي مجموع كتبهما عدد كتب سارة (12)؟',o:['أحمد + علي','علي + خالد','أحمد + خالد','منى + علي'],c:1,lv:3,e:'علي(5) + خالد(7) = 12 = سارة'},
+  {t:'لو انضم طالب جديد قرأ متوسط عدد الكتب، كم سيصبح الإجمالي؟',o:['49','50','51','52'],c:1,lv:3,e:'42 + 8 (المتوسط) = 50 كتاباً'},
+],
+dotplot:[
+  // Using: 6h→2, 7h→4, 8h→6, 9h→3, 10h→1 (total=16)
+  {t:'انظر إلى مخطط النقاط — كم طالباً ينام 8 ساعات يومياً؟',o:['4','5','6','7'],c:2,lv:1,e:'النقاط فوق 8 = 6 طلاب'},
+  {t:'ما عدد ساعات النوم الأكثر شيوعاً بين الطلاب؟',o:['6 ساعات','7 ساعات','8 ساعات','9 ساعات'],c:2,lv:1,e:'عمود 8 ساعات الأطول = 6 نقاط'},
+  {t:'كم طالباً إجمالاً يُمثَّلون في الرسم البياني؟',o:['14','15','16','17'],c:2,lv:1,e:'2+4+6+3+1 = 16 طالباً'},
+  {t:'أيّ عدد ساعات النوم له أقل عدد من الطلاب؟',o:['6 ساعات','7 ساعات','9 ساعات','10 ساعات'],c:3,lv:1,e:'10 ساعات لها نقطة واحدة فقط'},
+  {t:'كم طالباً ينام 7 ساعات يومياً؟',o:['2','3','4','5'],c:2,lv:1,e:'النقاط فوق 7 = 4 طلاب'},
+  {t:'كم طالباً ينام أكثر من 8 ساعات يومياً؟',o:['2','3','4','5'],c:2,lv:2,e:'9 ساعات(3) + 10 ساعات(1) = 4 طلاب'},
+  {t:'ما الفرق في العدد بين الطلاب الذين ينامون 8 ساعات و6 ساعات؟',o:['2','3','4','5'],c:2,lv:2,e:'6 - 2 = 4 طلاب'},
+  {t:'كم طالباً ينام 7 أو 8 ساعات مجتمعَين؟',o:['8','9','10','11'],c:2,lv:2,e:'4 + 6 = 10 طلاب'},
+  {t:'ما مدى البيانات (الفرق بين أكبر وأصغر قيمة)؟',o:['3','4','5','6'],c:1,lv:2,e:'10 - 6 = 4'},
+  {t:'ما المنوال (القيمة الأكثر تكراراً) في البيانات؟',o:['6','7','8','9'],c:2,lv:2,e:'8 ساعات لها أكثر نقاط (6 نقاط)'},
+  {t:'ما نسبة الطلاب الذين ينامون 8 ساعات من الإجمالي؟',o:['حوالي 20%','حوالي 25%','حوالي 38%','حوالي 50%'],c:2,lv:3,e:'6 ÷ 16 ≈ 37.5% ≈ 38%'},
+  {t:'لو انضم 4 طلاب جدد ينامون 7 ساعات، كم سيصبح الإجمالي؟',o:['18','19','20','21'],c:2,lv:3,e:'16 + 4 = 20 طالباً'},
+  {t:'كم طالباً ينام 8 أو 9 ساعات يومياً معاً؟',o:['7','8','9','10'],c:2,lv:3,e:'6 + 3 = 9 طلاب'},
+  {t:'ما الفترة الزمنية التي تجمع أكثر عدد من الطلاب؟',o:['6-7 ساعات','7-8 ساعات','8-9 ساعات','9-10 ساعات'],c:1,lv:3,e:'7+8 ساعات = 4+6 = 10 طلاب (الأكثر)'},
+  {t:'ماذا نستنتج من البيانات؟ معظم الطلاب ينامون...',o:['أقل من 7 ساعات','بين 7 و9 ساعات','أكثر من 9 ساعات','بالضبط 8 ساعات فقط'],c:1,lv:3,e:'الغالبية (4+6+3=13) ينامون 7-9 ساعات'},
+],
+cm:[
+  {t:'1 متر = <u>___</u> سنتيمتر',o:['10','100','1000','10000'],c:1,lv:1,e:'1 م = 100 سم دائماً'},
+  {t:'ما الوحدة المناسبة لقياس طول قلم الرصاص؟',o:['مليمتر','سنتيمتر','متر','كيلومتر'],c:1,lv:1,e:'القلم متوسط الطول — يُقاس بالسنتيمتر'},
+  {t:'2 متر = <u>___</u> سنتيمتر',o:['20','200','2000','20000'],c:1,lv:1,e:'2 × 100 = 200 سم'},
+  {t:'45 سم + 30 سم = <u>___</u> سم',o:['70','75','80','85'],c:1,lv:1,e:'45 + 30 = 75 سم'},
+  {t:'أيّهما أكبر: 80 سنتيمتر أم 1 متر؟',o:['80 سم','1 متر','متساويان','لا يمكن المقارنة'],c:1,lv:1,e:'1 م = 100 سم > 80 سم'},
+  {t:'1.5 متر = <u>___</u> سنتيمتر',o:['15','105','150','500'],c:2,lv:2,e:'1.5 × 100 = 150 سم'},
+  {t:'3 متر − 50 سم = <u>___</u> سنتيمتر',o:['200','250','300','350'],c:1,lv:2,e:'300 − 50 = 250 سم'},
+  {t:'رتّب تصاعدياً: 90 سم، 1 م، 110 سم',o:['90سم < 1م < 110سم','1م < 90سم < 110سم','110سم < 1م < 90سم','90سم = 1م < 110سم'],c:0,lv:2,e:'90 < 100 < 110 سم'},
+  {t:'قلم طوله 15 سم ومسطرة طولها 30 سم. ما مجموع طولهما؟',o:['40 سم','45 سم','50 سم','55 سم'],c:1,lv:2,e:'15 + 30 = 45 سم'},
+  {t:'شريط طوله 2 م. قُطع منه 45 سم. كم سم تبقى؟',o:['150 سم','155 سم','160 سم','165 سم'],c:1,lv:2,e:'200 − 45 = 155 سم'},
+  {t:'محيط مستطيل طوله 8 سم وعرضه 5 سم = <u>___</u> سم',o:['13 سم','26 سم','40 سم','52 سم'],c:1,lv:3,e:'المحيط = 2 × (8+5) = 2 × 13 = 26 سم'},
+  {t:'3 أقلام طول كل منها 18 سم. ما مجموع أطوالها؟',o:['48 سم','54 سم','60 سم','66 سم'],c:1,lv:3,e:'3 × 18 = 54 سم'},
+  {t:'خيط طوله 120 سم قُطع إلى 4 قطع متساوية. ما طول كل قطعة؟',o:['24 سم','30 سم','34 سم','40 سم'],c:1,lv:3,e:'120 ÷ 4 = 30 سم'},
+  {t:'رف طوله 1م 20سم. وُضع عليه 4 كتب عرض كل منها 25 سم. هل تناسب الكتب الرف؟',o:['نعم، تناسب الرف','لا، لا تناسب','تماماً بالضبط','يحتاج مزيداً من الحسابات'],c:0,lv:3,e:'4×25=100سم < 120سم، نعم تناسب'},
+  {t:'حديقة مستطيلة طولها 5 م وعرضها 3 م. ما محيطها بالسنتيمتر؟',o:['1400 سم','1500 سم','1600 سم','1700 سم'],c:2,lv:3,e:'2×(500+300) = 2×800 = 1600 سم'},
+],
+meters:[
+  {t:'300 سنتيمتر = <u>___</u> متر',o:['2','3','4','5'],c:1,lv:1,e:'300 ÷ 100 = 3 م'},
+  {t:'ما الوحدة المناسبة لقياس طول الفصل الدراسي؟',o:['مليمتر','سنتيمتر','متر','كيلومتر'],c:2,lv:1,e:'الفصل طويل — يُقاس بالمتر'},
+  {t:'5 متر = <u>___</u> سنتيمتر',o:['50','500','5000','50000'],c:1,lv:1,e:'5 × 100 = 500 سم'},
+  {t:'3 م + 4 م = <u>___</u> متر',o:['5','6','7','8'],c:2,lv:1,e:'3 + 4 = 7 م'},
+  {t:'أيّهما أكبر: 3 متر أم 250 سنتيمتر؟',o:['3 متر','250 سنتيمتر','متساويان','لا يمكن المقارنة'],c:0,lv:1,e:'3م = 300سم > 250سم'},
+  {t:'550 سنتيمتر = <u>___</u>',o:['5م 5سم','5م 50سم','55م','5م 500سم'],c:1,lv:2,e:'550 ÷ 100 = 5م و50سم متبقٍ'},
+  {t:'8 م − 3م 50سم = <u>___</u>',o:['4م 50سم','5م 50سم','4م 150سم','5م'],c:0,lv:2,e:'8م − 3.5م = 4.5م = 4م 50سم'},
+  {t:'رتّب تصاعدياً: 4م، 380سم، 4م 20سم',o:['380سم < 4م < 4م 20سم','4م < 380سم < 4م 20سم','380سم < 4م 20سم < 4م','4م 20سم < 380سم < 4م'],c:0,lv:2,e:'380سم=3.8م < 4م < 4.2م'},
+  {t:'ملعب طوله 20م وعرضه 10م. محيطه بالسنتيمتر = ___',o:['5000 سم','6000 سم','7000 سم','8000 سم'],c:1,lv:2,e:'2×(20+10)=60م = 6000سم'},
+  {t:'رحلة مسافتها 800م. قُطع 350م. كم متراً تبقى؟',o:['350 م','400 م','450 م','500 م'],c:2,lv:2,e:'800 − 350 = 450م'},
+  {t:'حبل طوله 15م قُطع إلى 6 قطع متساوية. ما طول كل قطعة؟',o:['2م','2م 50سم','3م','2م 30سم'],c:1,lv:3,e:'15 ÷ 6 = 2.5م = 2م 50سم'},
+  {t:'ثلاث غرف أطوالها: 4م50سم + 3م75سم + 5م25سم = ___',o:['12م 50سم','13م 50سم','14م 50سم','13م'],c:1,lv:3,e:'4.5+3.75+5.25 = 13.5م = 13م 50سم'},
+  {t:'مستطيل محيطه 20م وطوله 6م. ما عرضه؟',o:['3م','4م','5م','6م'],c:1,lv:3,e:'20=2×(6+w) → w = 4م'},
+  {t:'4م 30سم + 2م 85سم = ___',o:['6م 115سم','7م 15سم','7م 115سم','6م 15سم'],c:1,lv:3,e:'4.30+2.85=7.15م = 7م 15سم'},
+  {t:'رف طوله 3م 20سم. كتاب عرضه 8سم. كم كتاباً يسع الرف؟',o:['35','38','40','42'],c:2,lv:3,e:'320 ÷ 8 = 40 كتاباً'},
+],
+mm:[
+  {t:'1 سنتيمتر = <u>___</u> مليمتر',o:['1','10','100','1000'],c:1,lv:1,e:'1 سم = 10 مم دائماً'},
+  {t:'5 سنتيمتر = <u>___</u> مليمتر',o:['5','50','500','5000'],c:1,lv:1,e:'5 × 10 = 50 مم'},
+  {t:'30 مليمتر = <u>___</u> سنتيمتر',o:['3','30','300','3000'],c:0,lv:1,e:'30 ÷ 10 = 3 سم'},
+  {t:'ما الوحدة المناسبة لقياس سمك عملة معدنية؟',o:['متر','سنتيمتر','مليمتر','كيلومتر'],c:2,lv:1,e:'العملة رقيقة جداً — تُقاس بالمليمتر'},
+  {t:'4 سم 5 مم = <u>___</u> مليمتر',o:['45','405','450','54'],c:0,lv:1,e:'4×10 + 5 = 45 مم'},
+  {t:'35 مليمتر = <u>___</u>',o:['3سم 5مم','35سم','3سم 50مم','30سم 5مم'],c:0,lv:2,e:'35 ÷ 10 = 3 سم و5 مم متبقٍ'},
+  {t:'أيّهما أطول: 28 مليمتر أم 3 سنتيمتر؟',o:['28 مم','3 سم','متساويان','لا يمكن المقارنة'],c:1,lv:2,e:'3سم = 30مم > 28مم'},
+  {t:'100 مليمتر = <u>___</u> سنتيمتر',o:['1','10','100','1000'],c:1,lv:2,e:'100 ÷ 10 = 10 سم'},
+  {t:'2سم 8مم + 1سم 5مم = <u>___</u>',o:['3سم 3مم','4سم 3مم','4سم 13مم','3سم 13مم'],c:1,lv:2,e:'(2+1)سم + (8+5)مم = 3سم 13مم = 4سم 3مم'},
+  {t:'1 متر = <u>___</u> مليمتر',o:['10','100','1000','10000'],c:2,lv:2,e:'1م = 100سم = 1000مم'},
+  {t:'سلك طوله 50مم قُطع 5 قطع متساوية. طول كل قطعة؟',o:['10مم = 1سم','10مم = 2سم','5مم = 0.5سم','15مم = 1.5سم'],c:0,lv:3,e:'50 ÷ 5 = 10مم = 1سم'},
+  {t:'رتّب تصاعدياً: 15مم، 2سم، 1سم 8مم',o:['15مم < 1سم8مم < 2سم','2سم < 1سم8مم < 15مم','1سم8مم < 15مم < 2سم','2سم < 15مم < 1سم8مم'],c:0,lv:3,e:'15<18<20 مم'},
+  {t:'5 زجاجات سمك كل منها 3مم. ما ارتفاعها مجتمعةً؟',o:['10 مم','12 مم','15 مم','20 مم'],c:2,lv:3,e:'5 × 3 = 15 مم'},
+  {t:'حزمة ورق سمكها 3سم. سمك ورقة واحدة 1مم. كم ورقة في الحزمة؟',o:['20','25','30','35'],c:2,lv:3,e:'3سم = 30مم. 30 ÷ 1 = 30 ورقة'},
+  {t:'قلم طوله 14سم 5مم ومسطرة طولها 150مم. أيّهما أطول وبكم مليمتر؟',o:['القلم بـ 5مم','المسطرة بـ 5مم','متساويان','المسطرة بـ 10مم'],c:1,lv:3,e:'قلم=145مم، مسطرة=150مم. المسطرة أطول بـ 5مم'},
+],
+th:[
+  {t:'في العدد 3452 ، رقم الآلاف هو؟',o:['2','3','4','5'],c:1,lv:1,e:'الرقم في خانة الآلاف هو 3'},
+  {t:'اكتب "أربعة آلاف وخمسون" بالأرقام:',o:['4050','4500','4005','450'],c:0,lv:1,e:'4000+50=4050'},
+  {t:'أي عدد أكبر: 2999 أم 3000؟',o:['2999','3000','متساويان','لا يمكن تحديد ذلك'],c:1,lv:1,e:'3000 أكبر من 2999 بمقدار 1'},
+  {t:'1000 + 1000 + 1000 = <u>___</u>',o:['2000','3000','4000','1000'],c:1,lv:1,e:'3×1000=3000'},
+  {t:'كم عدد الآلاف في الرقم 7,000؟',o:['1','7','70','700'],c:1,lv:1,e:'7000 = 7 آلاف'},
+  {t:'رتّب تصاعدياً: 4500، 4050، 4005',o:['4005<4050<4500','4050<4005<4500','4500<4050<4005','4005<4500<4050'],c:0,lv:2,e:'4005 أصغرها ثم 4050 ثم 4500'},
+  {t:'العدد الذي يسبق 5000 مباشرة هو:',o:['4998','4999','5001','4990'],c:1,lv:2,e:'العدد السابق مباشرة = 5000 - 1 = 4999'},
+  {t:'في العدد 6,247 ما القيمة المكانية للرقم 2؟',o:['آلاف','مئات','عشرات','آحاد'],c:1,lv:2,e:'2 يقع في خانة المئات'},
+  {t:'5000 + 300 + 20 + 7 = <u>___</u>',o:['5327','5237','5372','5732'],c:0,lv:2,e:'حاصل الجمع = 5327'},
+  {t:'أي الأعداد يقع بين 3800 و 4000؟',o:['3750','3950','4050','3799'],c:1,lv:2,e:'3950 بين 3800 و4000'},
+  {t:'عدد مكوّن من 4 آلاف و6 مئات و0 عشرات و3 آحاد = <u>___</u>',o:['4603','4630','4063','4360'],c:0,lv:3,e:'4000+600+0+3=4603'},
+  {t:'الفرق بين أكبر وأصغر عدد يمكن تكوينه من الأرقام 2،5،8،1 (كل رقم مرة واحدة):',o:['7263','7362','6273','7236'],c:0,lv:3,e:'أكبر=8521، أصغر=1258، الفرق=7263'},
+  {t:'أنتج مصنع 2500 قطعة في يناير و1800 قطعة في فبراير. الإجمالي؟',o:['4200','4300','4400','3300'],c:1,lv:3,e:'2500+1800=4300'},
+  {t:'عدد رقم آلافه 3، ومئاته صفر، وعشراته صفر، وآحاده 7 = <u>___</u>',o:['3007','3070','3700','3077'],c:0,lv:3,e:'3000+0+0+7=3007'},
+  {t:'جمع فريق أحمد 4000 نقطة، وجمع فريق سارة نصف ذلك. كم نقطة جمعت سارة؟',o:['1000','2000','3000','4000'],c:1,lv:3,e:'4000÷2=2000'},
+],
+moreth:[
+  {t:'قرّب العدد 3,650 لأقرب ألف:',o:['3000','4000','3500','3600'],c:1,lv:1,e:'650 أقرب لـ1000 فيُقرَّب لأعلى'},
+  {t:'قرّب العدد 2,340 لأقرب ألف:',o:['2000','3000','2500','2300'],c:0,lv:1,e:'340 أقرب لـ0 فيُقرَّب لأسفل'},
+  {t:'2000 + 3000 = <u>___</u>',o:['4000','5000','6000','1000'],c:1,lv:1,e:'2000+3000=5000'},
+  {t:'5000 − 2000 = <u>___</u>',o:['2000','3000','4000','1000'],c:1,lv:1,e:'5000-2000=3000'},
+  {t:'أي عدد أقرب إلى 4000: 3800 أم 4300؟',o:['3800','4300','متساويان','4000'],c:0,lv:1,e:'الفرق: |3800-4000|=200 أقل من |4300-4000|=300'},
+  {t:'قرّب 6,499 لأقرب مئة:',o:['6400','6500','6000','6450'],c:1,lv:2,e:'99 تُقرَّب لأعلى فتصبح 6500'},
+  {t:'4,750 + 1,300 = <u>___</u>',o:['6050','6005','6500','5050'],c:0,lv:2,e:'4750+1300=6050'},
+  {t:'8,200 − 3,450 = <u>___</u>',o:['4650','4750','4850','5750'],c:1,lv:2,e:'8200-3450=4750'},
+  {t:'عدد قُرِّب لأقرب ألف فأصبح 7000. أي هذه الأعداد لا يمكن أن يكون هو العدد الأصلي؟',o:['6501','7499','7500','6499'],c:3,lv:2,e:'6499 يُقرَّب إلى 6000 لا 7000'},
+  {t:'المسافة بين مدينتين 4,850 كم. عند تقريبها لأقرب مئة تصبح:',o:['4800','4900','4850','5000'],c:1,lv:2,e:'50 تُقرَّب لأعلى فتصبح 4900'},
+  {t:'أنتج مصنعان 12,450 و9,780 وحدة. الفرق بينهما مقرَّباً لأقرب ألف:',o:['2000','3000','4000','2500'],c:1,lv:3,e:'الفرق الحقيقي=2670، يُقرَّب إلى 3000'},
+  {t:'جمعت جمعية 15,600 جنيه في أسبوع و12,900 في الأسبوع التالي. الإجمالي مقرَّباً لأقرب ألف:',o:['28000','29000','27000','30000'],c:1,lv:3,e:'الإجمالي=28500 يُقرَّب لأعلى إلى 29000'},
+  {t:'عدد سكان قرية 3,428 وأخرى 3,571. أي القريتين عدد سكانها أقرب إلى 3,500؟',o:['الأولى','الثانية','متساويتان','لا يمكن التحديد'],c:1,lv:3,e:'الفرق: |3428-3500|=72، |3571-3500|=71، الثانية أقرب'},
+  {t:'مبلغ 45,600 جنيه قُسِّم بالتساوي بين شخصين. نصيب كل منهما مقرَّباً لأقرب ألف:',o:['22000','23000','24000','20000'],c:1,lv:3,e:'45600÷2=22800 يُقرَّب إلى 23000'},
+  {t:'زاد عدد الحاضرين من 2,780 إلى 3,150 خلال أسبوعين. مقدار الزيادة؟',o:['370','380','470','270'],c:0,lv:3,e:'3150-2780=370'},
+],
+tenhun:[
+  {t:'ما القيمة المكانية للرقم 4 في العدد 45,231؟',o:['آحاد','عشرات','عشرات آلاف','مئات آلاف'],c:2,lv:1,e:'4 يقع في خانة عشرات الآلاف'},
+  {t:'اكتب "خمسون ألفاً وثلاثمائة" بالأرقام:',o:['50300','50030','5300','503000'],c:0,lv:1,e:'50000+300=50300'},
+  {t:'أكبر رقم يمكن أن يوضع في خانة عشرات الآلاف هو:',o:['9','90','99','900'],c:0,lv:1,e:'أكبر رقم مفرد هو 9'},
+  {t:'10 آلاف × 5 = <u>___</u>',o:['15000','50000','5000','500000'],c:1,lv:1,e:'10000×5=50000'},
+  {t:'أي عدد أكبر: 87,500 أم 78,500؟',o:['87500','78500','متساويان','لا يمكن تحديد ذلك'],c:0,lv:1,e:'87500 أكبر لأن رقم عشرات الآلاف فيه 8>7'},
+  {t:'العدد المكون من 3 مئات آلاف و4 عشرات آلاف و5 آلاف = <u>___</u>',o:['345000','340500','304500','300450'],c:0,lv:2,e:'300000+40000+5000=345000'},
+  {t:'رتّب تنازلياً: 234500، 243500، 224500',o:['243500>234500>224500','234500>243500>224500','224500>234500>243500','243500>224500>234500'],c:0,lv:2,e:'243500 الأكبر ثم 234500 ثم 224500'},
+  {t:'ما القيمة المكانية للرقم 7 في العدد 372,891؟',o:['مئات آلاف','عشرات آلاف','آلاف','مئات'],c:1,lv:2,e:'7 يقع في خانة عشرات الآلاف'},
+  {t:'250,000 + 130,000 = <u>___</u>',o:['380000','370000','390000','280000'],c:0,lv:2,e:'250000+130000=380000'},
+  {t:'عدد سكان مدينة 456,000 نسمة. ما الرقم في خانة عشرات الآلاف؟',o:['4','5','6','45'],c:1,lv:2,e:'الرقم 5 يقع في خانة عشرات الآلاف'},
+  {t:'500,000 − 1 = <u>___</u>',o:['499999','500001','499998','490000'],c:0,lv:3,e:'500000-1=499999'},
+  {t:'أصغر عدد من 6 أرقام (بحيث لا يبدأ بصفر) هو:',o:['100000','199999','999999','010000'],c:0,lv:3,e:'أصغر عدد من 6 أرقام يبدأ بـ1 = 100000'},
+  {t:'أنتج مصنعان 385,000 و298,000 قطعة. الفرق بينهما؟',o:['87000','97000','77000','107000'],c:0,lv:3,e:'385000-298000=87000'},
+  {t:'ميزانية مشروع 750,000 جنيه وُزِّعت بالتساوي على 3 مراحل. تكلفة كل مرحلة؟',o:['250000','225000','275000','300000'],c:0,lv:3,e:'750000÷3=250000'},
+  {t:'ما رقما خانتَي (مئات الآلاف) و(عشرات الآلاف) في العدد 683,214 على الترتيب؟',o:['6 و 8','8 و 6','6 و 3','3 و 8'],c:0,lv:3,e:'6 في مئات الآلاف، 8 في عشرات الآلاف'},
+],
+forms:[
+  {t:'الصورة القياسية للعدد 4000+300+50+2 هي:',o:['4352','4325','4532','4253'],c:0,lv:1,e:'4000+300+50+2=4352'},
+  {t:'الصورة اللفظية لعدد 2500 هي:',o:['ألفان وخمسمائة','مائتان وخمسون','خمسة وعشرون مائة','عشرون ألفاً وخمسة'],c:0,lv:1,e:'2500 = ألفان وخمسمائة'},
+  {t:'حلّل العدد 6,741 (الصورة التحليلية):',o:['6000+700+40+1','6000+70+400+1','6741+0','6000+740+1'],c:0,lv:1,e:'6=آلاف، 7=مئات، 4=عشرات، 1=آحاد'},
+  {t:'العدد "ثلاثة آلاف وستون" بالأرقام هو:',o:['3060','3600','3006','3660'],c:0,lv:1,e:'3000+60=3060'},
+  {t:'الصورة القياسية لـ"تسعة آلاف وتسعة" هي:',o:['9009','9090','9900','9099'],c:0,lv:1,e:'9000+9=9009'},
+  {t:'حلّل العدد 45,203 (الصورة التحليلية):',o:['40000+5000+200+3','40000+500+20+3','4000+5000+200+3','45000+200+3'],c:0,lv:2,e:'4=عشرات آلاف، 5=آلاف، 2=مئات، 0=عشرات، 3=آحاد'},
+  {t:'3000+200+40+6 يساوي بالصورة القياسية:',o:['3246','3264','3426','3624'],c:0,lv:2,e:'3000+200+40+6=3246'},
+  {t:'أي صيغة تحليلية صحيحة للعدد 70,502؟',o:['70000+500+2','70000+50+2','7000+500+2','70000+5000+2'],c:0,lv:2,e:'70000+500+2=70502'},
+  {t:'الصورة اللفظية لعدد 108,000 هي:',o:['مائة وثمانية آلاف','مائة ألف وثمانون','ثمانية آلاف ومائة','مائة وثمانون ألفاً'],c:0,lv:2,e:'108000 = مائة وثمانية آلاف'},
+  {t:'عدد كُتب بالكلمات "اثنا عشر ألفاً وخمسة عشر"، صورته القياسية:',o:['12015','12150','12105','21015'],c:0,lv:2,e:'12000+15=12015'},
+  {t:'عدد صورته التحليلية 200000+30000+4000+500+70+6، صورته القياسية:',o:['234576','234567','230456','234657'],c:0,lv:3,e:'200000+30000+4000+500+70+6=234576'},
+  {t:'عدد قياسي هو 509,040، ما صورته التحليلية الصحيحة؟',o:['500000+9000+40','500000+9000+400','500000+900+40','50000+9000+40'],c:0,lv:3,e:'500000+9000+40=509040'},
+  {t:'أي من هذه متساوٍ: (I) 4000+500+3  (II) الصورة القياسية 4503  (III) أربعة آلاف وخمسمائة وثلاثة؟',o:['جميعها متساوية','I و II فقط','II و III فقط','لا شيء منها متساوٍ'],c:0,lv:3,e:'الصيغ الثلاث تمثل نفس العدد 4503'},
+  {t:'عند جمع الصورة التحليلية لعدد بشكل صحيح، الفرق بينها وبين الصورة القياسية لنفس العدد يكون:',o:['صفر دائماً','يعتمد على العدد','1','100'],c:0,lv:3,e:'كلاهما يمثلان نفس العدد فالفرق صفر'},
+  {t:'عدد مكتوب "سبعمائة ألف وستة عشر"، اكتبه بالصورة القياسية:',o:['700016','700160','716000','70016'],c:0,lv:3,e:'700000+16=700016'},
+],
+arrays:[
+  {t:'مصفوفة من 3 صفوف و4 أعمدة، عدد عناصرها الكلي = <u>___</u>',o:['7','12','34','43'],c:1,lv:1,e:'3×4=12'},
+  {t:'مصفوفة 5×2 (5 صفوف وعمودان)، عدد نقاطها = <u>___</u>',o:['7','10','52','25'],c:1,lv:1,e:'5×2=10'},
+  {t:'مصفوفة بها 6 عناصر مرتبة في صفَّين. كم عموداً فيها؟',o:['2','3','4','6'],c:1,lv:1,e:'6÷2=3'},
+  {t:'مصفوفة بها 4 صفوف و4 أعمدة، هل عدد صفوفها = عدد أعمدتها؟',o:['نعم','لا','لا يمكن التحديد','فقط في صف واحد'],c:0,lv:1,e:'4=4 فهما متساويان'},
+  {t:'مصفوفة 2×5 لها نفس عدد عناصر مصفوفة مقاسها:',o:['3×3','1×10','4×3','6×1'],c:1,lv:1,e:'2×5=10 و1×10=10'},
+  {t:'مصفوفة 7×3، عدد عناصرها = <u>___</u>',o:['10','21','37','73'],c:1,lv:2,e:'7×3=21'},
+  {t:'رُتِّبت كراسي الفصل في مصفوفة 6 صفوف و5 أعمدة. كم كرسياً بالإجمالي؟',o:['11','30','65','56'],c:1,lv:2,e:'6×5=30'},
+  {t:'مصفوفة بها 24 عنصراً مرتبة في 4 صفوف. كم عموداً فيها؟',o:['5','6','7','8'],c:1,lv:2,e:'24÷4=6'},
+  {t:'مصفوفتان: الأولى 3×6 والثانية 2×9. أي منهما عدد عناصرها أكبر؟',o:['الأولى (18)','الثانية (18)','متساويتان','لا يمكن التحديد'],c:2,lv:2,e:'3×6=18 و2×9=18، متساويتان'},
+  {t:'عُلبة بيض مرتبة في مصفوفة 4×3. إذا أُضيف صف واحد بنفس عدد الأعمدة، فكم عدد البيض الجديد؟',o:['12','15','16','9'],c:1,lv:2,e:'4×3=12 ثم +صف من 3 = 15'},
+  {t:'حديقة نُظِّمت شجيراتها في مصفوفة 8×6. أُزيل عمود واحد كامل. كم شجيرة تبقّت؟',o:['40','42','48','56'],c:0,lv:3,e:'8×6=48، عمود واحد=8، الباقي=40'},
+  {t:'مصفوفة أولى 6×6 (36 عنصراً). ما الأبعاد الممكنة لمصفوفة أخرى بها نفس العدد (غير 6×6)؟',o:['4×9','5×7','3×11','8×5'],c:0,lv:3,e:'4×9=36'},
+  {t:'قاعة مقاعدها مرتبة في مصفوفة أعمدتها 12، وإجمالي المقاعد 96. كم عدد الصفوف؟',o:['6','7','8','9'],c:2,lv:3,e:'96÷12=8'},
+  {t:'مصفوفة مستطيلة عدد عناصرها 48. أي من هذه الأزواج غير صحيح؟',o:['6×8','4×12','5×10','3×16'],c:2,lv:3,e:'5×10=50 وليس 48'},
+  {t:'مصفوفة 9×9 (مربعة)، عدد عناصرها = <u>___</u>',o:['18','81','99','729'],c:1,lv:3,e:'9×9=81'},
+],
+multconcept:[
+  {t:'4+4+4 بصيغة الضرب هي:',o:['4×4','3×4','2×4','4×2'],c:1,lv:1,e:'4 تكرّر 3 مرات = 3×4'},
+  {t:'5×3 يعني:',o:['5 مجموعات كل منها 3','3 مجموعات كل منها 5','5+5','3-3'],c:0,lv:1,e:'العدد الأول يمثّل عدد المجموعات'},
+  {t:'6×2 يعني:',o:['6 مجموعات من 2','2 مجموعة من 6','ضرب 6 في 6','لا شيء مما سبق'],c:0,lv:1,e:'6×2 = 6 مجموعات كل منها 2'},
+  {t:'عبّر عن 3×5 كجمع متكرر:',o:['3+3+3+3+3','5+5+5','5+3','3+5'],c:1,lv:1,e:'3×5 = 3 مجموعات كل منها 5، أي 5+5+5'},
+  {t:'2×7 = <u>___</u>',o:['9','14','12','21'],c:1,lv:1,e:'2×7=14'},
+  {t:'لدى أحمد 4 صناديق في كل صندوق 6 تفاحات. كم تفاحة لديه؟',o:['10','24','20','28'],c:1,lv:2,e:'4×6=24'},
+  {t:'عبارة الضرب المناسبة لـ"5 صفوف من الكراسي كل صف فيه 8 كراسي":',o:['5+8','5×8','8÷5','8-5'],c:1,lv:2,e:'5×8=40 كرسياً'},
+  {t:'7×6 = <u>___</u>',o:['42','48','36','49'],c:0,lv:2,e:'7×6=42'},
+  {t:'أي عبارة تساوي 8×3؟',o:['8+3','3+3+3+3+3+3+3+3','8+8','لا شيء مما سبق'],c:1,lv:2,e:'8×3 = 8 مجموعات كل منها 3'},
+  {t:'مزرعة فيها 9 صفوف من الأشجار، كل صف 5 أشجار. عدد الأشجار = <u>___</u>',o:['14','45','54','40'],c:1,lv:2,e:'9×5=45'},
+  {t:'في حفل، 6 طاولات كل طاولة عليها 7 كراسي، ثم أُضيفت طاولة سابعة بنفس عدد الكراسي. الإجمالي الجديد؟',o:['42','49','48','56'],c:1,lv:3,e:'6×7=42، ثم +7=49'},
+  {t:'أي عدد إذا ضُرب في 4 أعطى نفس نتيجة 6×8؟',o:['12','10','14','8'],c:0,lv:3,e:'6×8=48، 48÷4=12'},
+  {t:'مصنع يعبّئ 8 عبوات في الكرتونة، ولديه 9 كراتين. وُزِّعت العبوات على 6 متاجر بالتساوي. كم عبوة لكل متجر؟',o:['10','12','14','16'],c:1,lv:3,e:'8×9=72، 72÷6=12'},
+  {t:'أي جملة ضرب خاطئة؟',o:['5×6=30','4×9=36','7×8=54','3×9=27'],c:2,lv:3,e:'7×8=56 وليس 54'},
+  {t:'إذا كانت كل حافلة تحمل 12 طالباً، فكم حافلة تحتاج لنقل 96 طالباً؟',o:['6','7','8','9'],c:2,lv:3,e:'96÷12=8'},
+],
+commute:[
+  {t:'حسب خاصية الابدال، 4×7 = <u>___</u>',o:['7×4','4+7','7-4','4÷7'],c:0,lv:1,e:'خاصية الابدال: تغيير ترتيب العددين لا يغيّر الحاصل'},
+  {t:'أي من العبارات التالية صحيحة بخاصية الابدال؟',o:['3×5=5×3','3×5=5+3','3×5=3-5','3×5=5÷3'],c:0,lv:1,e:'3×5=15 و5×3=15'},
+  {t:'إذا كان 6×9=54، فما نتيجة 9×6؟',o:['45','54','63','36'],c:1,lv:1,e:'الضرب تبادلي، فالنتيجة نفسها 54'},
+  {t:'خاصية الابدال في الضرب تعني:',o:['تغيير ترتيب العددين لا يغيّر حاصل الضرب','تغيير ترتيب العددين يغيّر حاصل الضرب','الضرب يساوي الجمع دائماً','لا توجد خاصية بهذا الاسم'],c:0,lv:1,e:'هذا هو التعريف الصحيح للخاصية'},
+  {t:'8×3 = 3×<u>___</u>',o:['3','8','11','24'],c:1,lv:1,e:'8×3=3×8'},
+  {t:'مصفوفة 5×6 لها نفس عدد عناصر مصفوفة أخرى أبعادها (بالابدال):',o:['6×5','5×5','6×6','4×7'],c:0,lv:2,e:'5×6=30=6×5'},
+  {t:'إذا كانت 7×9=63، فإن 9×7 = <u>___</u>',o:['56','63','70','72'],c:1,lv:2,e:'الضرب تبادلي، فالنتيجة 63'},
+  {t:'أي زوج من الجمل الضربية يوضح خاصية الابدال بشكل صحيح؟',o:['2×9 و 9×2','2×9 و 9+2','2×9 و 2-9','2×9 و 18÷2'],c:0,lv:2,e:'فقط تبديل ترتيب عددي الضرب يحافظ على الحاصل'},
+  {t:'لحساب 9×4 بسهولة أكبر، يمكن استخدام خاصية الابدال لحسابه كـ:',o:['4×9','9+4','9-4','9÷4'],c:0,lv:2,e:'4×9=9×4=36'},
+  {t:'العبارة "خاصية الابدال تنطبق على الطرح كما تنطبق على الضرب":',o:['خاطئة، الطرح لا يخضع للابدال','صحيحة تماماً','صحيحة جزئياً','غير قابلة للتحديد'],c:0,lv:2,e:'مثلاً 8-3≠3-8، فالطرح غير تبادلي'},
+  {t:'عامل يجمع 6 صناديق كل صندوق 8 قطع، وعامل آخر يرتّب 8 صناديق كل صندوق 6 قطع. عدد القطع الكلي عند كل منهما:',o:['متساوٍ (48 قطعة لكل منهما)','الأول أكثر','الثاني أكثر','لا يمكن المقارنة'],c:0,lv:3,e:'6×8=48=8×6'},
+  {t:'أي من هذه الأزواج لا يوضح خاصية الابدال بشكل صحيح؟',o:['5×3 و 3×5','2×8 و 8×2','4×6 و 6×4','7×3 و 3+7'],c:3,lv:3,e:'الزوج الأخير يخلط بين الضرب والجمع'},
+  {t:'إذا علمت أن أ×ب = 72، فبخاصية الابدال ب×أ = <u>___</u>',o:['64','72','80','9'],c:1,lv:3,e:'الحاصل لا يتغيّر بتبديل الترتيب'},
+  {t:'مستطيل مقسَّم إلى مصفوفة 9 صفوف و5 أعمدة. لو أُعيد رسمه بـ5 صفوف و9 أعمدة، فإن عدد الوحدات الكلي:',o:['يزيد','يقل','يبقى نفسه (45)','يتضاعف'],c:2,lv:3,e:'9×5=5×9=45'},
+  {t:'استخدم خاصية الابدال: 25×4 ثم 4×25. حاصل كل منهما؟',o:['100 لكل منهما','100 و 90','90 لكل منهما','100 و 110'],c:0,lv:3,e:'25×4=100=4×25'},
+]};
+
+// Final 20 questions (mixed) — Chapter 1
+const FinalQs=[
+  {t:'[الأنماط] 3، 6، 9، 12، <u>___</u>، 18 — ما الناقص؟',o:['13','14','15','16'],c:2,top:'patterns',e:'مضاعفات 3'},
+  {t:'[الأنماط] 1، 2، 4، 8، <u>___</u>، 32 — ما الناقص؟',o:['12','14','16','18'],c:2,top:'patterns',e:'يتضاعف كل مرة'},
+  {t:'[الأنماط] نمط في قصة: شجيرات 3،6،9،12،___ في الصف الخامس',o:['12','15','18','21'],c:1,top:'patterns',e:'3×5=15'},
+  {t:'[الأعمدة] ما مجموع كتب جميع الطلاب الخمسة؟',o:['40','42','44','46'],c:1,top:'barchart',e:'8+12+5+10+7=42'},
+  {t:'[الأعمدة] أيّ طالبَين معاً يساوي مجموع كتبهما سارة؟',o:['أحمد+علي','علي+خالد','أحمد+خالد','منى+علي'],c:1,top:'barchart',e:'5+7=12=سارة'},
+  {t:'[الأعمدة] ما متوسط عدد الكتب؟',o:['7','8','9','10'],c:1,top:'barchart',e:'42÷5≈8.4'},
+  {t:'[النقاط] كم طالباً إجمالاً في مخطط النقاط؟',o:['14','15','16','17'],c:2,top:'dotplot',e:'2+4+6+3+1=16'},
+  {t:'[النقاط] كم طالباً ينام أكثر من 8 ساعات؟',o:['2','3','4','5'],c:2,top:'dotplot',e:'9+10 ساعات = 3+1 = 4'},
+  {t:'[النقاط] كم طالباً ينام 8 أو 9 ساعات معاً؟',o:['7','8','9','10'],c:2,top:'dotplot',e:'6+3=9'},
+  {t:'[السنتيمتر] محيط مستطيل 8سم×5سم = ___',o:['13سم','26سم','40سم','52سم'],c:1,top:'cm',e:'2×(8+5)=26سم'},
+  {t:'[السنتيمتر] 3 أقلام طول كل منها 18سم. مجموعها = ___',o:['48سم','54سم','60سم','66سم'],c:1,top:'cm',e:'3×18=54سم'},
+  {t:'[السنتيمتر] حديقة 5م × 3م. محيطها بالسنتيمتر = ___',o:['1400','1500','1600','1700'],c:2,top:'cm',e:'2×(500+300)=1600سم'},
+  {t:'[المتر] مستطيل محيطه 20م وطوله 6م. عرضه = ___',o:['3م','4م','5م','6م'],c:1,top:'meters',e:'20=2×(6+w)، w=4م'},
+  {t:'[المتر] 4م 30سم + 2م 85سم = ___',o:['6م 115سم','7م 15سم','7م 115سم','6م 15سم'],c:1,top:'meters',e:'7م 15سم'},
+  {t:'[المتر] رف 3م 20سم + كتاب 8سم. كم كتاباً؟',o:['35','38','40','42'],c:2,top:'meters',e:'320÷8=40'},
+  {t:'[المليمتر] 100مم = ___ سم',o:['1','10','100','1000'],c:1,top:'mm',e:'100÷10=10سم'},
+  {t:'[المليمتر] رتّب: 15مم، 2سم، 1سم8مم',o:['15مم<1سم8مم<2سم','2سم<1سم8مم<15مم','1سم8مم<15مم<2سم','2سم<15مم<1سم8مم'],c:0,top:'mm',e:'15<18<20مم'},
+  {t:'[المليمتر] 1م = ___ مم',o:['10','100','1000','10000'],c:2,top:'mm',e:'1م=100سم=1000مم'},
+  {t:'[شامل] قلم 14سم5مم vs مسطرة 150مم. أيّهما أطول وبكم مم؟',o:['القلم بـ5مم','المسطرة بـ5مم','متساويان','المسطرة بـ10مم'],c:1,top:'mm',e:'145مم vs 150مم، المسطرة أطول بـ5مم'},
+  {t:'[شامل] 45، 40، 35، <u>___</u>، 25 — ما الناقص؟',o:['28','29','30','31'],c:2,top:'patterns',e:'ينقص بمقدار 5'},
+];
+
+// Final 20 questions (mixed) — Chapter 2
+const FinalQs2=[
+  {t:'[الآلاف] في العدد 3452 ما القيمة المكانية للرقم 3؟',o:['آلاف','مئات','عشرات','آحاد'],c:0,top:'th',e:'3 يقع في خانة الآلاف'},
+  {t:'[الآلاف] 1000+1000+1000 = ___',o:['2000','3000','4000','1000'],c:1,top:'th',e:'3×1000=3000'},
+  {t:'[مزيد من الآلاف] قرّب 3,650 لأقرب ألف:',o:['3000','4000','3500','3600'],c:1,top:'moreth',e:'650 تُقرَّب لأعلى'},
+  {t:'[مزيد من الآلاف] 4750+1300 = ___',o:['6050','6005','6500','5050'],c:0,top:'moreth',e:'4750+1300=6050'},
+  {t:'[عشرات ومئات الآلاف] العدد المكوّن من 3 مئات آلاف و4 عشرات آلاف و5 آلاف = ___',o:['345000','340500','304500','300450'],c:0,top:'tenhun',e:'300000+40000+5000=345000'},
+  {t:'[عشرات ومئات الآلاف] 250,000+130,000 = ___',o:['380000','370000','390000','280000'],c:0,top:'tenhun',e:'250000+130000=380000'},
+  {t:'[صيغ كتابة الأعداد] الصورة القياسية لـ 4000+300+50+2 = ___',o:['4352','4325','4532','4253'],c:0,top:'forms',e:'4000+300+50+2=4352'},
+  {t:'[صيغ كتابة الأعداد] حلّل العدد 45,203:',o:['40000+5000+200+3','40000+500+20+3','4000+5000+200+3','45000+200+3'],c:0,top:'forms',e:'4=عشرات آلاف،5=آلاف،2=مئات،3=آحاد'},
+  {t:'[المصفوفات] مصفوفة من 3 صفوف و4 أعمدة، عدد عناصرها = ___',o:['7','12','34','43'],c:1,top:'arrays',e:'3×4=12'},
+  {t:'[المصفوفات] مصفوفة بها 24 عنصراً في 4 صفوف. عدد الأعمدة = ___',o:['5','6','7','8'],c:1,top:'arrays',e:'24÷4=6'},
+  {t:'[مفهوم الضرب] عبّر عن 3×5 كجمع متكرر:',o:['3+3+3+3+3','5+5+5','5+3','3+5'],c:1,top:'multconcept',e:'3×5 = 3 مجموعات كل منها 5'},
+  {t:'[مفهوم الضرب] لدى أحمد 4 صناديق في كل صندوق 6 تفاحات. كم تفاحة لديه؟',o:['10','24','20','28'],c:1,top:'multconcept',e:'4×6=24'},
+  {t:'[خاصية الابدال] حسب خاصية الابدال، 4×7 = ___',o:['7×4','4+7','7-4','4÷7'],c:0,top:'commute',e:'تبديل ترتيب عددي الضرب لا يغيّر الحاصل'},
+  {t:'[خاصية الابدال] إذا كان 6×9=54، فما نتيجة 9×6؟',o:['45','54','63','36'],c:1,top:'commute',e:'الضرب تبادلي، النتيجة 54'},
+  {t:'[الآلاف] أي عدد أكبر: 2999 أم 3000؟',o:['2999','3000','متساويان','لا يمكن تحديد ذلك'],c:1,top:'th',e:'3000 أكبر بمقدار 1'},
+  {t:'[عشرات ومئات الآلاف] 500,000 − 1 = ___',o:['499999','500001','499998','490000'],c:0,top:'tenhun',e:'500000-1=499999'},
+  {t:'[صيغ كتابة الأعداد] الصورة اللفظية لعدد 2500 هي:',o:['ألفان وخمسمائة','مائتان وخمسون','خمسة وعشرون مائة','عشرون ألفاً وخمسة'],c:0,top:'forms',e:'2500 = ألفان وخمسمائة'},
+  {t:'[المصفوفات] رُتِّبت كراسي الفصل في مصفوفة 6 صفوف و5 أعمدة. كم كرسياً بالإجمالي؟',o:['11','30','65','56'],c:1,top:'arrays',e:'6×5=30'},
+  {t:'[مفهوم الضرب] مزرعة فيها 9 صفوف من الأشجار، كل صف 5 أشجار. عدد الأشجار = ___',o:['14','45','54','40'],c:1,top:'multconcept',e:'9×5=45'},
+  {t:'[خاصية الابدال] استخدم خاصية الابدال: 25×4 ثم 4×25. حاصل كل منهما؟',o:['100 لكل منهما','100 و 90','90 لكل منهما','100 و 110'],c:0,top:'commute',e:'25×4=100=4×25'},
+];
+
+// Final 26 questions (mixed) — Chapters 1 & 2 combined (2 questions per lesson)
+const FinalQsAll=[
+  {t:'[الأنماط] 2، 4، 6، <u>___</u>، 10 — ما العدد الناقص؟',o:['6','7','8','9'],c:2,top:'patterns',e:'كل عدد يزيد بمقدار 2'},
+  {t:'[الأنماط] 1، 2، 4، 8، <u>___</u>، 32 — ما العدد الناقص؟',o:['12','14','16','18'],c:2,top:'patterns',e:'كل عدد يتضاعف'},
+  {t:'[الأعمدة] من قرأ أكثر عدد من الكتب في الرسم البياني؟',o:['أحمد','سارة','علي','منى'],c:1,top:'barchart',e:'سارة = 12 كتاباً'},
+  {t:'[الأعمدة] ما الفرق في عدد الكتب بين سارة وعلي؟',o:['5','6','7','8'],c:2,top:'barchart',e:'12 - 5 = 7'},
+  {t:'[النقاط] كم طالباً ينام 8 ساعات يومياً حسب مخطط النقاط؟',o:['4','5','6','7'],c:2,top:'dotplot',e:'النقاط فوق 8 = 6 طلاب'},
+  {t:'[النقاط] كم طالباً إجمالاً في مخطط النقاط؟',o:['14','15','16','17'],c:2,top:'dotplot',e:'2+4+6+3+1=16'},
+  {t:'[السنتيمتر] 1 متر = <u>___</u> سنتيمتر',o:['10','100','1000','10000'],c:1,top:'cm',e:'1م = 100سم دائماً'},
+  {t:'[السنتيمتر] محيط مستطيل طوله 8سم وعرضه 5سم = <u>___</u>',o:['13سم','26سم','40سم','52سم'],c:1,top:'cm',e:'2×(8+5)=26سم'},
+  {t:'[المتر] مستطيل محيطه 20م وطوله 6م. عرضه = <u>___</u>',o:['3م','4م','5م','6م'],c:1,top:'meters',e:'20=2×(6+w)، w=4م'},
+  {t:'[المتر] 4م 30سم + 2م 85سم = <u>___</u>',o:['6م 115سم','7م 15سم','7م 115سم','6م 15سم'],c:1,top:'meters',e:'7م 15سم'},
+  {t:'[المليمتر] 100 مليمتر = <u>___</u> سنتيمتر',o:['1','10','100','1000'],c:1,top:'mm',e:'100÷10=10سم'},
+  {t:'[المليمتر] 1 متر = <u>___</u> مليمتر',o:['10','100','1000','10000'],c:2,top:'mm',e:'1م=100سم=1000مم'},
+  {t:'[الآلاف] في العدد 3452 ما رقم خانة الآلاف؟',o:['2','3','4','5'],c:1,top:'th',e:'3 يقع في خانة الآلاف'},
+  {t:'[الآلاف] 1000 + 1000 + 1000 = <u>___</u>',o:['2000','3000','4000','1000'],c:1,top:'th',e:'3×1000=3000'},
+  {t:'[مزيد من الآلاف] قرّب العدد 3,650 لأقرب ألف:',o:['3000','4000','3500','3600'],c:1,top:'moreth',e:'650 تُقرَّب لأعلى'},
+  {t:'[مزيد من الآلاف] 4,750 + 1,300 = <u>___</u>',o:['6050','6005','6500','5050'],c:0,top:'moreth',e:'4750+1300=6050'},
+  {t:'[عشرات ومئات الآلاف] 250,000 + 130,000 = <u>___</u>',o:['380000','370000','390000','280000'],c:0,top:'tenhun',e:'250000+130000=380000'},
+  {t:'[عشرات ومئات الآلاف] ما القيمة المكانية للرقم 7 في العدد 372,891؟',o:['مئات آلاف','عشرات آلاف','آلاف','مئات'],c:1,top:'tenhun',e:'7 يقع في خانة عشرات الآلاف'},
+  {t:'[صيغ كتابة الأعداد] الصورة القياسية لـ 4000+300+50+2 = <u>___</u>',o:['4352','4325','4532','4253'],c:0,top:'forms',e:'4000+300+50+2=4352'},
+  {t:'[صيغ كتابة الأعداد] الصورة اللفظية لعدد 2500 هي:',o:['ألفان وخمسمائة','مائتان وخمسون','خمسة وعشرون مائة','عشرون ألفاً وخمسة'],c:0,top:'forms',e:'2500 = ألفان وخمسمائة'},
+  {t:'[المصفوفات] مصفوفة من 3 صفوف و4 أعمدة، عدد عناصرها = <u>___</u>',o:['7','12','34','43'],c:1,top:'arrays',e:'3×4=12'},
+  {t:'[المصفوفات] رُتِّبت كراسي الفصل في مصفوفة 6 صفوف و5 أعمدة. الإجمالي؟',o:['11','30','65','56'],c:1,top:'arrays',e:'6×5=30'},
+  {t:'[مفهوم الضرب] عبّر عن 3×5 كجمع متكرر:',o:['3+3+3+3+3','5+5+5','5+3','3+5'],c:1,top:'multconcept',e:'3×5 = 3 مجموعات كل منها 5'},
+  {t:'[مفهوم الضرب] لدى أحمد 4 صناديق في كل صندوق 6 تفاحات. كم تفاحة لديه؟',o:['10','24','20','28'],c:1,top:'multconcept',e:'4×6=24'},
+  {t:'[خاصية الابدال] حسب خاصية الابدال، 4×7 = <u>___</u>',o:['7×4','4+7','7-4','4÷7'],c:0,top:'commute',e:'تبديل ترتيب عددي الضرب لا يغيّر الحاصل'},
+  {t:'[خاصية الابدال] إذا كان 6×9=54، فما نتيجة 9×6؟',o:['45','54','63','36'],c:1,top:'commute',e:'الضرب تبادلي، النتيجة 54'},
+];
+
+// ═══════════════════════════════════════════
+// SCORING STATE
+// ═══════════════════════════════════════════
+const scores={};
+ALL_TOPICS.forEach(t=>{
+  scores[t]={correct:0,total:0,answered:new Array(15).fill(false),byLevel:[0,0,0,0]};
+});
+const finalScores={correct:0,total:0,answered:new Array(20).fill(false),byTopic:{}};
+CH1_TOPICS.forEach(t=>finalScores.byTopic[t]={c:0,t:0});
+const finalScores2={correct:0,total:0,answered:new Array(20).fill(false),byTopic:{}};
+CH2_TOPICS.forEach(t=>finalScores2.byTopic[t]={c:0,t:0});
+const finalScoresAll={correct:0,total:0,answered:new Array(26).fill(false),byTopic:{}};
+ALL_TOPICS.forEach(t=>finalScoresAll.byTopic[t]={c:0,t:0});
+
+// ═══════════════════════════════════════════
+// RENDER CHARTS (bar chart + dot plot)
+// ═══════════════════════════════════════════
+function renderBarChart(){
+  const data=[{l:'أحمد',v:8,c:'#7C3AED'},{l:'سارة',v:12,c:'#0369A1'},{l:'علي',v:5,c:'#0E7490'},{l:'منى',v:10,c:'#047857'},{l:'خالد',v:7,c:'#B45309'}];
+  const maxV=12;
+  const box=document.getElementById('barChartViz');
+  box.innerHTML=`<div class="chart-title-text">📚 الكتب التي قرأها الطلاب (استخدم هذا الرسم للإجابة عن الأسئلة)</div>
+  <div style="position:relative;padding-right:44px;padding-left:8px">
+    <div class="y-axis">
+      <span class="y-val">12</span><span class="y-val">9</span>
+      <span class="y-val">6</span><span class="y-val">3</span><span class="y-val">0</span>
+    </div>
+    <div class="bar-chart-wrap" id="bcWrap">
+      <div class="gridlines">
+        <div class="gline" style="top:0%"></div><div class="gline" style="top:25%"></div>
+        <div class="gline" style="top:50%"></div><div class="gline" style="top:75%"></div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;font-size:12px;color:var(--mu);margin-top:.4rem">اسم الطالب</div>`;
+  const wrap=document.getElementById('bcWrap');
+  data.forEach(d=>{
+    const pct=(d.v/maxV)*100;
+    const g=document.createElement('div');g.className='b-group';
+    g.innerHTML=`<div class="b-bar" style="height:${pct}%;background:${d.c}"><div class="b-val">${d.v}</div></div>
+      <div class="b-lbl">${d.l}</div>`;
+    wrap.appendChild(g);
+  });
+}
+
+function renderDotPlot(){
+  const data=[{l:'6',c:2,col:'#7C3AED',e:'🟣'},{l:'7',c:4,col:'#0369A1',e:'🔵'},{l:'8',c:6,col:'#047857',e:'🟢'},{l:'9',c:3,col:'#B45309',e:'🟠'},{l:'10',c:1,col:'#B91C1C',e:'🔴'}];
+  const box=document.getElementById('dotPlotViz');
+  box.innerHTML=`<div class="chart-title-text">😴 عدد ساعات النوم اليومي للطلاب (كل نقطة = طالب واحد)</div>
+  <div class="dot-plot-wrap"><div class="dp-inner" id="dpInner"></div>
+  <div style="text-align:center;font-size:12px;color:var(--mu);margin-top:.4rem">عدد ساعات النوم</div></div>`;
+  const inner=document.getElementById('dpInner');
+  data.forEach(d=>{
+    const col=document.createElement('div');col.className='dp-col';
+    const ax=document.createElement('div');ax.className='dp-axis';ax.textContent=d.l;
+    col.appendChild(ax);
+    for(let i=0;i<d.c;i++){
+      const dot=document.createElement('div');dot.className='dp-dot';
+      dot.style.background=d.col;dot.innerHTML=d.e;
+      dot.title=`${d.l} ساعات: ${d.c} طلاب`;
+      col.insertBefore(dot,ax);
+    }
+    inner.appendChild(col);
+  });
+}
+
+// ═══════════════════════════════════════════
+// BUILD QUESTION BLOCKS
+// ═══════════════════════════════════════════
+function buildTopicQuestions(topicKey){
+  const qs=QData[topicKey];const meta=TOPICS_META[topicKey];
+  const cont=document.getElementById('q-'+topicKey);
+  cont.innerHTML='';
+
+  [1,2,3].forEach(lv=>{
+    const lvQ=qs.filter(q=>q.lv===lv);
+    const lvSection=document.createElement('div');
+    lvSection.className=`level-${lv===1?'basic':lv===2?'mid':'adv'}`;
+
+    const lvNames=['','أساسي 🟣','متوسط 🟡','متقدم 🔴'];
+    const lvBadgeClasses=['','lh-badge-basic','lh-badge-mid','lh-badge-adv'];
+    const hdr=document.createElement('div');hdr.className='level-header';
+    hdr.innerHTML=`<span class="lh-badge ${lvBadgeClasses[lv]}">${lvNames[lv]}</span>
+      <span class="lh-title">الأسئلة ${lv===1?'الأساسية':lv===2?'المتوسطة':'المتقدمة'}</span>
+      <span class="lh-score" id="lh-score-${topicKey}-${lv}">0/5</span>`;
+    lvSection.appendChild(hdr);
+
+    lvQ.forEach((q,localIdx)=>{
+      const qGlobalIdx=qs.indexOf(q);
+      const block=document.createElement('div');
+      block.className='q-block';block.id=`qb-${topicKey}-${qGlobalIdx}`;
+      const numBadge=document.createElement('div');
+      numBadge.className='q-num-badge';
+      numBadge.style.background=meta.colorHex;
+      numBadge.textContent=arN(qGlobalIdx+1);
+
+      block.innerHTML=`<div class="q-top"><div class="q-num-badge" style="background:${meta.colorHex}">${arN(qGlobalIdx+1)}</div>
+        <div class="q-text">${q.t}</div></div>
+        <div class="opts-grid">${q.o.map((o,j)=>`<button class="opt" onclick="answerTopicQ('${topicKey}',${qGlobalIdx},${j})">${o}</button>`).join('')}</div>
+        <div class="q-fb" id="fb-${topicKey}-${qGlobalIdx}"></div>`;
+      lvSection.appendChild(block);
+    });
+    cont.appendChild(lvSection);
+  });
+}
+
+function buildFinalQuestions(){
+  const cont=document.getElementById('q-final');cont.innerHTML='';
+  FinalQs.forEach((q,i)=>{
+    const block=document.createElement('div');
+    block.className='q-block';block.id=`qb-final-${i}`;
+    block.innerHTML=`<div class="q-top">
+      <div class="q-num-badge" style="background:var(--t1)">${arN(i+1)}</div>
+      <div class="q-text">${q.t}</div></div>
+      <div class="opts-grid">${q.o.map((o,j)=>`<button class="opt" onclick="answerFinalQ(${i},${j})">${o}</button>`).join('')}</div>
+      <div class="q-fb" id="fb-final-${i}"></div>`;
+    cont.appendChild(block);
+  });
+}
+
+function buildFinalQuestions2(){
+  const cont=document.getElementById('q-final2');cont.innerHTML='';
+  FinalQs2.forEach((q,i)=>{
+    const block=document.createElement('div');
+    block.className='q-block';block.id=`qb-final2-${i}`;
+    block.innerHTML=`<div class="q-top">
+      <div class="q-num-badge" style="background:#BE185D">${arN(i+1)}</div>
+      <div class="q-text">${q.t}</div></div>
+      <div class="opts-grid">${q.o.map((o,j)=>`<button class="opt" onclick="answerFinalQ2(${i},${j})">${o}</button>`).join('')}</div>
+      <div class="q-fb" id="fb-final2-${i}"></div>`;
+    cont.appendChild(block);
+  });
+  document.getElementById('final2-submit-wrap').style.display='none';
+}
+
+function buildFinalQuestionsAll(){
+  const cont=document.getElementById('q-finalAll');cont.innerHTML='';
+  FinalQsAll.forEach((q,i)=>{
+    const block=document.createElement('div');
+    block.className='q-block';block.id=`qb-finalAll-${i}`;
+    block.innerHTML=`<div class="q-top">
+      <div class="q-num-badge" style="background:var(--gold);color:var(--navy)">${arN(i+1)}</div>
+      <div class="q-text">${q.t}</div></div>
+      <div class="opts-grid">${q.o.map((o,j)=>`<button class="opt" onclick="answerFinalQAll(${i},${j})">${o}</button>`).join('')}</div>
+      <div class="q-fb" id="fb-finalAll-${i}"></div>`;
+    cont.appendChild(block);
+  });
+  document.getElementById('finalAll-submit-wrap').style.display='none';
+}
+
+// ═══════════════════════════════════════════
+// ANSWER HANDLERS
+// ═══════════════════════════════════════════
+function answerTopicQ(topic,qi,chosen){
+  const s=scores[topic];if(s.answered[qi])return;
+  s.answered[qi]=true;s.total++;
+  const q=QData[topic][qi];
+  const block=document.getElementById(`qb-${topic}-${qi}`);
+  const btns=block.querySelectorAll('.opt');btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById(`fb-${topic}-${qi}`);
+  if(chosen===q.c){
+    s.correct++;s.byLevel[q.lv]++;
+    btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ إجابة صحيحة! '+q.e;fb.className='q-fb show ok';
+  } else {
+    btns[chosen].classList.add('wrong');btns[q.c].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent='❌ الصحيح: '+q.o[q.c]+' — '+q.e;fb.className='q-fb show no';
+  }
+  updateTopicProgress(topic);
+  if(s.total===15) finishTopic(topic);
+}
+
+function answerFinalQ(qi,chosen){
+  if(finalScores.answered[qi])return;
+  finalScores.answered[qi]=true;finalScores.total++;
+  const q=FinalQs[qi];
+  const block=document.getElementById(`qb-final-${qi}`);
+  const btns=block.querySelectorAll('.opt');btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById(`fb-final-${qi}`);
+  if(chosen===q.c){
+    finalScores.correct++;
+    finalScores.byTopic[q.top].c++;
+    btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ '+q.e;fb.className='q-fb show ok';
+  } else {
+    btns[chosen].classList.add('wrong');btns[q.c].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent='❌ الصحيح: '+q.o[q.c]+' — '+q.e;fb.className='q-fb show no';
+  }
+  finalScores.byTopic[q.top].t++;
+  const pct=Math.round(finalScores.total/20*100);
+  document.getElementById('final-prog-bar').style.width=pct+'%';
+  document.getElementById('final-prog-txt').textContent=finalScores.total+' / 20';
+  updateOverall();
+}
+
+function answerFinalQ2(qi,chosen){
+  if(finalScores2.answered[qi])return;
+  finalScores2.answered[qi]=true;finalScores2.total++;
+  const q=FinalQs2[qi];
+  const block=document.getElementById(`qb-final2-${qi}`);
+  const btns=block.querySelectorAll('.opt');btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById(`fb-final2-${qi}`);
+  if(chosen===q.c){
+    finalScores2.correct++;
+    finalScores2.byTopic[q.top].c++;
+    btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ '+q.e;fb.className='q-fb show ok';
+  } else {
+    btns[chosen].classList.add('wrong');btns[q.c].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent='❌ الصحيح: '+q.o[q.c]+' — '+q.e;fb.className='q-fb show no';
+  }
+  finalScores2.byTopic[q.top].t++;
+  const pct=Math.round(finalScores2.total/20*100);
+  document.getElementById('final2-prog-bar').style.width=pct+'%';
+  document.getElementById('final2-prog-txt').textContent=finalScores2.total+' / 20';
+  if(finalScores2.total===20) document.getElementById('final2-submit-wrap').style.display='block';
+  updateOverall();
+}
+
+function answerFinalQAll(qi,chosen){
+  if(finalScoresAll.answered[qi])return;
+  finalScoresAll.answered[qi]=true;finalScoresAll.total++;
+  const q=FinalQsAll[qi];
+  const block=document.getElementById(`qb-finalAll-${qi}`);
+  const btns=block.querySelectorAll('.opt');btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById(`fb-finalAll-${qi}`);
+  if(chosen===q.c){
+    finalScoresAll.correct++;
+    finalScoresAll.byTopic[q.top].c++;
+    btns[chosen].classList.add('correct');block.classList.add('ok');
+    fb.textContent='✅ '+q.e;fb.className='q-fb show ok';
+  } else {
+    btns[chosen].classList.add('wrong');btns[q.c].classList.add('correct');
+    block.classList.add('no');
+    fb.textContent='❌ الصحيح: '+q.o[q.c]+' — '+q.e;fb.className='q-fb show no';
+  }
+  finalScoresAll.byTopic[q.top].t++;
+  const pct=Math.round(finalScoresAll.total/26*100);
+  document.getElementById('finalAll-prog-bar').style.width=pct+'%';
+  document.getElementById('finalAll-prog-txt').textContent=finalScoresAll.total+' / 26';
+  if(finalScoresAll.total===26) document.getElementById('finalAll-submit-wrap').style.display='block';
+  updateOverall();
+}
+
+function updateTopicProgress(topic){
+  const s=scores[topic];
+  const pct=Math.round(s.total/15*100);
+  document.getElementById('prog-'+topic).style.width=pct+'%';
+  document.getElementById('prog-'+topic+'-txt').textContent=s.total+'/15';
+  // Level score updates
+  for(let lv=1;lv<=3;lv++){
+    const lvQ=QData[topic].filter(q=>q.lv===lv);
+    const lvAnswered=lvQ.filter(q=>s.answered[QData[topic].indexOf(q)]).length;
+    document.getElementById(`lh-score-${topic}-${lv}`).textContent=`${s.byLevel[lv]}/${lvAnswered}`;
+  }
+  // Nav score
+  document.getElementById('nav-score-'+topic).textContent=s.correct+'/'+s.total;
+  updateOverall();
+}
+
+function finishTopic(topic){
+  const s=scores[topic];
+  const sumEl=document.getElementById('sum-'+topic);
+  sumEl.style.display='block';
+  document.getElementById('sum-'+topic+'-score').textContent=s.correct+'/15';
+  for(let lv=1;lv<=3;lv++){
+    document.getElementById(`sl-${topic}-${lv}`).textContent=`${s.byLevel[lv]}/5`;
+  }
+  document.getElementById('nav-'+topic).classList.add('topic-done');
+}
+
+function updateOverall(){
+  const totalAnswered=ALL_TOPICS.reduce((s,t)=>s+scores[t].total,0)+finalScores.total+finalScores2.total+finalScoresAll.total;
+  const totalQ=261;const pct=Math.round(totalAnswered/totalQ*100);
+  document.getElementById('ovFill').style.width=pct+'%';
+  document.getElementById('ovPct').textContent=pct+'%';
+}
+
+// ═══════════════════════════════════════════
+// REPORT GENERATION
+// ═══════════════════════════════════════════
+function getLevelInfo(correct,total){
+  if(total===0)return{cls:'lv0',txt:'لم يبدأ بعد',color:'#94A3B8',rec:'لم يجب على أسئلة هذا الدرس بعد'};
+  const pct=correct/total;
+  if(pct>=0.87)return{cls:'lv3',txt:'متقن ⭐⭐⭐',color:'#16A34A',rec:'أداء ممتاز! يُنصح بالانتقال للمستوى التالي'};
+  if(pct>=0.67)return{cls:'lv2',txt:'جيد جداً ⭐⭐',color:'#0369A1',rec:'أداء جيد مع بعض الثغرات. راجع الأسئلة الخاطئة'};
+  if(pct>=0.40)return{cls:'lv1',txt:'متوسط ⭐',color:'#B45309',rec:'يحتاج مزيداً من التدريب والمراجعة المكثفة'};
+  return{cls:'lv0',txt:'يحتاج دعماً',color:'#B91C1C',rec:'يحتاج دعماً تعليمياً مكثفاً وإعادة الشرح من البداية'};
+}
+
+function generateAndShowReport(){
+  const name=document.getElementById('studentNameInput')?.value?.trim()||'الطالب';
+  const allTopics=ALL_TOPICS;
+  const allCorrect=allTopics.reduce((s,t)=>s+scores[t].correct,0)+finalScores.correct+finalScores2.correct+finalScoresAll.correct;
+  const allTotal=allTopics.reduce((s,t)=>s+scores[t].total,0)+finalScores.total+finalScores2.total+finalScoresAll.total;
+  const allPct=allTotal>0?Math.round(allCorrect/allTotal*100):0;
+
+  const overallLevel=getLevelInfo(allCorrect,allTotal);
+  const gradeInfo=allPct>=90?{g:'A+',c:'#16A34A',t:'ممتاز جداً'}:
+                  allPct>=80?{g:'A',c:'#0369A1',t:'ممتاز'}:
+                  allPct>=70?{g:'B',c:'#0E7490',t:'جيد جداً'}:
+                  allPct>=60?{g:'C',c:'#B45309',t:'جيد'}:
+                  allPct>=50?{g:'D',c:'#B91C1C',t:'مقبول'}:
+                             {g:'F',c:'#7F1D1D',t:'يحتاج دعماً'};
+
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
+
+  // Build report HTML
+  let html=`
+  <div class="report-header">
+    <div style="font-size:36px;margin-bottom:.5rem">📊</div>
+    <div class="rh-student">${name}</div>
+    <div class="rh-sub">تقرير التقييم الشامل — الفصلان الأول والثاني</div>
+    <div class="rh-sub" style="margin-top:.25rem">الصف الثالث الابتدائي | رياضيات</div>
+    <div class="rh-date">${dateStr}</div>
+  </div>
+
+  <div class="report-overall">
+    <div class="ro-circle" style="border-color:${gradeInfo.c}">
+      <div class="ro-score" style="color:${gradeInfo.c}">${allPct}%</div>
+      <div class="ro-total">${allCorrect} / ${allTotal}</div>
+    </div>
+    <div class="ro-info">
+      <h2>النتيجة الإجمالية</h2>
+      <div class="ro-grade" style="background:${gradeInfo.c}20;color:${gradeInfo.c};border:2px solid ${gradeInfo.c}">
+        ${gradeInfo.g} — ${gradeInfo.t}
+      </div>
+      <div class="ro-desc">${overallLevel.rec}</div>
+    </div>
+  </div>`;
+
+  // Final assessment scores if done (chapter 1, chapter 2 & combined)
+  if(finalScores.total>0||finalScores2.total>0||finalScoresAll.total>0){
+    html+=`<div class="final-section-score" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">`;
+    if(finalScores.total>0){
+      html+=`<div class="fss-card" style="border-color:var(--t1)">
+        <div style="font-size:20px;margin-bottom:.3rem">📝</div>
+        <div class="fss-num" style="color:var(--t1)">${finalScores.correct}/${finalScores.total}</div>
+        <div class="fss-label">التقييم الختامي — الفصل الأول (${Math.round(finalScores.correct/finalScores.total*100)}%)</div>
+      </div>`;
+    }
+    if(finalScores2.total>0){
+      html+=`<div class="fss-card" style="border-color:#BE185D">
+        <div style="font-size:20px;margin-bottom:.3rem">📝</div>
+        <div class="fss-num" style="color:#BE185D">${finalScores2.correct}/${finalScores2.total}</div>
+        <div class="fss-label">التقييم الختامي — الفصل الثاني (${Math.round(finalScores2.correct/finalScores2.total*100)}%)</div>
+      </div>`;
+    }
+    if(finalScoresAll.total>0){
+      html+=`<div class="fss-card" style="border-color:var(--gold)">
+        <div style="font-size:20px;margin-bottom:.3rem">🏆</div>
+        <div class="fss-num" style="color:var(--gold)">${finalScoresAll.correct}/${finalScoresAll.total}</div>
+        <div class="fss-label">التقييم الختامي الشامل — الفصلان معاً (${Math.round(finalScoresAll.correct/finalScoresAll.total*100)}%)</div>
+      </div>`;
+    }
+    html+=`</div>`;
+  }
+
+  // Chart comparison (grouped by chapter)
+  html+=`<div class="chart-comparison">
+    <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1rem">📊 مقارنة الأداء بين الدروس</div>
+    <div style="font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;color:var(--t1d);margin-bottom:.6rem">📗 الفصل الأول</div>`;
+  CH1_TOPICS.forEach(t=>{
+    const s=scores[t];const meta=TOPICS_META[t];
+    const pct=s.total>0?Math.round(s.correct/s.total*100):0;
+    html+=`<div class="cc-row">
+      <div class="cc-label">${meta.icon} ${meta.name}</div>
+      <div class="cc-bar-bg">
+        <div class="cc-bar-fill" style="width:${pct}%;background:${meta.colorHex}">
+          ${pct>12?`<span class="cc-val">${s.correct}/${s.total}</span>`:''}
+        </div>
+      </div>
+      <div class="cc-pct" style="color:${meta.colorHex}">${pct}%</div>
+    </div>`;
+  });
+  html+=`<div style="font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;color:#BE185D;margin:1rem 0 .6rem">📘 الفصل الثاني</div>`;
+  CH2_TOPICS.forEach(t=>{
+    const s=scores[t];const meta=TOPICS_META[t];
+    const pct=s.total>0?Math.round(s.correct/s.total*100):0;
+    html+=`<div class="cc-row">
+      <div class="cc-label">${meta.icon} ${meta.name}</div>
+      <div class="cc-bar-bg">
+        <div class="cc-bar-fill" style="width:${pct}%;background:${meta.colorHex}">
+          ${pct>12?`<span class="cc-val">${s.correct}/${s.total}</span>`:''}
+        </div>
+      </div>
+      <div class="cc-pct" style="color:${meta.colorHex}">${pct}%</div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // Per-topic analysis
+  html+=`<div class="topics-analysis">
+    <div class="ta-title">🔍 تحليل تفصيلي لكل درس</div>`;
+  allTopics.forEach(t=>{
+    const s=scores[t];const meta=TOPICS_META[t];
+    const lv=getLevelInfo(s.correct,s.total);
+    const pct=s.total>0?Math.round(s.correct/s.total*100):0;
+    html+=`<div class="ta-row">
+      <div class="ta-icon">${meta.icon}</div>
+      <div class="ta-info">
+        <div class="ta-name">${meta.name}</div>
+        <div class="ta-bar-bg"><div class="ta-bar-fill" style="width:${pct}%;background:${meta.colorHex}"></div></div>
+        <div class="ta-meta">${s.correct} إجابة صحيحة من ${s.total} | نسبة ${pct}%</div>
+        <div class="ta-level-breakdown">
+          <div class="ta-lb" style="background:var(--t1l);color:var(--t1d)">أساسي: ${s.byLevel[1]}/5</div>
+          <div class="ta-lb" style="background:var(--t5l);color:var(--t5d)">متوسط: ${s.byLevel[2]}/5</div>
+          <div class="ta-lb" style="background:var(--t6l);color:var(--t6d)">متقدم: ${s.byLevel[3]}/5</div>
+        </div>
+      </div>
+      <div><span class="ta-badge lv-badge ${lv.cls}">${lv.txt}</span></div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // Level definitions
+  html+=`<div class="level-defs">
+    <div class="ld-card" style="background:var(--succ-lt);border-color:var(--succ)">
+      <div class="ld-range" style="color:var(--succ)">87% - 100%</div>
+      <div class="ld-name" style="color:var(--succ)">⭐⭐⭐ متقن</div>
+      <div class="ld-desc" style="color:var(--gn-dk)">يتقن المفهوم تماماً ويستطيع تطبيقه بمستويات متقدمة</div>
+    </div>
+    <div class="ld-card" style="background:var(--t2l);border-color:var(--t2)">
+      <div class="ld-range" style="color:var(--t2)">67% - 86%</div>
+      <div class="ld-name" style="color:var(--t2d)">⭐⭐ جيد جداً</div>
+      <div class="ld-desc" style="color:var(--t2d)">يفهم المفهوم بشكل جيد مع بعض الأخطاء في المستوى المتقدم</div>
+    </div>
+    <div class="ld-card" style="background:var(--t5l);border-color:var(--t5)">
+      <div class="ld-range" style="color:var(--t5)">40% - 66%</div>
+      <div class="ld-name" style="color:var(--t5d)">⭐ متوسط</div>
+      <div class="ld-desc" style="color:var(--t5d)">يفهم الأساسيات لكن يحتاج تدريباً أكثر على المستويات الأعلى</div>
+    </div>
+    <div class="ld-card" style="background:var(--t6l);border-color:var(--t6)">
+      <div class="ld-range" style="color:var(--t6)">0% - 39%</div>
+      <div class="ld-name" style="color:var(--t6d)">يحتاج دعماً</div>
+      <div class="ld-desc" style="color:var(--t6d)">يحتاج إعادة شرح المفاهيم الأساسية وتدريباً مكثفاً</div>
+    </div>
+  </div>`;
+
+  // Recommendations
+  html+=`<div class="recs-section">
+    <div style="font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1rem">💡 توصيات تفصيلية لكل درس</div>`;
+  allTopics.forEach(t=>{
+    const s=scores[t];const meta=TOPICS_META[t];const lv=getLevelInfo(s.correct,s.total);
+    let recDetail='';
+    if(s.total===0)recDetail='لم يُجب على أسئلة هذا الدرس. يُنصح بإكماله.';
+    else if(s.byLevel[1]<3)recDetail=`المستوى الأساسي ضعيف (${s.byLevel[1]}/5). ابدأ بمراجعة المفاهيم الأولية.`;
+    else if(s.byLevel[2]<3)recDetail=`الأساسي جيد (${s.byLevel[1]}/5) لكن المتوسط يحتاج تطوير (${s.byLevel[2]}/5).`;
+    else if(s.byLevel[3]<3)recDetail=`الأساسي والمتوسط ممتازان. ركّز على الأسئلة المتقدمة (${s.byLevel[3]}/5).`;
+    else recDetail='أداء ممتاز في جميع المستويات! واصل التقدم.';
+    html+=`<div class="rec-topic">
+      <div class="rec-icon">${meta.icon}</div>
+      <div><div class="rec-name">${meta.name}</div>
+      <div class="rec-text">${recDetail} — <strong>${lv.txt}</strong></div></div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  // Strengths & weaknesses
+  const strengths=allTopics.filter(t=>scores[t].total>0&&scores[t].correct/scores[t].total>=0.67);
+  const weaknesses=allTopics.filter(t=>scores[t].total>0&&scores[t].correct/scores[t].total<0.50);
+  if(strengths.length>0||weaknesses.length>0){
+    html+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem">`;
+    if(strengths.length>0){
+      html+=`<div style="background:var(--succ-lt);border-radius:var(--rad);padding:1.25rem;border:1.5px solid var(--succ)">
+        <div style="font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;color:var(--succ);margin-bottom:.75rem">✅ نقاط القوة</div>
+        ${strengths.map(t=>`<div style="font-size:13px;margin-bottom:.3rem">${TOPICS_META[t].icon} ${TOPICS_META[t].name}</div>`).join('')}
+      </div>`;
+    }
+    if(weaknesses.length>0){
+      html+=`<div style="background:var(--err-lt);border-radius:var(--rad);padding:1.25rem;border:1.5px solid var(--err)">
+        <div style="font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;color:var(--err);margin-bottom:.75rem">⚠️ تحتاج مراجعة</div>
+        ${weaknesses.map(t=>`<div style="font-size:13px;margin-bottom:.3rem">${TOPICS_META[t].icon} ${TOPICS_META[t].name}</div>`).join('')}
+      </div>`;
+    }
+    html+=`</div>`;
+  }
+
+  // Certificate if good score
+  if(allTotal>0&&allPct>=80){
+    html+=`<div class="cert">
+      <div style="font-size:52px;margin-bottom:.5rem">🏆</div>
+      <h2 style="color:var(--gold)">شهادة تفوق</h2>
+      <p style="color:rgba(255,255,255,.85);font-size:15px;margin:.5rem 0">يُمنح لـ <strong style="color:var(--gold)">${name}</strong> هذه الشهادة تقديراً لتفوقه في تقييم الفصلين الأول والثاني</p>
+      <p style="color:rgba(255,255,255,.6);font-size:13px;margin-top:.5rem">النتيجة: ${allCorrect}/${allTotal} (${allPct}%) — ${gradeInfo.t}</p>
+    </div>`;
+  }
+
+  html+=`<div class="btn-group" style="margin-top:1.5rem">
+    <button class="btn btn-print" onclick="window.print()">🖨️ طباعة التقرير</button>
+    <button class="btn btn-navy" onclick="resetAll()">🔄 بدء تقييم جديد</button>
+    <a class="btn btn-gold" href="index.html" style="text-decoration:none">🏠 رجوع للصفحة الرئيسية</a>
+  </div>`;
+
+  document.getElementById('reportContent').innerHTML=html;
+  showPage('report');
+}
+
+// ═══════════════════════════════════════════
+// NAVIGATION & UTILITIES
+// ═══════════════════════════════════════════
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('nav-'+name)?.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function startChapter(chNum){
+  const name=document.getElementById('studentNameInput')?.value?.trim();
+  if(!name){
+    document.getElementById('studentNameInput').focus();
+    document.getElementById('studentNameInput').style.borderColor='var(--err)';
+    setTimeout(()=>document.getElementById('studentNameInput').style.borderColor='',2000);
+    return;
+  }
+  showPage(chNum===1?'patterns':'th');
+}
+
+function goToFinalAllFromHome(){
+  const name=document.getElementById('studentNameInput')?.value?.trim();
+  if(!name){
+    document.getElementById('studentNameInput').focus();
+    document.getElementById('studentNameInput').style.borderColor='var(--err)';
+    setTimeout(()=>document.getElementById('studentNameInput').style.borderColor='',2000);
+    return;
+  }
+  showPage('finalAll');
+}
+
+function resetAll(){
+  location.reload();
+}
+
+function arN(n){return n.toString().replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload=function(){
+  ALL_TOPICS.forEach(t=>buildTopicQuestions(t));
+  renderBarChart();
+  renderDotPlot();
+  buildFinalQuestions();
+  buildFinalQuestions2();
+  buildFinalQuestionsAll();
+};
+</script>
+</body>
+</html>
