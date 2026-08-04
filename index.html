@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Quest | اختر الصف الدراسي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700&family=Cairo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#26332c;
+    --bg-2:#1c2721;
+    --chalk-white:#f3efe3;
+    --chalk-white-dim:#cfd2c8;
+    --chalk-yellow:#f2c14e;
+    --chalk-coral:#e8695b;
+    --chalk-teal:#6bb0a4;
+    --chalk-violet:#a689e8;
+    --line-soft: rgba(243,239,227,0.16);
+    --shadow-deep: rgba(0,0,0,0.45);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(243,239,227,0.05), transparent 40%),
+      radial-gradient(ellipse at 90% 10%, rgba(243,239,227,0.04), transparent 45%),
+      linear-gradient(180deg, var(--bg-1), var(--bg-2) 60%, #17201c 100%);
+    color:var(--chalk-white);
+    font-family:"Tajawal", sans-serif;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(rgba(243,239,227,0.035) 1px, transparent 1px),
+      radial-gradient(rgba(243,239,227,0.025) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 2px 3px;
+    pointer-events:none;
+    z-index:0;
+    opacity:0.6;
+  }
+
+  .eyebrow{
+    font-family:"Cairo", sans-serif;
+    font-weight:600;
+    letter-spacing:0.12em;
+    font-size:0.8rem;
+    color:var(--chalk-yellow);
+    display:inline-flex;
+    align-items:center;
+    gap:0.5em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:2px;
+    background:var(--chalk-yellow);
+    display:inline-block;
+    border-radius:2px;
+  }
+
+  nav{
+    position:relative; z-index:5;
+    display:flex; align-items:center; justify-content:center;
+    padding:26px clamp(20px,6vw,64px);
+  }
+  .brand{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:700;
+    font-size:1.25rem;
+    color:var(--chalk-white);
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:34px; height:34px;
+    border:2.5px solid var(--chalk-yellow);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Cairo", sans-serif;
+    color:var(--chalk-yellow);
+    font-size:1rem;
+    transform:rotate(-8deg);
+  }
+
+  main{
+    position:relative; z-index:2;
+    min-height:calc(100vh - 90px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:20px 20px 80px;
+  }
+
+  .intro{ max-width:600px; margin:0 auto 52px; }
+  .intro .eyebrow{ justify-content:center; }
+  h1{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:800;
+    font-size:clamp(2.1rem, 5.4vw, 3.4rem);
+    line-height:1.2;
+    margin:16px 0 14px;
+    color:var(--chalk-white);
+  }
+  h1 span{ color:var(--chalk-coral); }
+  .intro p{
+    font-size:clamp(1rem, 2vw, 1.15rem);
+    color:var(--chalk-white-dim);
+    line-height:1.9;
+    max-width:460px;
+    margin:0 auto;
+  }
+
+  .grade-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+    width:min(760px, 92vw);
+  }
+
+  .grade-card{
+    --accent: var(--chalk-teal);
+    position:relative;
+    display:flex; flex-direction:column; align-items:center;
+    text-decoration:none;
+    color:var(--chalk-white);
+    background: rgba(243,239,227,0.035);
+    border:1.5px solid var(--line-soft);
+    border-radius:26px;
+    padding:40px 24px 32px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .grade-card:hover, .grade-card:focus-visible{
+    transform:translateY(-6px);
+    border-color: var(--accent);
+    background: rgba(243,239,227,0.06);
+    box-shadow: 0 22px 40px -18px var(--shadow-deep);
+  }
+  .grade-card:focus-visible{ outline:2px solid var(--chalk-yellow); outline-offset:4px; }
+  .grade-card.violet{ --accent: var(--chalk-violet); }
+
+  .grade-num{
+    width:76px; height:76px;
+    border-radius:50%;
+    border:2.5px solid var(--accent);
+    color:var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:800;
+    font-size:2.1rem;
+    margin-bottom:18px;
+    transition: transform 0.2s ease;
+  }
+  .grade-card:hover .grade-num{ transform:rotate(-6deg) scale(1.05); }
+
+  .grade-card h2{
+    font-family:"Baloo Bhaijaan 2", sans-serif;
+    font-weight:700;
+    font-size:1.35rem;
+    margin:0 0 8px;
+  }
+  .grade-card .grade-desc{
+    font-size:0.92rem;
+    color:var(--chalk-white-dim);
+    line-height:1.8;
+    margin:0 0 22px;
+  }
+  .grade-enter{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"Cairo", sans-serif;
+    font-weight:700;
+    font-size:0.9rem;
+    color:var(--accent);
+  }
+  .grade-enter svg{ transition:transform 0.18s ease; }
+  .grade-card:hover .grade-enter svg{ transform:translateX(-4px); }
+
+  footer{
+    position:relative; z-index:2;
+    border-top:1px solid var(--line-soft);
+    padding:24px clamp(20px,6vw,64px);
+    text-align:center;
+    font-size:0.85rem; color:var(--chalk-white-dim);
+  }
+
+  @media (max-width:560px){
+    .grade-grid{ grid-template-columns:1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .grade-card, .grade-num, .grade-enter svg{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand"><span class="brand-mark">Σ</span> Math Quest</span>
+</nav>
+
+<main>
+  <div class="intro">
+    <span class="eyebrow">مغامرة الأرقام</span>
+    <h1>مين هيغامر <span>النهارده؟</span></h1>
+    <p>اختر الصف الدراسي عشان تبدأ رحلتك مع دروس وتمارين الرياضيات التفاعلية.</p>
+  </div>
+
+  <div class="grade-grid">
+    <a class="grade-card" href="https://math-quest-indol.vercel.app/grade3.html">
+      <span class="grade-num">٣</span>
+      <h2>الصف الثالث الابتدائي</h2>
+      <p class="grade-desc">٦ فصول و٦٧ درسًا تفاعليًا بشرح مبسّط وتمارين مباشرة.</p>
+      <span class="grade-enter">
+        ادخل الصف
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </a>
+
+    <a class="grade-card violet" href="https://math-quest-fourth-grade.vercel.app/">
+      <span class="grade-num">٤</span>
+      <h2>الصف الرابع الابتدائي</h2>
+      <p class="grade-desc">دروس وتمارين الصف الرابع، بنفس أسلوب المغامرة التفاعلي.</p>
+      <span class="grade-enter">
+        ادخل الصف
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </a>
+  </div>
+</main>
+
+<footer>
+  <span>Math Quest — صُمم لمساعدة طلابنا على تعلّم الرياضيات بمتعة</span>
+</footer>
+
+</body>
+</html>
